@@ -13,14 +13,16 @@ class Filtered extends Component {
   }
 
   componentDidMount() {
-    if (this.props.filter == '') {
+    if (this.props.match.params.filter === 'pseudo') {
       axios.get(`${url}/api/users/sorted/pseudo`).then((res) => {
         this.setState({ users: res.data });
       });
     } else {
-      axios.get(`${url}/api/users/sorted/score/${this.props.filter}`).then((res) => {
-        this.setState({ users: res.data });
-      });
+      axios
+        .get(`${url}/api/users/sorted/score/${this.props.match.params.filter}`)
+        .then((res) => {
+          this.setState({ users: res.data });
+        });
     }
   }
 

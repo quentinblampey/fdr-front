@@ -3,7 +3,6 @@ import axios from 'axios';
 import FicheCourte from './FicheCourte';
 import url from '../../config';
 import './Filtered.scss';
-import computeStats from './ComputeStats';
 
 class Filtered extends Component {
   constructor(props) {
@@ -14,16 +13,24 @@ class Filtered extends Component {
   }
 
   componentDidMount() {
-    axios.get(`${url}/api/users/sorted/score/${this.props.filter}`).then((res) => {
-      this.setState({ users: res.data });
-    });
+    if (this.props.match.params.filter === 'pseudo') {
+      axios.get(`${url}/api/users/sorted/pseudo`).then((res) => {
+        this.setState({ users: res.data });
+      });
+    } else {
+      axios
+        .get(`${url}/api/users/sorted/score/${this.props.match.params.filter}`)
+        .then((res) => {
+          this.setState({ users: res.data });
+        });
+    }
   }
 
   render() {
     return (
       <div className="container">
         {this.state.users.map(user => (
-          <FicheCourte name={user.pseudo} score={computeStats(user)} />
+          <FicheCourte name={user.pseudo} score={user.score} id={user._id} />
         ))}
       </div>
     );

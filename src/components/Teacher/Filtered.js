@@ -3,7 +3,6 @@ import axios from 'axios';
 import FicheCourte from './FicheCourte';
 import url from '../../config';
 import './Filtered.scss';
-import computeStats from './ComputeStats';
 
 class Filtered extends Component {
   constructor(props) {
@@ -23,7 +22,7 @@ class Filtered extends Component {
     return (
       <div className="container">
         {this.state.users.map(user => (
-          <FicheCourte name={user.pseudo} score={computeStats(user)} />
+          <FicheCourte name={user.pseudo} score={user.score} />
         ))}
       </div>
     );

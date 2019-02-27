@@ -21,29 +21,28 @@ class VueEnseignant extends Component {
     });
   }
 
-
-
-    render() {
-      let count = 0;
-      const { pseudos } = this.state;
-        return (
-          <div className="container">
-            <div className="panel panel-default">
-              <div className="panel-body">
-                <h1 className="jumbotron-heading">Aide à la réussite</h1>
-                <h3>Interface Enseignant</h3>
-                <Link to={`/enseignant/filter/pseudo`}>
-                  <button className={'btn btn-primary'}>Liste des étudiants</button>
-                </Link>
-                <Link to={`/enseignant/repartition/`}>
-                  <button className={'btn btn-primary'}>Vue globale</button>
-                </Link>
-                <Link to={`/enseignant/evolution/`}>
-                  <button className={'btn btn-primary'}>Vue globale 2</button>
-                </Link>
-              </div>
-            </div>
-        )
+  render() {
+    const count = 0;
+    const { pseudos } = this.state;
+    return (
+      <div className="container">
+        <div className="panel panel-default">
+          <div className="panel-body">
+            <h1 className="jumbotron-heading">Aide à la réussite</h1>
+            <h3>Interface Enseignant</h3>
+            <Link to="/enseignant/filter/pseudo">
+              <button className="btn btn-primary">Liste des étudiants</button>
+            </Link>
+            <Link to="/enseignant/repartition/">
+              <button className="btn btn-primary">Vue globale</button>
+            </Link>
+            <Link to="/enseignant/evolution/">
+              <button className="btn btn-primary">Vue globale 2</button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 

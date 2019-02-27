@@ -62,7 +62,7 @@ class FicheCourte extends Component {
 
   render() {
     return (
-      <div className="card">
+      <div className="card1">
         <div className="header">
           <div className="picture" />
           <h1>

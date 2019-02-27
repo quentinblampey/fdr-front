@@ -1,0 +1,9 @@
+{
+    "prettier.singleQuote": true,
+    "prettier.tabWidth": 4,
+    "prettier.eslintIntegration": true,
+    "javascript.format.enable": false,
+    "javascript.suggestionActions.enabled": false,
+    "eslint.enable": true,
+    "eslint.validate": ["javascript", "typescript"]
+}

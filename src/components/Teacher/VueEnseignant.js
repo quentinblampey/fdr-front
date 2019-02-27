@@ -70,12 +70,12 @@ class VueEnseignant extends Component {
               </div>
             </div>
 
-            <div class="card bg-light mb-3">
-              <div class="card-header">
+            <div className="card bg-light mb-3">
+              <div className="card-header">
               <h4>Etudiants inscrits : </h4>
               </div>
-              <div class="card-body">
-                  <ul class="card-text">
+              <div className="card-body">
+                  <ul className="card-text">
                     {pseudos.map((p) => {
                       count+=1
                       return <li key={count}><Link to={`/enseignant/fiche/${p._id}`}>{p.pseudo}</Link></li>
@@ -85,6 +85,16 @@ class VueEnseignant extends Component {
 
               </div>
             </div>
+            <div className="card bg-light mb-3">
+            <Link to={`/enseignant/repartition/`}>
+              <div className="card-header">
+              <h4>Vue globale : </h4>
+              </div>
+              <div className="card-body">
+                Clickez ici pour accéder à la vue globale
+              </div>
+            </Link>
+            </div>
                   
           </div>
         </div>
@@ -92,11 +102,11 @@ class VueEnseignant extends Component {
       )
     } else {
       return (
-        <div class="container">
+        <div className="container">
           <h2>Entrez le code pour accéder à l'interface enseignant.</h2>
           <form onSubmit={this.onSubmit}>
-              <input type="password" class="validate form-control" name="password" value={this.MdP} onChange={this.onChange} placeholder="Mot de passe" />
-              <button type="submit" class="btn btn-success">Me connecter</button>
+              <input type="password" className="validate form-control" name="password" value={this.MdP} onChange={this.onChange} placeholder="Mot de passe" />
+              <button type="submit" className="btn btn-success">Me connecter</button>
             </form>
         </div>
       )

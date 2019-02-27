@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 // import { Link } from 'react-router-dom';
 // import FooterStop from './FooterStop'
+import { Link } from 'react-router-dom';
 import url from '../../config';
+import './Repartition.scss';
 
 class Repartition extends Component {
   constructor(props) {
@@ -36,14 +38,16 @@ class Repartition extends Component {
     return (
         <div>
         {this.state.fields.map((f, i) =>
-            <div key={i}>
-                <h3 key={i+1}>{f.title}</h3>
-                <div key={(10*i).toString()} className="progress" style={{height:'20px', width:'90%', margin:'10px auto', borderRadius:'10px'}}>
-                    {f.repartition.map((r, j) => 
-                        <div key={(10*i+j+1).toString()} className={classes[j]} role="progressbar" style={{width: `${r}%`}} aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                    )}
-                </div>
-            </div>
+            <Link to={`enseignant/filter/${f.field}`}>
+              <div key={i} className='fieldState'>
+                  <h3 key={i+1}>{f.title}</h3>
+                  <div key={(10*i).toString()} className="progress" style={{height:'20px', width:'90%', margin:'10px auto', borderRadius:'10px'}}>
+                      {f.repartition.map((r, j) => 
+                          <div key={(10*i+j+1).toString()} className={classes[j]} role="progressbar" style={{width: `${r}%`}} aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                      )}
+                  </div>
+              </div>
+            </Link>
         )}
         </div>
         

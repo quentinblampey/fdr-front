@@ -69,6 +69,7 @@ function updateNoOrientation() {
   return 0;
 }
 
+/*
 export default function computeStats(user) {
   const tabScores = [];
   let count = 0;
@@ -107,4 +108,15 @@ export default function computeStats(user) {
   });
 
   return tabScores;
+}
+*/
+
+export default function computeStats(user) {
+  return {
+    motivation: updateMotivation(user),
+    lifestyle: updateLifestyle(user),
+    integration: updateIntegration(user),
+    noOrientation: updateNoOrientation(user),
+    fidelity: updateFidelity(user),
+  };
 }

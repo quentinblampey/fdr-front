@@ -9,6 +9,7 @@ import Home from './components/Home';
 import VueEnseignant from './components/Teacher/VueEnseignant';
 import VueEtudiant from './components/Student/VueEtudiant';
 import Fiche from './components/Teacher/Fiche';
+import Filtered from './components/Teacher/Filtered';
 import FicheCourte from './components/Teacher/FicheCourte';
 import Repartition from './components/Teacher/Repartition';
 
@@ -34,6 +35,10 @@ class App extends Component {
           <Route path="/begin/:id" render={props => <Begin {...props} />} />
           <Route path="/exit" component={Exit} />
           <Route path="/enseignant/fiche/:id" render={props => <Fiche {...props} />} />
+          <Route
+            path="/enseignant/filter/:filter"
+            render={props => <Filtered {...props} />}
+          />
           <Route path="/enseignant/repartition" component={Repartition} />
 
           <Footer />

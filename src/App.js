@@ -34,12 +34,6 @@ class App extends Component {
           <Route path="/chat/:id" component={Chat} />
           <Route path="/begin/:id" render={props => <Begin {...props} />} />
           <Route path="/exit" component={Exit} />
-          <Route path="/enseignant/fiche/:id" render={props => <Fiche {...props} />} />
-          <Route
-            path="/enseignant/filter/:filter"
-            render={props => <Filtered {...props} />}
-          />
-          <Route path="/enseignant/repartition" component={Repartition} />
           <Route path="/enseignant" component={RouterEns} />
 
           <Footer />

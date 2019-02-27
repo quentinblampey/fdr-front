@@ -1,11 +1,19 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import axios from 'axios';
 // import { Link } from 'react-router-dom';
 // import FooterStop from './FooterStop'
+// import PropTypes from 'prop-types';
 import url from '../../config';
 import computeStats from './ComputeStats';
 
 class Begin extends Component {
+  /* propTypes = {
+      match: PropTypes.number.isRequired,
+      params: PropTypes.number.isRequired,
+      id: PropTypes.number.isRequired,
+    }; */
   constructor(props) {
     super(props);
     // this.computeStats = this.computeStats.bind(this)
@@ -20,37 +28,35 @@ class Begin extends Component {
   }
 
   componentDidMount() {
+    // const { id } = this.props;
+    // this.props.match.params.id
+    // eslint-disable-next-line react/destructuring-assignment react/prop-types
     axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
-      console.log(res.data.registration);
-      this.setState(
-        { user: res.data, firstLog: this.toDisplay(res.data.registration) },
-        (state) => {
-          console.log('user', this.state.user);
+      console.log(res.data);
+      this.setState({ user: res.data }, () => {
+        // console.log('user', this.state.user);
+        const { user } = this.state;
+        const scores = computeStats(user);
+        let color = '';
+        if (scores[1] > 7) {
+          color = 'green';
+        } else if (scores[1] < 4) {
+          color = 'red';
+        } else {
+          color = 'orange';
+        }
 
-          const scores = computeStats(this.state.user);
-          let color = '';
-          if (scores[1] > 7) {
-            color = 'green';
-          } else if (scores[1] < 4) {
-            color = 'red';
-          } else {
-            color = 'orange';
-          }
+        // Coloration de l'indicateur INVESTISSEMENT
+        if (user.numberChats !== undefined && user.numberChats !== null) {
+          // const nbChats = user.numberChats.length;
 
-          // Coloration de l'indicateur INVESTISSEMENT
-          if (
-            this.state.user.numberChats !== undefined
-                        && this.state.user.numberChats !== null
-          ) {
-            const nbChats = this.state.user.numberChats.length;
+          // const d = new Date();
+          // const today = [d.getFullYear(), d.getMonth() + 1, d.getDate()];
+          // console.log(today);
 
-            const d = new Date();
-            const today = [d.getFullYear(), d.getMonth() + 1, d.getDate()];
-            console.log(today);
-
-            if (nbChats !== 0) {
-              const lastChat = this.state.user.numberChats[
-                this.state.user.numberChats.length - 1
+          /* if (nbChats !== 0) {
+              const lastChat = user.numberChats[
+                user.numberChats.length - 1
               ];
               console.log(lastChat);
 
@@ -59,35 +65,43 @@ class Begin extends Component {
                 lastChat.split('T')[0].split('-')[1],
                 lastChat.split('T')[0].split('-')[2],
               ];
-              console.log(lastEval);
-              /*
-            if (today[1] - lastEval[1] > 1 || today[0] - lastEval[0] > 1) {
+              // console.log(lastEval);
+
+            if (today[1] - lastEval[1] > 1 ||today[0] - lastEval[0] > 1) {
               color='red'
             } else if (today[2] - lastEval[2] > 14) {
               color='orange'
             } else if (today[2] - lastEval[2] < 14) {
               color='green'
             }
-*/
-            }
+            } */
+          const tab = user.registration.split('T')[0].split('-');
+          const reg = `${tab[2]}/${tab[1]}/${tab[0]}`;
 
-            this.setState({
-              user: res.data,
-              color: `list-group-item ${color}`,
-              score: scores,
-              average:
-                                (scores[0] + scores[1] + scores[2] + scores[3] + scores[4]) / 5,
-            });
-          }
-        },
-      );
+          console.log(user.numberChats[user.numberChats.length - 1]);
+          const tab2 = user.numberChats[user.numberChats.length - 1]
+            .split('T')[0]
+            .split('-');
+          const last = `${tab2[2]}/${tab2[1]}/${tab2[0]}`;
+
+          this.setState({
+            user: res.data,
+            color: `list-group-item ${color}`,
+            score: scores,
+            firstLog: reg,
+            lastChat: last,
+            average: (scores[0] + scores[1] + scores[2] + scores[3] + scores[4]) / 5,
+          });
+        }
+      });
     });
   }
 
-  toDisplay(dateMongo) {
+  /* toDisplay(dateMongo) {
     const tab = dateMongo.split('T')[0].split('-');
+    const tab2 = this.tab.split('T')[0].split('-');
     return `${tab[2]}/${tab[1]}/${tab[0]}`;
-  }
+  } */
 
   render() {
     let fidelity;
@@ -95,6 +109,9 @@ class Begin extends Component {
     let lifestyle;
     let integration;
     let noOrientation;
+    const {
+      user, score, color, firstLog, average, lastChat,
+    } = this.state;
 
     if (false) {
       motivation = true;
@@ -103,9 +120,9 @@ class Begin extends Component {
     }
 
     if (
-      this.state.user.numberChats !== undefined
-            && this.state.user.numberChats.length !== 0
-            && this.state.user.numberChats !== null
+      user.numberChats !== undefined
+            && user.numberChats.length !== 0
+            && user.numberChats !== null
     ) {
       fidelity = true;
     } else {
@@ -133,8 +150,8 @@ class Begin extends Component {
     return (
       <div className="container">
         <h2>
-Fiche de l'élève :
-          {this.state.user.pseudo}
+Fiche de l&apos;élève :
+          {user.pseudo}
         </h2>
         <div className="card bg-light mb-3">
           <div className="card-header">
@@ -146,8 +163,8 @@ Fiche de l'élève :
                 {' '}
                                 Motivation générale :
                 {' '}
-                {this.state.score[0]}
-/10
+                {score[0]}
+                                /10
               </h5>
               <p className="card-text">
                 {' '}
@@ -160,24 +177,20 @@ Fiche de l'élève :
               </p>
             </li>
 
-            <li className={this.state.color}>
+            <li className={color}>
               <h5 className="card-title">
                 {' '}
                                 Utilisation et fidélité :
                 {' '}
-                {this.state.score[1]}
-/10
+                {score[1]}
+                                /10
               </h5>
               <p className="card-text">
                 {' '}
                                 Dernière session de chat :
                 {' '}
                 {fidelity
-                  ? this.toDisplay(
-                    this.state.user.numberChats[
-                      this.state.user.numberChats.length - 1
-                    ],
-                  )
+                  ? lastChat
                   : 'Aucune session'}
                 {' '}
               </p>
@@ -185,33 +198,31 @@ Fiche de l'élève :
                 {' '}
                                 Nombre de sessions de chat :
                 {' '}
-                {fidelity ? this.state.user.numberChats.length : '0'}
+                {fidelity ? user.numberChats.length : '0'}
                 {' '}
               </p>
               <p className="card-text">
                 {' '}
                                 Nombre de réponses :
                 {' '}
-                {this.state.user.numberQuestion !== undefined
-                  ? this.state.user.numberQuestion
-                  : '0'}
+                {user.numberQuestion !== undefined ? user.numberQuestion : '0'}
                 {' '}
               </p>
               <p className="card-text">
                 {' '}
-                                Date d'inscription :
+Date d&apos;inscription :
+                {firstLog}
                 {' '}
-                {this.state.firstLog}
-                {' '}
+
               </p>
             </li>
 
             <li className="list-group-item">
               <h5 className="card-title">
                 {' '}
-Style de vie :
-                {this.state.score[2]}
-/10
+                                Style de vie :
+                {score[2]}
+                                /10
               </h5>
               <p className="card-text">
                 {' '}
@@ -227,9 +238,9 @@ Style de vie :
             <li className="list-group-item">
               <h5 className="card-title">
                 {' '}
-Intégration :
-                {this.state.score[3]}
-/10
+                                Intégration :
+                {score[3]}
+                                /10
               </h5>
               <p className="card-text">
                 {' '}
@@ -242,10 +253,10 @@ Intégration :
 
             <li className="list-group-item">
               <h5 className="card-title">
-                                Pertinence de l'orientation :
+                                Pertinence de l&apos;orientation :
                 {' '}
-                {this.state.score[4]}
-/10
+                {score[4]}
+                                /10
               </h5>
               <p className="card-text">
                 {' '}
@@ -259,9 +270,9 @@ Intégration :
 
           <div className="card-footer">
             <h4 className="card-title">
-Score moyen :
-              {this.state.average}
-/10
+                            Score moyen :
+              {average}
+                            /10
             </h4>
           </div>
         </div>

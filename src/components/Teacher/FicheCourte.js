@@ -5,14 +5,6 @@ class FicheCourte extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: 'Yves',
-      score: {
-        motivation: 7,
-        lifestyle: 4,
-        integration: 6,
-        fidelity: 10,
-        noOrientation: 3,
-      },
       color1: '',
       color2: '',
       color3: '',
@@ -22,7 +14,7 @@ class FicheCourte extends Component {
   }
 
   componentDidMount() {
-    const { score } = this.state;
+    const score = this.props.score;
     if (score.motivation <= 6) {
       if (score.motivation <= 3) {
         this.setState({ color1: 'red' });
@@ -45,14 +37,14 @@ class FicheCourte extends Component {
       }
     }
     if (score.fidelity <= 6) {
-      if (this.state.score.fidelity <= 3) {
+      if (score.fidelity <= 3) {
         this.setState({ color4: 'red' });
       } else {
         this.setState({ color4: 'orange' });
       }
     }
-    if (this.state.score.noOrientation <= 6) {
-      if (this.state.score.noOrientation <= 3) {
+    if (score.noOrientation <= 6) {
+      if (score.noOrientation <= 3) {
         this.setState({ color5: 'red' });
       } else {
         this.setState({ color5: 'orange' });
@@ -67,7 +59,7 @@ class FicheCourte extends Component {
           <div className="picture" />
           <h1>
             {' '}
-            {this.state.name}
+            {this.props.name}
             {' '}
           </h1>
         </div>
@@ -81,7 +73,7 @@ class FicheCourte extends Component {
               <div
                 className="score"
                 style={{
-                  height: `${this.state.score.motivation * 10}%`,
+                  height: `${this.props.score.motivation * 10}%`,
                   background: this.state.color1,
                 }}
               />
@@ -90,7 +82,7 @@ class FicheCourte extends Component {
               <div
                 className="score"
                 style={{
-                  height: `${this.state.score.lifestyle * 10}%`,
+                  height: `${this.props.score.lifestyle * 10}%`,
                   background: this.state.color2,
                 }}
               />
@@ -99,7 +91,7 @@ class FicheCourte extends Component {
               <div
                 className="score"
                 style={{
-                  height: `${this.state.score.integration * 10}%`,
+                  height: `${this.props.score.integration * 10}%`,
                   background: this.state.color3,
                 }}
               />
@@ -108,7 +100,7 @@ class FicheCourte extends Component {
               <div
                 className="score"
                 style={{
-                  height: `${this.state.score.fidelity * 10}%`,
+                  height: `${this.props.score.fidelity * 10}%`,
                   background: this.state.color4,
                 }}
               />
@@ -117,7 +109,7 @@ class FicheCourte extends Component {
               <div
                 className="score"
                 style={{
-                  height: `${this.state.score.noOrientation * 10}%`,
+                  height: `${this.props.score.noOrientation * 10}%`,
                   background: this.state.color5,
                 }}
               />

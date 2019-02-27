@@ -83,6 +83,17 @@ class VueEnseignant extends Component {
                 </div>
               </div>
             </div>
+            <div className="card bg-light mb-3">
+            <Link to={`/enseignant/repartition/`}>
+              <div className="card-header">
+              <h4>Vue globale : </h4>
+              </div>
+              <div className="card-body">
+                Clickez ici pour accéder à la vue globale
+              </div>
+            </Link>
+            </div>
+                  
           </div>
         );
       }

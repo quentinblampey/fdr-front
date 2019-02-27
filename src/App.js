@@ -12,6 +12,7 @@ import Fiche from './components/Teacher/Fiche';
 import Filtered from './components/Teacher/Filtered';
 import FicheCourte from './components/Teacher/FicheCourte';
 import Repartition from './components/Teacher/Repartition';
+import RouterEns from './components/Teacher/RouterEnseignant';
 
 class App extends Component {
   constructor(props) {
@@ -30,7 +31,6 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/fakefiche" component={FicheCourte} />
           <Route exact path="/etudiant" component={VueEtudiant} />
-          <Route exact path="/enseignant" component={VueEnseignant} />
           <Route path="/chat/:id" component={Chat} />
           <Route path="/begin/:id" render={props => <Begin {...props} />} />
           <Route path="/exit" component={Exit} />
@@ -40,6 +40,7 @@ class App extends Component {
             render={props => <Filtered {...props} />}
           />
           <Route path="/enseignant/repartition" component={Repartition} />
+          <Route path="/enseignant" component={RouterEns} />
 
           <Footer />
         </div>

@@ -13,9 +13,15 @@ class Filtered extends Component {
   }
 
   componentDidMount() {
-    axios.get(`${url}/api/users/sorted/score/${this.props.filter}`).then((res) => {
-      this.setState({ users: res.data });
-    });
+    if (this.props.filter == '') {
+      axios.get(`${url}/api/users/sorted/pseudo`).then((res) => {
+        this.setState({ users: res.data });
+      });
+    } else {
+      axios.get(`${url}/api/users/sorted/score/${this.props.filter}`).then((res) => {
+        this.setState({ users: res.data });
+      });
+    }
   }
 
   render() {

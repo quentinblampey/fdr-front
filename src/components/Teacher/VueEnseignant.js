@@ -21,59 +21,29 @@ class VueEnseignant extends Component {
     });
   }
 
-  render() {
-    let count = 0;
-    const { pseudos } = this.state;
 
-    return (
-      <div className="container">
-        <div className="panel panel-default">
-          <div className="panel-body">
-            <h1 className="jumbotron-heading">Aide à la réussite</h1>
-            <h3>Interface Enseignant</h3>
 
-            <div className="card bg-light mb-3">
-              <div className="card-header">
-                <h4>Etudiants inscrits : </h4>
-              </div>
-              <div className="card-body">
-                <p className="card-text">
-                  <button>Générer les statistiques</button>
-                </p>
+    render() {
+      let count = 0;
+      const { pseudos } = this.state;
+        return (
+          <div className="container">
+            <div className="panel panel-default">
+              <div className="panel-body">
+                <h1 className="jumbotron-heading">Aide à la réussite</h1>
+                <h3>Interface Enseignant</h3>
+                <Link to={`/enseignant/filter/pseudo`}>
+                  <button className={'btn btn-primary'}>Liste des étudiants</button>
+                </Link>
+                <Link to={`/enseignant/repartition/`}>
+                  <button className={'btn btn-primary'}>Vue globale</button>
+                </Link>
+                <Link to={`/enseignant/evolution/`}>
+                  <button className={'btn btn-primary'}>Vue globale 2</button>
+                </Link>
               </div>
             </div>
-
-            <div className="card bg-light mb-3">
-              <div className="card-header">
-                <h4>Etudiants inscrits : </h4>
-              </div>
-              <div className="card-body">
-                <ul className="card-text">
-                  {pseudos.map((p) => {
-                    count += 1;
-                    return (
-                      <li key={count}>
-                            <Link to={`/enseignant/fiche/${p._id}`}>
-                                {p.pseudo}
-                              </Link>
-                          </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="card bg-light mb-3">
-          <Link to="/enseignant/repartition/">
-            <div className="card-header">
-              <h4>Vue globale : </h4>
-            </div>
-            <div className="card-body">Clickez ici pour accéder à la vue globale</div>
-          </Link>
-        </div>
-      </div>
-    );
+        )
   }
 }
 

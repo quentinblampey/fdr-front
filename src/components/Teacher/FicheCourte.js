@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import './FicheCourte.scss';
+import { Redirect } from 'react-router-dom';
 
 class FicheCourte extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      redirect: false,
       color1: '',
       color2: '',
       color3: '',
@@ -52,73 +54,86 @@ class FicheCourte extends Component {
     }
   }
 
-  render() {
-    return (
-      <div className="card1">
-        <div className="header">
-          <div className="picture" />
-          <h1>
-            {' '}
-            {this.props.name}
-            {' '}
-          </h1>
-        </div>
-        <div className="scores">
-          <div className="other">
-            <div className="round" />
-            <div className="round" />
+    setRedirect = () => {
+      this.setState({
+        redirect: true,
+      });
+    };
+
+    renderRedirect = () => {
+      if (this.state.redirect) {
+        return <Redirect to={`/enseignant/fiche/${this.props.id}`} />;
+      }
+    };
+
+    render() {
+      return (
+        <div className="card1" onClick={this.setRedirect}>
+          {this.renderRedirect()}
+          <div className="header">
+            <div className="picture" />
+            <h1>
+              {' '}
+              {this.props.name}
+              {' '}
+            </h1>
           </div>
-          <div className="bars">
-            <div className="progress-container">
-              <div
-                className="score"
-                style={{
-                  height: `${this.props.score.motivation * 10}%`,
-                  background: this.state.color1,
-                }}
-              />
+          <div className="scores">
+            <div className="other">
+              <div className="round" />
+              <div className="round" />
             </div>
-            <div className="progress-container">
-              <div
-                className="score"
-                style={{
-                  height: `${this.props.score.lifestyle * 10}%`,
-                  background: this.state.color2,
-                }}
-              />
-            </div>
-            <div className="progress-container">
-              <div
-                className="score"
-                style={{
-                  height: `${this.props.score.integration * 10}%`,
-                  background: this.state.color3,
-                }}
-              />
-            </div>
-            <div className="progress-container">
-              <div
-                className="score"
-                style={{
-                  height: `${this.props.score.fidelity * 10}%`,
-                  background: this.state.color4,
-                }}
-              />
-            </div>
-            <div className="progress-container">
-              <div
-                className="score"
-                style={{
-                  height: `${this.props.score.noOrientation * 10}%`,
-                  background: this.state.color5,
-                }}
-              />
+            <div className="bars">
+              <div className="progress-container">
+                <div
+                  className="score"
+                  style={{
+                    height: `${this.props.score.motivation * 10}%`,
+                    background: this.state.color1,
+                  }}
+                />
+              </div>
+              <div className="progress-container">
+                <div
+                  className="score"
+                  style={{
+                    height: `${this.props.score.lifestyle * 10}%`,
+                    background: this.state.color2,
+                  }}
+                />
+              </div>
+              <div className="progress-container">
+                <div
+                  className="score"
+                  style={{
+                    height: `${this.props.score.integration * 10}%`,
+                    background: this.state.color3,
+                  }}
+                />
+              </div>
+              <div className="progress-container">
+                <div
+                  className="score"
+                  style={{
+                    height: `${this.props.score.fidelity * 10}%`,
+                    background: this.state.color4,
+                  }}
+                />
+              </div>
+              <div className="progress-container">
+                <div
+                  className="score"
+                  style={{
+                    height: `${this.props.score.noOrientation * 10}%`,
+                    background: this.state.color5,
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    );
-  }
+      );
+    }
 }
 
 export default FicheCourte;

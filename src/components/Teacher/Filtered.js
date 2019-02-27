@@ -30,7 +30,7 @@ class Filtered extends Component {
     return (
       <div className="container">
         {this.state.users.map(user => (
-          <FicheCourte name={user.pseudo} score={user.score} />
+          <FicheCourte name={user.pseudo} score={user.score} id={user._id} />
         ))}
       </div>
     );

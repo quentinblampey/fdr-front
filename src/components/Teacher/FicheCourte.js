@@ -44,7 +44,7 @@ class FicheCourte extends Component {
         this.setState({ color3: 'orange' });
       }
     }
-    if (this.state.score.fidelity <= 6) {
+    if (score.fidelity <= 6) {
       if (this.state.score.fidelity <= 3) {
         this.setState({ color4: 'red' });
       } else {

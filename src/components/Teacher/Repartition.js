@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-//import { Link } from 'react-router-dom';
-//import FooterStop from './FooterStop'
-import url from '../../config'
+// import { Link } from 'react-router-dom';
+// import FooterStop from './FooterStop'
+import url from '../../config';
 
 class Repartition extends Component {
-
   constructor(props) {
     super(props);
-    this.state = {fields : [
-    {field:'motivation',title: 'Motivation', repartition:[]},
-    {field:'lifestyle', title: 'Lifestyle', repartition:[]},
+    this.state = {
+      fields: [
+        { field: 'motivation', title: 'Motivation', repartition: [] },
+        { field: 'lifestyle', title: 'Lifestyle', repartition: [] },
     {field:'fidelity',title: 'Fidelite', repartition:[]}, 
     {field:'noOrientation',title: 'Besoin de réorientation', repartition:[]},
     {field:'integration',title: 'Intégration', repartition:[]}]};
   }
 
   componentDidMount() {
-      for (let i=0; i<this.state.fields.length; i++){
+      for (let i = 0; i < this.state.fields.length; i++){
         let field=this.state.fields[i];
         console.log('heyo');
         axios.post(url+'/api/stats/global', {field:field.field})

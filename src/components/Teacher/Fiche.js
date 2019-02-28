@@ -6,7 +6,7 @@ import axios from 'axios';
 // import FooterStop from './FooterStop'
 // import PropTypes from 'prop-types';
 import url from '../../config';
-import computeStats from './ComputeStats';
+// import computeStats from './ComputeStats';
 
 class Begin extends Component {
   /* propTypes = {
@@ -77,12 +77,18 @@ class Begin extends Component {
             } */
           const tab = user.registration.split('T')[0].split('-');
           const reg = `${tab[2]}/${tab[1]}/${tab[0]}`;
-
-          console.log(user.numberChats[user.numberChats.length - 1]);
-          const tab2 = user.numberChats[user.numberChats.length - 1]
-            .split('T')[0]
-            .split('-');
-          const last = `${tab2[2]}/${tab2[1]}/${tab2[0]}`;
+          let last = ' Aucune session';
+          if (
+            user.numberChats !== undefined
+                        && user.numberChats.length !== 0
+                        && user.numberChats !== null
+          ) {
+            // console.log(user.numberChats[user.numberChats.length - 1]);
+            const tab2 = user.numberChats[user.numberChats.length - 1]
+              .split('T')[0]
+              .split('-');
+            last = `${tab2[2]}/${tab2[1]}/${tab2[0]}`;
+          }
 
           this.setState({
             user: res.data,
@@ -193,12 +199,10 @@ Fiche de l&apos;élève :
               </h5>
               <p className="card-text">
                 {' '}
-                                Dernière session de chat :
+Dernière session de chat :
+                {lastChat}
                 {' '}
-                {fidelity
-                  ? lastChat
-                  : 'Aucune session'}
-                {' '}
+
               </p>
               <p className="card-text">
                 {' '}

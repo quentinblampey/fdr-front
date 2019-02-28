@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import FicheCourte from './FicheCourte';
 import url from '../../config';
-import './Filtered.scss';
 
-class Filtered extends Component {
+class HU extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      id: '5c76a73f39bf810101c7956b',
+      user: {
+        historicScores: {
+          motivation: [],
+          lifestyle: [],
+          noOrientation: [],
+          integration: [],
+          fidelity: [],
+        },
+      },
+    };
   }
-
-  componentDidMount() {}
 
     update = () => {
       axios.put(`${url}/api/users/save_scores`);
@@ -19,10 +26,14 @@ class Filtered extends Component {
     render() {
       return (
         <div>
-          <button onClick={this.update}> Update </button>
+          <button onClick={this.update} className="btn btn-danger">
+            {' '}
+                    Update
+            {' '}
+          </button>
         </div>
       );
     }
 }
 
-export default Filtered;
+export default HU;

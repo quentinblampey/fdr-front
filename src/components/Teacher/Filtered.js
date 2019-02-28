@@ -29,8 +29,8 @@ class Filtered extends Component {
   render() {
     return (
       <div className="container">
-        {this.state.users.map(user => (
-          <FicheCourte name={user.pseudo} score={user.score} id={user._id} />
+        {this.state.users.map((user,i) => (
+          <FicheCourte key={i} name={user.pseudo} score={user.score} id={user._id} />
         ))}
       </div>
     );

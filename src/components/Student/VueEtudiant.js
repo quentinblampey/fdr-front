@@ -45,21 +45,21 @@ class VueEtudiant extends Component {
       render() {
         const { pseudo, pseudos} = this.state;
         return (
-          <div class="text-center">
-            <div class="container">
-              <div class="panel panel-default">
-                <div class="panel-body">
+          <div className="text-center">
+            <div className="container">
+              <div className="panel panel-default">
+                <div className="panel-body">
                   <h1> Interface étudiant </h1>
                   <hr/>
                   <form onSubmit={this.onSubmit}>
-                    <input type="text" class="form-control" name="pseudo" value={pseudo} onChange={this.onChange} placeholder="Pseudo" />
-                    <button type="submit" class="btn btn-success">Me connecter</button>
+                    <input type="text" className="form-control" name="pseudo" value={pseudo} onChange={this.onChange} placeholder="Pseudo" />
+                    <button type="submit" className="btn btn-success">Me connecter</button>
                   </form>
                   <hr/>
                   <h2>Pseudos</h2>
                         <ul>
-                          {pseudos.map((p) =>
-                            <li><Link to={`/begin/${p._id}`}>{p.pseudo}</Link></li>
+                          {pseudos.map((p, i) =>
+                            <li key={i}><Link to={`/begin/${p._id}`}>{p.pseudo}</Link></li>
                           )}
                         </ul>
                 </div>

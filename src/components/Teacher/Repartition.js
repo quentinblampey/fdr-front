@@ -23,12 +23,10 @@ class Repartition extends Component {
   componentDidMount() {
     for (let i = 0; i < this.state.fields.length; i++) {
       const field = this.state.fields[i];
-      console.log('heyo');
       axios
         .post(`${url}/api/stats/global`, { field: field.field })
       // eslint-disable-next-line no-loop-func
         .then((res) => {
-          console.log(res.data);
           const fields = this.state.fields;
           fields[i].repartition = res.data;
           this.setState({ fields });
@@ -45,11 +43,10 @@ class Repartition extends Component {
     return (
       <div>
         {this.state.fields.map((f, i) => (
-          <Link to={`../filter/${f.field}`}>
-            <div key={i} className="fieldState">
-              <h3 key={i + 1}>{f.title}</h3>
+          <Link to={`../filter/${f.field}`} key={i}>
+            <div className="fieldState">
+              <h3>{f.title}</h3>
               <div
-                key={(10 * i).toString()}
                 className="progress"
                 style={{
                   height: '20px',
@@ -60,7 +57,7 @@ class Repartition extends Component {
               >
                 {f.repartition.map((r, j) => (
                   <div
-                    key={(10 * i + j + 1).toString()}
+                    key={j}
                     className={classes[j]}
                     role="progressbar"
                     style={{ width: `${r}%` }}

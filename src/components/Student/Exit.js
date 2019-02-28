@@ -5,21 +5,11 @@ import React, { Component } from 'react';
 
 class Exit extends Component {
 
-
-
-
-
-
-
   render() {
     return (
-      <div class="container">
+      <div className="container">
         <h1>Questionnaire de fin</h1>
-
       </div>
-
-      
-
     );
   }
 }

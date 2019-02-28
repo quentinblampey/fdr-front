@@ -7,6 +7,7 @@ import Fiche from './Fiche';
 import Filtered from './Filtered';
 import FicheCourte from './FicheCourte';
 import Repartition from './Repartition';
+import Profils from './Profils';
 
 const crypto = require('crypto');
 
@@ -76,6 +77,7 @@ class RouterEns extends Component {
               render={props => <Filtered {...props} />}
             />
             <Route path="/enseignant/repartition" component={Repartition} />
+            <Route path="/enseignant/profils" component={Profils} />
           </div>
         </Router>
       );

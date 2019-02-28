@@ -1,43 +1,47 @@
-class RadialChart extends React.Component {
+import React, { Component } from 'react';
+import Chart from 'react-apexcharts'
+
+class RadialChart extends Component {
+
   constructor(props) {
     super(props);
 
     this.state = {
       options: {
-        labels: ['Apples', 'Oranges', 'Bananas', 'Berries'],
-        radialBar: {
-          dataLabels: {
+        chart: {
+            events: {
+              dataPointSelection: function(event, chartContext, config) {
+                console.log(Array.from(event.path[0].id).slice(-1)[0]);
+              }
+            }
+          },
+        labels: ['Travail', 'Sportif', 'Hadicap', 'Artiste'],
+        plotOptions: {
+          radialBar: {
             name: {
-              fontSize: '22px',
+                fontSize: '22px',
             },
             value: {
-              fontSize: '16px',
+                fontSize: '26px',
             },
-            total: {
-              show: true,
-              label: 'Total',
-              formatter(w) {
-                // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-                return 249;
-              },
+            hollow: {
+                size: '20%',
             },
           },
         },
       },
-      series: [44, 55, 67, 83],
-    };
+      series: [68, 23, 12, 34],
+    }
   }
 
   render() {
+
     return (
-      <div id="chart">
-        <ReactApexChart
-          options={this.state.options}
-          series={this.state.series}
-          type="radialBar"
-          height="350"
-        />
+      <div className="radialbar">
+        <Chart options={this.state.options} series={this.state.series} type="radialBar" height="380" />
       </div>
     );
   }
 }
+
+export default RadialChart;

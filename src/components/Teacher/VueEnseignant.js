@@ -36,7 +36,7 @@ class VueEnseignant extends Component {
             <Link to="/enseignant/repartition/">
               <button className="btn btn-primary">Vue globale</button>
             </Link>
-            <Link to="/enseignant/evolution/">
+            <Link to="/enseignant/profils/">
               <button className="btn btn-primary">Vue globale 2</button>
             </Link>
           </div>

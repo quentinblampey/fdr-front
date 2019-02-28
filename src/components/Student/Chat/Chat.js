@@ -148,10 +148,11 @@ class Chat extends Component {
         userAnswer = (
           <div className="response-bar">
             <div id="choice-buttons">
-              {this.state.currentQuestion.answers.map(a => (
+              {this.state.currentQuestion.answers.map((a,i) => (
                 <button
                   onClick={this.onSubmit.bind(this, a)}
                   className="btn btn-outline-primary"
+                  key={i}
                 >
                   {a.body}
                 </button>
@@ -188,8 +189,8 @@ class Chat extends Component {
       return (
         <div className="text-center">
           <div className="chatbox" id="chatbox">
-            {this.state.chat.map(m => (
-              <MessageChat message={m.message} color={1 - m.color} />
+            {this.state.chat.map((m, i) => (
+              <MessageChat key={i} message={m.message} color={1 - m.color} />
             ))}
             <div className="loading">
               <Loading loading={this.state.loading} />

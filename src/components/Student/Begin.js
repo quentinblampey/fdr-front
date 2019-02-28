@@ -17,37 +17,28 @@ class Begin extends Component {
 
     axios.get(url+`/api/users/getid/${this.props.match.params.id}`)
       .then(res => {
-        console.log('user', res.data);
         this.setState({ user:res.data });
       });
 
   }
 
-
-
   render() {
     return (
-      <div class="container">
-        <div class="panel panel-default">
-            <div class="panel-body">
+      <div className="container">
+        <div className="panel panel-default">
+            <div className="panel-body">
                 <h1>Bienvenue dans l'application d'aide à la réussite !</h1>
                 <h1>Bonjour, {this.state.user.pseudo}</h1>
                 <h3>Vous pouvez commencer à chatter avec le bot pour vous évaluer : </h3>
 
                 <Link to={`/chat/${this.props.match.params.id}`}>
-                    <button type="submit" class="btn btn-success">Commencer la discussion !</button>
+                    <button type="submit" className="btn btn-success">Commencer la discussion !</button>
                 </Link>
-            
-            
-                  
             </div>
         </div>
         <FooterStop/>
 
       </div>
-
-      
-
     );
   }
 }

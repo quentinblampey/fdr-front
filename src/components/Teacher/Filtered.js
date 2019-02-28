@@ -17,9 +17,15 @@ class Filtered extends Component {
       axios.get(`${url}/api/users/sorted/pseudo`).then((res) => {
         this.setState({ users: res.data });
       });
-    } else {
+    } else if (this.props.match.params.filter in ['motivation','lifestyle', 'fidelity', 'integration',' noOrientation']){
       axios
         .get(`${url}/api/users/sorted/score/${this.props.match.params.filter}`)
+        .then((res) => {
+          this.setState({ users: res.data });
+        });
+    } else {
+      axios
+        .get(`${url}/api/users/sorted/caracteristics/${this.props.match.params.filter}`)
         .then((res) => {
           this.setState({ users: res.data });
         });

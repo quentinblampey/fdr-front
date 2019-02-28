@@ -35,8 +35,6 @@ class VueEtudiant extends Component {
           axios.post(url+'/api/users/initget', {pseudo:pseudo})
           .then((result) => {
             this.props.history.push(`/begin/${result.data._id}`);
-            console.log(this.props.history);
-            console.log(result);
           });
         }
         

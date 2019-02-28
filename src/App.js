@@ -6,12 +6,8 @@ import Chat from './components/Student/Chat/Chat';
 import Begin from './components/Student/Begin';
 import Exit from './components/Student/Exit';
 import Home from './components/Home';
-import VueEnseignant from './components/Teacher/VueEnseignant';
 import VueEtudiant from './components/Student/VueEtudiant';
-import Fiche from './components/Teacher/Fiche';
-import Filtered from './components/Teacher/Filtered';
 import FicheCourte from './components/Teacher/FicheCourte';
-import Repartition from './components/Teacher/Repartition';
 import RouterEns from './components/Teacher/RouterEnseignant';
 
 class App extends Component {

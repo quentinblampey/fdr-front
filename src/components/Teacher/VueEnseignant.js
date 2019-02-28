@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import url from '../../config';
 
-const crypto = require('crypto');
-
 class VueEnseignant extends Component {
   constructor(props) {
     super(props);
@@ -22,8 +20,6 @@ class VueEnseignant extends Component {
   }
 
   render() {
-    const count = 0;
-    const { pseudos } = this.state;
     return (
       <div className="container">
         <div className="panel panel-default">

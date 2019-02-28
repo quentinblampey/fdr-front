@@ -5,17 +5,19 @@ class RadialChart extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       options: {
         chart: {
             events: {
               dataPointSelection: function(event, chartContext, config) {
                 console.log(Array.from(event.path[0].id).slice(-1)[0]);
+              },
+              dataPointMouseEnter: function(event, chartContext, config) {
+                console.log(Array.from(event.path[0].id).slice(-1)[0]);
               }
             }
           },
-        labels: ['Travail', 'Sportif', 'Hadicap', 'Artiste'],
+        labels: this.props.profils,
         plotOptions: {
           radialBar: {
             name: {
@@ -30,7 +32,6 @@ class RadialChart extends Component {
           },
         },
       },
-      series: [68, 23, 12, 34],
     }
   }
 
@@ -38,7 +39,7 @@ class RadialChart extends Component {
 
     return (
       <div className="radialbar">
-        <Chart options={this.state.options} series={this.state.series} type="radialBar" height="380" />
+        <Chart options={this.state.options} series={this.props.proportions} type="radialBar" height="380" />
       </div>
     );
   }

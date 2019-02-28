@@ -46,6 +46,8 @@ class Begin extends Component {
           color = 'orange';
         }
 
+        console.log(user.numberQuestions);
+
         // Coloration de l'indicateur INVESTISSEMENT
         if (user.numberChats !== undefined && user.numberChats !== null) {
           // const nbChats = user.numberChats.length;
@@ -215,7 +217,7 @@ Dernière session de chat :
                 {' '}
                                 Nombre de réponses :
                 {' '}
-                {user.numberQuestion !== undefined ? user.numberQuestion : '0'}
+                {user.numberQuestions}
                 {' '}
               </p>
               <p className="card-text">

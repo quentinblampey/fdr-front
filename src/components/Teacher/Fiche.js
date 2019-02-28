@@ -6,7 +6,7 @@ import axios from 'axios';
 // import FooterStop from './FooterStop'
 // import PropTypes from 'prop-types';
 import url from '../../config';
-import computeStats from './ComputeStats';
+// import computeStats from './ComputeStats';
 
 class Begin extends Component {
   /* propTypes = {
@@ -36,11 +36,11 @@ class Begin extends Component {
       this.setState({ user: res.data }, () => {
         // console.log('user', this.state.user);
         const { user } = this.state;
-        const scores = computeStats(user);
+        const scores = user.score;
         let color = '';
-        if (scores[1] > 7) {
+        if (scores.fidelity > 7) {
           color = 'green';
-        } else if (scores[1] < 4) {
+        } else if (scores.fidelity < 4) {
           color = 'red';
         } else {
           color = 'orange';
@@ -77,12 +77,18 @@ class Begin extends Component {
             } */
           const tab = user.registration.split('T')[0].split('-');
           const reg = `${tab[2]}/${tab[1]}/${tab[0]}`;
-
-          console.log(user.numberChats[user.numberChats.length - 1]);
-          const tab2 = user.numberChats[user.numberChats.length - 1]
-            .split('T')[0]
-            .split('-');
-          const last = `${tab2[2]}/${tab2[1]}/${tab2[0]}`;
+          let last = ' Aucune session';
+          if (
+            user.numberChats !== undefined
+                        && user.numberChats.length !== 0
+                        && user.numberChats !== null
+          ) {
+            // console.log(user.numberChats[user.numberChats.length - 1]);
+            const tab2 = user.numberChats[user.numberChats.length - 1]
+              .split('T')[0]
+              .split('-');
+            last = `${tab2[2]}/${tab2[1]}/${tab2[0]}`;
+          }
 
           this.setState({
             user: res.data,
@@ -90,7 +96,13 @@ class Begin extends Component {
             score: scores,
             firstLog: reg,
             lastChat: last,
-            average: (scores[0] + scores[1] + scores[2] + scores[3] + scores[4]) / 5,
+            average:
+                            (scores.motivation
+                                + scores.fidelity
+                                + scores.lifestyle
+                                + scores.integration
+                                + scores.noOrientation)
+                            / 5,
           });
         }
       });
@@ -163,7 +175,7 @@ Fiche de l&apos;élève :
                 {' '}
                                 Motivation générale :
                 {' '}
-                {score[0]}
+                {score.motivation}
                                 /10
               </h5>
               <p className="card-text">
@@ -182,17 +194,15 @@ Fiche de l&apos;élève :
                 {' '}
                                 Utilisation et fidélité :
                 {' '}
-                {score[1]}
+                {score.fidelity}
                                 /10
               </h5>
               <p className="card-text">
                 {' '}
-                                Dernière session de chat :
+Dernière session de chat :
+                {lastChat}
                 {' '}
-                {fidelity
-                  ? lastChat
-                  : 'Aucune session'}
-                {' '}
+
               </p>
               <p className="card-text">
                 {' '}
@@ -221,7 +231,7 @@ Date d&apos;inscription :
               <h5 className="card-title">
                 {' '}
                                 Style de vie :
-                {score[2]}
+                {score.lifestyle}
                                 /10
               </h5>
               <p className="card-text">
@@ -239,7 +249,7 @@ Date d&apos;inscription :
               <h5 className="card-title">
                 {' '}
                                 Intégration :
-                {score[3]}
+                {score.integration}
                                 /10
               </h5>
               <p className="card-text">
@@ -255,7 +265,7 @@ Date d&apos;inscription :
               <h5 className="card-title">
                                 Pertinence de l&apos;orientation :
                 {' '}
-                {score[4]}
+                {score.noOrientation}
                                 /10
               </h5>
               <p className="card-text">

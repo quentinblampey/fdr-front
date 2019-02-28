@@ -42,6 +42,10 @@ class Chat extends Component {
       this.setState(state);
     };
 
+    updateUser = () => {
+      axios.put(`${url}/api/users/endchat/${this.state.user._id}`, this.state.user)
+    }
+
     onSubmitButton = (e) => {
       let ans;
       ans = this.state.currentQuestion.answers[0];
@@ -51,7 +55,6 @@ class Chat extends Component {
     };
 
     onSubmit = (answer, e) => {
-      console.log('ans', answer);
       this.setState({
         chat: this.state.chat.concat({ message: answer.body, color: 0 }),
         newMessage: '',
@@ -75,6 +78,7 @@ class Chat extends Component {
               axios.post(`${url}/api/questions/${this.state.user._id}`).then((res2) => {
                 if (res2.data.isFinish) {
                   this.setState({ isFinish: true });
+                  this.updateUser();
                 } else {
                   this.setState({ loading: true });
                   this.updateScroll();
@@ -103,6 +107,7 @@ class Chat extends Component {
             axios.post(`${url}/api/questions/${this.state.user._id}`).then((res2) => {
               if (res2.data.isFinish) {
                 this.setState({ isFinish: true });
+                this.updateUser();
               } else {
                 this.setState({ loading: true });
                 this.updateScroll();

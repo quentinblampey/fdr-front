@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 // import FooterStop from './FooterStop'
 import url from '../../config';
+import '../../globalSCSS/color.scss';
 
 class Repartition extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class Repartition extends Component {
       profils: ['Travail', 'Sportif', 'Hadicap', 'Artiste'],
       profilsName: ['employe', 'athlete', 'disabled', 'artist'],
       proportions: [0, 0, 0, 0],
+      colors: ["#0069D8", "#218838", "rgb(211, 87, 56)", "rgb(238, 128, 38)"]
     };
   }
 
@@ -22,7 +24,7 @@ class Repartition extends Component {
     console.log(this.state.profils);
     for (let i = 0; i < this.state.profils.length; i++) {
       axios
-        .post(`${url}/api/stats/profils`, { profil: this.state.profils[i] })
+        .post(`${url}/api/stats/profils`, { profil: this.state.profilsName[i] })
       // eslint-disable-next-line no-loop-func
         .then((res) => {
           const proportions = this.state.proportions;
@@ -39,6 +41,7 @@ class Repartition extends Component {
 
   render() {
     const options = {
+      colors: this.state.colors,
       chart: {
         events: {
           dataPointSelection: (event, chartContext, config) => {
@@ -50,6 +53,8 @@ class Repartition extends Component {
       labels: this.state.profils,
       plotOptions: {
         radialBar: {
+          startAngle:0,
+          endAngle: 270,
           name: {
             fontSize: '22px',
           },
@@ -65,17 +70,26 @@ class Repartition extends Component {
 
     return (
       <div>
-        <h2>
+        <h4>
                     Vous pouvez consulter ici les proportions de chacuns des profils parmi vos
                     étudiants.
-        </h2>
-        <div className="radialbar">
-          <Chart
-            options={options}
-            series={this.state.proportions}
-            type="radialBar"
-            height="380"
-          />
+        </h4>
+        <div>
+          <div style={{position:"absolute", top:"24%", width:'100%'}}>
+             {this.state.profils.map((a,i) => (
+                <div key={i} style={{color:this.state.colors[i], marginLeft:'7%'}}>{a} : {this.state.proportions[i]}%</div>
+              ))}
+          </div>
+          <div style={{position:"absolute", top:'16%'}}>
+              <div className="radialbar">
+                <Chart
+                  options={options}
+                  series={this.state.proportions}
+                  type="radialBar"
+                  height="380"
+                />
+              </div>
+          </div>
         </div>
       </div>
     );

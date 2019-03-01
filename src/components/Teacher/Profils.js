@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Chart from 'react-apexcharts'
+import Chart from 'react-apexcharts';
 import { Link } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 // import FooterStop from './FooterStop'
@@ -12,63 +12,70 @@ class Repartition extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      profils:['Travail', 'Sportif', 'Hadicap', 'Artiste'],
-      profilsName:['employe', 'athlete', 'disabled', 'artist'],
-      proportions:[0,0,0,0]
+      profils: ['Travail', 'Sportif', 'Hadicap', 'Artiste'],
+      profilsName: ['employe', 'athlete', 'disabled', 'artist'],
+      proportions: [0, 0, 0, 0],
     };
   }
 
   componentDidMount() {
     console.log(this.state.profils);
-    for (let i=0; i<this.state.profils.length; i++){
+    for (let i = 0; i < this.state.profils.length; i++) {
       axios
         .post(`${url}/api/stats/profils`, { profil: this.state.profils[i] })
       // eslint-disable-next-line no-loop-func
         .then((res) => {
           const proportions = this.state.proportions;
           proportions[i] = res.data.nb;
-          this.setState({ proportions:proportions });
+          this.setState({ proportions });
         });
-
     }
   }
-  
-  renderRedirect(link){
+
+  renderRedirect(link) {
     console.log(link);
-    this.props.history.push(`/filter/${link}`);
-    return;
+    this.props.history.push(`/enseignant/filter/${link}`);
   }
+
   render() {
-    const options= {
-          chart: {
-              events: {
-                dataPointSelection: (event, chartContext, config) => {
-                    let a = Array.from(event.path[0].id);
-                    this.renderRedirect((this.state.profilsName[a[a.length-1]]).toLowerCase());
-                }
-              }
-            },
-          labels: this.state.profils,
-          plotOptions: {
-            radialBar: {
-              name: {
-                  fontSize: '22px',
-              },
-              value: {
-                  fontSize: '26px',
-              },
-              hollow: {
-                  size: '20%',
-              },
-            },
+    const options = {
+      chart: {
+        events: {
+          dataPointSelection: (event, chartContext, config) => {
+            const a = Array.from(event.path[0].id);
+            this.renderRedirect(this.state.profilsName[a[a.length - 1]].toLowerCase());
           },
-        }
+        },
+      },
+      labels: this.state.profils,
+      plotOptions: {
+        radialBar: {
+          name: {
+            fontSize: '22px',
+          },
+          value: {
+            fontSize: '26px',
+          },
+          hollow: {
+            size: '20%',
+          },
+        },
+      },
+    };
 
     return (
       <div>
-        <h2>Vous pouvez consulter ici les proportions de chacuns des profils parmi vos étudiants.</h2>
+        <h2>
+                    Vous pouvez consulter ici les proportions de chacuns des profils parmi vos
+                    étudiants.
+        </h2>
         <div className="radialbar">
-          <Chart options={options} series={this.state.proportions} type="radialBar" height="380" />
+          <Chart
+            options={options}
+            series={this.state.proportions}
+            type="radialBar"
+            height="380"
+          />
         </div>
       </div>
     );

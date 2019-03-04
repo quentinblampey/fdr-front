@@ -64,5 +64,12 @@
     padding: 0px 20px;
     border-radius: 20px;
     background: none;
+    font-family: 'MsSemiBoldItalic';
     color: $white;
+
+    &:hover {
+        background: $white;
+        color: $color4;
+        transition: 0.3s;
+    }
 }

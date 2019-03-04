@@ -20,7 +20,7 @@ class Loading extends React.Component {
     const { loading } = this.props;
     return (
       <div className="sweet-loading">
-        <BeatLoader sizeUnit="px" size={12} color="#123abc" loading={loading} />
+        <BeatLoader sizeUnit="px" size={12} color="rgb(38,34,98)" loading={loading} />
       </div>
     );
   }

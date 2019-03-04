@@ -60,7 +60,8 @@ class Chat extends Component {
         newMessage: '',
       });
       this.updateScroll();
-      if (answer.reaction !== '') {
+      console.log(answer.reaction);
+      if (answer.reaction !== '' && answer.reaction !== undefined) {
         this.setState({ loading: true });
         this.updateScroll();
         setTimeout(() => {

@@ -6,6 +6,7 @@ import axios from 'axios';
 // import PropTypes from 'prop-types';
 import url from '../../config';
 // import computeStats from './ComputeStats';
+import SC from './ScoreChart';
 
 class Begin extends Component {
   /* propTypes = {
@@ -276,6 +277,10 @@ Date d&apos;inscription :
                 {noOrientation ? 'Indicateur' : "Pas d'indicateur"}
                 {' '}
               </p>
+            </li>
+
+            <li className="list-group-item">
+              <SC id={this.props.match.params.id} />
             </li>
           </ul>
 

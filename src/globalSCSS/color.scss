@@ -20,3 +20,11 @@ $color3: rgb(20, 20, 20);
 $color4: rgb(201, 2, 69);
 $color5: rgb(38, 28, 92);
 $color6: rgb(0, 209, 158);
+
+:export {
+    graph1: $blue;
+    graph2: $green;
+    graph3: $red;
+    graph4: $orange;
+    graph5: $color2;
+}

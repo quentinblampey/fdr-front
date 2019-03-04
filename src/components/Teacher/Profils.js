@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 // import FooterStop from './FooterStop'
 import url from '../../config';
-import '../../globalSCSS/color.scss';
+import variables from '../../globalSCSS/color.scss';
 
 class Repartition extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class Repartition extends Component {
       profils: ['Travail', 'Sportif', 'Hadicap', 'Artiste'],
       profilsName: ['employe', 'athlete', 'disabled', 'artist'],
       proportions: [0, 0, 0, 0],
-      colors: ["#0069D8", "#218838", "rgb(211, 87, 56)", "rgb(238, 128, 38)"]
+      colors: [variables.graph1, variables.graph2, variables.graph3, variables.graph4]
     };
   }
 

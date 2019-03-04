@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import url from '../../config';
 import './Repartition.scss';
+import variables from '../../globalSCSS/color.scss';
 
 class Repartition extends Component {
   constructor(props) {
@@ -40,6 +41,12 @@ class Repartition extends Component {
       'progress-bar bg-warning',
       'progress-bar bg-success',
     ];
+    const colors = [
+      variables.graph3,
+      variables.graph1,
+      variables.graph2,
+    ];
+
     return (
       <div>
         {this.state.fields.map((f, i) => (
@@ -60,11 +67,12 @@ class Repartition extends Component {
                     key={j}
                     className={classes[j]}
                     role="progressbar"
-                    style={{ width: `${r}%` }}
+                    style={{ width: `${r}%`, color: `${colors[j]}` }}
                     aria-valuenow="15"
                     aria-valuemin="0"
                     aria-valuemax="100"
-                  />
+                  >{r}
+                  </div>
                 ))}
               </div>
             </div>

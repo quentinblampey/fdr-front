@@ -10,6 +10,7 @@
         "body-parser": "^1.18.3",
         "chart.js": "^2.7.3",
         "express": "^4.16.4",
+        "jquery": "^3.3.1",
         "morgan": "^1.9.1",
         "node-sass": "^4.11.0",
         "prop-types": "^15.7.2",

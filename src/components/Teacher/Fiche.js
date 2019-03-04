@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import axios from 'axios';
 // import { Link } from 'react-router-dom';
@@ -32,7 +31,7 @@ class Begin extends Component {
     // this.props.match.params.id
     // eslint-disable-next-line react/destructuring-assignment react/prop-types
     axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       this.setState({ user: res.data }, () => {
         // console.log('user', this.state.user);
         const { user } = this.state;

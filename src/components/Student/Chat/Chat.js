@@ -14,7 +14,6 @@ class Chat extends Component {
       chat: [],
       chats: [],
       isFinish: false,
-      user: '',
       newMessage: '',
       currentQuestion: { answers: [] },
     };
@@ -43,7 +42,9 @@ class Chat extends Component {
     };
 
     updateUser = () => {
-      axios.put(`${url}/api/users/endchat/${this.state.user._id}`, this.state.user);
+      axios.get(`${url}/api/users/getid/${this.state.user._id}`).then((res) => {
+        axios.put(`${url}/api/users/endchat/${this.state.user._id}`, res);
+      });
     };
 
     onSubmitButton = (e) => {
@@ -79,6 +80,7 @@ class Chat extends Component {
                 if (res2.data.isFinish) {
                   this.setState({ isFinish: true });
                   this.updateUser();
+                  setTimeout(() => { this.updateScroll(); },10);
                 } else {
                   this.setState({ loading: true });
                   setTimeout(() => { this.updateScroll(); },10);
@@ -107,6 +109,7 @@ class Chat extends Component {
             axios.post(`${url}/api/questions/${this.state.user._id}`).then((res2) => {
               if (res2.data.isFinish) {
                 this.setState({ isFinish: true });
+                this.updateUser();
                 setTimeout(() => { this.updateScroll(); },10);
               } else {
                 this.setState({ loading: true });

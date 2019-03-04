@@ -1,3 +1,3 @@
-const url = 'http://localhost:8080';
+const url = 'http://fdr.cs-campus.fr/back';
 
 export default url;

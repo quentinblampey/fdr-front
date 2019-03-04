@@ -1,51 +1,92 @@
-@import "./globalSCSS/color.scss";
+@import './globalSCSS/color.scss';
 
 body {
     padding: 0;
     margin: 0;
     background-color: $background;
-
+    font-family: 'MsMedium';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-  
- p:last-child {
+}
+
+@font-face {
+    font-family: 'MsThin';
+    src: url('./assets/polices/Montserrat/Montserrat-Thin.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'MsBold';
+    src: url('./assets/polices/Montserrat/Montserrat-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'MsBoldItalic';
+    src: url('./assets/polices/Montserrat/Montserrat-BoldItalic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'MsMedium';
+    src: url('./assets/polices/Montserrat/Montserrat-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'MsLight';
+    src: url('./assets/polices/Montserrat/Montserrat-Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'MsSemiBold';
+    src: url('./assets/polices/Montserrat/Montserrat-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'MsRegular';
+    src: url('./assets/polices/Montserrat/Montserrat-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'MsExtraBold';
+    src: url('./assets/polices/Montserrat/Montserrat-ExtraBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'MsExtraLight';
+    src: url('./assets/polices/Montserrat/Montserrat-ExtraLight.ttf') format('truetype');
+}
+
+p:last-child {
     margin-bottom: 0;
-  }
-  
-  h1 {
+}
+
+h1 {
     font-weight: 300;
-  }
-  
-  .container {
-    max-width: 40rem;
-  }
-  
-  footer {
+}
+
+footer {
     padding-top: 3rem;
     padding-bottom: 3rem;
-  }
-  
-  footer p {
-    margin-bottom: .25rem;
-  }
+}
 
-  input {
+footer p {
+    margin-bottom: 0.25rem;
+}
+
+input {
     margin: 5px;
-  }
+}
 
-  button {
-    margin:2px;
-  }
+button {
+    margin: 2px;
+}
 
-  .orange {
+.orange {
     background: $orange;
-  }
+}
 
-  .green {
+.green {
     background: $green;
-  }
+}
 
-  .red {
+.red {
     background: $red;
-  }
+}

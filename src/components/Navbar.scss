@@ -1,9 +1,25 @@
-@import "../globalSCSS/color.scss";
-@import "../globalSCSS/size.scss";
+@import '../globalSCSS/color.scss';
+@import '../globalSCSS/size.scss';
 
 nav {
-    background: $grayDark;
+    background: $white;
     display: flex;
     justify-content: center;
     padding: $margin1;
+}
+
+.home {
+    border: 1px solid $color4;
+    height: 40px;
+    padding: 0px 20px;
+    border-radius: 20px;
+    background: none;
+    color: $color4;
+    font-family: 'MsSemiBoldItalic';
+
+    &:hover {
+        background: $color4;
+        color: $white;
+        transition: 0.3s;
+    }
 }

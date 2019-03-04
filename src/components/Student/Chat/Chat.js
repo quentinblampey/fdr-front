@@ -43,8 +43,8 @@ class Chat extends Component {
     };
 
     updateUser = () => {
-      axios.put(`${url}/api/users/endchat/${this.state.user._id}`, this.state.user)
-    }
+      axios.put(`${url}/api/users/endchat/${this.state.user._id}`, this.state.user);
+    };
 
     onSubmitButton = (e) => {
       let ans;
@@ -59,17 +59,16 @@ class Chat extends Component {
         chat: this.state.chat.concat({ message: answer.body, color: 0 }),
         newMessage: '',
       });
-      this.updateScroll();
-      console.log(answer.reaction);
+      setTimeout(() => { this.updateScroll(); },10);
       if (answer.reaction !== '' && answer.reaction !== undefined) {
         this.setState({ loading: true });
-        this.updateScroll();
+        setTimeout(() => { this.updateScroll(); },10);
         setTimeout(() => {
           this.setState({ loading: false });
           this.setState({
             chat: this.state.chat.concat({ message: answer.reaction, color: 1 }),
           });
-          this.updateScroll();
+          setTimeout(() => { this.updateScroll(); },10);
           axios
             .post(`${url}/api/answers/${this.state.user._id}`, {
               answer,
@@ -82,7 +81,7 @@ class Chat extends Component {
                   this.updateUser();
                 } else {
                   this.setState({ loading: true });
-                  this.updateScroll();
+                  setTimeout(() => { this.updateScroll(); },10);
                   setTimeout(() => {
                     this.setState({ loading: false });
                     this.setState({
@@ -92,7 +91,7 @@ class Chat extends Component {
                       ]),
                       currentQuestion: res2.data.question,
                     });
-                    this.updateScroll();
+                    setTimeout(() => { this.updateScroll(); },10);
                   }, 1000);
                 }
               });
@@ -108,7 +107,7 @@ class Chat extends Component {
             axios.post(`${url}/api/questions/${this.state.user._id}`).then((res2) => {
               if (res2.data.isFinish) {
                 this.setState({ isFinish: true });
-                this.updateUser();
+                setTimeout(() => { this.updateScroll(); },10);
               } else {
                 this.setState({ loading: true });
                 this.updateScroll();
@@ -121,7 +120,7 @@ class Chat extends Component {
                     ]),
                     currentQuestion: res2.data.question,
                   });
-                  this.updateScroll();
+                  setTimeout(() => { this.updateScroll(); },10);
                 }, 1000);
               }
             });
@@ -136,9 +135,9 @@ class Chat extends Component {
         userAnswer = <div />;
       } else if (this.state.isFinish) {
         userAnswer = (
-          <div>
+          <div className="response-bar">
             <Link to={`/begin/${this.props.match.params.id}`}>
-              <button className="btn btn-primary my-2"> Revenir à la page d'acceuil </button>
+              <button className="choice"> Revenir à la page d'acceuil </button>
             </Link>
           </div>
         );
@@ -149,10 +148,10 @@ class Chat extends Component {
         userAnswer = (
           <div className="response-bar">
             <div id="choice-buttons">
-              {this.state.currentQuestion.answers.map((a,i) => (
+              {this.state.currentQuestion.answers.map((a, i) => (
                 <button
                   onClick={this.onSubmit.bind(this, a)}
-                  className="btn btn-outline-primary"
+                  className="choice"
                   key={i}
                 >
                   {a.body}

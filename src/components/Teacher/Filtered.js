@@ -17,7 +17,11 @@ class Filtered extends Component {
       axios.get(`${url}/api/users/sorted/pseudo`).then((res) => {
         this.setState({ users: res.data });
       });
-    } else if (['motivation','lifestyle', 'fidelity', 'integration',' noOrientation'].includes(this.props.match.params.filter)){
+    } else if (
+      ['motivation', 'lifestyle', 'fidelity', 'integration', ' noOrientation'].includes(
+        this.props.match.params.filter,
+      )
+    ) {
       axios
         .get(`${url}/api/users/sorted/score/${this.props.match.params.filter}`)
         .then((res) => {
@@ -35,7 +39,14 @@ class Filtered extends Component {
   render() {
     return (
       <div className="container">
-        {this.state.users.map((user,i) => (
+        <div className="text-center">
+          <h2>
+            {' Étudiants triés par '}
+            {this.props.match.params.filter}
+            {' '}
+          </h2>
+        </div>
+        {this.state.users.map((user, i) => (
           <FicheCourte key={i} name={user.pseudo} score={user.score} id={user._id} />
         ))}
       </div>

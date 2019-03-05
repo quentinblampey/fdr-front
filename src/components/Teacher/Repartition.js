@@ -41,18 +41,14 @@ class Repartition extends Component {
       'progress-bar bg-warning',
       'progress-bar bg-success',
     ];
-    const colors = [
-      variables.graph3,
-      variables.graph1,
-      variables.graph2,
-    ];
+    const colors = [variables.graph3, variables.graph1, variables.graph2];
 
     return (
       <div>
         {this.state.fields.map((f, i) => (
           <Link to={`../filter/${f.field}`} key={i}>
             <div className="fieldState">
-              <h3>{f.title}</h3>
+              <h2>{f.title}</h2>
               <div
                 className="progress"
                 style={{
@@ -71,8 +67,7 @@ class Repartition extends Component {
                     aria-valuenow="15"
                     aria-valuemin="0"
                     aria-valuemax="100"
-                  >{r}
-                  </div>
+                  />
                 ))}
               </div>
             </div>

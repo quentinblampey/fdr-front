@@ -47,6 +47,10 @@
             flex-direction: row;
             align-items: center;
 
+            & p {
+                margin: 7.8px;
+            }
+
             & .round {
                 width: 25px;
                 height: 25px;
@@ -54,6 +58,10 @@
                 border-radius: 50%;
                 margin-right: $margin1;
             }
+        }
+
+        & .other {
+            margin-left: 10px;
         }
 
         & .bars {

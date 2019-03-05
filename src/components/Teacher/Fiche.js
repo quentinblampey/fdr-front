@@ -37,6 +37,8 @@ class Begin extends Component {
         // console.log('user', this.state.user);
         const { user } = this.state;
         const scores = user.score;
+
+        /*
         let color = '';
         if (scores.fidelity > 7) {
           color = 'green';
@@ -45,8 +47,7 @@ class Begin extends Component {
         } else {
           color = 'orange';
         }
-
-        console.log(user.numberQuestions);
+        */
 
         // Coloration de l'indicateur INVESTISSEMENT
         if (user.numberChats !== undefined && user.numberChats !== null) {
@@ -94,7 +95,7 @@ class Begin extends Component {
 
           this.setState({
             user: res.data,
-            color: `list-group-item ${color}`,
+            // color: `list-group-item ${color}`,
             score: scores,
             firstLog: reg,
             lastChat: last,
@@ -119,47 +120,13 @@ class Begin extends Component {
 
   render() {
     let fidelity;
-    let motivation;
+    /* let motivation;
     let lifestyle;
     let integration;
-    let noOrientation;
+    let noOrientation; */
     const {
-      user, score, color, firstLog, average, lastChat,
+      user, score, firstLog, average, lastChat,
     } = this.state;
-
-    if (false) {
-      motivation = true;
-    } else {
-      motivation = false;
-    }
-
-    if (
-      user.numberChats !== undefined
-            && user.numberChats.length !== 0
-            && user.numberChats !== null
-    ) {
-      fidelity = true;
-    } else {
-      fidelity = false;
-    }
-
-    if (false) {
-      lifestyle = true;
-    } else {
-      lifestyle = false;
-    }
-
-    if (false) {
-      integration = true;
-    } else {
-      integration = false;
-    }
-
-    if (false) {
-      noOrientation = true;
-    } else {
-      noOrientation = false;
-    }
 
     return (
       <div className="container">
@@ -169,7 +136,7 @@ Fiche de l&apos;élève :
         </h2>
         <div className="card bg-light mb-3">
           <div className="card-header">
-            <h3>Informations personnelles</h3>
+            <h2>Informations personnelles</h2>
           </div>
           <ul className="list-group list-group-flush">
             <li className="list-group-item">
@@ -177,26 +144,17 @@ Fiche de l&apos;élève :
                 {' '}
                                 Motivation générale :
                 {' '}
-                {score.motivation}
+                {parseFloat(score.motivation).toFixed(2)}
                                 /10
               </h5>
-              <p className="card-text">
-                {' '}
-                                Indicateur random :
-                {' '}
-                {motivation
-                  ? 'Indicateur'
-                  : "Pas d'indicateur"}
-                {' '}
-              </p>
             </li>
 
-            <li className={color}>
+            <li className="list-group-item">
               <h5 className="card-title">
                 {' '}
                                 Utilisation et fidélité :
                 {' '}
-                {score.fidelity}
+                {parseFloat(score.fidelity).toFixed(2)}
                                 /10
               </h5>
               <p className="card-text">
@@ -233,50 +191,29 @@ Date d&apos;inscription :
               <h5 className="card-title">
                 {' '}
                                 Style de vie :
-                {score.lifestyle}
+                {' '}
+                {parseFloat(score.lifestyle).toFixed(2)}
                                 /10
               </h5>
-              <p className="card-text">
-                {' '}
-                                Indicateur random :
-                {' '}
-                {lifestyle
-                  ? 'Indicateur'
-                  : "Pas d'indicateur"}
-                {' '}
-              </p>
             </li>
 
             <li className="list-group-item">
               <h5 className="card-title">
                 {' '}
                                 Intégration :
-                {score.integration}
+                {' '}
+                {parseFloat(score.integration).toFixed(2)}
                                 /10
               </h5>
-              <p className="card-text">
-                {' '}
-                                Indicateur random :
-                {' '}
-                {integration ? 'Indicateur' : "Pas d'indicateur"}
-                {' '}
-              </p>
             </li>
 
             <li className="list-group-item">
               <h5 className="card-title">
                                 Pertinence de l&apos;orientation :
                 {' '}
-                {score.noOrientation}
+                {parseFloat(score.noOrientation).toFixed(2)}
                                 /10
               </h5>
-              <p className="card-text">
-                {' '}
-                                Indicateur random :
-                {' '}
-                {noOrientation ? 'Indicateur' : "Pas d'indicateur"}
-                {' '}
-              </p>
             </li>
 
             <li className="list-group-item">
@@ -287,7 +224,8 @@ Date d&apos;inscription :
           <div className="card-footer">
             <h4 className="card-title">
                             Score moyen :
-              {average}
+              {' '}
+              {parseFloat(average).toFixed(2)}
                             /10
             </h4>
           </div>

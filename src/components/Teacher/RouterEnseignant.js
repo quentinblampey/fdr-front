@@ -9,6 +9,7 @@ import FicheCourte from './FicheCourte';
 import Repartition from './Repartition';
 import Profils from './Profils';
 import HistoricUpdate from './HistoricUpdate';
+import Nav from '../Navbar';
 
 const crypto = require('crypto');
 
@@ -48,8 +49,9 @@ class RouterEns extends Component {
       const { authorized } = this.state;
       if (!authorized) {
         return (
-          <div className="container">
-            <h2>Entrez le code pour accéder à l&apos;interface enseignant.</h2>
+          <div className="container text-center">
+            <h2>Interface enseignant</h2>
+            <p>Entrez le code</p>
             <form onSubmit={this.onSubmit}>
               <input
                 type="password"
@@ -68,20 +70,26 @@ class RouterEns extends Component {
       }
 
       return (
-        <Router>
-          <div>
-            <Route exact path="/fakefiche" component={FicheCourte} />
-            <Route exact path="/enseignant/historic/score" component={HistoricUpdate} />
-            <Route exact path="/enseignant" component={VueEnseignant} />
-            <Route path="/enseignant/fiche/:id" render={props => <Fiche {...props} />} />
-            <Route
-              path="/enseignant/filter/:filter"
-              render={props => <Filtered {...props} />}
-            />
-            <Route path="/enseignant/repartition" component={Repartition} />
-            <Route path="/enseignant/profils" component={Profils} />
-          </div>
-        </Router>
+        <div>
+          <Nav />
+          <Router>
+            <div>
+              <Route exact path="/fakefiche" component={FicheCourte} />
+              <Route exact path="/enseignant/historic/score" component={HistoricUpdate} />
+              <Route exact path="/enseignant" component={VueEnseignant} />
+              <Route
+                path="/enseignant/fiche/:id"
+                render={props => <Fiche {...props} />}
+              />
+              <Route
+                path="/enseignant/filter/:filter"
+                render={props => <Filtered {...props} />}
+              />
+              <Route path="/enseignant/repartition" component={Repartition} />
+              <Route path="/enseignant/profils" component={Profils} />
+            </div>
+          </Router>
+        </div>
       );
     }
 }

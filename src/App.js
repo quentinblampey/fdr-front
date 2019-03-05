@@ -4,7 +4,6 @@ import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Chat from './components/Student/Chat/Chat';
 import Begin from './components/Student/Begin';
-import Exit from './components/Student/Exit';
 import Home from './components/Home';
 import VueEtudiant from './components/Student/VueEtudiant';
 import FicheCourte from './components/Teacher/FicheCourte';

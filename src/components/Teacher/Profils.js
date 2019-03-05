@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Chart from 'react-apexcharts';
-import { Link } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 // import FooterStop from './FooterStop'
 // import { Link } from 'react-router-dom';
@@ -16,7 +15,7 @@ class Repartition extends Component {
       profils: ['Travail', 'Sportif', 'Hadicap', 'Artiste'],
       profilsName: ['employe', 'athlete', 'disabled', 'artist'],
       proportions: [0, 0, 0, 0],
-      colors: [variables.graph1, variables.graph2, variables.graph3, variables.graph4]
+      colors: [variables.graph1, variables.graph2, variables.graph3, variables.graph4],
     };
   }
 
@@ -53,7 +52,7 @@ class Repartition extends Component {
       labels: this.state.profils,
       plotOptions: {
         radialBar: {
-          startAngle:0,
+          startAngle: 0,
           endAngle: 270,
           name: {
             fontSize: '22px',
@@ -75,20 +74,26 @@ class Repartition extends Component {
                     étudiants.
         </h4>
         <div>
-          <div style={{position:"absolute", top:"24%", width:'100%'}}>
-             {this.state.profils.map((a,i) => (
-                <div key={i} style={{color:this.state.colors[i], marginLeft:'7%'}}>{a} : {this.state.proportions[i]}%</div>
-              ))}
-          </div>
-          <div style={{position:"absolute", top:'16%'}}>
-              <div className="radialbar">
-                <Chart
-                  options={options}
-                  series={this.state.proportions}
-                  type="radialBar"
-                  height="380"
-                />
+          <div style={{ position: 'absolute', top: '24%', width: '100%' }}>
+            {this.state.profils.map((a, i) => (
+              <div key={i} style={{ color: this.state.colors[i], marginLeft: '7%' }}>
+                {a}
+                {' '}
+:
+                {this.state.proportions[i]}
+%
               </div>
+            ))}
+          </div>
+          <div style={{ position: 'absolute', top: '16%' }}>
+            <div className="radialbar">
+              <Chart
+                options={options}
+                series={this.state.proportions}
+                type="radialBar"
+                height="380"
+              />
+            </div>
           </div>
         </div>
       </div>

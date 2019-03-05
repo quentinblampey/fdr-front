@@ -45,19 +45,25 @@ class VueEtudiant extends Component {
               <div className="panel-body">
                 <h1> Interface étudiant </h1>
                 <hr />
+                <h3>Veuillez vous inscrire avec votre adresse mail:</h3>
                 <form onSubmit={this.onSubmit}>
                   <input
-                    type="text"
+                    type="email"
                     className="form-control"
                     name="pseudo"
                     value={pseudo}
                     onChange={this.onChange}
-                    placeholder="Pseudo"
+                    placeholder="nom@exemple.com"
                   />
                   <button type="submit" className="btn btn-success">
                                     Me connecter
                   </button>
                 </form>
+                <br />
+                <h5>
+                                A terme, l'identification se fera par le biais du CAS (Service
+                                d'autentification central).
+                </h5>
                 <hr />
                 <div className="card bg-light mb-3">
                   <div className="card-header">

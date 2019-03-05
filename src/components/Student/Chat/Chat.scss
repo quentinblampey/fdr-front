@@ -16,11 +16,11 @@
 */
 
 .chatbox {
-    height: calc(100vh - #{$top} - #{$bottom});
     width: 100%;
     margin: 0px;
     position: absolute;
     bottom: $bottom;
+    top: $top;
     overflow: scroll;
     overflow-x: hidden;
     display: flex;
@@ -95,4 +95,7 @@
 
 .fixed-bottom {
     background: $grayLight;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

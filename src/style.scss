@@ -10,6 +10,10 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+a:link {
+    text-decoration: none;
+}
+
 @font-face {
     font-family: 'MsThin';
     src: url('./assets/polices/Montserrat/Montserrat-Thin.ttf') format('truetype');

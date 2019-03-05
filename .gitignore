@@ -63,4 +63,4 @@ typings/
 # next.js build output
 .next
 
-./src/config.js
+src/components/config.js

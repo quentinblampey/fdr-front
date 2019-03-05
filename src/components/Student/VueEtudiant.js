@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import url from '../../config';
+import './VueEtudiant.scss';
 
 class VueEtudiant extends Component {
   constructor(props) {
@@ -39,13 +40,11 @@ class VueEtudiant extends Component {
     render() {
       const { pseudo, pseudos } = this.state;
       return (
-        <div className="text-center">
+        <div className="text-center component">
           <div className="container">
             <div className="panel panel-default">
               <div className="panel-body">
-                <h1> Interface étudiant </h1>
-                <hr />
-                <h3>Veuillez vous inscrire avec votre adresse mail:</h3>
+                <h3>Inscris-toi ici</h3>
                 <form onSubmit={this.onSubmit}>
                   <input
                     type="email"
@@ -55,29 +54,11 @@ class VueEtudiant extends Component {
                     onChange={this.onChange}
                     placeholder="nom@exemple.com"
                   />
-                  <button type="submit" className="btn btn-success">
+                  <button type="submit" className="sign">
                                     Me connecter
                   </button>
                 </form>
                 <br />
-                <h5>
-                                A terme, l'identification se fera par le biais du CAS (Service
-                                d'autentification central).
-                </h5>
-                <hr />
-                <div className="card bg-light mb-3">
-                  <div className="card-header">
-                    <h5>Comptes inscrits :</h5>
-                  </div>
-
-                  <ul className="list-group list-group-flush">
-                    {pseudos.map((p, i) => (
-                      <li className="list-group-item" key={i}>
-                        <Link to={`/begin/${p._id}`}>{p.pseudo}</Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
               </div>
             </div>
           </div>

@@ -27,29 +27,50 @@ class Chat extends Component {
   componentDidMount() {
     axios.get(`${url}/api/questions/`).then((r) => {
       console.log(r.data.length);
-      if (r.data.length===0){
+      if (r.data.length === 0) {
         axios.post(`${url}/api/file/newfile`).then((r2) => {
           axios.post(`${url}/api/questions/${this.props.match.params.id}`).then((r3) => {
             if (r3.data.question.body === '' || r3.data.question.body === undefined) {
-              this.setState({ chat: this.state.chat.concat([{ message: "Je n'ai plus de questions à te poser pour le moment !", color: 1 }]), isFinish: true });
+              this.setState({
+                chat: this.state.chat.concat([
+                  {
+                    message:
+                                            "Je n'ai plus de questions à te poser pour le moment !",
+                    color: 1,
+                  },
+                ]),
+                isFinish: true,
+              });
             } else {
               this.setState({
                 user: r3.data.user,
-                chat: this.state.chat.concat([{ message: r3.data.question.body, color: 1 }]),
+                chat: this.state.chat.concat([
+                  { message: r3.data.question.body, color: 1 },
+                ]),
                 currentQuestion: r3.data.question,
               });
             }
           });
         });
-      }
-      else{
+      } else {
         axios.post(`${url}/api/questions/${this.props.match.params.id}`).then((r) => {
           if (r.data.question.body === '' || r.data.question.body === undefined) {
-            this.setState({ chat: this.state.chat.concat([{ message: "Je n'ai plus de questions à te poser pour le moment !", color: 1 }]), isFinish: true });
+            this.setState({
+              chat: this.state.chat.concat([
+                {
+                  message:
+                                        "Je n'ai plus de questions à te poser pour le moment !",
+                  color: 1,
+                },
+              ]),
+              isFinish: true,
+            });
           } else {
             this.setState({
               user: r.data.user,
-              chat: this.state.chat.concat([{ message: r.data.question.body, color: 1 }]),
+              chat: this.state.chat.concat([
+                { message: r.data.question.body, color: 1 },
+              ]),
               currentQuestion: r.data.question,
             });
           }
@@ -84,16 +105,22 @@ class Chat extends Component {
         chat: this.state.chat.concat({ message: answer.body, color: 0 }),
         newMessage: '',
       });
-      setTimeout(() => { this.updateScroll(); },10);
+      setTimeout(() => {
+        this.updateScroll();
+      }, 10);
       if (answer.reaction !== '' && answer.reaction !== undefined) {
         this.setState({ loading: true });
-        setTimeout(() => { this.updateScroll(); },10);
+        setTimeout(() => {
+          this.updateScroll();
+        }, 10);
         setTimeout(() => {
           this.setState({ loading: false });
           this.setState({
             chat: this.state.chat.concat({ message: answer.reaction, color: 1 }),
           });
-          setTimeout(() => { this.updateScroll(); },10);
+          setTimeout(() => {
+            this.updateScroll();
+          }, 10);
           axios
             .post(`${url}/api/answers/${this.state.user._id}`, {
               answer,
@@ -104,10 +131,14 @@ class Chat extends Component {
                 if (res2.data.isFinish) {
                   this.setState({ isFinish: true });
                   this.updateUser();
-                  setTimeout(() => { this.updateScroll(); },10);
+                  setTimeout(() => {
+                    this.updateScroll();
+                  }, 10);
                 } else {
                   this.setState({ loading: true });
-                  setTimeout(() => { this.updateScroll(); },10);
+                  setTimeout(() => {
+                    this.updateScroll();
+                  }, 10);
                   setTimeout(() => {
                     this.setState({ loading: false });
                     this.setState({
@@ -117,7 +148,9 @@ class Chat extends Component {
                       ]),
                       currentQuestion: res2.data.question,
                     });
-                    setTimeout(() => { this.updateScroll(); },10);
+                    setTimeout(() => {
+                      this.updateScroll();
+                    }, 10);
                   }, 1000);
                 }
               });
@@ -134,7 +167,9 @@ class Chat extends Component {
               if (res2.data.isFinish) {
                 this.setState({ isFinish: true });
                 this.updateUser();
-                setTimeout(() => { this.updateScroll(); },10);
+                setTimeout(() => {
+                  this.updateScroll();
+                }, 10);
               } else {
                 this.setState({ loading: true });
                 this.updateScroll();
@@ -147,7 +182,9 @@ class Chat extends Component {
                     ]),
                     currentQuestion: res2.data.question,
                   });
-                  setTimeout(() => { this.updateScroll(); },10);
+                  setTimeout(() => {
+                    this.updateScroll();
+                  }, 10);
                 }, 1000);
               }
             });
@@ -215,6 +252,15 @@ class Chat extends Component {
 
       return (
         <div className="text-center">
+          <div className="fixed-top">
+            <Link to={`/begin/${this.props.match.params.id}`}>
+              <button className="arrow">
+                {' '}
+                {'<'}
+                {' '}
+              </button>
+            </Link>
+          </div>
           <div className="chatbox" id="chatbox">
             {this.state.chat.map((m, i) => (
               <MessageChat key={i} message={m.message} color={1 - m.color} />
@@ -223,7 +269,7 @@ class Chat extends Component {
               <Loading loading={this.state.loading} />
             </div>
           </div>
-          {userAnswer}
+          <div class="fixed-bottom">{userAnswer}</div>
         </div>
       );
     }

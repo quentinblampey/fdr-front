@@ -21,26 +21,28 @@ class Begin extends Component {
 
   render() {
     return (
-      <div className="component">
-        <div className="shape">
-          <div className="left">
-            <div />
+      <div>
+        <div className="component">
+          <div className="shape">
+            <div className="left">
+              <div />
+            </div>
+            <Link to={`/chat/${this.props.match.params.id}`}>
+              <button type="submit" className="content">
+                <p>
+                  <span>“ </span>
+                                    MON COACH CHATBOT
+                  <span> ”</span>
+                </p>
+              </button>
+            </Link>
           </div>
-          <Link to={`/chat/${this.props.match.params.id}`}>
-            <button type="submit" className="content">
-              <p>
-                <span>“ </span>
-                                MON COACH CHATBOT
-                <span> ”</span>
-              </p>
+          <Link to="">
+            <button type="submit" className="help">
+              <p>DEMANDER DE L'AIDE</p>
             </button>
           </Link>
         </div>
-        <Link to="">
-          <button type="submit" className="help">
-            <p>DEMANDER DE L'AIDE</p>
-          </button>
-        </Link>
         <FooterStop />
       </div>
     );

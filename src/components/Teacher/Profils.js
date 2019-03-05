@@ -21,17 +21,14 @@ class Repartition extends Component {
 
   componentDidMount() {
     console.log(this.state.profils);
-    for (let i = 0; i < this.state.profils.length; i++) {
       axios
-        .post(`${url}/api/stats/profils`, { profil: this.state.profilsName[i] })
+        .post(`${url}/api/stats/profils`, { profils: this.state.profilsName })
       // eslint-disable-next-line no-loop-func
         .then((res) => {
-          const proportions = this.state.proportions;
-          proportions[i] = res.data.nb;
-          this.setState({ proportions });
+          console.log(res.data);
+          this.setState({ proportions: res.data.proportions });
         });
     }
-  }
 
   renderRedirect(link) {
     console.log(link);

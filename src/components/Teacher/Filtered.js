@@ -46,9 +46,11 @@ class Filtered extends Component {
             {' '}
           </h2>
         </div>
-        {this.state.users.map((user, i) => (
-          <FicheCourte key={i} name={user.pseudo} score={user.score} id={user._id} />
-        ))}
+        <div className="container-fiches">
+          {this.state.users.map((user, i) => (
+            <FicheCourte key={i} name={user.pseudo} score={user.score} id={user._id} />
+          ))}
+        </div>
       </div>
     );
   }

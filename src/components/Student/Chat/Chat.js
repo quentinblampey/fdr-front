@@ -254,10 +254,7 @@ class Chat extends Component {
         <div className="text-center">
           <div className="fixed-top">
             <Link to={`/begin/${this.props.match.params.id}`}>
-              <button className="arrow">
-                {' '}
-                {'<'}
-                {' '}
+              <button className="arrow"> Retour
               </button>
             </Link>
           </div>
@@ -269,7 +266,7 @@ class Chat extends Component {
               <Loading loading={this.state.loading} />
             </div>
           </div>
-          <div class="fixed-bottom">{userAnswer}</div>
+          <div className="fixed-bottom">{userAnswer}</div>
         </div>
       );
     }

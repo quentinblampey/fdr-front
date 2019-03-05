@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import url from '../../config';
 import './VueEtudiant.scss';
 
@@ -9,7 +8,6 @@ class VueEtudiant extends Component {
     super(props);
     this.state = {
       pseudo: '',
-      pseudos: [],
     };
   }
 
@@ -38,7 +36,7 @@ class VueEtudiant extends Component {
     };
 
     render() {
-      const { pseudo, pseudos } = this.state;
+      const { pseudo } = this.state;
       return (
         <div className="text-center component">
           <div className="container">

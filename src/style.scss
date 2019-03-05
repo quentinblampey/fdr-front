@@ -1,4 +1,5 @@
 @import './globalSCSS/color.scss';
+@import './globalSCSS/size.scss';
 
 body {
     padding: 0;
@@ -59,12 +60,24 @@ body {
     src: url('./assets/polices/Montserrat/Montserrat-ExtraLight.ttf') format('truetype');
 }
 
-p:last-child {
-    margin-bottom: 0;
+// Size
+
+.fixed-bottom {
+    height: $bottom;
+}
+.fixed-top {
+    height: $top;
+    background: $white;
 }
 
 h1 {
     font-weight: 300;
+}
+
+// Margins
+
+p:last-child {
+    margin-bottom: 0;
 }
 
 footer {
@@ -83,6 +96,8 @@ input {
 button {
     margin: 2px;
 }
+
+// Colors
 
 .orange {
     background: $orange;

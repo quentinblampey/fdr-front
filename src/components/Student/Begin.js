@@ -37,9 +37,9 @@ class Begin extends Component {
               </button>
             </Link>
           </div>
-          <Link to="">
+          <Link to={`/chat/${this.props.match.params.id}`}>
             <button type="submit" className="help">
-              <p>DEMANDER DE L'AIDE</p>
+              <p>LANCER LE CHAT</p>
             </button>
           </Link>
         </div>

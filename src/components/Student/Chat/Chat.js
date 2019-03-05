@@ -44,7 +44,7 @@ class Chat extends Component {
       }
       else{
         axios.post(`${url}/api/questions/${this.props.match.params.id}`).then((r) => {
-          if (r.data.question.body == '' || r.data.question.body == undefined) {
+          if (r.data.question.body === '' || r.data.question.body === undefined) {
             this.setState({ chat: this.state.chat.concat([{ message: "Je n'ai plus de questions à te poser pour le moment !", color: 1 }]), isFinish: true });
           } else {
             this.setState({

@@ -1,7 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 // import axios from 'axios';
-import { Link } from 'react-router-dom';
 import './FooterStop.scss';
 
 class FooterStop extends Component {
@@ -12,11 +11,7 @@ class FooterStop extends Component {
           className="navbar fixed-bottom navbar-light bg-light"
           style={{ display: 'flex', justifyContent: 'center' }}
         >
-          <a
-            href="https://goo.gl/forms/NkNRuP0SJ4LnZ23w1"
-            className="stop"
-            target="_blank"
-          >
+          <a href="https://goo.gl/forms/NkNRuP0SJ4LnZ23w1" className="stop">
             <button type="submit" className="btn btn-danger">
                             ARRÊTER L'ÉVALUATION
             </button>

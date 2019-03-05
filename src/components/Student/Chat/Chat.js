@@ -25,14 +25,34 @@ class Chat extends Component {
   }
 
   componentDidMount() {
-    axios.post(`${url}/api/questions/${this.props.match.params.id}`).then((r) => {
-      if (r.data.question.body == '' || r.data.question.body == undefined) {
-        this.setState({ chat: this.state.chat.concat([{ message: "Je n'ai plus de questions à te poser pour le moment !", color: 1 }]), isFinish: true });
-      } else {
-        this.setState({
-          user: r.data.user,
-          chat: this.state.chat.concat([{ message: r.data.question.body, color: 1 }]),
-          currentQuestion: r.data.question,
+    axios.get(`${url}/api/questions/`).then((r) => {
+      console.log(r.data.length);
+      if (r.data.length===0){
+        axios.post(`${url}/api/file/newfile`).then((r2) => {
+          axios.post(`${url}/api/questions/${this.props.match.params.id}`).then((r3) => {
+            if (r3.data.question.body === '' || r3.data.question.body === undefined) {
+              this.setState({ chat: this.state.chat.concat([{ message: "Je n'ai plus de questions à te poser pour le moment !", color: 1 }]), isFinish: true });
+            } else {
+              this.setState({
+                user: r3.data.user,
+                chat: this.state.chat.concat([{ message: r3.data.question.body, color: 1 }]),
+                currentQuestion: r3.data.question,
+              });
+            }
+          });
+        });
+      }
+      else{
+        axios.post(`${url}/api/questions/${this.props.match.params.id}`).then((r) => {
+          if (r.data.question.body === '' || r.data.question.body === undefined) {
+            this.setState({ chat: this.state.chat.concat([{ message: "Je n'ai plus de questions à te poser pour le moment !", color: 1 }]), isFinish: true });
+          } else {
+            this.setState({
+              user: r.data.user,
+              chat: this.state.chat.concat([{ message: r.data.question.body, color: 1 }]),
+              currentQuestion: r.data.question,
+            });
+          }
         });
       }
     });

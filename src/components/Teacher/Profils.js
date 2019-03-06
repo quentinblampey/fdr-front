@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import axios from 'axios';
 import Chart from 'react-apexcharts';
@@ -59,7 +60,7 @@ class RadialChart extends Component {
                 {a}
                 {' '}
 :
-                {this.props.proportions[i]}
+                {(i + 1) * this.props.proportions[i]}
 %
               </div>
             ))}

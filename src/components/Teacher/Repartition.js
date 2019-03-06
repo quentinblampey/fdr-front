@@ -45,6 +45,32 @@ class Repartition extends Component {
 
     return (
       <div>
+        <h2 className="container">Répartition des élèves suivant les 5 critères. </h2>
+        <h5 className="container">
+                    La largeur de chaque couleur correspond à la proportion d'étudiants dans chaque
+                    intervalle de notes :
+          {' '}
+        </h5>
+        <div className="container">
+          <div className="card">
+            <div className="card-header">Légende : proportion d'étudiants </div>
+            <ul className="list-group list-group-flush">
+              <li className="list-group-item d-flex justify-content-center">
+                                Notés de &nbsp; &nbsp;
+                <span className="badge badge-pill badge-danger">0 à 4</span>
+              </li>
+              <li className="list-group-item d-flex justify-content-center">
+                                Notés de &nbsp; &nbsp;
+                <span className="badge badge-pill badge-warning">4 à 7</span>
+              </li>
+              <li className="list-group-item d-flex justify-content-center">
+                                Notés de &nbsp; &nbsp;
+                <span className="badge badge-pill badge-success">7 à 10</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
         {this.state.fields.map((f, i) => (
           <Link to={`../filter/${f.field}`} key={i}>
             <div className="fieldState">
@@ -52,10 +78,10 @@ class Repartition extends Component {
               <div
                 className="progress"
                 style={{
-                  height: '20px',
+                  height: '30px',
                   width: '90%',
                   margin: '10px auto',
-                  borderRadius: '10px',
+                  borderRadius: '15px',
                 }}
               >
                 {f.repartition.map((r, j) => (

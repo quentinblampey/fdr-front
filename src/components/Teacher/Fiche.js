@@ -18,7 +18,7 @@ class Begin extends Component {
     super(props);
     // this.computeStats = this.computeStats.bind(this)
     this.state = {
-      user: { details: {} },
+      user: { details: {name:'undefined'} },
       color: 'green',
       lastChat: '',
       firstLog: '',

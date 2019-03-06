@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import url from '../../config';
 import './VueEtudiant.scss';
+import FooterStop from './FooterStop';
 
 class VueEtudiant extends Component {
   constructor(props) {
@@ -43,6 +44,7 @@ class VueEtudiant extends Component {
             <div className="panel panel-default">
               <div className="panel-body">
                 <h3>INSCRIS-TOI ICI !</h3>
+                <p style={{ color: '#fefefe' }}> Renseigne ton email</p>
                 <form onSubmit={this.onSubmit}>
                   <input
                     type="email"
@@ -60,6 +62,7 @@ class VueEtudiant extends Component {
               </div>
             </div>
           </div>
+          <FooterStop />
         </div>
       );
     }

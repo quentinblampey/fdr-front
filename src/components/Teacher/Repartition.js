@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 // import { Link } from 'react-router-dom';
 // import FooterStop from './FooterStop'
-import { Link } from 'react-router-dom';
 import url from '../../config';
 import './Repartition.scss';
 import variables from '../../globalSCSS/color.scss';

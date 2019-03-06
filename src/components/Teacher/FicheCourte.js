@@ -13,13 +13,6 @@ class FicheCourte extends Component {
       color3: '',
       color4: '',
       color5: '',
-      fields: [
-        { field: 'motivation', title: 'Motivation', repartition: [] },
-        { field: 'lifestyle', title: 'Lifestyle', repartition: [] },
-        { field: 'fidelity', title: 'Fidelite', repartition: [] },
-        { field: 'noOrientation', title: 'Besoin de réorientation', repartition: [] },
-        { field: 'integration', title: 'Intégration', repartition: [] },
-      ]
     };
   }
 
@@ -132,28 +125,51 @@ class FicheCourte extends Component {
             </div>
             <div className="scores">
               <div className="bars">
-                {this.state.fields.map((f, i) => (
-                  <div key={i} className="fieldState">
-                    <div
-                      className="progress"
-                      style={{
-                        height: '15px',
-                        width: '90%',
-                        margin: '10px auto',
-                        borderRadius: '8px',
-                      }}
-                    >
-                        <div
-                          key={i+5}
-                          role="progressbar"
-                          style={{ width: `${this.props.user.score[f.field]}%`, color: 'blue' }}
-                          aria-valuenow="15"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        >{this.props.user.score[f.field]}</div>
-                    </div>
-                  </div>
-              ))}
+                <div className="progress-container">
+                  <div
+                    className="score"
+                    style={{
+                      height: `${this.props.user.score.motivation * 10}%`,
+                      background: this.state.color1,
+                    }}
+                  ></div>
+                </div>
+                <div className="progress-container">
+                  <div
+                    className="score"
+                    style={{
+                      height: `${this.props.user.score.lifestyle * 10}%`,
+                      background: this.state.color2,
+                    }}
+                  />
+                </div>
+                <div className="progress-container" onMouseEnter={this.jump.bind(this)}>
+                  <div
+                    className="score"
+                    style={{
+                      height: `${this.props.user.score.integration * 10}%`,
+                      background: this.state.color3,
+                    }}
+                  />
+                </div>
+                <div className="progress-container">
+                  <div
+                    className="score"
+                    style={{
+                      height: `${this.props.user.score.fidelity * 10}%`,
+                      background: this.state.color4,
+                    }}
+                  />
+                </div>
+                <div className="progress-container">
+                  <div
+                    className="score"
+                    style={{
+                      height: `${this.props.user.score.noOrientation * 10}%`,
+                      background: this.state.color5,
+                    }}
+                  />
+                </div>
               </div>
             </div>
           </div>

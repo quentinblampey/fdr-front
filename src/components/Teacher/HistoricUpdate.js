@@ -25,7 +25,14 @@ class HU extends Component {
 
     render() {
       return (
-        <div>
+        <div className="text-center">
+          <h2> Ce bouton permet de stocker les indicateurs des étudiants à un instant T </h2>
+          <p>
+            {' '}
+                    Dans la version réelle, il sera automatiquement activé à un intervalle de temps
+                    régulier
+            {' '}
+          </p>
           <button onClick={this.update} className="btn btn-danger">
             {' '}
                     Update

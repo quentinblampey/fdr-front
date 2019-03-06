@@ -31,7 +31,8 @@
 */
 
 .text-box-blue {
-    width: $messageWidth;
+    width: max-content;
+    max-width: $messageWidth;
     min-height: $messageMinHeight;
     border-radius: $normal;
     position: relative;
@@ -47,7 +48,8 @@
 }
 
 .text-box-gray {
-    width: $messageWidth;
+    width: max-content;
+    max-width: $messageWidth;
     min-height: $messageMinHeight;
     border-radius: $normal;
     background: $grayLight;

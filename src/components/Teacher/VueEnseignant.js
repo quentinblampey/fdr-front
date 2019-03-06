@@ -32,9 +32,13 @@ class VueEnseignant extends Component {
   }
 
   updateFilter(filter) {
+<<<<<<< Updated upstream
     console.log(filter);
     this.setState({ filter });
     console.log(this.state.filter);
+=======
+    this.setState({filter : filter});
+>>>>>>> Stashed changes
   }
 
   render() {
@@ -54,6 +58,7 @@ class VueEnseignant extends Component {
               </button>
             </div>
             <div className="row">
+<<<<<<< Updated upstream
               <div className="col-6">
                 <RadialChart
                   updateFilter={this.state.updateFilter}
@@ -71,6 +76,18 @@ class VueEnseignant extends Component {
           </div>
           <div className="col-3">
             <Filtered filter={this.state.filter} style={{ maxWidth: '80%' }} />
+=======
+              <div className="card col-6">
+                <RadialChart updateFilter={this.state.updateFilter} parent={this} profils= {this.state.profils} profilsName = {this.state.profilsName} proportions={this.state.proportions} colors={this.state.colors}></RadialChart>
+              </div>
+              <div className="card col-6">
+                <Repartition updateFilter={this.state.updateFilter}></Repartition>
+              </div>
+            </div>
+          </div>
+          <div className="card col-3">
+            <Filtered filter={this.state.filter}></Filtered>
+>>>>>>> Stashed changes
           </div>
         </div>
       </div>

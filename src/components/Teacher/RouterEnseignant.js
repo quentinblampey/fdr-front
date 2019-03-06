@@ -26,8 +26,7 @@ class RouterEns extends Component {
   componentDidMount() {}
 
     onChange = (e) => {
-      const { MdP } = this.state;
-      this.setState({ MdP: e.target.value }, () => console.log(MdP));
+      this.setState({ MdP: e.target.value });
     };
 
     onSubmit = (e) => {

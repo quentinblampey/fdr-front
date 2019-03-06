@@ -9,10 +9,8 @@ class RadialChart extends Component {
         chart: {
           events: {
             dataPointSelection(event, chartContext, config) {
-              console.log(Array.from(event.path[0].id).slice(-1)[0]);
             },
             dataPointMouseEnter(event, chartContext, config) {
-              console.log(Array.from(event.path[0].id).slice(-1)[0]);
             },
           },
         },

@@ -58,7 +58,6 @@ class FicheCourte extends Component {
 
   componentDidUpdate(prevProps){
     if (prevProps.user !== this.props.user) {
-      console.log(this.props.user);
       const score = this.props.user.score;
       if (score.motivation <= 6) {
         if (score.motivation <= 3) {
@@ -102,7 +101,6 @@ class FicheCourte extends Component {
   }
 
     hover = () => {
-      console.log('hover');
       // this.setState({ indicator: s });
     };
 
@@ -124,6 +122,17 @@ class FicheCourte extends Component {
               </h1>
             </div>
             <div className="scores">
+              <div className="other">
+                <p>M</p>
+                {' '}
+                <p>L</p>
+                {' '}
+                <p>I</p>
+                {' '}
+                <p>F</p>
+                {' '}
+                <p>O</p>
+              </div>
               <div className="bars">
                 <div className="progress-container">
                   <div

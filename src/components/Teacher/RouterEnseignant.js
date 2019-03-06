@@ -19,6 +19,7 @@ class RouterEns extends Component {
     this.state = {
       authorized: false,
       MdP: '',
+      fail: false,
     };
   }
 
@@ -41,13 +42,15 @@ class RouterEns extends Component {
           .toString('hex');
         if (hash === res.data.hash) {
           this.setState({ authorized: true });
+        } else {
+          this.setState({ fail: true });
         }
       });
     };
 
     render() {
-      const { authorized } = this.state;
-      if (!authorized) {
+      const { authorized, fail } = this.state;
+      if (!authorized && !fail) {
         return (
           <div className="container text-center">
             <h2>Interface enseignant</h2>
@@ -65,6 +68,31 @@ class RouterEns extends Component {
                             Me connecter
               </button>
             </form>
+          </div>
+        );
+      }
+      if (!authorized && fail) {
+        return (
+          <div className="container text-center">
+            <h2>Interface enseignant</h2>
+            <p>Entrez le code</p>
+            <form onSubmit={this.onSubmit}>
+              <input
+                type="password"
+                className="validate form-control"
+                name="password"
+                value={this.MdP}
+                onChange={this.onChange}
+                placeholder="Mot de passe"
+              />
+              <button type="submit" className="btn btn-success">
+                            Me connecter
+              </button>
+            </form>
+            <br />
+            <div className="alert alert-danger" role="alert">
+                        Mot de passe incorrect ! Veuillez réessayer.
+            </div>
           </div>
         );
       }

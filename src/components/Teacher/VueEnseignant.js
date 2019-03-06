@@ -50,7 +50,7 @@ class VueEnseignant extends Component {
             </div>
             <div className="row">
               <div className="col-6">
-                <RadialChart updateFilter={this.updateFilter} parent={this} profils= {this.state.profils} profilsName = {this.state.profilsName} proportions={this.state.proportions} colors={this.state.colors}></RadialChart>
+                <RadialChart updateFilter={this.state.updateFilter} parent={this} profils= {this.state.profils} profilsName = {this.state.profilsName} proportions={this.state.proportions} colors={this.state.colors}></RadialChart>
               </div>
               <div className="col-6">
                 <Repartition updateFilter={this.state.updateFilter}></Repartition>

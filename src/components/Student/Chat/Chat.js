@@ -140,6 +140,7 @@ class Chat extends Component {
                 this.setState({
                   chat: this.state.chat.concat({ message: answer.reaction, color: 1 }),
                 });
+                this.updateScroll();
                 resolve();
               }, 1000);
             } else {

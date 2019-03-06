@@ -18,7 +18,7 @@ class Begin extends Component {
     super(props);
     // this.computeStats = this.computeStats.bind(this)
     this.state = {
-      user: '',
+      user: { details: {} },
       color: 'green',
       lastChat: '',
       firstLog: '',
@@ -130,10 +130,15 @@ class Begin extends Component {
 
     return (
       <div className="container">
-        <h2>
-Fiche de l&apos;élève :
-          {user.pseudo}
+        <h2 className="text-center">
+          {" Fiche de l'élève : "}
+          {user.details.name}
         </h2>
+        <p>
+          {' '}
+          {user.pseudo}
+          {' '}
+        </p>
         <div className="card bg-light mb-3">
           <div className="card-header">
             <h2>Informations personnelles</h2>

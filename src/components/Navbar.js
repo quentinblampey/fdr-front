@@ -8,7 +8,7 @@ class Navbar extends Component {
     return (
       <div>
         <nav>
-          <Link to="enseignant">
+          <Link to="/enseignant">
             <button className="btn btn-primary">Accueil</button>
           </Link>
         </nav>

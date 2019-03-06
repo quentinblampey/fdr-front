@@ -40,6 +40,11 @@ class Filtered extends Component {
     return (
       <div className="container">
         <div className="text-center">
+          <button onClick={this.componentDidMount.bind(this)} className="btn btn-success">
+            {' '}
+                        Refresh
+            {' '}
+          </button>
           <h2>
             {' Étudiants triés par '}
             {this.props.match.params.filter}

@@ -71,9 +71,9 @@ class RouterEns extends Component {
 
       return (
         <div>
-          <Nav />
           <Router>
             <div>
+              <Nav />
               <Route exact path="/fakefiche" component={FicheCourte} />
               <Route exact path="/enseignant/historic/score" component={HistoricUpdate} />
               <Route exact path="/enseignant" component={VueEnseignant} />

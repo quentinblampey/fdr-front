@@ -5,7 +5,6 @@ import Chat from './components/Student/Chat/Chat';
 import Begin from './components/Student/Begin';
 import Home from './components/Home';
 import VueEtudiant from './components/Student/VueEtudiant';
-import FicheCourte from './components/Teacher/FicheCourte';
 import RouterEns from './components/Teacher/RouterEnseignant';
 
 class App extends Component {
@@ -21,12 +20,10 @@ class App extends Component {
       <Router>
         <div>
           <Route exact path="/" component={Home} />
-          <Route exact path="/fakefiche" component={FicheCourte} />
           <Route exact path="/etudiant" component={VueEtudiant} />
           <Route path="/chat/:id" component={Chat} />
           <Route path="/begin/:id" render={props => <Begin {...props} />} />
           <Route path="/enseignant" component={RouterEns} />
-
           <Footer />
         </div>
       </Router>

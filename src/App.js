@@ -19,7 +19,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={VueEtudiant} />
           <Route exact path="/etudiant" component={VueEtudiant} />
           <Route path="/chat/:id" component={Chat} />
           <Route path="/begin/:id" render={props => <Begin {...props} />} />

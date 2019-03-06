@@ -17,7 +17,7 @@ class FicheCourte extends Component {
   }
 
   componentDidMount() {
-    const score = this.props.score;
+    const score = this.props.user.score;
     if (score.motivation <= 6) {
       if (score.motivation <= 3) {
         this.setState({ color1: 'red' });
@@ -55,8 +55,48 @@ class FicheCourte extends Component {
     }
   }
 
+  componentDidUpdate(prevProps){
+    if (prevProps.user !== this.props.user) {
+      const score = this.props.user.score;
+    if (score.motivation <= 6) {
+      if (score.motivation <= 3) {
+        this.setState({ color1: 'red' });
+      } else {
+        this.setState({ color1: 'orange' });
+      }
+    }
+    if (score.lifestyle <= 6) {
+      if (score.lifestyle <= 3) {
+        this.setState({ color2: 'red' });
+      } else {
+        this.setState({ color2: 'orange' });
+      }
+    }
+    if (score.integration <= 6) {
+      if (score.integration <= 3) {
+        this.setState({ color3: 'red' });
+      } else {
+        this.setState({ color3: 'orange' });
+      }
+    }
+    if (score.fidelity <= 6) {
+      if (score.fidelity <= 3) {
+        this.setState({ color4: 'red' });
+      } else {
+        this.setState({ color4: 'orange' });
+      }
+    }
+    if (score.noOrientation <= 6) {
+      if (score.noOrientation <= 3) {
+        this.setState({ color5: 'red' });
+      } else {
+        this.setState({ color5: 'orange' });
+      }
+    }
+  }
+}
+
   jump(event) {
-    console.log('Fucking hover ta mère la tchoin !');
   }
 
     hover = () => {
@@ -71,13 +111,13 @@ class FicheCourte extends Component {
 
     render() {
       return (
-        <Link to={`/enseignant/fiche/${this.props.id}`}>
+        <Link to={`/enseignant/fiche/${this.props.user._id}`}>
           <div className="card1">
             <div className="header">
               <div className="picture" />
               <h1>
                 {' '}
-                {this.props.name}
+                {this.props.user.details !== undefined && this.props.user.details.name}
                 {' '}
               </h1>
             </div>
@@ -98,7 +138,7 @@ class FicheCourte extends Component {
                   <div
                     className="score"
                     style={{
-                      height: `${this.props.score.motivation * 10}%`,
+                      height: `${this.props.user.score.motivation * 10}%`,
                       background: this.state.color1,
                     }}
                   />
@@ -107,7 +147,7 @@ class FicheCourte extends Component {
                   <div
                     className="score"
                     style={{
-                      height: `${this.props.score.lifestyle * 10}%`,
+                      height: `${this.props.user.score.lifestyle * 10}%`,
                       background: this.state.color2,
                     }}
                   />
@@ -116,7 +156,7 @@ class FicheCourte extends Component {
                   <div
                     className="score"
                     style={{
-                      height: `${this.props.score.integration * 10}%`,
+                      height: `${this.props.user.score.integration * 10}%`,
                       background: this.state.color3,
                     }}
                   />
@@ -125,7 +165,7 @@ class FicheCourte extends Component {
                   <div
                     className="score"
                     style={{
-                      height: `${this.props.score.fidelity * 10}%`,
+                      height: `${this.props.user.score.fidelity * 10}%`,
                       background: this.state.color4,
                     }}
                   />
@@ -134,7 +174,7 @@ class FicheCourte extends Component {
                   <div
                     className="score"
                     style={{
-                      height: `${this.props.score.noOrientation * 10}%`,
+                      height: `${this.props.user.score.noOrientation * 10}%`,
                       background: this.state.color5,
                     }}
                   />

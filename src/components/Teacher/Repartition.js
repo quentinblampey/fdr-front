@@ -61,7 +61,7 @@ class Repartition extends Component {
         </div>
 
         {this.state.fields.map((f, i) => (
-            <div key={i} className="fieldState" onClick={this.props.updateFilter.bind(this.props.parent, f.field)}>
+            <div key={i} className="fieldState" onClick={() => this.props.updateFilter(f.field)}>
               <h6>{f.title}</h6>
               <div
                 className="progress"

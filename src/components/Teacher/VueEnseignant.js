@@ -32,13 +32,7 @@ class VueEnseignant extends Component {
   }
 
   updateFilter(filter) {
-<<<<<<< Updated upstream
-    console.log(filter);
-    this.setState({ filter });
-    console.log(this.state.filter);
-=======
     this.setState({filter : filter});
->>>>>>> Stashed changes
   }
 
   render() {

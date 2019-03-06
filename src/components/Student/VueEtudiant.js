@@ -42,7 +42,7 @@ class VueEtudiant extends Component {
           <div className="container">
             <div className="panel panel-default">
               <div className="panel-body">
-                <h3>Inscris-toi ici</h3>
+                <h3>INSCRIS-TOI ICI !</h3>
                 <form onSubmit={this.onSubmit}>
                   <input
                     type="email"

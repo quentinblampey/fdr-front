@@ -10,9 +10,9 @@ class Chat extends Component {
   constructor() {
     super();
     this.state = {
+      emptyBodyForbidden:[1,3,5],
       loading: false,
       chat: [],
-      chats: [],
       isFinish: false,
       newMessage: '',
       currentQuestion: { answers: [] },
@@ -26,70 +26,50 @@ class Chat extends Component {
   }
 
   componentDidMount() {
-    axios.get(`${url}/api/questions/`).then((r) => {
-      console.log(r.data.length);
-      if (r.data.length === 0) {
-        axios.post(`${url}/api/file/newfile`).then((r2) => {
-          axios.post(`${url}/api/questions/${this.props.match.params.id}`).then((r3) => {
-            if (r3.data.question.body === '' || r3.data.question.body === undefined) {
-              this.setState({
-                chat: this.state.chat.concat([
-                  {
-                    message:
-                                            "Je n'ai plus de questions à te poser pour le moment !",
-                    color: 1,
-                  },
-                ]),
-                isFinish: true,
-              });
-            } else {
-              this.setState({
-                user: r3.data.user,
-                chat: this.state.chat.concat([
-                  { message: r3.data.question.body, color: 1 },
-                ]),
-                currentQuestion: r3.data.question,
-              });
-            }
-          });
-        });
-      } else {
-        axios.post(`${url}/api/questions/${this.props.match.params.id}`).then((r) => {
-          if (r.data.question.body === '' || r.data.question.body === undefined) {
-            this.setState({
-              chat: this.state.chat.concat([
-                {
-                  message:
-                                        "Je n'ai plus de questions à te poser pour le moment !",
-                  color: 1,
-                },
-              ]),
-              isFinish: true,
-            });
-          } else {
-            this.setState({
-              user: r.data.user,
-              chat: this.state.chat.concat([
-                { message: r.data.question.body, color: 1 },
-              ]),
-              currentQuestion: r.data.question,
-            });
-          }
-        });
-      }
+    var promise = new Promise((resolve) => {
+      axios.get(`${url}/api/questions/`).then((r) => {
+        if (r.data.length === 0) {
+          axios.post(`${url}/api/file/newfile`).then(()=>{})
+        }
+        resolve();
+      })
     });
-    setTimeout(this.updateScroll, 10);
+    promise.then(()=> {
+      axios.post(`${url}/api/questions/${this.props.match.params.id}`).then((r3) => {
+        if (r3.data.question.body === '' || r3.data.question.body === undefined) {
+          this.setState({
+            chat: this.state.chat.concat([
+              {
+                message:
+                                        "Je n'ai plus de questions à te poser pour le moment !",
+                color: 1,
+              },
+            ]),
+            isFinish: true,
+          });
+        } else {
+          this.setState({
+            chat: this.state.chat.concat([
+              { message: r3.data.question.body, color: 1 },
+            ]),
+            currentQuestion: r3.data.question,
+          });
+        }
+        this.updateScroll();
+      });
+    });
   }
 
     onChange = (e) => {
       const { state } = this;
       state[e.target.name] = e.target.value;
       this.setState(state);
+      this.updateScroll();
     };
 
     updateUser = () => {
-      axios.get(`${url}/api/users/getid/${this.state.user._id}`).then((res) => {
-        axios.put(`${url}/api/users/endchat/${this.state.user._id}`, res);
+      axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
+        axios.put(`${url}/api/users/endchat/${this.props.match.params.id}`, res);
       });
     }
 
@@ -101,55 +81,20 @@ class Chat extends Component {
       this.onSubmit(ans, e);
     };
 
-    onSubmit = (answer, e) => {
-      if ((this.state.currentQuestion.idQ===1 || this.state.currentQuestion.idQ===3)&& (answer.body==='')){
-        if (!this.state.error){
-          this.setState({
-            chat: this.state.chat.concat({ message: "Merci de rentrer un prénom", color: 1 }),
-          });
-        }
-        this.setState({error:true})
-      }
-      else{
-        this.setState({error:false});
-        this.setState({
-          chat: this.state.chat.concat({ message: answer.body, color: 0 }),
-          newMessage: '',
-        });
-        setTimeout(() => {
-          this.updateScroll();
-        }, 10);
-        if (answer.reaction !== '' && answer.reaction !== undefined) {
-          this.setState({ loading: true });
-          setTimeout(() => {
-            this.updateScroll();
-          }, 10);
-          setTimeout(() => {
-            this.setState({ loading: false });
-            this.setState({
-              chat: this.state.chat.concat({ message: answer.reaction, color: 1 }),
-            });
-            setTimeout(() => {
-              this.updateScroll();
-            }, 10);
-            axios
-              .post(`${url}/api/answers/${this.state.user._id}`, {
+    sendAnswer = (answer) => {
+      axios.post(`${url}/api/answers/${this.props.match.params.id}`, {
                 answer,
                 field: this.state.currentQuestion.field,
               })
               .then((res) => {
-                axios.post(`${url}/api/questions/${this.state.user._id}`).then((res2) => {
+                axios.post(`${url}/api/questions/${this.props.match.params.id}`).then((res2) => {
                   if (res2.data.isFinish) {
                     this.setState({ isFinish: true });
                     this.updateUser();
-                    setTimeout(() => {
-                      this.updateScroll();
-                    }, 10);
+                    this.updateScroll();
                   } else {
                     this.setState({ loading: true });
-                    setTimeout(() => {
-                      this.updateScroll();
-                    }, 10);
+                    this.updateScroll();
                     setTimeout(() => {
                       this.setState({ loading: false });
                       this.setState({
@@ -159,53 +104,54 @@ class Chat extends Component {
                         ]),
                         currentQuestion: res2.data.question,
                       });
-                      setTimeout(() => {
-                        this.updateScroll();
-                      }, 10);
+                      this.updateScroll();
                     }, 1000);
                   }
                 });
               });
-          }, 1000);
-        } else {
-          axios
-            .post(`${url}/api/answers/${this.state.user._id}`, {
-              answer,
-              field: this.state.currentQuestion.field,
-            })
-            .then((res) => {
-              axios.post(`${url}/api/questions/${this.state.user._id}`).then((res2) => {
-                if (res2.data.isFinish) {
-                  this.setState({ isFinish: true });
-                  this.updateUser();
-                  setTimeout(() => {
-                    this.updateScroll();
-                  }, 10);
-                } else {
-                  this.setState({ loading: true });
-                  this.updateScroll();
-                  setTimeout(() => {
-                    this.setState({ loading: false });
-                    this.setState({
-                      user: res2.data.user,
-                      chat: this.state.chat.concat([
-                        { message: res2.data.question.body, color: 1 },
-                      ]),
-                      currentQuestion: res2.data.question,
-                    });
-                    setTimeout(() => {
-                      this.updateScroll();
-                    }, 10);
-                  }, 1000);
-                }
-              });
-            });
-          }  
+    }
+
+    onSubmit = (answer, e) => {
+      if ( this.state.emptyBodyForbidden.includes(this.state.currentQuestion.idQ) && (answer.body==='')){
+        if (!this.state.error){
+          this.setState({
+            chat: this.state.chat.concat({ message: "Merci de rentrer une réponse", color: 1 }),
+            error: true
+          });
+        }
+      }
+      else {
+        var promiseScroll = new Promise((resolve) => {
+          this.updateScroll();
+          resolve();
+        })
+        var promise = new Promise((resolve) => {
+          this.setState({error:false});
+          this.setState({
+            chat: this.state.chat.concat({ message: answer.body, color: 0 }),
+            newMessage: '',
+          });
+          promiseScroll.then(()=> {
+            if (answer.reaction !== '' && answer.reaction !== undefined) {
+              this.setState({ loading: true });
+              this.updateScroll();
+              setTimeout(() => {
+                this.setState({ loading: false });
+                this.setState({
+                  chat: this.state.chat.concat({ message: answer.reaction, color: 1 }),
+                });
+                resolve();
+              }, 1000);
+            } else {
+              resolve();
+            }
+          })
+        });
+        promise.then(()=> { this.sendAnswer(answer)});
         } 
       };
 
     handleKeyPress(target) {
-      console.log(target.charCode);
       if (target.charCode === 13) {
         let ans;
         ans = this.state.currentQuestion.answers[0];

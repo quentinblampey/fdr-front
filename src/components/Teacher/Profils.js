@@ -53,6 +53,7 @@ class RadialChart extends Component {
 
     return (
       <div className="container">
+        <h5>Repartition des étudiants selon leurs profils</h5>
         <div>
           <div>
             {this.props.profils.map((a, i) => (

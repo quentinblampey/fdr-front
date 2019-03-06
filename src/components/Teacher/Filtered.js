@@ -13,23 +13,23 @@ class Filtered extends Component {
   }
 
   componentDidMount() {
-    if (this.props.match.params.filter === 'pseudo') {
+    if (this.props.filter === 'pseudo') {
       axios.get(`${url}/api/users/sorted/pseudo`).then((res) => {
         this.setState({ users: res.data });
       });
     } else if (
       ['motivation', 'lifestyle', 'fidelity', 'integration', ' noOrientation'].includes(
-        this.props.match.params.filter,
+        this.props.filter,
       )
     ) {
       axios
-        .get(`${url}/api/users/sorted/score/${this.props.match.params.filter}`)
+        .get(`${url}/api/users/sorted/score/${this.props.filter}`)
         .then((res) => {
           this.setState({ users: res.data });
         });
     } else {
       axios
-        .get(`${url}/api/users/sorted/caracteristics/${this.props.match.params.filter}`)
+        .get(`${url}/api/users/sorted/caracteristics/${this.props.filter}`)
         .then((res) => {
           this.setState({ users: res.data });
         });
@@ -46,9 +46,7 @@ class Filtered extends Component {
             {' '}
           </button>
           <h2>
-            {' Étudiants triés par '}
-            {this.props.match.params.filter}
-            {' '}
+            {' Étudiants triés par ', this.props.filter, ' '}
           </h2>
         </div>
         <div className="container-fiches">

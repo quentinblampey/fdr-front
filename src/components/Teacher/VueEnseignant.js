@@ -15,12 +15,13 @@ class VueEnseignant extends Component {
       pseudo: '',
       pseudos: [],
       filter:'pseudo',
-      profils: ['Travail', 'Sportif', 'Hadicap', 'Artiste'],
+      profils: ['Employés', 'Sportifs', 'Handicapés', 'Artistes'],
       profilsName: ['employe', 'athlete', 'disabled', 'artist'],
       proportions: [0, 0, 0, 0],
       colors: [variables.graph1, variables.graph2, variables.graph3, variables.graph4],
-    };
+      updateFilter:this.updateFilter.bind(this), 
   }
+    };
 
   componentDidMount() {
     axios.post(`${url}/api/stats/profils`, { profils: this.state.profilsName })
@@ -33,8 +34,9 @@ class VueEnseignant extends Component {
   }
 
   updateFilter(filter) {
-    console.log('1');
+    console.log(filter);
     this.setState({filter : filter});
+    console.log(this.state.filter);
   }
 
   render() {
@@ -48,10 +50,10 @@ class VueEnseignant extends Component {
             </div>
             <div className="row">
               <div className="col-6">
-                <RadialChart profils= {this.state.profils} profilsName = {this.state.profilsName} proportions={this.state.proportions} colors={this.state.colors}></RadialChart>
+                <RadialChart updateFilter={this.updateFilter} parent={this} profils= {this.state.profils} profilsName = {this.state.profilsName} proportions={this.state.proportions} colors={this.state.colors}></RadialChart>
               </div>
               <div className="col-6">
-                <Repartition updateFilter={this.updateFilter} parent={this}></Repartition>
+                <Repartition updateFilter={this.state.updateFilter}></Repartition>
               </div>
             </div>
           </div>

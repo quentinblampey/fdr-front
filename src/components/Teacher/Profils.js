@@ -28,7 +28,7 @@ class RadialChart extends Component {
         events: {
           dataPointSelection: (event, chartContext, config) => {
             const a = Array.from(event.path[0].id);
-            this.renderRedirect(this.props.profilsName[a[a.length - 1]].toLowerCase());
+            this.props.updateFilter.bind(this.props.parent, this.props.profilsName[a[a.length - 1]].toLowerCase());
           },
         },
       },

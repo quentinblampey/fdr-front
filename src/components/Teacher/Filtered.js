@@ -22,17 +22,13 @@ class Filtered extends Component {
         this.props.filter,
       )
     ) {
-      axios
-        .get(`${url}/api/users/sorted/score/${this.props.filter}`)
-        .then((res) => {
-          this.setState({ users: res.data });
-        });
+      axios.get(`${url}/api/users/sorted/score/${this.props.filter}`).then((res) => {
+        this.setState({ users: res.data });
+      });
     } else {
-      axios
-        .get(`${url}/api/users/sorted/caracteristics/${this.props.filter}`)
-        .then((res) => {
-          this.setState({ users: res.data });
-        });
+      axios.get(`${url}/api/users/sorted/caracteristics/${this.props.filter}`).then((res) => {
+        this.setState({ users: res.data });
+      });
     }
   }
 
@@ -45,11 +41,13 @@ class Filtered extends Component {
                         Refresh
             {' '}
           </button>
-          <h2>
-            {' Étudiants triés par ', this.props.filter, ' '}
-          </h2>
+          <p>
+            {' Étudiants triés par '}
+            {this.props.filter}
+            {' '}
+          </p>
         </div>
-        <div className="container-fiches">
+        <div className="container-fiches box">
           {this.state.users.map((user, i) => (
             <FicheCourte key={i} name={user.pseudo} score={user.score} id={user._id} />
           ))}

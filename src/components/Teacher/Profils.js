@@ -60,7 +60,7 @@ class RadialChart extends Component {
                 {a}
                 {' '}
 :
-                {(i + 1) * this.props.proportions[i]}
+                {String((i + 1) * this.props.proportions[i]).split('.')[0]}
 %
               </div>
             ))}

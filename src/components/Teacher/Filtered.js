@@ -22,17 +22,13 @@ class Filtered extends Component {
         this.props.filter,
       )
     ) {
-      axios
-        .get(`${url}/api/users/sorted/score/${this.props.filter}`)
-        .then((res) => {
-          this.setState({ users: res.data });
-        });
+      axios.get(`${url}/api/users/sorted/score/${this.props.filter}`).then((res) => {
+        this.setState({ users: res.data });
+      });
     } else {
-      axios
-        .get(`${url}/api/users/sorted/caracteristics/${this.props.filter}`)
-        .then((res) => {
-          this.setState({ users: res.data });
-        });
+      axios.get(`${url}/api/users/sorted/caracteristics/${this.props.filter}`).then((res) => {
+        this.setState({ users: res.data });
+      });
     }
   }
 
@@ -71,7 +67,7 @@ class Filtered extends Component {
             {' Étudiants triés par ', this.props.filter, ' '}
           </h2>
         </div>
-        <div className="container-fiches">
+        <div className="container-fiches box">
           {this.state.users.map((user, i) => (
             <FicheCourte key={i} user={user} />
           ))}

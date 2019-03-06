@@ -4,6 +4,13 @@
     align-items: center;
 }
 
+.box {
+    height: calc(100vh - 200px);
+    overflow: hidden;
+    overflow: scroll;
+    width: 250px;
+}
+
 .container-fiches {
     display: flex;
     flex-direction: row;

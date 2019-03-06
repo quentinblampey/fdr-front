@@ -17,7 +17,6 @@ class RadialChart extends Component {
   componentDidMount() {}
 
   renderRedirect(link) {
-    console.log(link);
     this.props.history.push(`/enseignant/filter/${link}`);
   }
 
@@ -28,7 +27,7 @@ class RadialChart extends Component {
         events: {
           dataPointSelection: (event, chartContext, config) => {
             const a = Array.from(event.path[0].id);
-            this.props.updateFilter.bind(this.props.parent, this.props.profilsName[a[a.length - 1]].toLowerCase());
+            this.props.updateFilter(this.props.profilsName[a[a.length - 1]].toLowerCase());
           },
         },
       },
@@ -36,7 +35,7 @@ class RadialChart extends Component {
       plotOptions: {
         radialBar: {
           startAngle: 0,
-          endAngle: 270,
+          endAngle: 360,
           name: {
             fontSize: '22px',
           },

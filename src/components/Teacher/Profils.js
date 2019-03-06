@@ -10,12 +10,10 @@ import url from '../../config';
 class RadialChart extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
   }
 
-  componentDidMount() {
-    }
+  componentDidMount() {}
 
   renderRedirect(link) {
     console.log(link);
@@ -70,7 +68,12 @@ class RadialChart extends Component {
             <div className="radialbar">
               <Chart
                 options={options}
-                series={this.props.proportions}
+                series={[
+                  this.props.proportions[0],
+                  2 * this.props.proportions[1],
+                  3 * this.props.proportions[2],
+                  4 * this.props.proportions[3],
+                ]}
                 type="radialBar"
                 height="380"
               />

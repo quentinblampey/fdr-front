@@ -5,6 +5,7 @@ import axios from 'axios';
 import url from '../../config';
 import './Repartition.scss';
 import variables from '../../globalSCSS/color.scss';
+import Info from './Info';
 
 class Repartition extends Component {
   constructor(props) {
@@ -44,7 +45,14 @@ class Repartition extends Component {
 
     return (
       <div>
-        <h5 className="container">Répartition des élèves suivant les 5 critères. </h5>
+        <div className="row">
+          <div className="col-10">
+            <h5>Répartition des élèves suivant les 5 critères.</h5>
+          </div>
+          <div className="col-2">
+            <Info part='repartition'/>
+          </div>
+        </div>
         <div className="container">
           <div className="card">
             <div className="card-header">Légende : proportion d'étudiants </div>

@@ -2,11 +2,12 @@
 import React, { Component } from 'react';
 import './FicheCourte.scss';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import url from '../../config';
 
 class FicheCourte extends Component {
   constructor(props) {
     super(props);
-    this.jump = this.jump.bind(this);
     this.state = {
       aide: false,
       indicator: '',
@@ -106,48 +107,37 @@ class FicheCourte extends Component {
     }
   }
 
-  jump(event) {}
-
-    hover = () => {
-      // this.setState({ indicator: s });
-    };
-
-    /* <div className="other">
-              <div className="round" />
-              <div className="round" />
-            </div> */
-
-    render() {
-      const { aide } = this.state;
-      return (
-            <Link to={`/enseignant/fiche/${this.props.user._id}`}>
-                <div className="card1">
-                    <div className="header">
-                        {aide && (
-                            <div>
-                                <span className="badge badge-pill badge-danger">Aide</span>
-                                <span className="badge badge-pill badge-warning">Aide</span>
+  render() {
+    const { aide } = this.state;
+    return (
+            <div className="fiche">
+                <Link to={`/enseignant/fiche/${this.props.user._id}`}>
+                    <div className="card1">
+                        <div className="header">
+                            {aide && (
+                                <div>
+                                    <span className="badge badge-pill badge-danger">Aide</span>
+                                    <span className="badge badge-pill badge-warning">Aide</span>
+                                </div>
+                            )}
+                            <div className="completion-container">
+                                <div
+                                  className="completion"
+                                  style={{
+                                    width: `${this.props.user.completion}%`,
+                                  }}
+                                />
                             </div>
-                        )}
-                        <div className="completion-container">
-                            <div
-                              className="completion"
-                              style={{
-                                width: `${this.props.user.completion}%`,
-                              }}
-                            />
-                        </div>
-                        <div className="picture" />
-                        <h1>
-                            {' '}
-                            {this.props.user.details !== undefined
-                                && this.props.user.details.name}
+                            <h1>
+                                {' '}
+                                {this.props.user.details !== undefined
+                                    && this.props.user.details.name}
 {' '}
-                        </h1>
-                    </div>
-                    <div className="scores">
-                        <div className="other">
-                            <p>M</p>
+                            </h1>
+                        </div>
+                        <div className="scores">
+                            <div className="other">
+                                <p>M</p>
 {' '}
 <p>L</p>
 {' '}
@@ -156,59 +146,70 @@ class FicheCourte extends Component {
 <p>F</p>
 {' '}
 <p>O</p>
-                        </div>
-                        <div className="bars">
-                            <div className="progress-container">
-                                <div
-                                  className="score"
-                                  style={{
-                                    height: `${this.props.user.score.motivation * 10}%`,
-                                    background: this.state.color1,
-                                  }}
-                                />
                             </div>
-                            <div className="progress-container">
-                                <div
-                                  className="score"
-                                  style={{
-                                    height: `${this.props.user.score.lifestyle * 10}%`,
-                                    background: this.state.color2,
-                                  }}
-                                />
-                            </div>
-                            <div className="progress-container" onMouseEnter={this.jump.bind(this)}>
-                                <div
-                                  className="score"
-                                  style={{
-                                    height: `${this.props.user.score.integration * 10}%`,
-                                    background: this.state.color3,
-                                  }}
-                                />
-                            </div>
-                            <div className="progress-container">
-                                <div
-                                  className="score"
-                                  style={{
-                                    height: `${this.props.user.score.fidelity * 10}%`,
-                                    background: this.state.color4,
-                                  }}
-                                />
-                            </div>
-                            <div className="progress-container">
-                                <div
-                                  className="score"
-                                  style={{
-                                    height: `${this.props.user.score.noOrientation * 10}%`,
-                                    background: this.state.color5,
-                                  }}
-                                />
+                            <div className="bars">
+                                <div className="progress-container">
+                                    <div
+                                      className="score"
+                                      style={{
+                                        height: `${this.props.user.score.motivation * 10}%`,
+                                        background: this.state.color1,
+                                      }}
+                                    />
+                                </div>
+                                <div className="progress-container">
+                                    <div
+                                      className="score"
+                                      style={{
+                                        height: `${this.props.user.score.lifestyle * 10}%`,
+                                        background: this.state.color2,
+                                      }}
+                                    />
+                                </div>
+                                <div className="progress-container">
+                                    <div
+                                      className="score"
+                                      style={{
+                                        height: `${this.props.user.score.integration * 10}%`,
+                                        background: this.state.color3,
+                                      }}
+                                    />
+                                </div>
+                                <div className="progress-container">
+                                    <div
+                                      className="score"
+                                      style={{
+                                        height: `${this.props.user.score.fidelity * 10}%`,
+                                        background: this.state.color4,
+                                      }}
+                                    />
+                                </div>
+                                <div className="progress-container">
+                                    <div
+                                      className="score"
+                                      style={{
+                                        height: `${this.props.user.score.noOrientation * 10}%`,
+                                        background: this.state.color5,
+                                      }}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </Link>
-      );
-    }
+                </Link>
+                {!this.props.user.helped && (
+                    <button
+                      onClick={() => {
+                        this.props.help(this.props.user._id);
+                      }}
+                      className="buttonHelp"
+                    >
+                        <i className="fa fa-calendar" aria-hidden="true" />
+                    </button>
+                )}
+            </div>
+    );
+  }
 }
 
 export default FicheCourte;

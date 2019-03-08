@@ -110,3 +110,21 @@
         background: $green;
     }
 }
+
+.buttonHelp {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: $green;
+    border: none;
+
+    & i {
+        color: $white;
+    }
+}
+
+.fiche {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

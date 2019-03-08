@@ -13,14 +13,15 @@ class Filtered extends Component {
   }
 
   componentDidMount() {
-    axios.get(`${url}/api/users/filter/${this.props}`).then((res) => {
+    console.log(this.props);
+    axios.post(`${url}/api/users/filter`, this.props).then((res) => {
       this.setState({ users: res.data });
     });
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
-      axios.get(`${url}/api/users/filter/${this.props}`).then((res) => {
+      axios.post(`${url}/api/users/filter`, this.props).then((res) => {
         this.setState({ users: res.data });
       });
     }

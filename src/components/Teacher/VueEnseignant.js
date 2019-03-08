@@ -14,8 +14,8 @@ class VueEnseignant extends Component {
       pseudo: '',
       pseudos: [],
       filter: [],
-      sort: ["pseudo"],
-      sortScore:[],
+      sort: ['pseudo'],
+      sortScore: [],
       profils: ['Employés', 'Sportifs', 'Handicapés', 'Artistes'],
       profilsName: ['employe', 'athlete', 'disabled', 'artist'],
       proportions: [0, 0, 0, 0],
@@ -35,17 +35,17 @@ class VueEnseignant extends Component {
   }
 
   updateSort(sort) {
-    this.setState({ sortScore:[sort] });
+    this.setState({ sortScore: [sort] });
   }
 
   updateFilter(filter) {
-    let filters = this.state.filter;
-    if (filters.includes(filter)){
-      filters.splice(filters.indexOf(filter), 1)
+    const filters = this.state.filter;
+    if (filters.includes(filter)) {
+      filters.splice(filters.indexOf(filter), 1);
     } else {
       filters.push(filter);
     }
-    this.setState({ filter:filters });
+    this.setState({ filter: filters });
   }
 
   render() {
@@ -69,6 +69,7 @@ class VueEnseignant extends Component {
             </div>
             <div className="row">
               <div className="card col-6">
+                <br />
                 <RadialChart
                   updateFilter={this.state.updateFilter}
                   parent={this}
@@ -79,6 +80,7 @@ class VueEnseignant extends Component {
                 />
               </div>
               <div className="card col-6">
+                <br />
                 <Repartition updateSort={this.state.updateSort} />
               </div>
             </div>

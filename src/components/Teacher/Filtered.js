@@ -13,7 +13,6 @@ class Filtered extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
     axios.post(`${url}/api/users/filter`, this.props).then((res) => {
       this.setState({ users: res.data });
     });
@@ -31,6 +30,7 @@ class Filtered extends Component {
     return (
       <div className="container">
         <div className="filters">
+          <p> Filtres :</p>
           {this.props.filter.map(filter => (
             <div key={filter} className="filter">
               {' '}
@@ -40,7 +40,15 @@ class Filtered extends Component {
           ))}
         </div>
         <div className="sorts">
+          <p> Tri :</p>
           {this.props.sortScore.map(sort => (
+            <div key={sort} className="sort">
+              {' '}
+              {sort}
+              {' '}
+            </div>
+          ))}
+          {this.props.sort.map(sort => (
             <div key={sort} className="sort">
               {' '}
               {sort}

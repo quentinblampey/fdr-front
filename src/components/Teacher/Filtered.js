@@ -30,24 +30,22 @@ class Filtered extends Component {
     return (
       <div className="container">
         <div className="filters">
-          {this.props.filter.array.forEach((filter) => {
+          {this.props.filter.map(filter => (
             <div className="filter">
               {' '}
               {filter}
               {' '}
-            </div>;
-          })}
-                    ;
+            </div>
+          ))}
         </div>
         <div className="sorts">
-          {this.props.sortScore.array.forEach((sort) => {
-            <div className="filter">
+          {this.props.sortScore.map(sort => (
+            <div className="sort">
               {' '}
               {sort}
               {' '}
-            </div>;
-          })}
-                    ;
+            </div>
+          ))}
         </div>
         <div className="text-center">
           <h2> Étudiants </h2>

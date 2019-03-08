@@ -114,6 +114,9 @@ class FicheCourte extends Component {
         <Link to={`/enseignant/fiche/${this.props.user._id}`}>
           <div className="card1">
             <div className="header">
+              <div class="completion-container"><div class="completion" style={{
+                      width: `${this.props.user.completion}%`
+                    }}></div></div>
               <div className="picture" />
               <h1>
                 {' '}

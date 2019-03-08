@@ -35,14 +35,7 @@ class VueEnseignant extends Component {
   }
 
   updateSort(sort) {
-    let sorts = this.state.sortScore;
-    if (sorts.includes(sort)){
-      sorts.splice(sorts.indexOf(sort), 1)
-    } else {
-      sorts.push(sort);
-    }
-    this.setState({ sortScore:sorts });
-    console.log(this.state.sortScore);
+    this.setState({ sortScore:[sort] });
   }
 
   updateFilter(filter) {

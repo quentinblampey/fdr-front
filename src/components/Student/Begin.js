@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-indent */
+/* eslint-disable quotes */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unused-state */
@@ -27,7 +29,7 @@ class Begin extends Component {
       const { user } = this.state;
       const id = user._id;
       console.log(id);
-      axios.post(`${url}/api/users/aide/${user._id}/2`, user).then((res) => {
+      axios.post(`${url}/api/users/aide/${user._id}/2`).then((res) => {
         this.setState({ user: res.data });
       });
     };
@@ -35,45 +37,45 @@ class Begin extends Component {
     render() {
       const { user } = this.state;
       return (
-        <div>
-          <div className="component">
-            <div className="shape">
-              <div className="left">
-                <div />
-              </div>
-              <Link to={`/chat/${this.props.match.params.id}`}>
-                <button type="submit" className="content">
-                  <p>
-                    <span>“ </span>
+            <div>
+                <div className="component">
+                    <div className="shape">
+                        <div className="left">
+                            <div />
+                        </div>
+                        <Link to={`/chat/${this.props.match.params.id}`}>
+                            <button type="submit" className="content">
+                                <p>
+                                    <span>“ </span>
                                     MON COACH CHATBOT
-                    <span> ”</span>
-                  </p>
-                </button>
-              </Link>
-            </div>
-            <Link to={`/chat/${this.props.match.params.id}`}>
-              <button type="submit" className="help">
-                <p>LANCER LE CHAT</p>
-              </button>
-            </Link>
-            <br />
-            {user.aide >= 2 ? (
-              <button type="submit" className="help" disabled>
-                <p>DEMANDE D'AIDE ENVOYEE!</p>
-              </button>
-            ) : (
-              <button type="submit" className="help" onClick={this.demAide}>
-                <p>DEMANDER DE L'AIDE</p>
-              </button>
-            )}
-            <br />
-            <p className="container backg">
+                                    <span> ”</span>
+                                </p>
+                            </button>
+                        </Link>
+                    </div>
+                    <Link to={`/chat/${this.props.match.params.id}`}>
+                        <button type="submit" className="help">
+                            <p>LANCER LE CHAT</p>
+                        </button>
+                    </Link>
+                    <br />
+                    {user.aide >= 2 ? (
+                        <button type="submit" className="help" disabled>
+                            <p>DEMANDE D'AIDE ENVOYEE!</p>
+                        </button>
+                    ) : (
+                        <button type="submit" className="help" onClick={this.demAide}>
+                            <p>DEMANDER DE L'AIDE</p>
+                        </button>
+                    )}
+                    <br />
+                    <p className="container backg">
                         Tu peux contacter ton enseignant référend grâce à ce bouton. Si tu as besoin
                         de conseils ou de soutien, tu peux le solliciter ici!
-            </p>
-          </div>
-          <FooterStop />
-        </div>
+                    </p>
+                </div>
+                <FooterStop />
+            </div>
       );
     }
 }

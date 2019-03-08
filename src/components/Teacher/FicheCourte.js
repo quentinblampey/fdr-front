@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import './FicheCourte.scss';
 import { Link } from 'react-router-dom';
+import ReactTooltip from 'react-tooltip';
 
 class FicheCourte extends Component {
   constructor(props) {
@@ -123,12 +124,37 @@ class FicheCourte extends Component {
             <Link to={`/enseignant/fiche/${this.props.user._id}`}>
                 <div className="card1">
                     <div className="header">
+                        <ReactTooltip multiline />
                         {aide === 2 && <span className="badge badge-pill badge-danger">Aide</span>}
-                        {aide === 1 && <span className="badge badge-pill badge-warning">Aide</span>}
+                        {aide === 1 && (
+                            <div>
+                                <ReactTooltip multiline />
+                                <span
+                                  multiline
+                                  className="badge badge-pill badge-warning"
+                                  data-tip="Le chatbot a repéré un étudiant <br /> qui mérite votre attention!"
+                                >
+                                    Aide
+                                </span>
+                            </div>
+                        )}
                         {aide === 3 && (
                             <div>
-                                <span className="badge badge-pill badge-danger">Aide</span>
-                                <span className="badge badge-pill badge-warning">Aide</span>
+                                <ReactTooltip multiline />
+                                <span
+                                  multiline
+                                  className="badge badge-pill badge-danger"
+                                  data-tip="Message étudiant"
+                                >
+                                    Aide
+                                </span>
+                                <span
+                                  multiline
+                                  className="badge badge-pill badge-warning"
+                                  data-tip="Le chatbot a repéré un étudiant <br /> qui mérite votre attention!"
+                                >
+                                    Aide
+                                </span>
                             </div>
                         )}
                         <div className="completion-container">

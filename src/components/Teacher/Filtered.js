@@ -7,35 +7,6 @@ import './Filtered.scss';
 class Filtered extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      users: [],
-    };
-  }
-
-  componentDidMount() {
-    if (!this.props.helped) {
-      axios.post(`${url}/api/users/filter`, this.props).then((res) => {
-        this.setState({ users: res.data });
-      });
-    } else {
-      axios.get(`${url}/api/users/helped`).then((res) => {
-        this.setState({ users: res.data });
-      });
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps !== this.props || prevState.update !== this.state.update) {
-      if (!this.props.helped) {
-        axios.post(`${url}/api/users/filter`, this.props).then((res) => {
-          this.setState({ users: res.data });
-        });
-      } else {
-        axios.get(`${url}/api/users/helped`).then((res) => {
-          this.setState({ users: res.data });
-        });
-      }
-    }
   }
 
   render() {
@@ -77,7 +48,7 @@ class Filtered extends Component {
         )}
         {this.props.helped && <h2> Rendez-vous demandés </h2>}
         <div className="container-fiches box">
-          {this.state.users.map(user => (
+          {this.props.users.map(user => (
             <FicheCourte key={user._id} user={user} help={this.props.help} />
           ))}
         </div>

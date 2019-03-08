@@ -80,5 +80,9 @@
     &:disabled {
         color: $white;
         border: 0px;
+
+        &:hover {
+            background: transparent;
+        }
     }
 }

@@ -27,7 +27,7 @@ class Begin extends Component {
       const { user } = this.state;
       const id = user._id;
       console.log(id);
-      axios.post(`${url}/api/users/aide/${user._id}`, user).then((res) => {
+      axios.post(`${url}/api/users/aide/${user._id}/2`, user).then((res) => {
         this.setState({ user: res.data });
       });
     };
@@ -57,7 +57,7 @@ class Begin extends Component {
               </button>
             </Link>
             <br />
-            {user.aide ? (
+            {user.aide >= 2 ? (
               <button type="submit" className="help" disabled>
                 <p>DEMANDE D'AIDE ENVOYEE!</p>
               </button>

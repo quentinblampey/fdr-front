@@ -67,6 +67,15 @@ class Begin extends Component {
                             </div>
                             <SC id={this.props.match.params.id} />
                         </div>
+                        <br />
+                        {user.aide && (
+                            <div className="card">
+                                <div className="card-header">
+                                    <h2>Gestion de l'aide</h2>
+                                </div>
+                                <Aide id={this.props.match.params.id} />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
@@ -263,6 +272,41 @@ Date d&apos;inscription :
                         </h4>
                     </div>
                 </div>
+            </div>
+    );
+  }
+}
+
+// Gestion des demandes d'aide
+class Aide extends Component {
+  /* propTypes = {
+      match: PropTypes.number.isRequired,
+      params: PropTypes.number.isRequired,
+      id: PropTypes.number.isRequired,
+    }; */
+  constructor(props) {
+    super(props);
+    // this.computeStats = this.computeStats.bind(this)
+    this.state = {
+      user: { details: { name: 'undefined' } },
+    };
+  }
+
+  componentDidMount() {
+    // const { id } = this.props;
+    // this.props.match.params.id
+    // eslint-disable-next-line react/destructuring-assignment react/prop-types
+    axios.get(`${url}/api/users/getid/${this.id}`).then((res) => {
+      // console.log(res.data);
+      this.setState({ user: res.data });
+    });
+  }
+
+  render() {
+    const { user } = this.state;
+    return (
+            <div>
+                <h2>Résoudre la demande d'aide</h2>
             </div>
     );
   }

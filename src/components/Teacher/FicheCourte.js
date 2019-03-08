@@ -107,6 +107,7 @@ class FicheCourte extends Component {
     }
   }
 
+<<<<<<< HEAD
   render() {
     const { aide } = this.state;
     return (
@@ -127,6 +128,31 @@ class FicheCourte extends Component {
                                     width: `${this.props.user.completion}%`,
                                   }}
                                 />
+=======
+  jump(event) {}
+
+    hover = () => {
+      // this.setState({ indicator: s });
+    };
+
+    /* <div className="other">
+              <div className="round" />
+              <div className="round" />
+            </div> */
+
+    render() {
+      const { aide } = this.state;
+      return (
+            <Link to={`/enseignant/fiche/${this.props.user._id}`}>
+                <div className="card1">
+                    <div className="header">
+                        {aide === 2 && <span className="badge badge-pill badge-danger">Aide</span>}
+                        {aide === 1 && <span className="badge badge-pill badge-warning">Aide</span>}
+                        {aide === 3 && (
+                            <div>
+                                <span className="badge badge-pill badge-danger">Aide</span>
+                                <span className="badge badge-pill badge-warning">Aide</span>
+>>>>>>> e455e6acb88312fd85374f923f91a8b5de23422b
                             </div>
                             <h1>
                                 {' '}

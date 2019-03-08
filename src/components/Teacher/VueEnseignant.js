@@ -33,7 +33,7 @@ class VueEnseignant extends Component {
   }
 
   updateFilter(filter) {
-    let filters = this.state.filters;
+    let filters = this.state.filter;
     if (filters.includes(filter)){
       filters.splice(filters.indexOf(filter), 1)
     } else {

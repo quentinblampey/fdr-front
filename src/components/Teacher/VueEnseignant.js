@@ -53,7 +53,10 @@ class VueEnseignant extends Component {
       <div className="container text-center">
         <h1 className="jumbotron-heading">Aide à la réussite</h1>
         <div className="row">
-          <div className="col-9">
+          <div className="card col-3">
+            <Filtered filter={this.state.filter} sort={this.state.sort} sortScore={this.state.sortScore} helped/>
+          </div>
+          <div className="col-6">
             <div className="row text-center">
               <button
                 type="button"
@@ -81,7 +84,7 @@ class VueEnseignant extends Component {
             </div>
           </div>
           <div className="card col-3">
-            <Filtered filter={this.state.filter} sort={this.state.sort} sortScore={this.state.sortScore}/>
+            <Filtered filter={this.state.filter} sort={this.state.sort} sortScore={this.state.sortScore} helped={false}/>
           </div>
         </div>
       </div>

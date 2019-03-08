@@ -13,60 +13,44 @@ class Filtered extends Component {
   }
 
   componentDidMount() {
-    if (this.props.filter === 'pseudo') {
-      axios.get(`${url}/api/users/sorted/pseudo`).then((res) => {
-        this.setState({ users: res.data });
-      });
-    } else if (
-      ['motivation', 'lifestyle', 'fidelity', 'integration', ' noOrientation'].includes(
-        this.props.filter,
-      )
-    ) {
-      axios.get(`${url}/api/users/sorted/score/${this.props.filter}`).then((res) => {
-        this.setState({ users: res.data });
-      });
-    } else {
-      axios.get(`${url}/api/users/sorted/caracteristics/${this.props.filter}`).then((res) => {
-        this.setState({ users: res.data });
-      });
-    }
+    axios.get(`${url}/api/users/filter/${this.props}`).then((res) => {
+      this.setState({ users: res.data });
+    });
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.filter !== this.props.filter) {
-      if (this.props.filter === 'pseudo') {
-        axios.get(`${url}/api/users/sorted/pseudo`).then((res) => {
-          this.setState({ users: res.data });
-        });
-      } else if (
-        ['motivation', 'lifestyle', 'fidelity', 'integration', 'noOrientation'].includes(
-          this.props.filter,
-        )
-      ) {
-        axios.get(`${url}/api/users/sorted/score/${this.props.filter}`).then((res) => {
-          this.setState({ users: res.data });
-          console.log(res.data);
-        });
-      } else {
-        axios
-          .get(`${url}/api/users/sorted/caracteristics/${this.props.filter}`)
-          .then((res) => {
-            this.setState({ users: res.data });
-          });
-      }
+    if (prevProps !== this.props) {
+      axios.get(`${url}/api/users/filter/${this.props}`).then((res) => {
+        this.setState({ users: res.data });
+      });
     }
   }
 
   render() {
     return (
       <div className="container">
+        <div className="filters">
+          {this.props.filter.array.forEach((filter) => {
+            <div className="filter">
+              {' '}
+              {filter}
+              {' '}
+            </div>;
+          })}
+                    ;
+        </div>
+        <div className="sorts">
+          {this.props.sortScore.array.forEach((sort) => {
+            <div className="filter">
+              {' '}
+              {sort}
+              {' '}
+            </div>;
+          })}
+                    ;
+        </div>
         <div className="text-center">
-          <h2>
-            {' Étudiants triés par '}
-            {' '}
-            {this.props.filter}
-            {' '}
-          </h2>
+          <h2> Étudiants </h2>
         </div>
         <div className="container-fiches box">
           {this.state.users.map(user => (

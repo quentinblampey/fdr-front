@@ -14,6 +14,7 @@ class VueEnseignant extends Component {
       pseudo: '',
       pseudos: [],
       filter: [],
+      sort: ["pseudo"],
       profils: ['Employés', 'Sportifs', 'Handicapés', 'Artistes'],
       profilsName: ['employe', 'athlete', 'disabled', 'artist'],
       proportions: [0, 0, 0, 0],
@@ -32,7 +33,7 @@ class VueEnseignant extends Component {
   }
 
   updateFilter(filter) {
-    filters = this.state.filters;
+    let filters = this.state.filters;
     if (filters.includes(filter)){
       filters.splice(filters.indexOf(filter), 1)
     } else {
@@ -74,7 +75,7 @@ class VueEnseignant extends Component {
             </div>
           </div>
           <div className="card col-3">
-            <Filtered filter={this.state.filter} score={[]} sortScore={[]}/>
+            <Filtered filter={this.state.filter} sort={this.state.sort} sortScore={[]}/>
           </div>
         </div>
       </div>

@@ -6,6 +6,7 @@ import Begin from './components/Student/Begin';
 // import Home from './components/Home';
 import VueEtudiant from './components/Student/VueEtudiant';
 import RouterEns from './components/Teacher/RouterEnseignant';
+import IE from './components/IE';
 
 class App extends Component {
   constructor(props) {
@@ -24,6 +25,7 @@ class App extends Component {
           <Route path="/chat/:id" component={Chat} />
           <Route path="/begin/:id" render={props => <Begin {...props} />} />
           <Route path="/enseignant" component={RouterEns} />
+          <Route path="/ie" component={IE} />
           <Footer />
         </div>
       </Router>

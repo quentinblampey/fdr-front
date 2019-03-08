@@ -6,6 +6,7 @@ import variables from '../../globalSCSS/color.scss';
 import RadialChart from './Profils';
 import Repartition from './Repartition';
 import Filtered from './Filtered';
+import './VueEnseignant.scss';
 
 class VueEnseignant extends Component {
   constructor(props) {
@@ -40,6 +41,10 @@ class VueEnseignant extends Component {
     this.setState({ sortScore: [sort] });
   }
 
+  updateSortPseudo() {
+    this.setState({ sortScore: [], filter: [] });
+  }
+
     help = (id) => {
       axios.post(`${url}/api/users/help/${id}`).then(() => {
         this.setState({ update: this.state.update + 1 });
@@ -60,8 +65,8 @@ class VueEnseignant extends Component {
       return (
         <div className="container text-center">
           <h1 className="jumbotron-heading">Aide à la réussite</h1>
-          <div className="row">
-            <div className="card col-3">
+          <div className="row dashboard">
+            <div className="filtered">
               <Filtered
                 filter={this.state.filter}
                 sort={this.state.sort}
@@ -70,19 +75,19 @@ class VueEnseignant extends Component {
                 helped
               />
             </div>
-            <div className="col-6">
+            <div className="bloc-center">
               <div className="row text-center">
                 <button
                   type="button"
                   className="btn btn-primary"
                   style={{ width: '100%' }}
-                  onClick={this.updateSort.bind(this, 'pseudo')}
+                  onClick={this.updateSortPseudo.bind(this)}
                 >
                                 Afficher la liste complète
                 </button>
               </div>
               <div className="row">
-                <div className="card col-6">
+                <div className="chart">
                   <br />
                   <RadialChart
                     updateFilter={this.state.updateFilter}
@@ -93,13 +98,13 @@ class VueEnseignant extends Component {
                     colors={this.state.colors}
                   />
                 </div>
-                <div className="card col-6">
+                <div className="progress-chart">
                   <br />
                   <Repartition updateSort={this.state.updateSort} />
                 </div>
               </div>
             </div>
-            <div className="card col-3">
+            <div className="filtered">
               <Filtered
                 filter={this.state.filter}
                 sort={this.state.sort}

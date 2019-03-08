@@ -22,8 +22,8 @@ class Info extends Component {
     render() {
       return (
         <div>
-            <ReactTooltip multiline={true}></ReactTooltip>
-            <button multiline={true} type="button" className="btn btn-primary rounded-circle" data-tip={this.state.texts[this.props.part]}>
+            <ReactTooltip multiline></ReactTooltip>
+            <button multiline type="button" className="btn btn-primary rounded-circle" data-tip={this.state.texts[this.props.part]}>
                 &nbsp;i&nbsp;
             </button>
         </div>

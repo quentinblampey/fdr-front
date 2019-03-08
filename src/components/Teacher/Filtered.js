@@ -13,23 +13,39 @@ class Filtered extends Component {
   }
 
   componentDidMount() {
-    axios.post(`${url}/api/users/filter`, this.props).then((res) => {
-      this.setState({ users: res.data });
-    });
+    if (!this.props.helped){
+      axios.post(`${url}/api/users/filter`, this.props).then((res) => {
+        this.setState({ users: res.data });
+      });
+    }
+    else{
+      axios.get(`${url}/api/users/helped`).then((res) => {
+        this.setState({ users: res.data });
+      });
+    }
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
-      axios.post(`${url}/api/users/filter`, this.props).then((res) => {
-        this.setState({ users: res.data });
-      });
+      if (!this.props.helped){
+        axios.post(`${url}/api/users/filter`, this.props).then((res) => {
+          this.setState({ users: res.data });
+        });
+      }
+      else{
+        axios.get(`${url}/api/users/helped`).then((res) => {
+          this.setState({ users: res.data });
+        });
+      }
     }
   }
 
   render() {
     return (
       <div className="container">
-        <div className="filters">
+        {!this.props.helped &&
+          <div className='container'>
+          <div className="filters">
           <p> Filtres :</p>
           {this.props.filter.map(filter => (
             <div key={filter} className="filter">
@@ -56,9 +72,14 @@ class Filtered extends Component {
             </div>
           ))}
         </div>
-        <div className="text-center">
-          <h2> Étudiants </h2>
+          <div className="text-center">
+            <h2> Étudiants </h2>
+          </div>
         </div>
+        }
+        {this.props.helped &&
+          <h2> Rendez-vous demandés </h2>
+        }
         <div className="container-fiches box">
           {this.state.users.map(user => (
             <FicheCourte key={user._id} user={user} />

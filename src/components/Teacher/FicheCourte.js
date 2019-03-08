@@ -19,6 +19,7 @@ class FicheCourte extends Component {
             color3: '',
             color4: '',
             color5: '',
+            update:0,
         };
     }
 
@@ -71,6 +72,7 @@ class FicheCourte extends Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.user !== this.props.user) {
+          this.setState({update:this.state.update+1});
             const score = this.props.user.score;
             if (score.motivation <= 6) {
                 if (score.motivation <= 3) {

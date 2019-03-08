@@ -25,7 +25,8 @@ class VueEnseignant extends Component {
       updateSort: this.updateSort.bind(this),
       help: this.help.bind(this),
       users:[],
-      usersHelped:[]
+      usersHelped:[],
+      update:0,
     };
   }
 
@@ -44,34 +45,50 @@ class VueEnseignant extends Component {
     });
   }
 
+  componentDidUpdate(prevState){
+    if (this.state.update !== prevState.update){
+      console.log('updateEns');
+      axios.post(`${url}/api/stats/profils`, { profils: this.state.profilsName }).then((res) => {
+        this.setState({ proportions: res.data.proportions });
+      });
+      axios.get(`${url}/api/users/`).then((res) => {
+        this.setState({ pseudo: '', pseudos: res.data });
+      });
+      axios.post(`${url}/api/users/filter`, {filter:this.state.filter, sort:this.state.sort, sortScore:this.state.sortScore}).then((res) => {
+        this.setState({ users: res.data });
+      });
+      axios.get(`${url}/api/users/helped`).then((res) => {
+        this.setState({ usersHelped: res.data });
+      });
+    }
+  }
+
   updateSort(sort) {
-    this.setState({ sortScore: [sort] });
+    console.log('2');
+    this.setState({ sortScore: [sort] , update:this.state.update+1});
   }
 
   updateSortPseudo() {
-    this.setState({ sortScore: [], filter: [] });
+    console.log('1');
+    this.setState({ sortScore: [], filter: [] , update:this.state.update+1});
   }
 
     help = (id) => {
-      console.log('id');
+      console.log('3');
       axios.post(`${url}/api/users/help/${id}`).then(() => {
-        axios.post(`${url}/api/users/filter`, {filter:this.state.filter, sort:this.state.sort, sortScore:this.state.sortScore}).then((res) => {
-          this.setState({ users: res.data });
-        });
-        axios.get(`${url}/api/users/helped`).then((res) => {
-          this.setState({ usersHelped: res.data });
-        });
+        this.setState({update:this.state.update+1});
       });
     };
 
     updateFilter(filter) {
+      console.log('4');
       const filters = this.state.filter;
       if (filters.includes(filter)) {
         filters.splice(filters.indexOf(filter), 1);
       } else {
         filters.push(filter);
       }
-      this.setState({ filter: filters });
+      this.setState({ filter: filters , update:this.state.update+1});
     }
 
     render() {

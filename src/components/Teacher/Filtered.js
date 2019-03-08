@@ -27,7 +27,7 @@ class Filtered extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps !== this.props || prevState !== this.state) {
+    if (prevProps !== this.props || prevState.update !== this.state.update) {
       if (!this.props.helped) {
         axios.post(`${url}/api/users/filter`, this.props).then((res) => {
           this.setState({ users: res.data });

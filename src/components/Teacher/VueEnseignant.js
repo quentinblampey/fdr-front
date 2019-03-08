@@ -15,11 +15,13 @@ class VueEnseignant extends Component {
       pseudos: [],
       filter: [],
       sort: ["pseudo"],
+      sortScore:[],
       profils: ['Employés', 'Sportifs', 'Handicapés', 'Artistes'],
       profilsName: ['employe', 'athlete', 'disabled', 'artist'],
       proportions: [0, 0, 0, 0],
       colors: [variables.graph1, variables.graph2, variables.graph3, variables.graph4],
       updateFilter: this.updateFilter.bind(this),
+      updateSort: this.updateSort.bind(this),
     };
   }
 
@@ -30,6 +32,17 @@ class VueEnseignant extends Component {
     axios.get(`${url}/api/users/`).then((res) => {
       this.setState({ pseudo: '', pseudos: res.data });
     });
+  }
+
+  updateSort(sort) {
+    let sorts = this.state.sortScore;
+    if (sorts.includes(sort)){
+      sorts.splice(sorts.indexOf(sort), 1)
+    } else {
+      sorts.push(sort);
+    }
+    this.setState({ sortScore:sorts });
+    console.log(this.state.sortScore);
   }
 
   updateFilter(filter) {
@@ -53,7 +66,7 @@ class VueEnseignant extends Component {
                 type="button"
                 className="btn btn-primary"
                 style={{ width: '100%' }}
-                onClick={this.updateFilter.bind(this, 'pseudo')}
+                onClick={this.updateSort.bind(this, 'pseudo')}
               >
                                 Afficher la liste complète
               </button>
@@ -70,12 +83,12 @@ class VueEnseignant extends Component {
                 />
               </div>
               <div className="card col-6">
-                <Repartition updateFilter={this.state.updateFilter} />
+                <Repartition updateSort={this.state.updateSort} />
               </div>
             </div>
           </div>
           <div className="card col-3">
-            <Filtered filter={this.state.filter} sort={this.state.sort} sortScore={[]}/>
+            <Filtered filter={this.state.filter} sort={this.state.sort} sortScore={this.state.sortScore}/>
           </div>
         </div>
       </div>

@@ -33,21 +33,26 @@ class VueEnseignant extends Component {
   componentDidMount() {
     axios.post(`${url}/api/stats/profils`, { profils: this.state.profilsName }).then((res) => {
       this.setState({ proportions: res.data.proportions });
+      this.setState({update:this.state.update+1});
     });
     axios.get(`${url}/api/users/`).then((res) => {
       this.setState({ pseudo: '', pseudos: res.data });
+      this.setState({update:this.state.update+1});
     });
     axios.post(`${url}/api/users/filter`, {filter:this.state.filter, sort:this.state.sort, sortScore:this.state.sortScore}).then((res) => {
       this.setState({ users: res.data });
+      this.setState({update:this.state.update+1});
     });
     axios.get(`${url}/api/users/helped`).then((res) => {
       this.setState({ usersHelped: res.data });
+      this.setState({update:this.state.update+1});
     });
   }
 
   componentDidUpdate(prevState){
-    if (this.state.update !== prevState.update){
+    if ( prevState.update !== this.state.update ) {
       console.log('updateEns');
+      console.log(this.state.update);
       axios.post(`${url}/api/stats/profils`, { profils: this.state.profilsName }).then((res) => {
         this.setState({ proportions: res.data.proportions });
       });
@@ -60,8 +65,15 @@ class VueEnseignant extends Component {
       axios.get(`${url}/api/users/helped`).then((res) => {
         this.setState({ usersHelped: res.data });
       });
+      console.log(this.state.filter);
+      console.log(this.state.sort);
+      console.log(this.state.sortScore);
     }
   }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.update !== this.state.update
+}
 
   updateSort(sort) {
     console.log('2');

@@ -72,6 +72,7 @@ class FicheCourte extends Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.user !== this.props.user) {
+          console.log("fiche courte");
           this.setState({update:this.state.update+1});
             const score = this.props.user.score;
             if (score.motivation <= 6) {

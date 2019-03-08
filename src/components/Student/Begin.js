@@ -6,6 +6,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Modal from 'react-responsive-modal';
 import FooterStop from './FooterStop';
 import url from '../../config';
 import './Begin.scss';
@@ -16,6 +17,8 @@ class Begin extends Component {
     // this.demAide = this.demAide.bind(this);
     this.state = {
       user: '',
+      open: false,
+      message: '',
     };
   }
 
@@ -25,17 +28,31 @@ class Begin extends Component {
     });
   }
 
+    onOpenModal = () => {
+      this.setState({ open: true });
+    };
+
+    onCloseModal = () => {
+      this.setState({ open: false });
+    };
+
+    onChange = (e) => {
+      const message = e.target.value;
+      this.setState({ message });
+    };
+
     demAide = () => {
-      const { user } = this.state;
-      const id = user._id;
-      console.log(id);
-      axios.post(`${url}/api/users/aide/${user._id}/2`).then((res) => {
+      const { user, message } = this.state;
+      console.log(message);
+      console.log(user._id);
+      axios.post(`${url}/api/users/aide/${user._id}/2`, { message }).then((res) => {
         this.setState({ user: res.data });
+        this.onCloseModal();
       });
     };
 
     render() {
-      const { user } = this.state;
+      const { user, open, message } = this.state;
       return (
             <div>
                 <div className="component">
@@ -64,9 +81,31 @@ class Begin extends Component {
                             <p>DEMANDE D'AIDE ENVOYEE!</p>
                         </button>
                     ) : (
-                        <button type="submit" className="help" onClick={this.demAide}>
-                            <p>DEMANDER DE L'AIDE</p>
-                        </button>
+                        <div>
+                            <button type="submit" className="help" onClick={this.onOpenModal}>
+                                <p>DEMANDER DE L'AIDE</p>
+                            </button>
+                            <Modal open={open} onClose={this.onCloseModal} center>
+                                <h2>Demander de l'aide</h2>
+                                <p>
+                                    Tu peux joindre un message pour ton enseignant référend. Si tu
+                                    ne veux pas en ajouter, clique juste sur "Envoyer".
+                                </p>
+
+                                <textarea
+                                  className="form-control"
+                                  id="exampleFormControlTextarea1"
+                                  rows="2"
+                                  value={message}
+                                  onChange={this.onChange}
+                                />
+                                <br />
+
+                                <button type="submit" className="modale" onClick={this.demAide}>
+                                    <p>ENVOYER</p>
+                                </button>
+                            </Modal>
+                        </div>
                     )}
                     <br />
                     <p className="container backg">

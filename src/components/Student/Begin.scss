@@ -86,3 +86,17 @@
         }
     }
 }
+
+.modale {
+    border: 1px solid $color4;
+    height: 40px;
+    padding: 0px 20px;
+    border-radius: 20px;
+    background: none;
+    color: $color4;
+    font-family: 'MsSemiBoldItalic';
+
+    &:hover {
+        background: $color4;
+    }
+}

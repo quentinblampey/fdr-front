@@ -165,13 +165,22 @@ class FicheCourte extends Component {
                             </div>
                             <h1>
                                 {' '}
-                                {this.props.user.details !== undefined &&
-                                    this.props.user.details.name}{' '}
+                                {this.props.user.details !== undefined
+                                    && this.props.user.details.name}
+{' '}
                             </h1>
                         </div>
                         <div className="scores">
                             <div className="other">
-                                <p>M</p> <p>L</p> <p>I</p> <p>F</p> <p>O</p>
+                                <p>M</p>
+{' '}
+<p>L</p>
+{' '}
+<p>I</p>
+{' '}
+<p>F</p>
+{' '}
+<p>O</p>
                             </div>
                             <div className="bars">
                                 <div className="progress-container">

@@ -7,8 +7,6 @@ import React, { Component } from 'react';
 import './FicheCourte.scss';
 import { Link } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
-import axios from 'axios';
-import url from '../../config';
 
 class FicheCourte extends Component {
     constructor(props) {

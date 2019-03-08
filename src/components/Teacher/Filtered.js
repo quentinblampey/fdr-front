@@ -43,6 +43,9 @@ class Filtered extends Component {
       <div className="container">
         {!this.props.helped && (
         <div className="container">
+          <div className="text-center">
+            <h2> Étudiants </h2>
+          </div>
           <div className="filters">
             <p> Filtres :</p>
             {this.props.filter.map(filter => (
@@ -62,16 +65,6 @@ class Filtered extends Component {
                 {' '}
               </div>
             ))}
-            {this.props.sort.map(sort => (
-              <div key={sort} className="sort">
-                {' '}
-                {sort}
-                {' '}
-              </div>
-            ))}
-          </div>
-          <div className="text-center">
-            <h2> Étudiants </h2>
           </div>
         </div>
         )}

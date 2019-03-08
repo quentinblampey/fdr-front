@@ -45,7 +45,6 @@ class Filtered extends Component {
       ) {
         axios.get(`${url}/api/users/sorted/score/${this.props.filter}`).then((res) => {
           this.setState({ users: res.data });
-          console.log(res.data);
         });
       } else {
         axios

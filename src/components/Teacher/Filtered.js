@@ -32,7 +32,7 @@ class Filtered extends Component {
       <div className="container">
         <div className="filters">
           {this.props.filter.map(filter => (
-            <div className="filter">
+            <div key={filter} className="filter">
               {' '}
               {filter}
               {' '}
@@ -41,7 +41,7 @@ class Filtered extends Component {
         </div>
         <div className="sorts">
           {this.props.sortScore.map(sort => (
-            <div className="sort">
+            <div key={sort} className="sort">
               {' '}
               {sort}
               {' '}

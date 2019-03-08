@@ -13,6 +13,7 @@ class FicheCourte extends Component {
         super(props);
         this.state = {
             aide: false,
+            aideMessage: '',
             indicator: '',
             color1: '',
             color2: '',
@@ -30,6 +31,13 @@ class FicheCourte extends Component {
             this.setState({ aide });
         } catch (error) {
             this.setState({ aide: false });
+        }
+
+        try {
+            const aideMessage = `Message de l'étudiant : <br />${this.props.user.aideMessage}`;
+            this.setState({ aideMessage });
+        } catch (error) {
+            this.setState({ aideMessage: "Pas de message de l'étudiant." });
         }
 
         if (score.motivation <= 6) {
@@ -111,7 +119,7 @@ class FicheCourte extends Component {
     }
 
     render() {
-        const { aide } = this.state;
+        const { aide, aideMessage } = this.state;
         return (
             <div className="fiche">
                 <Link to={`/enseignant/fiche/${this.props.user._id}`}>
@@ -119,7 +127,13 @@ class FicheCourte extends Component {
                         <div className="header">
                             <ReactTooltip multiline />
                             {aide === 2 && (
-                                <span className="badge badge-pill badge-danger">Aide</span>
+                                <span
+                                    multiline
+                                    className="badge badge-pill badge-danger"
+                                    data-tip={aideMessage}
+                                >
+                                    Aide
+                                </span>
                             )}
                             {aide === 1 && (
                                 <div>
@@ -139,7 +153,7 @@ class FicheCourte extends Component {
                                     <span
                                         multiline
                                         className="badge badge-pill badge-danger"
-                                        data-tip="Message étudiant"
+                                        data-tip={aideMessage}
                                     >
                                         Aide
                                     </span>

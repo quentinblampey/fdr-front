@@ -123,7 +123,9 @@ class FicheCourte extends Component {
             <Link to={`/enseignant/fiche/${this.props.user._id}`}>
                 <div className="card1">
                     <div className="header">
-                        {aide && (
+                        {aide === 2 && <span className="badge badge-pill badge-danger">Aide</span>}
+                        {aide === 1 && <span className="badge badge-pill badge-warning">Aide</span>}
+                        {aide === 3 && (
                             <div>
                                 <span className="badge badge-pill badge-danger">Aide</span>
                                 <span className="badge badge-pill badge-warning">Aide</span>

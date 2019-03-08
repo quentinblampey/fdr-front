@@ -7,6 +7,7 @@ import Chart from 'react-apexcharts';
 // import { Link } from 'react-router-dom';
 // import FooterStop from './FooterStop'
 import url from '../../config';
+import Info from './Info';
 
 class RadialChart extends Component {
   constructor(props) {
@@ -50,7 +51,14 @@ class RadialChart extends Component {
 
     return (
       <div className="container">
-        <h5>Repartition des étudiants selon leurs profils</h5>
+        <div className="row">
+          <div className="col-10">
+            <h5>Repartition des étudiants selon leurs profils</h5>
+          </div>
+          <div className="col-2">
+            <Info part='profils'/>
+          </div>
+        </div>
         <div>
           <div>
             {this.props.profils.map((a, i) => (

@@ -18,7 +18,7 @@ class Begin extends Component {
     super(props);
     // this.computeStats = this.computeStats.bind(this)
     this.state = {
-      user: { details: {name:'undefined'} },
+      user: { details: { name: 'undefined' } },
       color: 'green',
       lastChat: '',
       firstLog: '',
@@ -133,6 +133,13 @@ class Begin extends Component {
         <h2 className="text-center">
           {" Fiche de l'élève : "}
           {user.details.name}
+          {user.aide && (
+          <p>
+            <span className="badge badge-pill badge-danger">
+                                Cet étudiant a demandé de l'aide !
+            </span>
+          </p>
+          )}
         </h2>
         <p>
           {' '}

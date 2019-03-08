@@ -22,6 +22,8 @@ class VueEnseignant extends Component {
       colors: [variables.graph1, variables.graph2, variables.graph3, variables.graph4],
       updateFilter: this.updateFilter.bind(this),
       updateSort: this.updateSort.bind(this),
+      help: this.help.bind(this),
+      update: 0,
     };
   }
 
@@ -38,60 +40,79 @@ class VueEnseignant extends Component {
     this.setState({ sortScore: [sort] });
   }
 
-  updateFilter(filter) {
-    const filters = this.state.filter;
-    if (filters.includes(filter)) {
-      filters.splice(filters.indexOf(filter), 1);
-    } else {
-      filters.push(filter);
-    }
-    this.setState({ filter: filters });
-  }
+    help = (id) => {
+      axios.post(`${url}/api/users/help/${id}`).then(() => {
+        this.setState({ update: this.state.update + 1 });
+      });
+    };
 
-  render() {
-    return (
-      <div className="container text-center">
-        <h1 className="jumbotron-heading">Aide à la réussite</h1>
-        <div className="row">
-          <div className="card col-3">
-            <Filtered filter={this.state.filter} sort={this.state.sort} sortScore={this.state.sortScore} helped/>
-          </div>
-          <div className="col-6">
-            <div className="row text-center">
-              <button
-                type="button"
-                className="btn btn-primary"
-                style={{ width: '100%' }}
-                onClick={this.updateSort.bind(this, 'pseudo')}
-              >
+    updateFilter(filter) {
+      const filters = this.state.filter;
+      if (filters.includes(filter)) {
+        filters.splice(filters.indexOf(filter), 1);
+      } else {
+        filters.push(filter);
+      }
+      this.setState({ filter: filters });
+    }
+
+    render() {
+      return (
+        <div className="container text-center">
+          <h1 className="jumbotron-heading">Aide à la réussite</h1>
+          <div className="row">
+            <div className="card col-3">
+              <Filtered
+                filter={this.state.filter}
+                sort={this.state.sort}
+                sortScore={this.state.sortScore}
+                help={this.state.help}
+                helped
+              />
+            </div>
+            <div className="col-6">
+              <div className="row text-center">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  style={{ width: '100%' }}
+                  onClick={this.updateSort.bind(this, 'pseudo')}
+                >
                                 Afficher la liste complète
-              </button>
-            </div>
-            <div className="row">
-              <div className="card col-6">
-                <br />
-                <RadialChart
-                  updateFilter={this.state.updateFilter}
-                  parent={this}
-                  profils={this.state.profils}
-                  profilsName={this.state.profilsName}
-                  proportions={this.state.proportions}
-                  colors={this.state.colors}
-                />
+                </button>
               </div>
-              <div className="card col-6">
-                <br />
-                <Repartition updateSort={this.state.updateSort} />
+              <div className="row">
+                <div className="card col-6">
+                  <br />
+                  <RadialChart
+                    updateFilter={this.state.updateFilter}
+                    parent={this}
+                    profils={this.state.profils}
+                    profilsName={this.state.profilsName}
+                    proportions={this.state.proportions}
+                    colors={this.state.colors}
+                  />
+                </div>
+                <div className="card col-6">
+                  <br />
+                  <Repartition updateSort={this.state.updateSort} />
+                </div>
               </div>
             </div>
-          </div>
-          <div className="card col-3">
-            <Filtered filter={this.state.filter} sort={this.state.sort} sortScore={this.state.sortScore} helped={false}/>
+            <div className="card col-3">
+              <Filtered
+                filter={this.state.filter}
+                sort={this.state.sort}
+                sortScore={this.state.sortScore}
+                helped={false}
+                update={this.state.update}
+                help={this.state.help}
+              />
+            </div>
           </div>
         </div>
-      </div>
-    );
-  }
+      );
+    }
 }
 
 export default VueEnseignant;

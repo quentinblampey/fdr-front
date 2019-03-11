@@ -35,7 +35,7 @@ class FicheCourte extends Component {
                                 <span
                                     multiline
                                     className="badge badge-pill badge-danger"
-                                    data-tip={aideMessage}
+                                    data-tip={this.props.user.aideMessage}
                                 >
                                     Aide
                                 </span>
@@ -58,7 +58,7 @@ class FicheCourte extends Component {
                                     <span
                                         multiline
                                         className="badge badge-pill badge-danger"
-                                        data-tip={aideMessage}
+                                        data-tip={this.props.user.aideMessage}
                                     >
                                         Aide
                                     </span>

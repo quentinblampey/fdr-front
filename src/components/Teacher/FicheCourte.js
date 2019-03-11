@@ -31,7 +31,7 @@ class FicheCourte extends Component {
                     <div className="card1">
                         <div className="header">
                             <ReactTooltip multiline />
-                            {aide === -2 && (
+                            {aide && (
                                 <span
                                     multiline
                                     className="badge badge-pill badge-danger"
@@ -40,7 +40,7 @@ class FicheCourte extends Component {
                                     Aide
                                 </span>
                             )}
-                            {aide === -1 && (
+                            {this.props.user.mean < 1024 && (
                                 <div>
                                     <ReactTooltip multiline />
                                     <span
@@ -52,7 +52,7 @@ class FicheCourte extends Component {
                                     </span>
                                 </div>
                             )}
-                            {aide === -3 && (
+                            {(aide && this.props.user.mean) < 1024 && (
                                 <div>
                                     <ReactTooltip multiline />
                                     <span

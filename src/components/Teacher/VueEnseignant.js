@@ -50,10 +50,6 @@ class VueEnseignant extends Component {
       });
     };
 
-  updateSortHelp() {
-    this.setState({ sort: ['aide'] });
-  }
-
     help = (id) => {
       console.log('3');
       axios.post(`${url}/api/users/help/${id}`).then(() => {
@@ -114,7 +110,15 @@ class VueEnseignant extends Component {
                   type="button"
                   className="btn btn-primary col"
                   style={{ width: '100%' }}
-                  onClick={this.updateSortHelp.bind(this)}
+                  onClick={this.updateSort.bind(this, 'mean')}
+                >
+                                Etudiants en difficulté
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-primary col"
+                  style={{ width: '100%' }}
+                  onClick={this.updateFilter.bind(this, 'aide')}
                 >
                                 Etudiants en difficulté
                 </button>

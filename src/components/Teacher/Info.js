@@ -12,7 +12,6 @@ class Info extends Component {
                     'Dans cette partie du Dashboard, <br/>vous pouvez clicker sur chacune <br/>des radial bars afin que la liste des <br/>étudiants proposés soit filtrée pour <br/>ce profil.',
         repartition:
                     'Dans cette partie du Dashboard, <br/>vous pouvez clicker sur chacun <br/>des élements afin que la liste des <br/>étudiants proposés soit ordonnée en <br/>fonction de ce critère.',
-        aide: 'Le chatbot a repéré un étudiant qui mérite votre attention!',
       },
     };
   }

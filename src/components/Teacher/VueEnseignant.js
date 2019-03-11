@@ -60,8 +60,11 @@ class VueEnseignant extends Component {
     };
 
     updateSort(sort) {
-      console.log('2');
-      this.setState({ sortScore: [sort] });
+      if (this.state.sortScore[0] === sort) {
+        this.setState({ sortScore: [] });
+      } else {
+        this.setState({ sortScore: [sort] });
+      }
       this.loadUsers();
     }
 

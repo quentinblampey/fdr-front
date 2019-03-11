@@ -40,7 +40,7 @@ class Begin extends Component {
     return (
             <div className="container">
                 <h2 className="text-center">
-                    {" Fiche de l'élève : "}
+                    {" Fiche de l'étudiant : "}
                     {user.details.name}
                     {user.aide && (
                         <p>

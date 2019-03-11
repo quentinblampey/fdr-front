@@ -47,10 +47,10 @@ class Repartition extends Component {
       <div>
         <div className="row">
           <div className="col-10">
-            <h5>Répartition des élèves suivant les 5 critères.</h5>
+            <h5>Répartition des étudiants suivant les 5 critères.</h5>
           </div>
           <div className="col-2">
-            <Info part='repartition'/>
+            <Info part="repartition" />
           </div>
         </div>
         <div className="container">
@@ -68,30 +68,34 @@ class Repartition extends Component {
         </div>
 
         {this.state.fields.map((f, i) => (
-            <div key={i} className="fieldState" onClick={() => this.props.updateSort(f.field)}>
-              <h6>{f.title}</h6>
-              <div
-                className="progress"
-                style={{
-                  height: '15px',
-                  width: '90%',
-                  margin: '10px auto',
-                  borderRadius: '8px',
-                }}
-              >
-                {f.repartition.map((r, j) => (
-                  <div
-                    key={j}
-                    className={classes[j]}
-                    role="progressbar"
-                    style={{ width: `${r}%`, color: `${colors[j]}` }}
-                    aria-valuenow="15"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  />
-                ))}
-              </div>
+          <div
+            key={i}
+            className="fieldState"
+            onClick={() => this.props.updateSort(f.field)}
+          >
+            <h6>{f.title}</h6>
+            <div
+              className="progress"
+              style={{
+                height: '15px',
+                width: '90%',
+                margin: '10px auto',
+                borderRadius: '8px',
+              }}
+            >
+              {f.repartition.map((r, j) => (
+                <div
+                  key={j}
+                  className={classes[j]}
+                  role="progressbar"
+                  style={{ width: `${r}%`, color: `${colors[j]}` }}
+                  aria-valuenow="15"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                />
+              ))}
             </div>
+          </div>
         ))}
       </div>
     );

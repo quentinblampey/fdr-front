@@ -23,6 +23,7 @@ class VueEnseignant extends Component {
       updateSort: this.updateSort.bind(this),
       help: this.help.bind(this),
       loadUsers: this.loadUsers.bind(this),
+      filterHelp: false,
       users: [],
       usersHelped: [],
     };
@@ -81,6 +82,11 @@ class VueEnseignant extends Component {
       this.loadUsers();
     }
 
+    updateFilterHelp() {
+      this.setState({ filterHelp: !this.state.filterHelp });
+      this.loadUsers();
+    }
+
     render() {
       return (
         <div className="container text-center">
@@ -89,6 +95,7 @@ class VueEnseignant extends Component {
             <div className="filtered">
               <Filtered
                 filter={this.state.filter}
+                filterHelp={this.state.filterHelp}
                 sort={this.state.sort}
                 sortScore={this.state.sortScore}
                 helped={false}
@@ -104,7 +111,7 @@ class VueEnseignant extends Component {
                   style={{ width: '100%' }}
                   onClick={this.updateSortPseudo.bind(this)}
                 >
-                                Afficher la liste complète
+                                Liste complète
                 </button>
                 <button
                   type="button"
@@ -112,15 +119,15 @@ class VueEnseignant extends Component {
                   style={{ width: '100%' }}
                   onClick={this.updateSort.bind(this, 'mean')}
                 >
-                                Etudiants en difficulté
+                                Étudiants en difficulté
                 </button>
                 <button
                   type="button"
                   className="btn btn-primary col"
                   style={{ width: '100%' }}
-                  onClick={this.updateFilter.bind(this, 'aide')}
+                  onClick={this.updateFilterHelp.bind(this)}
                 >
-                                Etudiants en difficulté
+                                Étudiants en demande d'aide
                 </button>
               </div>
               <div className="row">
@@ -144,6 +151,7 @@ class VueEnseignant extends Component {
             <div className="filtered">
               <Filtered
                 filter={this.state.filter}
+                filterHelp={this.state.filterHelp}
                 sort={this.state.sort}
                 sortScore={this.state.sortScore}
                 help={this.state.help}

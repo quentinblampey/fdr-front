@@ -31,10 +31,16 @@ class FicheCourte extends Component {
                     <div className="card1">
                         <div className="header">
                             <ReactTooltip multiline />
-                            {aide === 2 && (
-                                <span className="badge badge-pill badge-danger">Aide</span>
+                            {aide === -2 && (
+                                <span
+                                    multiline
+                                    className="badge badge-pill badge-danger"
+                                    data-tip={aideMessage}
+                                >
+                                    Aide
+                                </span>
                             )}
-                            {aide === 1 && (
+                            {aide === -1 && (
                                 <div>
                                     <ReactTooltip multiline />
                                     <span
@@ -46,13 +52,13 @@ class FicheCourte extends Component {
                                     </span>
                                 </div>
                             )}
-                            {aide === 3 && (
+                            {aide === -3 && (
                                 <div>
                                     <ReactTooltip multiline />
                                     <span
                                         multiline
                                         className="badge badge-pill badge-danger"
-                                        data-tip="Message étudiant"
+                                        data-tip={aideMessage}
                                     >
                                         Aide
                                     </span>
@@ -87,11 +93,11 @@ class FicheCourte extends Component {
 {' '}
 <p>L</p>
 {' '}
-<p>I</p>
-{' '}
 <p>F</p>
 {' '}
 <p>O</p>
+{' '}
+<p>I</p>
                             </div>
                             <div className="bars">
                                 <div className="progress-container">

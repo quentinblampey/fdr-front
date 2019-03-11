@@ -4,12 +4,15 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import axios from 'axios';
+import DatePicker from 'react-datepicker';
 // import { Link } from 'react-router-dom';
 // import FooterStop from './FooterStop'
 // import PropTypes from 'prop-types';
 import url from '../../config';
 // import computeStats from './ComputeStats';
 import SC from './ScoreChart';
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 class Begin extends Component {
   /* propTypes = {
@@ -40,7 +43,7 @@ class Begin extends Component {
     return (
             <div className="container">
                 <h2 className="text-center">
-                    {" Fiche de l'élève : "}
+                    {" Fiche de l'étudiant : "}
                     {user.details.name}
                     {user.aide && (
                         <p>
@@ -68,14 +71,15 @@ class Begin extends Component {
                             <SC id={this.props.match.params.id} />
                         </div>
                         <br />
-                        {user.aide && (
+                        {user.helped && (
                             <div className="card">
                                 <div className="card-header">
-                                    <h2>Gestion de l'aide</h2>
+                                    <h2>Gestion des rendez-vous</h2>
                                 </div>
                                 <Aide id={this.props.match.params.id} />
                             </div>
                         )}
+                        <br />
                     </div>
                 </div>
             </div>
@@ -284,32 +288,64 @@ class Aide extends Component {
       params: PropTypes.number.isRequired,
       id: PropTypes.number.isRequired,
     }; */
+
   constructor(props) {
     super(props);
     // this.computeStats = this.computeStats.bind(this)
     this.state = {
-      user: { details: { name: 'undefined' } },
+      date: new Date(),
+      taken: [],
     };
   }
 
-  componentDidMount() {
-    // const { id } = this.props;
-    // this.props.match.params.id
-    // eslint-disable-next-line react/destructuring-assignment react/prop-types
-    axios.get(`${url}/api/users/getid/${this.id}`).then((res) => {
-      // console.log(res.data);
-      this.setState({ user: res.data });
-    });
-  }
+    onChange = date => this.setState({ date });
 
-  render() {
-    const { user } = this.state;
-    return (
-            <div>
-                <h2>Résoudre la demande d'aide</h2>
+    proposeRdv = () => {
+      const { date } = this.state;
+      const horaire = `${date.getDate()}/${date.getMonth()
+            + 1}/${date.getFullYear()} à ${date.getHours()}h${date.getMinutes()}`;
+      axios.post(`${url}/api/rdv/newrdv/${this.props.id}`, { horr: horaire }).then((res) => {
+        axios.get(`${url}/api/rdv/${this.props.id}`).then((resp) => {
+          this.setState({ taken: resp.data });
+        });
+        // console.log(res.data);
+        // this.setState({ taken: res.data });
+      });
+    };
+
+    render() {
+      const { taken } = this.state;
+      return (
+            <div className="container">
+                <br />
+                <h2>Proposer un rendez-vous</h2>
+                <br />
+                <DatePicker
+                  selected={this.state.date}
+                  onChange={this.onChange}
+                  showTimeSelect
+                  timeFormat="HH:mm"
+                  timeIntervals={15}
+                  dateFormat="d/M/yyyy, h:mm aa"
+                  timeCaption="time"
+                  placeholderText="Choisir l'horaire"
+                />
+{' '}
+                <button type="button" className="btn btn-success" onClick={this.proposeRdv}>
+                    Proposer l'horaire
+                </button>
+                <br />
+                <br />
+                <h2>Horaires déjà proposés : </h2>
+                {taken.map(horaire => (
+                    <div>
+                        {horaire}
+                        <br />
+                    </div>
+                ))}
             </div>
-    );
-  }
+      );
+    }
 }
 
 export default Begin;

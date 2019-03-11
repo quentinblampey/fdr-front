@@ -12,8 +12,6 @@ class VueEnseignant extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pseudo: '',
-      pseudos: [],
       filter: [],
       sort: ['pseudo'],
       sortScore: [],
@@ -24,47 +22,19 @@ class VueEnseignant extends Component {
       updateFilter: this.updateFilter.bind(this),
       updateSort: this.updateSort.bind(this),
       help: this.help.bind(this),
+      loadUsers: this.loadUsers.bind(this),
       users: [],
       usersHelped: [],
     };
   }
 
   componentDidMount() {
-    axios.post(`${url}/api/stats/profils`, { profils: this.state.profilsName }).then((res) => {
-      this.setState({ proportions: res.data.proportions });
-    });
-    axios.get(`${url}/api/users/`).then((res) => {
-      this.setState({ pseudo: '', pseudos: res.data });
-    });
-    axios
-      .post(`${url}/api/users/filter`, {
-        filter: this.state.filter,
-        sort: this.state.sort,
-        sortScore: this.state.sortScore,
-      })
-      .then((res) => {
-        this.setState({ users: res.data });
-      });
-    axios.get(`${url}/api/users/helped`).then((res) => {
-      this.setState({ usersHelped: res.data });
-    });
+    this.loadUsers();
   }
 
-  updateSort(sort) {
-    this.setState({ sortScore: [sort] });
-  }
-
-  updateSortPseudo() {
-    this.setState({ sortScore: [], filter: [] });
-  }
-
-  updateSortHelp() {
-    this.setState({ sort: ['aide'] });
-  }
-
-    help = (id) => {
-      console.log('id');
-      axios.post(`${url}/api/users/help/${id}`).then(() => {
+    loadUsers = () => {
+      axios.post(`${url}/api/stats/profils`, { profils: this.state.profilsName }).then((res) => {
+        this.setState({ proportions: res.data.proportions });
         axios
           .post(`${url}/api/users/filter`, {
             filter: this.state.filter,
@@ -73,14 +43,38 @@ class VueEnseignant extends Component {
           })
           .then((res) => {
             this.setState({ users: res.data });
+            axios.get(`${url}/api/users/helped`).then((res) => {
+              this.setState({ usersHelped: res.data });
+            });
           });
-        axios.get(`${url}/api/users/helped`).then((res) => {
-          this.setState({ usersHelped: res.data });
-        });
       });
     };
 
+  updateSortHelp() {
+    this.setState({ sort: ['aide'] });
+  }
+
+    help = (id) => {
+      console.log('3');
+      axios.post(`${url}/api/users/help/${id}`).then(() => {
+        this.loadUsers();
+      });
+    };
+
+    updateSort(sort) {
+      console.log('2');
+      this.setState({ sortScore: [sort] });
+      this.loadUsers();
+    }
+
+    updateSortPseudo() {
+      console.log('1');
+      this.setState({ sortScore: [], filter: [] });
+      this.loadUsers();
+    }
+
     updateFilter(filter) {
+      console.log('4');
       const filters = this.state.filter;
       if (filters.includes(filter)) {
         filters.splice(filters.indexOf(filter), 1);
@@ -88,6 +82,7 @@ class VueEnseignant extends Component {
         filters.push(filter);
       }
       this.setState({ filter: filters });
+      this.loadUsers();
     }
 
     render() {

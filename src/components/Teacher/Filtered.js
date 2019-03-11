@@ -7,6 +7,9 @@ import './Filtered.scss';
 class Filtered extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      update: 0,
+    };
   }
 
   render() {

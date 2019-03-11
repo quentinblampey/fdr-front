@@ -25,7 +25,6 @@ class Info extends Component {
       <div>
         <ReactTooltip multiline />
         <button
-          multiline
           type="button"
           className="btn btn-primary rounded-circle"
           data-tip={this.state.texts[this.props.part]}

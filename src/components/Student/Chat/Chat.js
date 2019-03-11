@@ -117,7 +117,7 @@ class Chat extends Component {
           this.setState({
             chat: this.state.chat.concat({ message: "Merci de rentrer une réponse", color: 1 }),
             error: true
-          });
+          }, () => { this.updateScroll() });
         }
       }
       else {
@@ -149,7 +149,7 @@ class Chat extends Component {
           })
         });
         promise.then(()=> { this.sendAnswer(answer)});
-        } 
+        }
       };
 
     handleKeyPress(target) {

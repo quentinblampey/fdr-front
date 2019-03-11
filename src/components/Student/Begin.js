@@ -76,7 +76,7 @@ class Begin extends Component {
                         </button>
                     </Link>
                     <br />
-                    {user.aide >= 2 ? (
+                    {user.aide ? (
                         <button type="submit" className="help" disabled>
                             <p>DEMANDE D'AIDE ENVOYEE!</p>
                         </button>

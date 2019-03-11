@@ -171,7 +171,7 @@ class Chat extends Component {
         userAnswer = (
           <div className="response-bar">
             <Link to={`/begin/${this.props.match.params.id}`}>
-              <button className="choice"> Revenir à la page d'acceuil </button>
+              <button className="choice"> Revenir à la page d'accueil </button>
             </Link>
           </div>
         );

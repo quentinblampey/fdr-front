@@ -188,11 +188,11 @@ class FicheCourte extends Component {
 {' '}
 <p>L</p>
 {' '}
-<p>I</p>
-{' '}
 <p>F</p>
 {' '}
 <p>O</p>
+{' '}
+<p>I</p>
                             </div>
                             <div className="bars">
                                 <div className="progress-container">
@@ -217,15 +217,6 @@ class FicheCourte extends Component {
                                     <div
                                         className="score"
                                         style={{
-                                            height: `${this.props.user.score.integration * 10}%`,
-                                            background: this.state.color3,
-                                        }}
-                                    />
-                                </div>
-                                <div className="progress-container">
-                                    <div
-                                        className="score"
-                                        style={{
                                             height: `${this.props.user.score.fidelity * 10}%`,
                                             background: this.state.color4,
                                         }}
@@ -237,6 +228,15 @@ class FicheCourte extends Component {
                                         style={{
                                             height: `${this.props.user.score.noOrientation * 10}%`,
                                             background: this.state.color5,
+                                        }}
+                                    />
+                                </div>
+                                <div className="progress-container">
+                                    <div
+                                        className="score"
+                                        style={{
+                                            height: `${this.props.user.score.integration * 10}%`,
+                                            background: this.state.color3,
                                         }}
                                     />
                                 </div>

@@ -24,8 +24,8 @@ class VueEnseignant extends Component {
       updateFilter: this.updateFilter.bind(this),
       updateSort: this.updateSort.bind(this),
       help: this.help.bind(this),
-      users:[],
-      usersHelped:[]
+      users: [],
+      usersHelped: [],
     };
   }
 
@@ -36,9 +36,15 @@ class VueEnseignant extends Component {
     axios.get(`${url}/api/users/`).then((res) => {
       this.setState({ pseudo: '', pseudos: res.data });
     });
-    axios.post(`${url}/api/users/filter`, {filter:this.state.filter, sort:this.state.sort, sortScore:this.state.sortScore}).then((res) => {
-      this.setState({ users: res.data });
-    });
+    axios
+      .post(`${url}/api/users/filter`, {
+        filter: this.state.filter,
+        sort: this.state.sort,
+        sortScore: this.state.sortScore,
+      })
+      .then((res) => {
+        this.setState({ users: res.data });
+      });
     axios.get(`${url}/api/users/helped`).then((res) => {
       this.setState({ usersHelped: res.data });
     });
@@ -55,9 +61,15 @@ class VueEnseignant extends Component {
     help = (id) => {
       console.log('id');
       axios.post(`${url}/api/users/help/${id}`).then(() => {
-        axios.post(`${url}/api/users/filter`, {filter:this.state.filter, sort:this.state.sort, sortScore:this.state.sortScore}).then((res) => {
-          this.setState({ users: res.data });
-        });
+        axios
+          .post(`${url}/api/users/filter`, {
+            filter: this.state.filter,
+            sort: this.state.sort,
+            sortScore: this.state.sortScore,
+          })
+          .then((res) => {
+            this.setState({ users: res.data });
+          });
         axios.get(`${url}/api/users/helped`).then((res) => {
           this.setState({ usersHelped: res.data });
         });
@@ -84,9 +96,9 @@ class VueEnseignant extends Component {
                 filter={this.state.filter}
                 sort={this.state.sort}
                 sortScore={this.state.sortScore}
+                helped={false}
                 help={this.state.help}
-                users={this.state.usersHelped}
-                helped
+                users={this.state.users}
               />
             </div>
             <div className="bloc-center">
@@ -123,9 +135,9 @@ class VueEnseignant extends Component {
                 filter={this.state.filter}
                 sort={this.state.sort}
                 sortScore={this.state.sortScore}
-                helped={false}
                 help={this.state.help}
-                users={this.state.users}
+                users={this.state.usersHelped}
+                helped
               />
             </div>
           </div>

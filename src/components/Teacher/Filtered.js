@@ -27,6 +27,11 @@ class Filtered extends Component {
                 {' '}
               </div>
             ))}
+            <div className="filter">
+              {' '}
+              {this.props.filterHelp && 'Demande aide'}
+              {' '}
+            </div>
           </div>
           <div className="sorts">
             <p> Tri :</p>

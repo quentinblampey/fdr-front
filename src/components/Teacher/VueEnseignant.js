@@ -15,6 +15,7 @@ class VueEnseignant extends Component {
       filter: [],
       sort: ['pseudo'],
       sortScore: [],
+      filterHelp: false,
       profils: ['Employés', 'Sportifs', 'Handicapés', 'Artistes'],
       profilsName: ['employe', 'athlete', 'disabled', 'artist'],
       proportions: [0, 0, 0, 0, 0],
@@ -23,7 +24,6 @@ class VueEnseignant extends Component {
       updateSort: this.updateSort.bind(this),
       help: this.help.bind(this),
       loadUsers: this.loadUsers.bind(this),
-      filterHelp: false,
       users: [],
       usersHelped: [],
     };
@@ -41,6 +41,7 @@ class VueEnseignant extends Component {
             filter: this.state.filter,
             sort: this.state.sort,
             sortScore: this.state.sortScore,
+            filterHelp: this.state.filterHelp,
           })
           .then((res) => {
             this.setState({ users: res.data });
@@ -151,7 +152,7 @@ class VueEnseignant extends Component {
             <div className="filtered">
               <Filtered
                 filter={this.state.filter}
-                filterHelp={this.state.filterHelp}
+                filterHelp={false}
                 sort={this.state.sort}
                 sortScore={this.state.sortScore}
                 help={this.state.help}

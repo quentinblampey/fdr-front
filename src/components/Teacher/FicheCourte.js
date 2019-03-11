@@ -126,7 +126,7 @@ class FicheCourte extends Component {
                     <div className="card1">
                         <div className="header">
                             <ReactTooltip multiline />
-                            {aide === 2 && (
+                            {aide === -2 && (
                                 <span
                                     multiline
                                     className="badge badge-pill badge-danger"
@@ -135,7 +135,7 @@ class FicheCourte extends Component {
                                     Aide
                                 </span>
                             )}
-                            {aide === 1 && (
+                            {aide === -1 && (
                                 <div>
                                     <ReactTooltip multiline />
                                     <span
@@ -147,7 +147,7 @@ class FicheCourte extends Component {
                                     </span>
                                 </div>
                             )}
-                            {aide === 3 && (
+                            {aide === -3 && (
                                 <div>
                                     <ReactTooltip multiline />
                                     <span

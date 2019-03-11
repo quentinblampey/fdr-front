@@ -305,8 +305,11 @@ class Aide extends Component {
       const horaire = `${date.getDate()}/${date.getMonth()
             + 1}/${date.getFullYear()} à ${date.getHours()}h${date.getMinutes()}`;
       axios.post(`${url}/api/rdv/newrdv/${this.props.id}`, { horr: horaire }).then((res) => {
+        axios.get(`${url}/api/rdv/${this.props.id}`).then((resp) => {
+          this.setState({ taken: resp.data });
+        });
         // console.log(res.data);
-        this.setState({ taken: res.data });
+        // this.setState({ taken: res.data });
       });
     };
 

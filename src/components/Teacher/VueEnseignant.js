@@ -19,7 +19,7 @@ class VueEnseignant extends Component {
       sortScore: [],
       profils: ['Employés', 'Sportifs', 'Handicapés', 'Artistes'],
       profilsName: ['employe', 'athlete', 'disabled', 'artist'],
-      proportions: [0, 0, 0, 0],
+      proportions: [0, 0, 0, 0, 0],
       colors: [variables.graph1, variables.graph2, variables.graph3, variables.graph4],
       updateFilter: this.updateFilter.bind(this),
       updateSort: this.updateSort.bind(this),
@@ -56,6 +56,10 @@ class VueEnseignant extends Component {
 
   updateSortPseudo() {
     this.setState({ sortScore: [], filter: [] });
+  }
+
+  updateSortHelp() {
+    this.setState({ sort: ['aide'] });
   }
 
     help = (id) => {
@@ -105,11 +109,19 @@ class VueEnseignant extends Component {
               <div className="row text-center">
                 <button
                   type="button"
-                  className="btn btn-primary"
+                  className="btn btn-primary col"
                   style={{ width: '100%' }}
                   onClick={this.updateSortPseudo.bind(this)}
                 >
                                 Afficher la liste complète
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-primary col"
+                  style={{ width: '100%' }}
+                  onClick={this.updateSortHelp.bind(this)}
+                >
+                                Etudiants en difficulté
                 </button>
               </div>
               <div className="row">

@@ -40,28 +40,9 @@ class FicheCourte extends Component {
                                     Aide
                                 </span>
                             )}
-                            {this.props.user.mean < 1024 && (
+                            {this.props.user.score.mean < 4 && (
                                 <div>
                                     <ReactTooltip multiline />
-                                    <span
-                                        multiline
-                                        className="badge badge-pill badge-warning"
-                                        data-tip="Le chatbot a repéré un étudiant <br /> qui mérite votre attention!"
-                                    >
-                                        Aide
-                                    </span>
-                                </div>
-                            )}
-                            {(this.props.user.aide && this.props.user.mean) < 1024 && (
-                                <div>
-                                    <ReactTooltip multiline />
-                                    <span
-                                        multiline
-                                        className="badge badge-pill badge-danger"
-                                        data-tip={this.props.user.aideMessage}
-                                    >
-                                        Aide
-                                    </span>
                                     <span
                                         multiline
                                         className="badge badge-pill badge-warning"

@@ -67,7 +67,7 @@ class VueEnseignant extends Component {
 
     updateSortPseudo() {
       console.log('1');
-      this.setState({ sortScore: [], filter: [] });
+      this.setState({ sortScore: [], filter: [], filterHelp: false });
       this.loadUsers();
     }
 

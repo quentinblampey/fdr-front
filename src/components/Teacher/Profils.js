@@ -27,7 +27,9 @@ class RadialChart extends Component {
       chart: {
         events: {
           dataPointSelection: (event, chartContext, config) => {
-            this.props.updateFilter(this.props.profilsName[config.dataPointIndex].toLowerCase());
+            this.props.updateFilter(
+              this.props.profilsName[config.dataPointIndex].toLowerCase(),
+            );
           },
         },
       },
@@ -56,7 +58,7 @@ class RadialChart extends Component {
             <h5>Repartition des étudiants selon leurs profils</h5>
           </div>
           <div className="col-2">
-            <Info part='profils'/>
+            <Info part="profils" />
           </div>
         </div>
         <div>
@@ -77,9 +79,9 @@ class RadialChart extends Component {
                 options={options}
                 series={[
                   this.props.proportions[0],
-                  2 * this.props.proportions[1],
-                  3 * this.props.proportions[2],
-                  4 * this.props.proportions[3],
+                  this.props.proportions[1],
+                  this.props.proportions[2],
+                  this.props.proportions[3],
                 ]}
                 type="radialBar"
                 height="380"

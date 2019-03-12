@@ -24,10 +24,9 @@ class FicheCourte extends Component {
     };
 
     render() {
-        const { aide } = this.props.user.aide;
         return (
             <div className="fiche">
-                <Link to={`/enseignant/fiche/${this.props.user._id}`}>
+                <Link to={`/enseignant/fiche/${this.props.user._id}`} target="_blank">
                     <div className="card1">
                         <div className="header">
                             <ReactTooltip multiline />
@@ -74,11 +73,11 @@ class FicheCourte extends Component {
 {' '}
 <p>L</p>
 {' '}
+<p>I</p>
+{' '}
 <p>F</p>
 {' '}
 <p>O</p>
-{' '}
-<p>I</p>
                             </div>
                             <div className="bars">
                                 <div className="progress-container">

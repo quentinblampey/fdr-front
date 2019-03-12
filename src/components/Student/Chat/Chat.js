@@ -11,6 +11,7 @@ class Chat extends Component {
     super();
     this.state = {
       emptyBodyForbidden:[1,3,5],
+      numberMandatory:[151, 152, 153],
       loading: false,
       chat: [],
       isFinish: false,
@@ -119,6 +120,9 @@ class Chat extends Component {
             error: true
           }, () => { this.updateScroll() });
         }
+      }else if (this.state.numberMandatory.includes(this.state.currentQuestion.idQ) && (isNaN(Number(answer.body)))) {
+        this.state.newMessage='';
+        this.setState({chat: this.state.chat.concat({ message: "Merci de rentrer un nombre valide entre 0 et 100", color: 1 })}, () => { this.updateScroll() });
       }
       else {
         var promiseScroll = new Promise((resolve) => {
@@ -206,6 +210,7 @@ class Chat extends Component {
                 onChange={this.onChange}
                 placeholder="..."
                 onKeyPress={this.handleKeyPress.bind(this)}
+                autoFocus
               />
               <div className="send-box">
                 <button

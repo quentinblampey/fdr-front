@@ -38,7 +38,7 @@ class FicheCourte extends Component {
                                     Aide
                                 </span>
                             )}
-                            {this.props.user.score.mean < 4 && (
+                            {this.props.user.score.mean < 5 && (
                                 <div>
                                     <ReactTooltip multiline />
                                     <span

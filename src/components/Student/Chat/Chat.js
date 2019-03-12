@@ -50,15 +50,15 @@ class Chat extends Component {
           });
         } else {
           if(r3.data.question.idQ >1){
-            this.setState({
-              chat: this.state.chat.concat([
-                {
-                  message:
-                                          "Coucou c'est moi Charlotte le Chatbot !",
-                  color: 1,
-                },
-              ]),
-            });
+              this.setState({
+                chat: this.state.chat.concat([
+                  {
+                    message:
+                          "Coucou, je suis content de te revoir !🙂",
+                    color: 1,
+                  },
+                ]),
+              });
           }
           this.setState({
             chat: this.state.chat.concat([

@@ -17,7 +17,9 @@ class Begin extends Component {
     // this.demAide = this.demAide.bind(this);
     this.state = {
       user: '',
-      open: false,
+      rdvs: [],
+      open1: false,
+      open2: false,
       message: '',
     };
   }
@@ -25,15 +27,26 @@ class Begin extends Component {
   componentDidMount() {
     axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
       this.setState({ user: res.data });
+      axios.get(`${url}/api/rdv/${this.props.match.params.id}`).then((res2) => {
+        this.setState({ rdvs: res2.data });
+      });
     });
   }
 
-    onOpenModal = () => {
-      this.setState({ open: true });
+    onOpenModal1 = () => {
+      this.setState({ open1: true });
     };
 
-    onCloseModal = () => {
-      this.setState({ open: false });
+    onCloseModal1 = () => {
+      this.setState({ open1: false });
+    };
+
+    onOpenModal2 = () => {
+      this.setState({ open2: true });
+    };
+
+    onCloseModal2 = () => {
+      this.setState({ open2: false });
     };
 
     onChange = (e) => {
@@ -47,12 +60,14 @@ class Begin extends Component {
       console.log(user._id);
       axios.post(`${url}/api/users/aide/${user._id}/2`, { message }).then((res) => {
         this.setState({ user: res.data });
-        this.onCloseModal();
+        this.onCloseModal1();
       });
     };
 
     render() {
-      const { user, open, message } = this.state;
+      const {
+        user, open1, open2, message, rdvs,
+      } = this.state;
       return (
             <div>
                 <div className="component">
@@ -77,15 +92,54 @@ class Begin extends Component {
                     </Link>
                     <br />
                     {user.aide ? (
-                        <button type="submit" className="help" disabled>
-                            <p>DEMANDE D'AIDE ENVOYEE!</p>
-                        </button>
+                        <div className="container">
+                            <button type="submit" className="help" onClick={this.onOpenModal2}>
+                                <p>
+                                    CRENEAUX PROPOSES
+{' '}
+                                    {rdvs.length > 0 && (
+                                        <span className="badge badge-pill badge-light">
+                                            {'  '}
+                                            {rdvs.length}
+{' '}
+                                        </span>
+                                    )}
+                                </p>
+                            </button>
+                            <br />
+                            <p className="container backg">
+                                Tu peux maintenant voir si ton enseignant référend t'a proposé des
+                                créneaux de rendez-vous.
+                            </p>
+                            <Modal open={open2} onClose={this.onCloseModal2} center>
+                                <h2>Créneaux proposés: </h2>
+
+                                {rdvs.length === 0 ? (
+                                    <p>Pas de Créneaux proposés</p>
+                                ) : (
+                                  rdvs.map(horaire => (
+                                        <div>
+                                            {horaire}
+                                            <button type="submit" className="modale">
+                                                oui
+                                            </button>
+                                            <br />
+                                        </div>
+                                  ))
+                                )}
+                            </Modal>
+                        </div>
                     ) : (
-                        <div>
-                            <button type="submit" className="help" onClick={this.onOpenModal}>
+                        <div className="container">
+                            <button type="submit" className="help" onClick={this.onOpenModal1}>
                                 <p>DEMANDER DE L'AIDE</p>
                             </button>
-                            <Modal open={open} onClose={this.onCloseModal} center>
+                            <br />
+                            <p className="container backg">
+                                Tu peux contacter ton enseignant référend grâce à ce bouton. Si tu
+                                as besoin de conseils ou de soutien, tu peux le solliciter ici!
+                            </p>
+                            <Modal open={open1} onClose={this.onCloseModal1} center>
                                 <h2>Demander de l'aide</h2>
                                 <p>
                                     Tu peux joindre un message pour ton enseignant référend. Si tu
@@ -107,11 +161,6 @@ class Begin extends Component {
                             </Modal>
                         </div>
                     )}
-                    <br />
-                    <p className="container backg">
-                        Tu peux contacter ton enseignant référend grâce à ce bouton. Si tu as besoin
-                        de conseils ou de soutien, tu peux le solliciter ici!
-                    </p>
                 </div>
                 <FooterStop />
             </div>

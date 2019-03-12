@@ -173,7 +173,6 @@ class Recap extends Component {
   } */
 
   render() {
-    let fidelity;
     /* let motivation;
     let lifestyle;
     let integration;
@@ -218,7 +217,7 @@ Dernière session de chat :
                                 {' '}
                                 Nombre de sessions de chat :
 {' '}
-                                {fidelity ? user.numberChats.length : '0'}
+                                {user.numberChats.length}
 {' '}
                             </p>
                             <p className="card-text">

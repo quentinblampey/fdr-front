@@ -32,7 +32,6 @@ class FicheCourte extends Component {
                             <ReactTooltip multiline />
                             {this.props.user.aide && (
                                 <span
-                                    multiline
                                     className="badge badge-pill badge-danger"
                                     data-tip={this.props.user.aideMessage}
                                 >
@@ -43,7 +42,6 @@ class FicheCourte extends Component {
                                 <div>
                                     <ReactTooltip multiline />
                                     <span
-                                        multiline
                                         className="badge badge-pill badge-warning"
                                         data-tip="Le chatbot a repéré un étudiant <br /> qui mérite votre attention!"
                                     >

@@ -132,7 +132,7 @@ class Chat extends Component {
           }, () => { this.updateScroll() });
         }
       }else if (this.state.numberMandatory.includes(this.state.currentQuestion.idQ) && (isNaN(Number(answer.body)))) {
-        this.state.newMessage='';
+        this.setState({newMessage:''});
         this.setState({chat: this.state.chat.concat({ message: "Merci de rentrer un nombre valide entre 0 et 100", color: 1 })}, () => { this.updateScroll() });
       }
       else {

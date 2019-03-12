@@ -58,8 +58,6 @@ class Begin extends Component {
 
     demAide = () => {
         const { user, message } = this.state;
-        console.log(message);
-        console.log(user._id);
         axios.post(`${url}/api/users/aide/${user._id}/2`, { message }).then(res => {
             this.setState({ user: res.data });
             this.onCloseModal1();

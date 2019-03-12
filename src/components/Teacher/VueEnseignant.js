@@ -53,7 +53,6 @@ class VueEnseignant extends Component {
     };
 
     help = (id) => {
-      console.log('3');
       axios.post(`${url}/api/users/help/${id}`).then(() => {
         this.loadUsers();
       });
@@ -69,13 +68,11 @@ class VueEnseignant extends Component {
     }
 
     updateSortPseudo() {
-      console.log('1');
       this.setState({ sortScore: [], filter: [], filterHelp: false });
       this.loadUsers();
     }
 
     updateFilter(filter) {
-      console.log('4');
       const filters = this.state.filter;
       if (filters.includes(filter)) {
         filters.splice(filters.indexOf(filter), 1);

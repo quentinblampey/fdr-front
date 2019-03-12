@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import FicheCourte from './FicheCourte';
-import url from '../../config';
 import './Filtered.scss';
 
 class Filtered extends Component {

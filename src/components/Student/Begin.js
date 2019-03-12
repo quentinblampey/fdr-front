@@ -1,3 +1,5 @@
+/* eslint-disable arrow-parens */
+/* eslint-disable indent */
 /* eslint-disable react/jsx-indent */
 /* eslint-disable quotes */
 /* eslint-disable no-underscore-dangle */
@@ -12,63 +14,64 @@ import url from '../../config';
 import './Begin.scss';
 
 class Begin extends Component {
-  constructor(props) {
-    super(props);
-    // this.demAide = this.demAide.bind(this);
-    this.state = {
-      user: '',
-      rdvs: [],
-      open1: false,
-      open2: false,
-      message: '',
-    };
-  }
+    constructor(props) {
+        super(props);
+        // this.demAide = this.demAide.bind(this);
+        this.state = {
+            user: '',
+            rdvs: [],
+            open1: false,
+            open2: false,
+            message: '',
+        };
+    }
 
-  componentDidMount() {
-    axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
-      this.setState({ user: res.data });
-      axios.get(`${url}/api/rdv/${this.props.match.params.id}`).then((res2) => {
-        this.setState({ rdvs: res2.data });
-      });
-    });
-  }
+    componentDidMount() {
+        axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then(res => {
+            this.setState({ user: res.data });
+            axios.get(`${url}/api/rdv/${this.props.match.params.id}`).then(res2 => {
+                this.setState({ rdvs: res2.data });
+            });
+        });
+    }
 
     onOpenModal1 = () => {
-      this.setState({ open1: true });
+        this.setState({ open1: true });
     };
 
     onCloseModal1 = () => {
-      this.setState({ open1: false });
+        this.setState({ open1: false });
     };
 
     onOpenModal2 = () => {
-      this.setState({ open2: true });
+        this.setState({ open2: true });
     };
 
     onCloseModal2 = () => {
-      this.setState({ open2: false });
+        this.setState({ open2: false });
     };
 
-    onChange = (e) => {
-      const message = e.target.value;
-      this.setState({ message });
+    onChange = e => {
+        const message = e.target.value;
+        this.setState({ message });
     };
 
     demAide = () => {
-      const { user, message } = this.state;
-      console.log(message);
-      console.log(user._id);
-      axios.post(`${url}/api/users/aide/${user._id}/2`, { message }).then((res) => {
-        this.setState({ user: res.data });
-        this.onCloseModal1();
-      });
+        const { user, message } = this.state;
+        console.log(message);
+        console.log(user._id);
+        axios.post(`${url}/api/users/aide/${user._id}/2`, { message }).then(res => {
+            this.setState({ user: res.data });
+            this.onCloseModal1();
+        });
     };
 
     render() {
-      const {
-        user, open1, open2, message, rdvs,
-      } = this.state;
-      return (
+        const {
+ user, open1, open2, message, rdvs,
+} = this.state;
+        let i = 0;
+        return (
             <div>
                 <div className="component">
                     <div className="shape">
@@ -117,16 +120,19 @@ class Begin extends Component {
                                 {rdvs.length === 0 ? (
                                     <p>Pas de Créneaux proposés</p>
                                 ) : (
-                                  rdvs.map(horaire => (
-                                        <div>
-                                            {horaire}
+                                    rdvs.map(horaire => {
+                                        i += 1;
+                                        return (
+                                            <div key={i}>
+                                                {horaire}
 {' '}
-                                            <button type="submit" className="modale">
-                                                <i className="fas fa-check" />
-                                            </button>
-                                            <br />
-                                        </div>
-                                  ))
+                                                <button type="submit" className="modale">
+                                                    <i className="fas fa-check" />
+                                                </button>
+                                                <br />
+                                            </div>
+                                        );
+                                    })
                                 )}
                                 <p>
                                     La fonctionnalité "accepter le RDV" n'a pas encore été
@@ -169,7 +175,7 @@ class Begin extends Component {
                 </div>
                 <FooterStop />
             </div>
-      );
+        );
     }
 }
 

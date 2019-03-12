@@ -177,9 +177,13 @@ class Recap extends Component {
     let lifestyle;
     let integration;
     let noOrientation; */
+    let fidelity = false;
     const {
       user, score, firstLog, average, lastChat,
     } = this.state;
+    if (user.numberChats !== undefined && user.numberChats !== null) {
+      fidelity = true;
+    }
 
     return (
             <div>
@@ -217,7 +221,7 @@ Dernière session de chat :
                                 {' '}
                                 Nombre de sessions de chat :
 {' '}
-                                {user.numberChats.length}
+                                {fidelity ? user.numberChats.length : '0'}
 {' '}
                             </p>
                             <p className="card-text">
@@ -297,6 +301,12 @@ class Aide extends Component {
     };
   }
 
+  componentDidMount() {
+    axios.get(`${url}/api/rdv/${this.props.id}`).then((resp) => {
+      this.setState({ taken: resp.data });
+    });
+  }
+
     onChange = date => this.setState({ date });
 
     proposeRdv = () => {
@@ -325,7 +335,7 @@ class Aide extends Component {
                   showTimeSelect
                   timeFormat="HH:mm"
                   timeIntervals={15}
-                  dateFormat="d/M/yyyy, h:mm aa"
+                  dateFormat="d/MM/yyyy, h:mm aa"
                   timeCaption="time"
                   placeholderText="Choisir l'horaire"
                 />

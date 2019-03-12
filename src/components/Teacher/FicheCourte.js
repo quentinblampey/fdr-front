@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable react/jsx-indent-props */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-underscore-dangle */
@@ -140,14 +141,19 @@ class FicheCourte extends Component {
                     </div>
                 </Link>
                 {!this.props.user.helped && (
-                    <button
-                        onClick={() => {
-                            this.props.help(this.props.user._id);
-                        }}
-                        className="buttonHelp"
-                    >
-                        <i className="fa fa-calendar" aria-hidden="true" />
-                    </button>
+                    <div>
+                        <ReactTooltip multiline />
+                        <button
+                            multiline
+                            onClick={() => {
+                                this.props.help(this.props.user._id);
+                            }}
+                            className="buttonHelp"
+                            data-tip="Cliquez-ici pour pouvoir proposer<br />de l'aide à cet étudiant"
+                        >
+                            <i className="fa fa-calendar" aria-hidden="true" />
+                        </button>
+                    </div>
                 )}
             </div>
         );

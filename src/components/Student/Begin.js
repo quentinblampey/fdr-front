@@ -120,13 +120,18 @@ class Begin extends Component {
                                   rdvs.map(horaire => (
                                         <div>
                                             {horaire}
+{' '}
                                             <button type="submit" className="modale">
-                                                oui
+                                                <i className="fas fa-check" />
                                             </button>
                                             <br />
                                         </div>
                                   ))
                                 )}
+                                <p>
+                                    La fonctionnalité "accepter le RDV" n'a pas encore été
+                                    implémentée.
+                                </p>
                             </Modal>
                         </div>
                     ) : (

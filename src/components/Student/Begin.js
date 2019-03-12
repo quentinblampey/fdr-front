@@ -110,7 +110,7 @@ class Begin extends Component {
                             <br />
                             <Modal open={open2} onClose={this.onCloseModal2} center>
                                 <h2>Créneaux proposés: </h2>
-                                <p className="container backg">
+                                <p>
                                     Tu peux maintenant voir si ton enseignant référend t'a proposé
                                     des créneaux de rendez-vous.
                                 </p>

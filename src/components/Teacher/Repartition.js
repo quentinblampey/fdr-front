@@ -60,7 +60,11 @@ class Repartition extends Component {
               <li className="list-group-item d-flex justify-content-center">
                                 Notes de &nbsp; &nbsp;
                 <span className="badge badge-pill badge-danger">0 à 4</span>
+                {' '}
+&nbsp;
                 <span className="badge badge-pill badge-warning">4 à 7</span>
+                {' '}
+&nbsp;
                 <span className="badge badge-pill badge-success">7 à 10</span>
               </li>
             </ul>

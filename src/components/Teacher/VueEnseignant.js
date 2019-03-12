@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
 import axios from 'axios';
+import ReactTooltip from 'react-tooltip';
 import url from '../../config';
 import variables from '../../globalSCSS/color.scss';
 import RadialChart from './Profils';

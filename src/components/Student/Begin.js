@@ -108,12 +108,12 @@ class Begin extends Component {
                                 </p>
                             </button>
                             <br />
-                            <p className="container backg">
-                                Tu peux maintenant voir si ton enseignant référend t'a proposé des
-                                créneaux de rendez-vous.
-                            </p>
                             <Modal open={open2} onClose={this.onCloseModal2} center>
                                 <h2>Créneaux proposés: </h2>
+                                <p className="container backg">
+                                    Tu peux maintenant voir si ton enseignant référend t'a proposé
+                                    des créneaux de rendez-vous.
+                                </p>
 
                                 {rdvs.length === 0 ? (
                                     <p>Pas de Créneaux proposés</p>
@@ -144,15 +144,12 @@ class Begin extends Component {
                                 <p>DEMANDER DE L'AIDE</p>
                             </button>
                             <br />
-                            <p className="container backg">
-                                Tu peux contacter ton enseignant référend grâce à ce bouton. Si tu
-                                as besoin de conseils ou de soutien, tu peux le solliciter ici!
-                            </p>
                             <Modal open={open1} onClose={this.onCloseModal1} center>
                                 <h2>Demander de l'aide</h2>
                                 <p>
-                                    Tu peux joindre un message pour ton enseignant référend. Si tu
-                                    ne veux pas en ajouter, clique juste sur "Envoyer".
+                                    Ici, tu peux contacter ton enseignant référendsi tu as besoin de
+                                    conseils ou de soutient. Tu peux aussi lui joindre un message.
+                                    Si tu ne veux pas en ajouter, clique juste sur "Envoyer".
                                 </p>
 
                                 <textarea

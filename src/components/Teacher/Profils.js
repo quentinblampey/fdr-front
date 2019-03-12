@@ -1,12 +1,5 @@
-/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
-import axios from 'axios';
 import Chart from 'react-apexcharts';
-// import { Link } from 'react-router-dom';
-// import FooterStop from './FooterStop'
-// import { Link } from 'react-router-dom';
-// import FooterStop from './FooterStop'
-import url from '../../config';
 import Info from './Info';
 
 class RadialChart extends Component {

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './FicheCourte.scss';
-import { Link } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
 
 class Info extends Component {

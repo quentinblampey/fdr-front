@@ -323,6 +323,7 @@ class Aide extends Component {
     };
 
     render() {
+      let i = 0;
       const { taken } = this.state;
       return (
             <div className="container">
@@ -346,12 +347,15 @@ class Aide extends Component {
                 <br />
                 <br />
                 <h2>Horaires déjà proposés : </h2>
-                {taken.map(horaire => (
-                    <div>
-                        {horaire}
-                        <br />
-                    </div>
-                ))}
+                {taken.map((horaire) => {
+                  i += 1;
+                  return (
+                        <div key={i}>
+                            {horaire}
+                            <br />
+                        </div>
+                  );
+                })}
             </div>
       );
     }

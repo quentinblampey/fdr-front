@@ -1,3 +1,6 @@
+@import '../../globalSCSS/color.scss';
+@import '../../globalSCSS/size.scss';
+
 .container {
     display: flex;
     flex-direction: column;
@@ -5,10 +8,10 @@
 }
 
 .box {
-    height: 450px;
+    height: 500px;
     overflow: hidden;
     overflow: scroll;
-    width: 250px;
+    max-width: 305px;
 }
 
 .container-fiches {
@@ -16,4 +19,43 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    border-radius: 8px;
+}
+
+.filters {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+
+    & p {
+        margin: 4px 2px;
+    }
+}
+
+.filter {
+    background: $blue;
+    color: $white;
+    border-radius: 4px;
+    padding: 0px 4px;
+    margin: 4px 2px;
+}
+
+.sorts {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+
+    & p {
+        margin: 4px 2px;
+    }
+}
+
+.sort {
+    background: $green;
+    color: $white;
+    border-radius: 4px;
+    padding: 0px 4px;
+    margin: 4px 2px;
 }

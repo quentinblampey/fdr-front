@@ -5,6 +5,7 @@ import axios from 'axios';
 import url from '../../config';
 import './Repartition.scss';
 import variables from '../../globalSCSS/color.scss';
+import Info from './Info';
 
 class Repartition extends Component {
   constructor(props) {
@@ -44,7 +45,14 @@ class Repartition extends Component {
 
     return (
       <div>
-        <h5 className="container">Répartition des élèves suivant les 5 critères. </h5>
+        <div className="row">
+          <div className="col-10">
+            <h5>Répartition des étudiants suivant les 5 critères.</h5>
+          </div>
+          <div className="col-2">
+            <Info part="repartition" />
+          </div>
+        </div>
         <div className="container">
           <div className="card">
             <div className="card-header">Légende : proportion d'étudiants </div>
@@ -52,7 +60,11 @@ class Repartition extends Component {
               <li className="list-group-item d-flex justify-content-center">
                                 Notes de &nbsp; &nbsp;
                 <span className="badge badge-pill badge-danger">0 à 4</span>
+                {' '}
+&nbsp;
                 <span className="badge badge-pill badge-warning">4 à 7</span>
+                {' '}
+&nbsp;
                 <span className="badge badge-pill badge-success">7 à 10</span>
               </li>
             </ul>
@@ -60,30 +72,34 @@ class Repartition extends Component {
         </div>
 
         {this.state.fields.map((f, i) => (
-            <div key={i} className="fieldState" onClick={() => this.props.updateFilter(f.field)}>
-              <h6>{f.title}</h6>
-              <div
-                className="progress"
-                style={{
-                  height: '15px',
-                  width: '90%',
-                  margin: '10px auto',
-                  borderRadius: '8px',
-                }}
-              >
-                {f.repartition.map((r, j) => (
-                  <div
-                    key={j}
-                    className={classes[j]}
-                    role="progressbar"
-                    style={{ width: `${r}%`, color: `${colors[j]}` }}
-                    aria-valuenow="15"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  />
-                ))}
-              </div>
+          <div
+            key={i}
+            className="fieldState"
+            onClick={() => this.props.updateSort(f.field)}
+          >
+            <h6>{f.title}</h6>
+            <div
+              className="progress"
+              style={{
+                height: '15px',
+                width: '90%',
+                margin: '10px auto',
+                borderRadius: '8px',
+              }}
+            >
+              {f.repartition.map((r, j) => (
+                <div
+                  key={j}
+                  className={classes[j]}
+                  role="progressbar"
+                  style={{ width: `${r}%`, color: `${colors[j]}` }}
+                  aria-valuenow="15"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                />
+              ))}
             </div>
+          </div>
         ))}
       </div>
     );

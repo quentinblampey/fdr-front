@@ -1,12 +1,18 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable react/jsx-indent */
+/* eslint-disable react/no-multi-comp */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import axios from 'axios';
+import DatePicker from 'react-datepicker';
 // import { Link } from 'react-router-dom';
 // import FooterStop from './FooterStop'
 // import PropTypes from 'prop-types';
 import url from '../../config';
 // import computeStats from './ComputeStats';
 import SC from './ScoreChart';
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 class Begin extends Component {
   /* propTypes = {
@@ -18,8 +24,81 @@ class Begin extends Component {
     super(props);
     // this.computeStats = this.computeStats.bind(this)
     this.state = {
-      user: { details: {name:'undefined'} },
-      color: 'green',
+      user: { details: { name: 'undefined' } },
+    };
+  }
+
+  componentDidMount() {
+    // const { id } = this.props;
+    // this.props.match.params.id
+    // eslint-disable-next-line react/destructuring-assignment react/prop-types
+    axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
+      // console.log(res.data);
+      this.setState({ user: res.data });
+    });
+  }
+
+  render() {
+    const { user } = this.state;
+    return (
+            <div className="container">
+                <h2 className="text-center">
+                    {" Fiche de l'étudiant : "}
+                    {user.details.name}
+                    {user.aide && (
+                        <p>
+                            <span className="badge badge-pill badge-danger">
+                                Cet étudiant a demandé de l'aide !
+                            </span>
+                        </p>
+                    )}
+                </h2>
+                <p>
+{' '}
+{user.pseudo}
+{' '}
+                </p>
+
+                <div className="row">
+                    <div className="col-6">
+                        <Recap id={this.props.match.params.id} />
+                    </div>
+                    <div className=" col-6">
+                        <div className="card">
+                            <div className="card-header">
+                                <h2>Evolution des indicateurs</h2>
+                            </div>
+                            <SC id={this.props.match.params.id} />
+                        </div>
+                        <br />
+                        {user.helped && (
+                            <div className="card">
+                                <div className="card-header">
+                                    <h2>Gestion des rendez-vous</h2>
+                                </div>
+                                <Aide id={this.props.match.params.id} />
+                            </div>
+                        )}
+                        <br />
+                    </div>
+                </div>
+            </div>
+    );
+  }
+}
+
+// Liste et affichage des scores
+class Recap extends Component {
+  /* propTypes = {
+      match: PropTypes.number.isRequired,
+      params: PropTypes.number.isRequired,
+      id: PropTypes.number.isRequired,
+    }; */
+  constructor(props) {
+    super(props);
+    // this.computeStats = this.computeStats.bind(this)
+    this.state = {
+      user: { details: { name: 'undefined' } },
       lastChat: '',
       firstLog: '',
       score: [],
@@ -31,7 +110,7 @@ class Begin extends Component {
     // const { id } = this.props;
     // this.props.match.params.id
     // eslint-disable-next-line react/destructuring-assignment react/prop-types
-    axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
+    axios.get(`${url}/api/users/getid/${this.props.id}`).then((res) => {
       // console.log(res.data);
       this.setState({ user: res.data }, () => {
         // console.log('user', this.state.user);
@@ -53,31 +132,6 @@ class Begin extends Component {
         if (user.numberChats !== undefined && user.numberChats !== null) {
           // const nbChats = user.numberChats.length;
 
-          // const d = new Date();
-          // const today = [d.getFullYear(), d.getMonth() + 1, d.getDate()];
-          // console.log(today);
-
-          /* if (nbChats !== 0) {
-              const lastChat = user.numberChats[
-                user.numberChats.length - 1
-              ];
-              console.log(lastChat);
-
-              const lastEval = [
-                lastChat.split('T')[0].split('-')[0],
-                lastChat.split('T')[0].split('-')[1],
-                lastChat.split('T')[0].split('-')[2],
-              ];
-              // console.log(lastEval);
-
-            if (today[1] - lastEval[1] > 1 ||today[0] - lastEval[0] > 1) {
-              color='red'
-            } else if (today[2] - lastEval[2] > 14) {
-              color='orange'
-            } else if (today[2] - lastEval[2] < 14) {
-              color='green'
-            }
-            } */
           const tab = user.registration.split('T')[0].split('-');
           const reg = `${tab[2]}/${tab[1]}/${tab[0]}`;
           let last = ' Aucune session';
@@ -119,125 +173,192 @@ class Begin extends Component {
   } */
 
   render() {
-    let fidelity;
     /* let motivation;
     let lifestyle;
     let integration;
     let noOrientation; */
+    let fidelity = false;
     const {
       user, score, firstLog, average, lastChat,
     } = this.state;
+    if (user.numberChats !== undefined && user.numberChats !== null) {
+      fidelity = true;
+    }
 
     return (
-      <div className="container">
-        <h2 className="text-center">
-          {" Fiche de l'élève : "}
-          {user.details.name}
-        </h2>
-        <p>
-          {' '}
-          {user.pseudo}
-          {' '}
-        </p>
-        <div className="card bg-light mb-3">
-          <div className="card-header">
-            <h2>Informations personnelles</h2>
-          </div>
-          <ul className="list-group list-group-flush">
-            <li className="list-group-item">
-              <h5 className="card-title">
-                {' '}
+            <div>
+                <div className="card bg-light mb-3">
+                    <div className="card-header">
+                        <h2>Informations personnelles</h2>
+                    </div>
+                    <ul className="list-group list-group-flush">
+                        <li className="list-group-item">
+                            <h5 className="card-title">
+                                {' '}
                                 Motivation générale :
-                {' '}
-                {parseFloat(score.motivation).toFixed(2)}
+{' '}
+{parseFloat(score.motivation).toFixed(2)}
                                 /10
-              </h5>
-            </li>
+                            </h5>
+                        </li>
 
-            <li className="list-group-item">
-              <h5 className="card-title">
-                {' '}
+                        <li className="list-group-item">
+                            <h5 className="card-title">
+                                {' '}
                                 Utilisation et fidélité :
-                {' '}
-                {parseFloat(score.fidelity).toFixed(2)}
+{' '}
+{parseFloat(score.fidelity).toFixed(2)}
                                 /10
-              </h5>
-              <p className="card-text">
-                {' '}
+                            </h5>
+                            <p className="card-text">
+{' '}
 Dernière session de chat :
-                {lastChat}
-                {' '}
+{lastChat}
+{' '}
 
-              </p>
-              <p className="card-text">
-                {' '}
+                            </p>
+                            <p className="card-text">
+                                {' '}
                                 Nombre de sessions de chat :
-                {' '}
-                {fidelity ? user.numberChats.length : '0'}
-                {' '}
-              </p>
-              <p className="card-text">
-                {' '}
+{' '}
+                                {fidelity ? user.numberChats.length : '0'}
+{' '}
+                            </p>
+                            <p className="card-text">
+                                {' '}
                                 Nombre de réponses :
-                {' '}
-                {user.numberQuestions}
-                {' '}
-              </p>
-              <p className="card-text">
-                {' '}
+{' '}
+{user.numberQuestions}
+{' '}
+                            </p>
+                            <p className="card-text">
+{' '}
 Date d&apos;inscription :
-                {firstLog}
-                {' '}
+{firstLog}
+{' '}
 
-              </p>
-            </li>
+                            </p>
+                        </li>
 
-            <li className="list-group-item">
-              <h5 className="card-title">
-                {' '}
+                        <li className="list-group-item">
+                            <h5 className="card-title">
+                                {' '}
                                 Style de vie :
-                {' '}
-                {parseFloat(score.lifestyle).toFixed(2)}
+{' '}
+{parseFloat(score.lifestyle).toFixed(2)}
                                 /10
-              </h5>
-            </li>
+                            </h5>
+                        </li>
 
-            <li className="list-group-item">
-              <h5 className="card-title">
-                {' '}
+                        <li className="list-group-item">
+                            <h5 className="card-title">
+                                {' '}
                                 Intégration :
-                {' '}
-                {parseFloat(score.integration).toFixed(2)}
+{' '}
+{parseFloat(score.integration).toFixed(2)}
                                 /10
-              </h5>
-            </li>
+                            </h5>
+                        </li>
 
-            <li className="list-group-item">
-              <h5 className="card-title">
+                        <li className="list-group-item">
+                            <h5 className="card-title">
                                 Pertinence de l&apos;orientation :
-                {' '}
-                {parseFloat(score.noOrientation).toFixed(2)}
+{' '}
+                                {parseFloat(score.noOrientation).toFixed(2)}
                                 /10
-              </h5>
-            </li>
+                            </h5>
+                        </li>
+                    </ul>
 
-            <li className="list-group-item">
-              <SC id={this.props.match.params.id} />
-            </li>
-          </ul>
-
-          <div className="card-footer">
-            <h4 className="card-title">
+                    <div className="card-footer">
+                        <h4 className="card-title">
                             Score moyen :
-              {' '}
-              {parseFloat(average).toFixed(2)}
+{' '}
+{parseFloat(average).toFixed(2)}
                             /10
-            </h4>
-          </div>
-        </div>
-      </div>
+                        </h4>
+                    </div>
+                </div>
+            </div>
     );
   }
+}
+
+// Gestion des demandes d'aide
+class Aide extends Component {
+  /* propTypes = {
+      match: PropTypes.number.isRequired,
+      params: PropTypes.number.isRequired,
+      id: PropTypes.number.isRequired,
+    }; */
+
+  constructor(props) {
+    super(props);
+    // this.computeStats = this.computeStats.bind(this)
+    this.state = {
+      date: new Date(),
+      taken: [],
+    };
+  }
+
+  componentDidMount() {
+    axios.get(`${url}/api/rdv/${this.props.id}`).then((resp) => {
+      this.setState({ taken: resp.data });
+    });
+  }
+
+    onChange = date => this.setState({ date });
+
+    proposeRdv = () => {
+      const { date } = this.state;
+      const horaire = `${date.getDate()}/${date.getMonth()
+            + 1}/${date.getFullYear()} à ${date.getHours()}h${date.getMinutes()}`;
+      axios.post(`${url}/api/rdv/newrdv/${this.props.id}`, { horr: horaire }).then((res) => {
+        axios.get(`${url}/api/rdv/${this.props.id}`).then((resp) => {
+          this.setState({ taken: resp.data });
+        });
+        // console.log(res.data);
+        // this.setState({ taken: res.data });
+      });
+    };
+
+    render() {
+      let i = 0;
+      const { taken } = this.state;
+      return (
+            <div className="container">
+                <br />
+                <h2>Proposer un rendez-vous</h2>
+                <br />
+                <DatePicker
+                  selected={this.state.date}
+                  onChange={this.onChange}
+                  showTimeSelect
+                  timeFormat="HH:mm"
+                  timeIntervals={15}
+                  dateFormat="d/MM/yyyy, h:mm aa"
+                  timeCaption="time"
+                  placeholderText="Choisir l'horaire"
+                />
+{' '}
+                <button type="button" className="btn btn-success" onClick={this.proposeRdv}>
+                    Proposer l'horaire
+                </button>
+                <br />
+                <br />
+                <h2>Horaires déjà proposés : </h2>
+                {taken.map((horaire) => {
+                  i += 1;
+                  return (
+                        <div key={i}>
+                            {horaire}
+                            <br />
+                        </div>
+                  );
+                })}
+            </div>
+      );
+    }
 }
 
 export default Begin;

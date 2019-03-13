@@ -56,6 +56,11 @@
     background-image: linear-gradient(60deg, $color1, $color4);
 }
 
+.backg {
+    font-family: 'MsSemiBoldItalic';
+    color: $white;
+}
+
 .help {
     border: 1px solid $white;
     height: 40px;
@@ -70,5 +75,28 @@
         background: $white;
         color: $color4;
         transition: 0.3s;
+    }
+
+    &:disabled {
+        color: $white;
+        border: 0px;
+
+        &:hover {
+            background: transparent;
+        }
+    }
+}
+
+.modale {
+    border: 1px solid $color4;
+    height: 40px;
+    padding: 0px 20px;
+    border-radius: 20px;
+    background: none;
+    color: $color4;
+    font-family: 'MsSemiBoldItalic';
+
+    &:hover {
+        background: $color4;
     }
 }

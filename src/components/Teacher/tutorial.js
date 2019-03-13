@@ -1,8 +1,15 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
+import axios from 'axios';
 import Chart from 'react-apexcharts';
+// import { Link } from 'react-router-dom';
+// import FooterStop from './FooterStop'
+// import { Link } from 'react-router-dom';
+// import FooterStop from './FooterStop'
+import url from '../../config';
 import Info from './Info';
 
-class RadialChart extends Component {
+class Tutorial extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -45,7 +52,7 @@ class RadialChart extends Component {
     };
 
     return (
-      <div className="container">
+      <div className="container" style={{ backgroundColor: 'black' }}>
         <div className="row">
           <div className="col-10">
             <h5>Repartition des étudiants selon leurs profils</h5>
@@ -61,7 +68,7 @@ class RadialChart extends Component {
                 {a}
                 {' '}
 :
-                {this.props.proportions[i]}
+                {String((i + 1) * this.props.proportions[i]).split('.')[0]}
 %
               </div>
             ))}
@@ -87,4 +94,4 @@ class RadialChart extends Component {
   }
 }
 
-export default RadialChart;
+export default Tutorial;

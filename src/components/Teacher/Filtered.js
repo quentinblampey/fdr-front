@@ -1,76 +1,65 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
+import ReactTooltip from 'react-tooltip';
 import FicheCourte from './FicheCourte';
-import url from '../../config';
+// import url from '../../config';
 import './Filtered.scss';
 
 class Filtered extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      users: [],
-    };
-  }
-
-  componentDidMount() {
-    if (this.props.filter === 'pseudo') {
-      axios.get(`${url}/api/users/sorted/pseudo`).then((res) => {
-        this.setState({ users: res.data });
-      });
-    } else if (
-      ['motivation', 'lifestyle', 'fidelity', 'integration', ' noOrientation'].includes(
-        this.props.filter,
-      )
-    ) {
-      axios.get(`${url}/api/users/sorted/score/${this.props.filter}`).then((res) => {
-        this.setState({ users: res.data });
-      });
-    } else {
-      axios.get(`${url}/api/users/sorted/caracteristics/${this.props.filter}`).then((res) => {
-        this.setState({ users: res.data });
-      });
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.filter !== this.props.filter) {
-      if (this.props.filter === 'pseudo') {
-        axios.get(`${url}/api/users/sorted/pseudo`).then((res) => {
-          this.setState({ users: res.data });
-        });
-      } else if (
-        ['motivation', 'lifestyle', 'fidelity', 'integration', 'noOrientation'].includes(
-          this.props.filter,
-        )
-      ) {
-        axios.get(`${url}/api/users/sorted/score/${this.props.filter}`).then((res) => {
-          this.setState({ users: res.data });
-          console.log(res.data);
-        });
-      } else {
-        axios
-          .get(`${url}/api/users/sorted/caracteristics/${this.props.filter}`)
-          .then((res) => {
-            this.setState({ users: res.data });
-          });
-      }
-    }
+    this.state = {};
   }
 
   render() {
     return (
       <div className="container">
-        <div className="text-center">
-          <h2>
-            {' Étudiants triés par '}
-            {' '}
-            {this.props.filter}
-            {' '}
-          </h2>
+        {!this.props.helped && (
+        <div className="container">
+          <div className="text-center">
+            <h2> Étudiants </h2>
+          </div>
+          <div className="filters">
+            <p> Filtres :</p>
+            {this.props.filter.map(filter => (
+              <div key={filter} className="filter">
+                {' '}
+                {filter}
+                {' '}
+              </div>
+            ))}
+            <div className="filter">
+              {' '}
+              {this.props.filterHelp && 'Demande aide'}
+              {' '}
+            </div>
+          </div>
+          <div className="sorts">
+            <p> Tri :</p>
+            {this.props.sortScore.map(sort => (
+              <div key={sort} className="sort">
+                {' '}
+                {sort}
+                {' '}
+              </div>
+            ))}
+          </div>
         </div>
+        )}
+        {this.props.helped && (
+        <div>
+          <ReactTooltip multiline />
+          <div
+            multiline
+            data-tip="Etudiants auxquels vous voulez <br />proposer de l'aide. Accedez<br />à sa fiche pour proposer<br />un horaire"
+          >
+            <h2> Rendez-vous demandés </h2>
+          </div>
+        </div>
+        )}
         <div className="container-fiches box">
-          {this.state.users.map(user => (
-            <FicheCourte key={user._id} user={user} />
+          {this.props.users.map(user => (
+            <FicheCourte key={user._id} user={user} help={this.props.help} />
           ))}
         </div>
       </div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
 import axios from 'axios';
 import ReactTooltip from 'react-tooltip';
+import { Link } from 'react-router-dom';
 import url from '../../config';
 import variables from '../../globalSCSS/color.scss';
 import RadialChart from './Profils';
@@ -131,6 +132,15 @@ class VueEnseignant extends Component {
                 >
                                 Étudiants en demande d'aide
                 </button>
+                <Link to="/enseignant/propose">
+                  <button
+                    type="button"
+                    className="btn btn-info"
+                    style={{ width: '100%' }}
+                  >
+                                    Proposer des creneaux de Rendez-vous
+                  </button>
+                </Link>
               </div>
               <div className="row">
                 <div className="chart">

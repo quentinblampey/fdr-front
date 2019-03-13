@@ -10,6 +10,7 @@ import Repartition from './Repartition';
 import Profils from './Profils';
 import HistoricUpdate from './HistoricUpdate';
 import Nav from '../Navbar';
+import Propose from './Propose';
 
 const crypto = require('crypto');
 
@@ -114,6 +115,7 @@ class RouterEns extends Component {
               />
               <Route path="/enseignant/repartition" component={Repartition} />
               <Route path="/enseignant/profils" component={Profils} />
+              <Route exact path="/enseignant/propose" component={Propose} />
             </div>
           </Router>
         </div>

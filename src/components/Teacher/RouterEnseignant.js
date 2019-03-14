@@ -105,6 +105,7 @@ class RouterEns extends Component {
               <Route exact path="/fakefiche" component={FicheCourte} />
               <Route exact path="/enseignant/historic/score" component={HistoricUpdate} />
               <Route exact path="/enseignant" component={VueEnseignant} />
+              <Route path="/enseignant/propose" component={Propose} />
               <Route
                 path="/enseignant/fiche/:id"
                 render={props => <Fiche {...props} />}
@@ -115,7 +116,6 @@ class RouterEns extends Component {
               />
               <Route path="/enseignant/repartition" component={Repartition} />
               <Route path="/enseignant/profils" component={Profils} />
-              <Route exact path="/enseignant/propose" component={Propose} />
             </div>
           </Router>
         </div>

@@ -10,11 +10,11 @@
         width: 33.3334%;
         height: 30px;
     }
-}
 
-p {
-    height: 30px;
-    padding-top: 2px;
+    & p {
+        height: 30px;
+        padding-top: 2px;
+    }
 }
 
 .left,

@@ -35,10 +35,16 @@
         margin: 0px;
         padding: 0px;
         border: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
 
         & p {
             color: $color4;
             font-size: 30px;
+            vertical-align: middle;
+            padding-top: 30px;
+            margin: 0px;
             font-family: 'MsBoldItalic';
 
             & span {
@@ -53,7 +59,7 @@
     flex-direction: column;
     align-items: center;
     height: calc(100vh - #{$bottom});
-    background-image: linear-gradient(60deg, $color1, $color4);
+    background-image: linear-gradient(0deg, $color1, $color4);
 }
 
 .backg {
@@ -64,7 +70,6 @@
 .help {
     border: 1px solid $white;
     height: 40px;
-    margin-top: 30px;
     padding: 0px 20px;
     border-radius: 20px;
     background: none;

@@ -7,47 +7,47 @@ class Test extends Component {
     return (
       <div>
         <div className="onglets">
-          <Link to="/test/chatbot">
+          <Link to={`/begin/${this.props.id}`}>
             <div
               className={`text-center ${
-                this.props.match.params.onglet === 'chatbot' ? 'color' : 'left'
+                this.props.onglet === 'chatbot' ? 'color' : 'left'
               }`}
             >
               <p> Chatbot </p>
-              {this.props.match.params.onglet === 'aide' && (
+              {this.props.onglet === 'aide' && (
               <div className="corner-left">
                 <div />
               </div>
               )}
             </div>
           </Link>
-          <Link to="/test/aide">
+          <Link to={`/aide/${this.props.id}`}>
             <div
               className={`text-center ${
-                this.props.match.params.onglet === 'aide' ? 'color' : 'middle'
+                this.props.onglet === 'aide' ? 'color' : 'middle'
               }`}
             >
               <p> Aide </p>
               {}
-              {this.props.match.params.onglet === 'rdv' && (
+              {this.props.onglet === 'rdv' && (
               <div className="corner-left">
                 <div />
               </div>
               )}
-              {this.props.match.params.onglet === 'chatbot' && (
+              {this.props.onglet === 'chatbot' && (
               <div className="corner-right">
                 <div />
               </div>
               )}
             </div>
           </Link>
-          <Link to="/test/rdv">
+          <Link to={`/rdv/${this.props.id}`}>
             <div
               className={`text-center ${
-                this.props.match.params.onglet === 'rdv' ? 'color' : 'right'
+                this.props.onglet === 'rdv' ? 'color' : 'right'
               }`}
             >
-              {this.props.match.params.onglet === 'aide' && (
+              {this.props.onglet === 'aide' && (
               <div className="corner-right">
                 <div />
               </div>

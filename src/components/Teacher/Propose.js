@@ -150,7 +150,7 @@ class Propose extends Component {
                 <li className="list-group-item list-group-item-secondary">Créneaux</li>
                 {this.state.plage.map(creneaux => (
                   <li key={creneaux.id} className="list-group-item">
-                    {creneaux.horaire}
+                    {creneaux.date}
                   </li>
                 ))}
                 {this.state.plage.length === 0 && (

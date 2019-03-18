@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom';
 import FooterStop from './FooterStop';
 import url from '../../config';
 import Modal from 'react-responsive-modal';
+import Test from './test';
+import './Begin.scss';
 
 class Contrat extends Component {
   constructor(props) {
@@ -126,7 +128,10 @@ class Contrat extends Component {
     render() {
       return (
           <div>
-              <div className="btn-group" role="group" aria-label="Basic example">
+              <Test onglet="contrat" id={this.props.match.params.id} />
+          <div className="component">
+            <h3 className="titre-cadre"> MES CONTRATS </h3>
+            <div className="btn-group" role="group" aria-label="Basic example">
                   <button type="button" className="btn btn-secondary" onClick={this.choice}>Choisir mes UE</button>
                   <button type="button" className="btn btn-secondary" onClick={this.feedback}>Feedback sur mes UE</button>
                 </div>
@@ -172,6 +177,7 @@ class Contrat extends Component {
                             ))}
                     </ul>
                 )}
+          </div>
               <FooterStop />
             </div>
       );

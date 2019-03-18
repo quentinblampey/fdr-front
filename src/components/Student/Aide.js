@@ -39,6 +39,19 @@ class Exit extends Component {
       this.setState({ open1: false });
     };
 
+    onChange = (e) => {
+      const message = e.target.value;
+      this.setState({ message });
+    };
+
+    demAide = () => {
+      const { user, message } = this.state;
+      axios.post(`${url}/api/users/aide/${user._id}/2`, { message }).then((res) => {
+        this.setState({ user: res.data });
+        this.onCloseModal1();
+      });
+    };
+
     render() {
       const {
         user, open1, message, rdvs,
@@ -47,57 +60,58 @@ class Exit extends Component {
         <div>
           <Test onglet="aide" id={this.props.match.params.id} />
           <div className="component">
-            <h3 className="titre-cadre"> DEMANDE D'AIDE </h3>
-            <div className="container">
-              <button type="submit" className="help" onClick={this.onOpenModal1}>
-                <p>DEMANDER DE L'AIDE</p>
-              </button>
-              <br />
-              <Modal open={open1} onClose={this.onCloseModal1} center>
-                <h2>Demander de l'aide</h2>
-                <p>
-                                Ici, tu peux contacter ton enseignant référendsi tu as besoin de
-                                conseils ou de soutient. Tu peux aussi lui joindre un message. Si tu
-                                ne veux pas en ajouter, clique juste sur "Envoyer".
-                </p>
-
-                <textarea
-                  className="form-control"
-                  id="exampleFormControlTextarea1"
-                  rows="2"
-                  value={message}
-                  onChange={this.onChange}
-                />
-                <br />
-
-                <button type="submit" className="modale" onClick={this.demAide}>
-                  <p>ENVOYER</p>
+            <h3 className="titre-cadre"> DEMANDE D&apos;AIDE </h3>
+            {!user.aide ? (
+              <div className="container">
+                <button type="submit" className="help" onClick={this.onOpenModal1}>
+                  <p>DEMANDER DE L&apos;AIDE</p>
                 </button>
-              </Modal>
-            </div>
+                <br />
+                <Modal open={open1} onClose={this.onCloseModal1} center>
+                  <h2>Demander de l&apos;aide</h2>
+                  <p>
+                                    Ici, tu peux contacter ton enseignant référendsi tu as besoin de
+                                    conseils ou de soutient. Tu peux aussi lui joindre un message.
+                                    Si tu ne veux pas en ajouter, clique juste sur
+                                    &bdquo;Envoyer&bdquo;.
+                  </p>
+
+                  <textarea
+                    className="form-control"
+                    id="exampleFormControlTextarea1"
+                    rows="2"
+                    value={message}
+                    onChange={this.onChange}
+                  />
+                  <br />
+
+                  <button type="submit" className="modale" onClick={this.demAide}>
+                    <p>ENVOYER</p>
+                  </button>
+                </Modal>
+              </div>
+            ) : (
+              <div className="container">
+                <button type="submit" className="help" disabled>
+                  <p>DEMANDE D&apos;AIDE ENVOYÉE</p>
+                </button>
+                <br />
+              </div>
+            )}
 
             <div className="container">
-              <button type="submit" className="help" onClick={this.onOpenModal2}>
-                <p>
-                                CRENEAUX PROPOSES
-                  {' '}
-                  {rdvs.length > 0 && (
-                    <span className="badge badge-pill badge-light">
-                      {'  '}
-                      {rdvs.length}
-                      {' '}
-                    </span>
-                  )}
-                </p>
+              <button type="submit" className="help" disabled>
+                <p>CRENEAUX PROPOSÉS </p>
               </button>
               <br />
               <h2>Créneaux proposés: </h2>
-              <p>
-                            Tu peux maintenant voir si ton enseignant référend t'a proposé des
-                            créneaux de rendez-vous.
-              </p>
-
-              <p>La fonctionnalité "accepter le RDV" n'a pas encore été implémentée.</p>
+              {rdvs.length !== 0 && (
+                <div>
+                  {rdvs.map(rdv => (
+                    <div key={rdv._id}>{rdv.date}</div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
           <FooterStop />

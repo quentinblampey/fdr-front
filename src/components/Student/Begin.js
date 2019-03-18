@@ -44,19 +44,6 @@ class Begin extends Component {
         this.setState({ open2: false });
     };
 
-    onChange = e => {
-        const message = e.target.value;
-        this.setState({ message });
-    };
-
-    demAide = () => {
-        const { user, message } = this.state;
-        axios.post(`${url}/api/users/aide/${user._id}/2`, { message }).then(res => {
-            this.setState({ user: res.data });
-            this.onCloseModal1();
-        });
-    };
-
     render() {
         const {
  user, open1, open2, message, rdvs,

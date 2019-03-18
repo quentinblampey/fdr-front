@@ -140,17 +140,18 @@ class Contrat extends Component {
       return (
           <div>
               <Test onglet="contrat" id={this.props.match.params.id} />
+              
           <div className="component">
-            <h3 className="titre-cadre"> MES CONTRATS </h3>
-            <div className="btn-group" role="group" aria-label="Basic example">
-                  <button type="button" className="btn btn-secondary" onClick={this.choice}>Choisir mes UE</button>
-                  <button type="button" className="btn btn-secondary" onClick={this.feedback}>Feedback sur mes UE</button>
+          <h3 className="titre-cadre" style={{ position: 'absolute', top:'70px'}}> MES CONTRATS </h3>
+            <div className="btn-group" role="group" aria-label="Basic example" style={{ position: 'absolute', top:'140px'}}>
+                  <button type="button" className="btn btn-light" onClick={this.choice}>Choisir mes UE</button>
+                  <button type="button" className="btn btn-light" onClick={this.feedback}>Feedback sur mes UE</button>
                 </div>
                 {this.state.status === 'choice' && (
-                    <div>
+                    <div class="text-center">
                         <form>
                             {this.state.UEs.map((ue, i) => (
-                                <div>
+                                <div style={{ color : '#fefefe', margin: '10px'}}>
                                     <label>
                                         <input
                                         name={i}
@@ -163,18 +164,18 @@ class Contrat extends Component {
                                 </div>
                             ))}
                         </form>
-                        <button className="btn btn-success" onClick={this.send}>Valider</button>
+                        <button className="help" onClick={this.send}>Valider</button>
                     </div>
                 )}
                 {(this.state.status === 'feedback' && this.state.user.ue)&& (
-                    <ul className="list-group">
+                    <ul className="list-group" style={{ width:'90%', margin: '10px'}}>
                             {this.state.user.ue.map((ue) => (
-                                <li key={ue.name} className={"row list-group-item-"+ue.status}>
-                                    <div className="col-8">
+                                <li key={ue.name} className={"row list-group-item-"+ue.status} style={{'border-radius':'10px', width:'100%', margin: '5px 0px', padding: '0px 0px 0px 10px', display:'flex', 'flex-direction': 'row', 'justify-content':'space-between', 'align-items':'center'}}>
+                                    <div>
                                         {ue.name}
                                     </div>
-                                    <div className="dropdown col-4">
-                                    <DropdownButton variant="light" id="dropdown-basic-button" title="Options">
+                                    <div className="dropdown">
+                                    <DropdownButton variant="light" id="dropdown-basic-button" title="">
                                         <Dropdown.Item onClick={this.options.bind(this, "success", ue.name)}>Validé !</Dropdown.Item>
                                         <Dropdown.Item onClick={this.options.bind(this, "warning", ue.name)}>Signaler des difficulté</Dropdown.Item>
                                         <Dropdown.Item onClick={this.options.bind(this, "danger", ue.name)}>Echec</Dropdown.Item>

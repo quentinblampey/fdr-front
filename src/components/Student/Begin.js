@@ -87,6 +87,11 @@ class Begin extends Component {
                                 </p>
                             </button>
                         </Link>
+                        <Link to={`/contrat/${this.props.match.params.id}`}>
+                            <button type="submit" className="help">
+                                <p>CONTRAT</p>
+                            </button>
+                        </Link>
                     </div>
                     {user.aide ? (
                         <div className="container">

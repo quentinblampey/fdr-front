@@ -1,3 +1,5 @@
+/* eslint-disable react/prefer-stateless-function */
+/* eslint-disable react/no-multi-comp */
 import React, { Component } from 'react';
 import './Begin.scss';
 import axios from 'axios';
@@ -14,11 +16,14 @@ class Exit extends Component {
   constructor(props) {
     super(props);
     // this.demAide = this.demAide.bind(this);
+    this.onOpenModal2 = this.onOpenModal2.bind(this);
+    this.onCloseModal2 = this.onCloseModal2.bind(this);
     this.state = {
       user: '',
       rdvs: [],
       message: '',
       open1: false,
+      open2: false,
     };
   }
 
@@ -37,6 +42,14 @@ class Exit extends Component {
 
     onCloseModal1 = () => {
       this.setState({ open1: false });
+    };
+
+    onOpenModal2 = () => {
+      this.setState({ open2: true });
+    };
+
+    onCloseModal2 = () => {
+      this.setState({ open2: false });
     };
 
     onChange = (e) => {
@@ -105,17 +118,76 @@ class Exit extends Component {
               </button>
               <br />
               <h2>Créneaux proposés: </h2>
+              <button type="submit" className="help" onClick={this.onOpenModal2}>
+                <p>CRÉNEAUX DISPONIBLES</p>
+              </button>
               {rdvs.length !== 0 && (
                 <div>
-                  {rdvs.map(rdv => (
-                    <div key={rdv._id}>{rdv.date}</div>
-                  ))}
+                  <ModalRDV
+                    open={this.state.open2}
+                    closeModal={this.onCloseModal2}
+                    openModal={this.onOpenModal2}
+                    rdvs={this.state.rdvs}
+                    id={this.props.match.params.id}
+                  />
                 </div>
               )}
             </div>
           </div>
           <FooterStop />
         </div>
+      );
+    }
+}
+
+class ModalRDV extends Component {
+    acceptRDV = (e) => {
+      console.log(e.target.value);
+      if (e.target.value !== undefined) {
+        axios
+          .post(`${url}/api/users/chosen-slots/${this.props.id}`, {
+            chosenSlot: e.target.value,
+          })
+          .then((res) => {
+            console.log('sucess !');
+          });
+      }
+    };
+
+    render() {
+      return (
+        <Modal open={this.props.open} onClose={this.props.closeModal} center>
+          <h2>Demander un créneau de rendez-vous</h2>
+          <p>
+                    Ici, tu peux voir les créneaux qu'a proposé ton enseignant référent et en
+                    demander plusieurs. Un de ceux que tu as demandé te sera attribué en fonction
+                    des disponibilités.
+          </p>
+          <br />
+          {this.props.rdvs.map(rdv => (
+            <div key={rdv._id}>
+              {rdv.date}
+                        &nbsp;
+              <button
+                type="submit"
+                className="modale"
+                value={rdv._id}
+                onClick={this.acceptRDV}
+              >
+                <p>V</p>
+              </button>
+            </div>
+          ))}
+          <br />
+          <button type="submit" className="modale" onClick={this.props.closeModal}>
+            <p>CONFIRMER</p>
+          </button>
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+        </Modal>
       );
     }
 }

@@ -78,8 +78,14 @@ class Propose extends Component {
     };
 
     confirmAll = () => {
-      Axios.post(`${url}/api/slots/`, this.state.plage).then(() => {
-        console.log('ok');
+      const { plage } = this.state;
+      plage.map((slot) => {
+        Axios.post(`${url}/api/slots/`, { duration: slot.duration, date: slot.date }).then(
+          () => {
+            console.log('ok');
+          },
+        );
+        return 0;
       });
     };
 

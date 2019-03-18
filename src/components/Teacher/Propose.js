@@ -19,11 +19,7 @@ class Propose extends Component {
   }
 
     changeDuration = (e) => {
-      if (e.target.value >= 10 && e.target.value <= 50) {
-        this.setState({ duration: e.target.value });
-      } else {
-        this.setState({ duration: 15 });
-      }
+      this.setState({ duration: e.target.value });
     };
 
     changeNumber = (e) => {
@@ -35,24 +31,24 @@ class Propose extends Component {
         number, date, plage, duration, numberTot,
       } = this.state;
       // eslint-disable-next-line prefer-const
-      let heureFin = date;
+      let heureFin = new Date();
+      heureFin.setHours(date.getHours());
+      heureFin.setMinutes(date.getMinutes());
       let count = 0;
       while (count < number) {
-        count += count + 1;
+        count += 1;
         plage.push({
-          horaire: `${heureFin.getDate()}/${heureFin.getMonth()
-                    + 1}/${heureFin.getFullYear()} à ${heureFin.getHours()}h${heureFin.getMinutes()}`,
+          horaire: `${date.getDate()}/${date.getMonth()
+                    + 1}/${date.getFullYear()} à ${heureFin.getHours()}h${heureFin.getMinutes()}`,
           id: plage.length + 1,
         });
-        const min = heureFin.getMinutes();
-        const heure = heureFin.getHours();
-        if (min + duration > 59) {
-          heureFin.setHours(heure + 1);
-          heureFin.setMinutes(min - 60);
-        } else {
-          heureFin.setMinutes(min);
-        }
-        heureFin.setMinutes(heureFin.getMinutes);
+        heureFin.setHours(
+          heureFin.getHours(),
+          Number(heureFin.getMinutes()) + Number(duration),
+          0,
+          0,
+        );
+        // heureFin.setMinutes(heureFin.getMinutes());
       }
       this.setState({ plage, numberTot: numberTot + number }, () => console.log(this.state.plage));
     };

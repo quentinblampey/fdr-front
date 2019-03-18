@@ -113,11 +113,6 @@ class Exit extends Component {
             )}
 
             <div className="container">
-              <button type="submit" className="help" disabled>
-                <p>CRENEAUX PROPOSÉS </p>
-              </button>
-              <br />
-              <h2>Créneaux proposés: </h2>
               <button type="submit" className="help" onClick={this.onOpenModal2}>
                 <p>CRÉNEAUX DISPONIBLES</p>
               </button>
@@ -150,6 +145,7 @@ class ModalRDV extends Component {
           })
           .then((res) => {
             console.log('sucess !');
+            super.setState({ rdvs: [] });
           });
       }
     };
@@ -165,22 +161,17 @@ class ModalRDV extends Component {
           </p>
           <br />
           {this.props.rdvs.map(rdv => (
-            <div key={rdv._id}>
-              {rdv.date}
+            <div className="form-check" key={rdv._id}>
+              <input className="form-check-input" type="checkbox" value="" id={rdv._id} />
+              <label className="form-check-label" htmlFor={rdv._id}>
+                {rdv.date}
+              </label>
                         &nbsp;
-              <button
-                type="submit"
-                className="modale"
-                value={rdv._id}
-                onClick={this.acceptRDV}
-              >
-                <p>V</p>
-              </button>
             </div>
           ))}
           <br />
           <button type="submit" className="modale" onClick={this.props.closeModal}>
-            <p>CONFIRMER</p>
+            <p>DEMANDER LES CRÉNEAUX</p>
           </button>
           <br />
           <br />

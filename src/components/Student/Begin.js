@@ -88,22 +88,7 @@ class Begin extends Component {
                                 <p className="text-align"> Lancer le chat </p>
                             </button>
                         </Link>
-                        <Link to={`/contrat/${this.props.match.params.id}`}>
-                            <button type="submit" className="help">
-                                <p>CONTRAT</p>
-                            </button>
-                        </Link>
                     </div>
-                    <Link to={`/chat/${this.props.match.params.id}`}>
-                        <button type="submit" className="help">
-                            <p>LANCER LE CHAT</p>
-                        </button>
-                    </Link>
-                    <Link to={`/contrat/${this.props.match.params.id}`}>
-                        <button type="submit" className="help">
-                            <p>CONTRAT</p>
-                        </button>
-                    </Link>
                     <br />
                     {user.aide ? (
                         <div className="container">

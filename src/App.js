@@ -5,11 +5,11 @@ import Chat from './components/Student/Chat/Chat';
 import Begin from './components/Student/Begin';
 import Aide from './components/Student/Aide';
 import Contrat from './components/Student/Contrat';
+import ContratVue from './components/Student/ContratVue';
 import Test from './components/Student/test';
 // import Home from './components/Home';
 import VueEtudiant from './components/Student/VueEtudiant';
 import RouterEns from './components/Teacher/RouterEnseignant';
-import Contrat from './components/Student/Contrat';
 import IE from './components/IE';
 
 class App extends Component {
@@ -26,10 +26,9 @@ class App extends Component {
         <div>
           <Route exact path="/" component={VueEtudiant} />
           <Route exact path="/etudiant" component={VueEtudiant} />
-          <Route exact path="/contrat/:id" component={Contrat} />
+          <Route exact path="/contrat/:id" component={ContratVue} />
           <Route path="/chat/:id" component={Chat} />
           <Route path="/aide/:id" component={Aide} />
-          <Route path="/contrat/:id" component={Contrat} />
           <Route path="/test/:onglet" component={Test} />
           <Route path="/begin/:id" render={props => <Begin {...props} />} />
           <Route path="/enseignant" component={RouterEns} />

@@ -11,9 +11,9 @@ class Exit extends Component {
   render() {
     return (
       <div>
-        <Test onglet="aide" id={this.props.match.params.id} />
+        <Test onglet="contrat" id={this.props.match.params.id} />
         <div className="component">
-          <h3 className="titre-cadre"> DEMANDE D'AIDE </h3>
+          <h3 className="titre-cadre"> MES CONTRATS </h3>
         </div>
         <FooterStop />
       </div>

@@ -29,7 +29,7 @@ class Test extends Component {
             >
               <p> Aide </p>
               {}
-              {this.props.onglet === 'rdv' && (
+              {this.props.onglet === 'contrat' && (
               <div className="corner-left">
                 <div />
               </div>
@@ -41,10 +41,10 @@ class Test extends Component {
               )}
             </div>
           </Link>
-          <Link to={`/rdv/${this.props.id}`}>
+          <Link to={`/contrat/${this.props.id}`}>
             <div
               className={`text-center ${
-                this.props.onglet === 'rdv' ? 'color' : 'right'
+                this.props.onglet === 'contrat' ? 'color' : 'right'
               }`}
             >
               {this.props.onglet === 'aide' && (
@@ -52,7 +52,7 @@ class Test extends Component {
                 <div />
               </div>
               )}
-              <p> Rendez-vous </p>
+              <p> Contrats </p>
             </div>
           </Link>
         </div>

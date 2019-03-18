@@ -24,6 +24,9 @@ class Exit extends Component {
       message: '',
       open1: false,
       open2: false,
+      open3: false,
+      current: '',
+      passed: [],
     };
   }
 
@@ -32,6 +35,14 @@ class Exit extends Component {
       this.setState({ user: res.data });
       axios.get(`${url}/api/slots/getfree`).then((res2) => {
         this.setState({ rdvs: res2.data });
+        axios.get(`${url}/users/current/${this.props.match.params.id}`).then((curRDV) => {
+          this.setState({ current: curRDV.data });
+          axios
+            .get(`${url}/api/passed-slots/${this.props.match.params.id}`)
+            .then((passRDV) => {
+              this.setState({ passed: passRDV.data });
+            });
+        });
       });
     });
   }
@@ -52,6 +63,14 @@ class Exit extends Component {
       this.setState({ open2: false });
     };
 
+    onOpenModal3 = () => {
+      this.setState({ open3: true });
+    };
+
+    onCloseModal3 = () => {
+      this.setState({ open3: false });
+    };
+
     onChange = (e) => {
       const message = e.target.value;
       this.setState({ message });
@@ -67,7 +86,7 @@ class Exit extends Component {
 
     render() {
       const {
-        user, open1, message, rdvs,
+        user, open1, message, rdvs, current, passed,
       } = this.state;
       return (
         <div>
@@ -113,16 +132,33 @@ class Exit extends Component {
             )}
 
             <div className="container">
-              <button type="submit" className="help" onClick={this.onOpenModal2}>
-                <p>CRÉNEAUX DISPONIBLES</p>
-              </button>
               {rdvs.length !== 0 && (
                 <div>
+                  <button type="submit" className="help" onClick={this.onOpenModal2}>
+                    <p>CRÉNEAUX DISPONIBLES</p>
+                  </button>
                   <ModalRDV
                     open={this.state.open2}
                     closeModal={this.onCloseModal2}
                     openModal={this.onOpenModal2}
                     rdvs={this.state.rdvs}
+                    id={this.props.match.params.id}
+                  />
+                </div>
+              )}
+            </div>
+            <br />
+            <div className="container">
+              {(current === '' || passed.length > 0) && (
+                <div>
+                  <button type="submit" className="help" onClick={this.onOpenModal3}>
+                    <p>MES RENDEZ-VOUS</p>
+                  </button>
+                  <ModalMesRDV
+                    open={this.state.open3}
+                    closeModal={this.onCloseModal3}
+                    openModal={this.onOpenModal3}
+                    current={this.state.current}
                     id={this.props.match.params.id}
                   />
                 </div>
@@ -181,6 +217,23 @@ class ModalRDV extends Component {
         </Modal>
       );
     }
+}
+
+class ModalMesRDV extends Component {
+  render() {
+    return (
+      <Modal open={this.props.open} onClose={this.props.closeModal} center>
+        <br />
+        <h2>Mes Rendez-vous</h2>
+        <p>Ici, tu peux voir les créneaux qui t'ont été attribués, passés ou futur.</p>
+        <br />
+        <button type="submit" className="modale" onClick={this.props.closeModal}>
+          <p>FERMER</p>
+        </button>
+        <br />
+      </Modal>
+    );
+  }
 }
 
 export default Exit;

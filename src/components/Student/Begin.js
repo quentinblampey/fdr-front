@@ -24,6 +24,8 @@ class Begin extends Component {
             open1: false,
             open2: false,
             message: '',
+            accorded: [],
+            passed: [],
         };
     }
 

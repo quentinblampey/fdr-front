@@ -1,8 +1,12 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-alert */
 /* eslint-disable react/no-unescaped-entities */
 import React, { Component } from 'react';
 import './Propose.scss';
 import './FicheCourte.scss';
 import DatePicker from 'react-datepicker';
+import Axios from 'axios';
+import url from '../../config';
 // import ReactTooltip from 'react-tooltip';
 // import axios from 'axios';
 
@@ -38,8 +42,9 @@ class Propose extends Component {
       while (count < number) {
         count += 1;
         plage.push({
-          horaire: `${date.getDate()}/${date.getMonth()
+          date: `${date.getDate()}/${date.getMonth()
                     + 1}/${date.getFullYear()} à ${heureFin.getHours()}h${heureFin.getMinutes()}`,
+          duration: this.state.duration,
           id: plage.length + 1,
         });
         heureFin.setHours(
@@ -70,6 +75,12 @@ class Propose extends Component {
         const numberTot = 0;
         this.setState({ plage, numberTot });
       }
+    };
+
+    confirmAll = () => {
+      Axios.post(`${url}/api/slots/`, this.state.plage).then(() => {
+        console.log('ok');
+      });
     };
 
     onChange = date => this.setState({ date });

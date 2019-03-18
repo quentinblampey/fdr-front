@@ -124,6 +124,7 @@ class Exit extends Component {
                     openModal={this.onOpenModal2}
                     rdvs={this.state.rdvs}
                     id={this.props.match.params.id}
+                    user={this.state.user}
                   />
                 </div>
               )}
@@ -136,6 +137,14 @@ class Exit extends Component {
 }
 
 class ModalRDV extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        slots : [],
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
     acceptRDV = (e) => {
       console.log(e.target.value);
       if (e.target.value !== undefined) {
@@ -150,6 +159,35 @@ class ModalRDV extends Component {
       }
     };
 
+    componentDidMount() {
+      axios.get(`${url}/api/slots`).then((slots) => {
+        let ins = [];
+        console.log(slots);
+        slots.data.forEach((slot) => { ins.push({id: slot._id, date: slot.date,checked:(this.props.user.chosenSlots.indexOf(slot._id) > -1)})})
+        this.setState({ slots: ins})
+        console.log(ins);
+      })
+    }
+
+    handleInputChange(event) {
+      const target = event.target;
+      const value = target.type === 'checkbox' ? target.checked : target.value;
+      const i = target.name;
+      let slots = this.state.slots;
+      console.log(slots)
+      slots[i].checked = value;
+      this.setState({
+        slots,
+      });
+    }
+
+    send = () => {
+      let toSend = []
+      this.state.slots.forEach(slot => { if (slot.checked) { toSend.push(slot.id) }});
+      axios.post(`${url}/api/users/chosen-slots/${this.props.user._id}`, { chosenSlots: toSend });
+      this.props.closeModal();
+    }
+
     render() {
       return (
         <Modal open={this.props.open} onClose={this.props.closeModal} center>
@@ -160,19 +198,22 @@ class ModalRDV extends Component {
                     des disponibilités.
           </p>
           <br />
-          {this.props.rdvs.map(rdv => (
-            <div className="form-check" key={rdv._id}>
-              <input className="form-check-input" type="checkbox" value="" id={rdv._id} />
-              <label className="form-check-label" htmlFor={rdv._id}>
-                {rdv.date}
-              </label>
-                        &nbsp;
-            </div>
-          ))}
-          <br />
-          <button type="submit" className="modale" onClick={this.props.closeModal}>
-            <p>DEMANDER LES CRÉNEAUX</p>
-          </button>
+          <form>
+                            {this.state.slots.map((slot,i) => (
+                                <div>
+                                    <label>
+                                        <input
+                                        name={i}
+                                        type="checkbox"
+                                        checked={slot.checked}
+                                        onChange={this.handleInputChange}
+                                    />
+                                        {slot.date}
+                                    </label>
+                                </div>
+                            ))}
+                        </form>
+                        <button className="modale" onClick={this.send}>Valider</button>
           <br />
           <br />
           <br />

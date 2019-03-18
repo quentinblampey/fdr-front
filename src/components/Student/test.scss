@@ -1,0 +1,83 @@
+@import '../../globalSCSS/color.scss';
+@import '../../globalSCSS/size.scss';
+
+.onglets {
+    display: flex;
+    flex-direction: row;
+    background: $white;
+
+    & > * {
+        width: 33.3334%;
+        height: 30px;
+    }
+
+    & p {
+        height: 30px;
+        padding-top: 2px;
+    }
+}
+
+.left,
+.right,
+.middle {
+    color: $color4;
+    position: relative;
+}
+
+.color {
+    background: $color4;
+    color: $white;
+    border-radius: 15px 15px 0px 0px;
+}
+
+.corner-left {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    & div {
+        width: 15px;
+        margin: auto;
+        overflow: hidden;
+        position: relative;
+        height: 15px;
+    }
+    & div:before,
+    & div:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        height: 15px;
+        width: 15px;
+        box-shadow: 0 0 0 500px $color4;
+        border-radius: 0 0 100% 0;
+    }
+}
+
+.corner-right {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    & div {
+        width: 15px;
+        margin: auto;
+        overflow: hidden;
+        position: relative;
+        height: 15px;
+    }
+    & div:before,
+    & div:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        height: 15px;
+        width: 15px;
+        box-shadow: 0 0 0 500px $color4;
+        border-radius: 0 0 0 100%;
+    }
+}
+
+.background {
+    height: 100vh;
+    width: 100%;
+    background: $color4;
+}

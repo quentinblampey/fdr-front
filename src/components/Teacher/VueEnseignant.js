@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
 import axios from 'axios';
 import ReactTooltip from 'react-tooltip';
+import { Link } from 'react-router-dom';
 import url from '../../config';
 import variables from '../../globalSCSS/color.scss';
 import RadialChart from './Profils';
@@ -89,6 +90,10 @@ class VueEnseignant extends Component {
       this.loadUsers();
     }
 
+    navigate() {
+      this.props.history.push('/enseignant/propose');
+    }
+
     render() {
       return (
         <div className="container text-center">
@@ -106,6 +111,17 @@ class VueEnseignant extends Component {
               />
             </div>
             <div className="bloc-center">
+              <Link to="/enseignant/propose">
+                <div className="row text-center s12 m12 l12">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    style={{ width: '100%' }}
+                  >
+                                    Proposer des creneaux de Rendez-vous
+                  </button>
+                </div>
+              </Link>
               <div className="row text-center">
                 <button
                   type="button"
@@ -115,6 +131,7 @@ class VueEnseignant extends Component {
                 >
                                 Liste complète
                 </button>
+
                 <button
                   type="button"
                   className="btn btn-primary col"
@@ -123,6 +140,7 @@ class VueEnseignant extends Component {
                 >
                                 Étudiants en difficulté
                 </button>
+
                 <button
                   type="button"
                   className="btn btn-primary col"

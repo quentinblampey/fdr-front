@@ -12,6 +12,7 @@ import Modal from 'react-responsive-modal';
 import FooterStop from './FooterStop';
 import url from '../../config';
 import './Begin.scss';
+import Test from './test';
 
 class Begin extends Component {
     constructor(props) {
@@ -71,6 +72,7 @@ class Begin extends Component {
         let i = 0;
         return (
             <div>
+                <Test onglet="chatbot" id={this.props.match.params.id} />
                 <div className="component">
                     <div className="shape">
                         <div className="left">
@@ -83,6 +85,11 @@ class Begin extends Component {
                                     MON COACH CHATBOT
                                     <span> ”</span>
                                 </p>
+                            </button>
+                        </Link>
+                        <Link to={`/contrat/${this.props.match.params.id}`}>
+                            <button type="submit" className="help">
+                                <p>CONTRAT</p>
                             </button>
                         </Link>
                     </div>

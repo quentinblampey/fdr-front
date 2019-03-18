@@ -16,6 +16,7 @@ class Contrat extends Component {
     super(props);
     // this.demAide = this.demAide.bind(this);
     this.state = {
+        comment:'',
         user:{ue:[]},
         status: 'choice',
         UEs: [{ name: 'Maths', checked: false, comment: false },
@@ -57,8 +58,8 @@ class Contrat extends Component {
   }
 
     onChange = (e) => {
-      const message = e.target.value;
-      this.setState({ message });
+      const comment = e.target.value;
+      this.setState({ comment });
     };
 
     send() {
@@ -96,34 +97,44 @@ class Contrat extends Component {
       }
 
       onClose(name){
-        let UEs = [];
-        UEs.forEach(element =>{
+        let a = [];
+        this.state.UEs.forEach(element =>{
             if (element.name === name){
                 let aux = element;
                 aux.comment = !element.comment;
-                UEs.push(aux);
+                a.push(aux);
             }
             else{
-                UEs.push(element);
+                a.push(element);
             }
         })
-        this.setState({UEs:UEs});
+        this.setState({UEs:a});
       }
 
       comment = (name) => {
-        let UEs = [];
-        UEs.forEach(element =>{
+        let a = [];
+        this.state.UEs.forEach(element =>{
             if (element.name === name){
                 let aux = element;
                 aux.comment = !element.comment;
-                UEs.push(aux);
+                a.push(aux);
             }
             else{
-                UEs.push(element);
+                a.push(element);
             }
         })
-        this.setState({UEs:UEs});
+        this.setState({UEs:a});
       }  
+
+      sendComment = (name) => {
+        console.log('here i am')
+        let comment = this.state.comment;
+        axios.post(`${url}/api/contrats/comment/${this.props.match.params.id}`, { name, comment }).then((res) => {
+                console.log(res.data);
+                this.setState({ user: res.data, comment:''});
+                this.onClose(name);
+              });
+      }
 
     render() {
       return (
@@ -169,8 +180,19 @@ class Contrat extends Component {
                                         <Dropdown.Item onClick={this.options.bind(this, "danger", ue.name)}>Echec</Dropdown.Item>
                                         <Dropdown.Item onClick={this.comment.bind(this, ue.name)}>Commentaire</Dropdown.Item>
                                     </DropdownButton>
-                                    <Modal open={this.state.UEs.filter(element => element.name===ue.name).comment} onClose={this.onClose.bind(this, 'bjr')} center>
+                                    <Modal open={this.state.UEs.filter(element => element.name===ue.name)[0].comment} onClose={this.onClose.bind(this, ue.name)} center>
                                         <h2>Entre ton commentaire</h2>
+                                        <textarea
+                                        className="form-control"
+                                        id="exampleFormControlTextarea1"
+                                        rows="2"
+                                        value={this.state.comment}
+                                        onChange={this.onChange}
+                                        />
+                                        <br />
+                                        <button type="submit" className="modale" onClick={this.sendComment.bind(this, ue.name)}>
+                                            <p>ENVOYER</p>
+                                        </button>
                                     </Modal>
                                     </div>
                                 </li>

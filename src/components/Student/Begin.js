@@ -85,6 +85,7 @@ class Begin extends Component {
                                     MON COACH CHATBOT
                                     <span> ”</span>
                                 </p>
+                                <p className="text-align"> Lancer le chat </p>
                             </button>
                         </Link>
                         <Link to={`/contrat/${this.props.match.params.id}`}>

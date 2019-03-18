@@ -103,7 +103,7 @@ class RouterEns extends Component {
             <div>
               <Nav />
               <Route exact path="/fakefiche" component={FicheCourte} />
-              <Route exact path="/enseignant/historic/score" component={HistoricUpdate} />
+              <Route exact path="/enseignant/automation" component={HistoricUpdate} />
               <Route exact path="/enseignant" component={VueEnseignant} />
               <Route path="/enseignant/propose" component={Propose} />
               <Route

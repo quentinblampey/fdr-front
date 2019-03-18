@@ -24,7 +24,7 @@ class Begin extends Component {
     super(props);
     // this.computeStats = this.computeStats.bind(this)
     this.state = {
-      user: { details: { name: 'undefined' } },
+      user: { details: { name: 'undefined' }, ue: [] },
     };
   }
 
@@ -34,6 +34,7 @@ class Begin extends Component {
     // eslint-disable-next-line react/destructuring-assignment react/prop-types
     axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
       // console.log(res.data);
+      console.log(res.data.ue);
       this.setState({ user: res.data });
     });
   }
@@ -62,6 +63,23 @@ class Begin extends Component {
                 <div className="row">
                     <div className="col-6">
                         <Recap id={this.props.match.params.id} />
+                        <div>
+                        <div className="card">
+                            <div className="card-header">
+                                <h2>Contrat pédagogique</h2>
+                            </div>
+                            <div>
+                              {(this.state.user.ue.length === 0) ? (
+                                <h5>Cet étudiant n'a pas encore signalé d'UEs</h5>
+                              ) : (
+                                this.state.user.ue.map(ue => (
+                                  <div key={ue}>{ue}</div>
+                                ))
+                              )}
+                              
+                            </div>
+                        </div>
+                        </div>
                     </div>
                     <div className=" col-6">
                         <div className="card">

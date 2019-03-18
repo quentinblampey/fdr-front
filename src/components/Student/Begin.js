@@ -93,6 +93,17 @@ class Begin extends Component {
                             </button>
                         </Link>
                     </div>
+                    <Link to={`/chat/${this.props.match.params.id}`}>
+                        <button type="submit" className="help">
+                            <p>LANCER LE CHAT</p>
+                        </button>
+                    </Link>
+                    <Link to={`/contrat/${this.props.match.params.id}`}>
+                        <button type="submit" className="help">
+                            <p>CONTRAT</p>
+                        </button>
+                    </Link>
+                    <br />
                     {user.aide ? (
                         <div className="container">
                             <button type="submit" className="help" onClick={this.onOpenModal2}>

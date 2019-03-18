@@ -4,7 +4,7 @@ import Footer from './components/Footer';
 import Chat from './components/Student/Chat/Chat';
 import Begin from './components/Student/Begin';
 import Aide from './components/Student/Aide';
-import Rdv from './components/Student/Rdv';
+import Contrat from './components/Student/Contrat';
 import Test from './components/Student/test';
 // import Home from './components/Home';
 import VueEtudiant from './components/Student/VueEtudiant';
@@ -27,7 +27,7 @@ class App extends Component {
           <Route exact path="/etudiant" component={VueEtudiant} />
           <Route path="/chat/:id" component={Chat} />
           <Route path="/aide/:id" component={Aide} />
-          <Route path="/rdv/:id" component={Rdv} />
+          <Route path="/contrat/:id" component={Contrat} />
           <Route path="/test/:onglet" component={Test} />
           <Route path="/begin/:id" render={props => <Begin {...props} />} />
           <Route path="/enseignant" component={RouterEns} />

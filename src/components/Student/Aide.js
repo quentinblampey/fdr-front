@@ -13,7 +13,7 @@ class Exit extends Component {
       <div>
         <Test onglet="aide" id={this.props.match.params.id} />
         <div className="component">
-          <h3>Coucou, c'est moi Charlotte</h3>
+          <h3 className="titre-cadre"> DEMANDE D'AIDE </h3>
         </div>
         <FooterStop />
       </div>

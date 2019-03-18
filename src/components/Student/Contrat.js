@@ -7,6 +7,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import FooterStop from './FooterStop';
 import url from '../../config';
+import Modal from 'react-responsive-modal';
 
 class Contrat extends Component {
   constructor(props) {
@@ -15,10 +16,10 @@ class Contrat extends Component {
     this.state = {
         user:{ue:[]},
         status: 'choice',
-        UEs: [{ name: 'Maths', checked: false },
-            { name: 'Cuisine', checked: false },
-            { name: 'Piscine', checked: false },
-            { name: "Histoire de l'autriche précolombienne selon Jesus", checked: false }],
+        UEs: [{ name: 'Maths', checked: false, comment: false },
+            { name: 'Cuisine', checked: false, comment: false },
+            { name: 'Piscine', checked: false, comment: false },
+            { name: "Histoire de l'autriche précolombienne selon Jesus", checked: false, comment: false }],
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.send = this.send.bind(this);
@@ -92,6 +93,36 @@ class Contrat extends Component {
               });
       }
 
+      onClose(name){
+        let UEs = [];
+        UEs.forEach(element =>{
+            if (element.name === name){
+                let aux = element;
+                aux.comment = !element.comment;
+                UEs.push(aux);
+            }
+            else{
+                UEs.push(element);
+            }
+        })
+        this.setState({UEs:UEs});
+      }
+
+      comment = (name) => {
+        let UEs = [];
+        UEs.forEach(element =>{
+            if (element.name === name){
+                let aux = element;
+                aux.comment = !element.comment;
+                UEs.push(aux);
+            }
+            else{
+                UEs.push(element);
+            }
+        })
+        this.setState({UEs:UEs});
+      }  
+
     render() {
       return (
           <div>
@@ -120,19 +151,22 @@ class Contrat extends Component {
                     </div>
                 )}
                 {(this.state.status === 'feedback' && this.state.user.ue)&& (
-                    <ul class="list-group">
+                    <ul className="list-group">
                             {this.state.user.ue.map((ue) => (
                                 <li key={ue.name} className={"row list-group-item-"+ue.status}>
                                     <div className="col-8">
                                         {ue.name}
                                     </div>
-                                    <div class="dropdown col-4">
+                                    <div className="dropdown col-4">
                                     <DropdownButton variant="light" id="dropdown-basic-button" title="Options">
                                         <Dropdown.Item onClick={this.options.bind(this, "success", ue.name)}>Validé !</Dropdown.Item>
                                         <Dropdown.Item onClick={this.options.bind(this, "warning", ue.name)}>Signaler des difficulté</Dropdown.Item>
                                         <Dropdown.Item onClick={this.options.bind(this, "danger", ue.name)}>Echec</Dropdown.Item>
-                                        <Dropdown.Item>Commentaire</Dropdown.Item>
+                                        <Dropdown.Item onClick={this.comment.bind(this, ue.name)}>Commentaire</Dropdown.Item>
                                     </DropdownButton>
+                                    <Modal open={this.state.UEs.filter(element => element.name===ue.name).comment} onClose={this.onClose.bind(this, 'bjr')} center>
+                                        <h2>Entre ton commentaire</h2>
+                                    </Modal>
                                     </div>
                                 </li>
                             ))}

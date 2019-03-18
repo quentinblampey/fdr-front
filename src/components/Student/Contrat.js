@@ -9,6 +9,7 @@ import FooterStop from './FooterStop';
 import url from '../../config';
 import Modal from 'react-responsive-modal';
 import Test from './test';
+import liste from './listeUE';
 import './Begin.scss';
 
 class Contrat extends Component {
@@ -19,10 +20,7 @@ class Contrat extends Component {
         comment:'',
         user:{ue:[]},
         status: 'choice',
-        UEs: [{ name: 'Maths', checked: false, comment: false },
-            { name: 'Cuisine', checked: false, comment: false },
-            { name: 'Piscine', checked: false, comment: false },
-            { name: "Histoire de l'autriche précolombienne selon Jesus", checked: false, comment: false }],
+        UEs: [],
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.send = this.send.bind(this);
@@ -47,13 +45,11 @@ class Contrat extends Component {
 
   componentDidMount() {
     axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
-        // console.log(res.data);
-        console.log(res.data.ue);
-        let UEs=this.state.UEs
-        UEs.forEach(element => {
-            element.checked = (res.data.ue.filter((x) => element.name===x.name).length ===1);
-        });
-        this.setState({ user: res.data , UEs:UEs});
+        let aux=[];
+        liste.forEach(element => {
+            aux.push({name:element, checked:(res.data.ue.filter((x) => element.name===x.name).length ===1), comment:false})
+        })
+        this.setState({ user: res.data , UEs:aux});
       });
   }
 
@@ -148,10 +144,17 @@ class Contrat extends Component {
                   <button type="button" className="btn btn-light" onClick={this.feedback}>Feedback sur mes UE</button>
                 </div>
                 {this.state.status === 'choice' && (
-                    <div class="text-center">
+                    <div className="text-center" style={{
+                        width:'100%',
+                        position: 'absolute',
+                        left:'5%',
+                        top: '190px',
+                        bottom:'75px',
+                        overflow: 'scroll',
+                        overflowX: 'hidden'}}>
                         <form>
                             {this.state.UEs.map((ue, i) => (
-                                <div style={{ color : '#fefefe', margin: '10px'}}>
+                                <div key={ue.name} style={{ color : '#fefefe', margin: '10px'}}>
                                     <label>
                                         <input
                                         name={i}
@@ -175,12 +178,17 @@ class Contrat extends Component {
                                         {ue.name}
                                     </div>
                                     <div className="dropdown">
-                                    <DropdownButton variant="light" id="dropdown-basic-button" title="">
-                                        <Dropdown.Item onClick={this.options.bind(this, "success", ue.name)}>Validé !</Dropdown.Item>
-                                        <Dropdown.Item onClick={this.options.bind(this, "warning", ue.name)}>Signaler des difficulté</Dropdown.Item>
-                                        <Dropdown.Item onClick={this.options.bind(this, "danger", ue.name)}>Echec</Dropdown.Item>
-                                        <Dropdown.Item onClick={this.comment.bind(this, ue.name)}>Commentaire</Dropdown.Item>
-                                    </DropdownButton>
+                                    <Dropdown>
+                                        <Dropdown.Toggle variant="light" id="dropdown-basic">
+                                        </Dropdown.Toggle>
+
+                                        <Dropdown.Menu alignRight>
+                                            <Dropdown.Item onClick={this.options.bind(this, "success", ue.name)}>Validé !</Dropdown.Item>
+                                            <Dropdown.Item onClick={this.options.bind(this, "warning", ue.name)}>Signaler des difficulté</Dropdown.Item>
+                                            <Dropdown.Item onClick={this.options.bind(this, "danger", ue.name)}>Echec</Dropdown.Item>
+                                            <Dropdown.Item onClick={this.comment.bind(this, ue.name)}>Commentaire</Dropdown.Item>
+                                        </Dropdown.Menu>
+                                    </Dropdown>
                                     <Modal open={this.state.UEs.filter(element => element.name===ue.name)[0].comment} onClose={this.onClose.bind(this, ue.name)} center>
                                         <h2>Entre ton commentaire</h2>
                                         <textarea

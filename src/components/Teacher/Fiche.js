@@ -25,8 +25,14 @@ class Begin extends Component {
     // this.computeStats = this.computeStats.bind(this)
     this.state = {
       user: { details: { name: 'undefined' }, ue: [] },
+      textContrat: '',
     };
   }
+
+  onChange = (e) => {
+    const textContrat = e.target.value;
+    this.setState({ textContrat });
+  };
 
   componentDidMount() {
     // const { id } = this.props;
@@ -35,6 +41,14 @@ class Begin extends Component {
     axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
       // console.log(res.data);
       console.log(res.data.ue);
+      this.setState({ user: res.data , textContrat: res.data.textContrat});
+    });
+  }
+
+  save = () => {
+    axios.post(`${url}/api/users/textContrat/${this.props.match.params.id}`, {textContrat:this.state.textContrat}).then((res) => {
+      // console.log(res.data);
+      console.log(res.data);
       this.setState({ user: res.data });
     });
   }
@@ -73,10 +87,25 @@ class Begin extends Component {
                                 <h5>Cet étudiant n'a pas encore signalé d'UEs</h5>
                               ) : (
                                 this.state.user.ue.map(ue => (
-                                  <div key={ue}>{ue}</div>
+                                  <div key={ue.name}>{ue.name}</div>
                                 ))
                               )}
-                              
+                              {(this.state.user.ue.length > 0 &&
+                                <div>
+                                <h5>
+                                  Contrat pédagogique : texte
+                                </h5>
+                                <textarea
+                                className="form-control"
+                                id="exampleFormControlTextarea1"
+                                value={this.state.textContrat}
+                                onChange={this.onChange}
+                                />
+                                <button type="submit" className="modale" onClick={this.save.bind(this)}>
+                                            <p>ENREGISTRER</p>
+                                        </button>
+                                </div>
+                              )}
                             </div>
                         </div>
                         </div>

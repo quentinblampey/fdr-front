@@ -16,6 +16,7 @@ class Contrat extends Component {
     super(props);
     // this.demAide = this.demAide.bind(this);
     this.state = {
+        comment:'',
         user:{ue:[]},
         status: 'choice',
         UEs: [{ name: 'Maths', checked: false, comment: false },
@@ -57,8 +58,8 @@ class Contrat extends Component {
   }
 
     onChange = (e) => {
-      const message = e.target.value;
-      this.setState({ message });
+      const comment = e.target.value;
+      this.setState({ comment });
     };
 
     send() {
@@ -96,50 +97,61 @@ class Contrat extends Component {
       }
 
       onClose(name){
-        let UEs = [];
-        UEs.forEach(element =>{
+        let a = [];
+        this.state.UEs.forEach(element =>{
             if (element.name === name){
                 let aux = element;
                 aux.comment = !element.comment;
-                UEs.push(aux);
+                a.push(aux);
             }
             else{
-                UEs.push(element);
+                a.push(element);
             }
         })
-        this.setState({UEs:UEs});
+        this.setState({UEs:a});
       }
 
       comment = (name) => {
-        let UEs = [];
-        UEs.forEach(element =>{
+        let a = [];
+        this.state.UEs.forEach(element =>{
             if (element.name === name){
                 let aux = element;
                 aux.comment = !element.comment;
-                UEs.push(aux);
+                a.push(aux);
             }
             else{
-                UEs.push(element);
+                a.push(element);
             }
         })
-        this.setState({UEs:UEs});
+        this.setState({UEs:a});
       }  
+
+      sendComment = (name) => {
+        console.log('here i am')
+        let comment = this.state.comment;
+        axios.post(`${url}/api/contrats/comment/${this.props.match.params.id}`, { name, comment }).then((res) => {
+                console.log(res.data);
+                this.setState({ user: res.data, comment:''});
+                this.onClose(name);
+              });
+      }
 
     render() {
       return (
           <div>
               <Test onglet="contrat" id={this.props.match.params.id} />
+              
           <div className="component">
-            <h3 className="titre-cadre"> MES CONTRATS </h3>
-            <div className="btn-group" role="group" aria-label="Basic example">
-                  <button type="button" className="btn btn-secondary" onClick={this.choice}>Choisir mes UE</button>
-                  <button type="button" className="btn btn-secondary" onClick={this.feedback}>Feedback sur mes UE</button>
+          <h3 className="titre-cadre" style={{ position: 'absolute', top:'70px'}}> MES CONTRATS </h3>
+            <div className="btn-group" role="group" aria-label="Basic example" style={{ position: 'absolute', top:'140px'}}>
+                  <button type="button" className="btn btn-light" onClick={this.choice}>Choisir mes UE</button>
+                  <button type="button" className="btn btn-light" onClick={this.feedback}>Feedback sur mes UE</button>
                 </div>
                 {this.state.status === 'choice' && (
-                    <div>
+                    <div class="text-center">
                         <form>
                             {this.state.UEs.map((ue, i) => (
-                                <div>
+                                <div style={{ color : '#fefefe', margin: '10px'}}>
                                     <label>
                                         <input
                                         name={i}
@@ -152,25 +164,36 @@ class Contrat extends Component {
                                 </div>
                             ))}
                         </form>
-                        <button className="btn btn-success" onClick={this.send}>Valider</button>
+                        <button className="help" onClick={this.send}>Valider</button>
                     </div>
                 )}
                 {(this.state.status === 'feedback' && this.state.user.ue)&& (
-                    <ul className="list-group">
+                    <ul className="list-group" style={{ width:'90%', margin: '10px'}}>
                             {this.state.user.ue.map((ue) => (
-                                <li key={ue.name} className={"row list-group-item-"+ue.status}>
-                                    <div className="col-8">
+                                <li key={ue.name} className={"row list-group-item-"+ue.status} style={{'border-radius':'10px', width:'100%', margin: '5px 0px', padding: '0px 0px 0px 10px', display:'flex', 'flex-direction': 'row', 'justify-content':'space-between', 'align-items':'center'}}>
+                                    <div>
                                         {ue.name}
                                     </div>
-                                    <div className="dropdown col-4">
-                                    <DropdownButton variant="light" id="dropdown-basic-button" title="Options">
+                                    <div className="dropdown">
+                                    <DropdownButton variant="light" id="dropdown-basic-button" title="">
                                         <Dropdown.Item onClick={this.options.bind(this, "success", ue.name)}>Validé !</Dropdown.Item>
                                         <Dropdown.Item onClick={this.options.bind(this, "warning", ue.name)}>Signaler des difficulté</Dropdown.Item>
                                         <Dropdown.Item onClick={this.options.bind(this, "danger", ue.name)}>Echec</Dropdown.Item>
                                         <Dropdown.Item onClick={this.comment.bind(this, ue.name)}>Commentaire</Dropdown.Item>
                                     </DropdownButton>
-                                    <Modal open={this.state.UEs.filter(element => element.name===ue.name).comment} onClose={this.onClose.bind(this, 'bjr')} center>
+                                    <Modal open={this.state.UEs.filter(element => element.name===ue.name)[0].comment} onClose={this.onClose.bind(this, ue.name)} center>
                                         <h2>Entre ton commentaire</h2>
+                                        <textarea
+                                        className="form-control"
+                                        id="exampleFormControlTextarea1"
+                                        rows="2"
+                                        value={this.state.comment}
+                                        onChange={this.onChange}
+                                        />
+                                        <br />
+                                        <button type="submit" className="modale" onClick={this.sendComment.bind(this, ue.name)}>
+                                            <p>ENVOYER</p>
+                                        </button>
                                     </Modal>
                                     </div>
                                 </li>

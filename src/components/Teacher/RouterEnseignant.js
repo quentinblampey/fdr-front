@@ -34,9 +34,7 @@ class RouterEns extends Component {
       const { MdP } = this.state;
       e.preventDefault();
       const MdPasse = MdP;
-      // console.log(MdP);
       axios.get(`${url}/api/enseignants/`).then((res) => {
-        // console.log(res.data);
         const hash = crypto
           .pbkdf2Sync(MdPasse, res.data.salt, 1000, 64, 'sha512')
           .toString('hex');

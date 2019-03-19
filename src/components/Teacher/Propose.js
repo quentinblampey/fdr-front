@@ -64,7 +64,7 @@ class Propose extends Component {
         );
         // heureFin.setMinutes(heureFin.getMinutes());
       }
-      this.setState({ plage, numberTot: numberTot + number }, () => console.log(this.state.plage));
+      this.setState({ plage, numberTot: numberTot + number });
     };
 
     addDate = () => {
@@ -99,7 +99,6 @@ class Propose extends Component {
         const id = e.target.value;
         Axios.delete(`${url}/api/slots/TbAa3CpZXgS1apnKjCnj3VdnkIxMhlny/clear/${id}`).then(
           () => {
-            console.log('ok');
             this.reload();
           },
         );
@@ -118,7 +117,6 @@ class Propose extends Component {
         plage.map((slot) => {
           Axios.post(`${url}/api/slots/`, { duration: slot.duration, date: slot.date }).then(
             () => {
-              console.log('ok');
               count += 1;
               if (count === tot) {
                 this.setState({ plage: [] }, () => this.reload());

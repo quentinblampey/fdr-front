@@ -1,7 +1,7 @@
 /* eslint-disable react/prefer-stateless-function */
 /* eslint-disable react/no-multi-comp */
 import React, { Component } from 'react';
-import {ToastsContainer, ToastsStore} from 'react-toasts';
+import { ToastsStore } from 'react-toasts';
 import './Begin.scss';
 import axios from 'axios';
 import Modal from 'react-responsive-modal';
@@ -86,9 +86,7 @@ class Exit extends Component {
     };
 
     render() {
-      const {
-        user, open1, message, rdvs, current, passed,
-      } = this.state;
+      const { user, open1, message, rdvs } = this.state;
       return (
         <div>
           <Test onglet="aide" id={this.props.match.params.id} />
@@ -131,7 +129,7 @@ class Exit extends Component {
                 <br />
               </div>
             )}
-            { user.helped ? (<p style={{color: '#fefefe'}}> Votre professeur veut un rendez-vous !</p>) : (<p style={{color: '#fefefe'}}>Votre professeur n'a pas encore cherché à vous reçevoir</p>)}
+            { user.helped ? (<p style={{color: '#fefefe'}}> Votre professeur veut un rendez-vous !</p>) : (<p style={{color: '#fefefe'}}>Votre professeur n'a pas encore cherché à vous recevoir</p>)}
             <div className="container">
               {(rdvs.length !== 0 && user.helped) && (
                 <div>
@@ -184,14 +182,12 @@ class ModalRDV extends Component {
   }
 
     acceptRDV = (e) => {
-      console.log(e.target.value);
       if (e.target.value !== undefined) {
         axios
           .post(`${url}/api/users/chosen-slots/${this.props.id}`, {
             chosenSlot: e.target.value,
           })
           .then((res) => {
-            console.log('sucess !');
             super.setState({ rdvs: [] });
           });
       }
@@ -200,10 +196,8 @@ class ModalRDV extends Component {
     componentDidMount() {
       axios.get(`${url}/api/slots`).then((slots) => {
         let ins = [];
-        console.log(slots);
         slots.data.forEach((slot) => { ins.push({id: slot._id, date: slot.date,checked:(this.props.user.chosenSlots.indexOf(slot._id) > -1)})})
         this.setState({ slots: ins})
-        console.log(ins);
       })
     }
 
@@ -212,7 +206,6 @@ class ModalRDV extends Component {
       const value = target.type === 'checkbox' ? target.checked : target.value;
       const i = target.name;
       let slots = this.state.slots;
-      console.log(slots)
       slots[i].checked = value;
       this.setState({
         slots,

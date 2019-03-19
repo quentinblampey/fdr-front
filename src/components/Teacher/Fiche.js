@@ -41,16 +41,12 @@ class Begin extends Component {
     // this.props.match.params.id
     // eslint-disable-next-line react/destructuring-assignment react/prop-types
     axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
-      // console.log(res.data);
-      console.log(res.data.ue);
       this.setState({ user: res.data , textContrat: res.data.textContrat});
     });
   }
 
   save = () => {
     axios.post(`${url}/api/users/textContrat/${this.props.match.params.id}`, {textContrat:this.state.textContrat}).then((res) => {
-      // console.log(res.data);
-      console.log(res.data);
       this.setState({ user: res.data, saved:true});
     });
   }
@@ -176,9 +172,7 @@ class Recap extends Component {
     // this.props.match.params.id
     // eslint-disable-next-line react/destructuring-assignment react/prop-types
     axios.get(`${url}/api/users/getid/${this.props.id}`).then((res) => {
-      // console.log(res.data);
       this.setState({ user: res.data }, () => {
-        // console.log('user', this.state.user);
         const { user } = this.state;
         const scores = user.score;
 
@@ -205,7 +199,6 @@ class Recap extends Component {
                         && user.numberChats.length !== 0
                         && user.numberChats !== null
           ) {
-            // console.log(user.numberChats[user.numberChats.length - 1]);
             const tab2 = user.numberChats[user.numberChats.length - 1]
               .split('T')[0]
               .split('-');
@@ -382,8 +375,6 @@ class Aide extends Component {
         axios.get(`${url}/api/rdv/${this.props.id}`).then((resp) => {
           this.setState({ taken: resp.data });
         });
-        // console.log(res.data);
-        // this.setState({ taken: res.data });
       });
     };
 

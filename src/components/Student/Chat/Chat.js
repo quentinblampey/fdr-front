@@ -124,18 +124,17 @@ class Chat extends Component {
     }
 
     onSubmit = (answer, e) => {
-      if ( this.state.emptyBodyForbidden.includes(this.state.currentQuestion.idQ) && (answer.body==='')){
-        if (!this.state.error){
-          this.setState({
-            chat: this.state.chat.concat({ message: "Merci de rentrer une réponse", color: 1 }),
-            error: true
-          }, () => { this.updateScroll() });
-        }
+      if (answer.body==='' && this.state.emptyBodyForbidden.includes(this.state.currentQuestion.idQ)){
+          if (!this.state.error){
+            this.setState({
+              chat: this.state.chat.concat({ message: "Merci de rentrer une réponse", color: 1 }),
+              error: true
+            }, () => { this.updateScroll() });
+          }
       }else if (this.state.numberMandatory.includes(this.state.currentQuestion.idQ) && (isNaN(Number(answer.body)))) {
         this.setState({newMessage:''});
         this.setState({chat: this.state.chat.concat({ message: "Merci de rentrer un nombre valide entre 0 et 100", color: 1 })}, () => { this.updateScroll() });
-      }
-      else {
+      }else {
         var promiseScroll = new Promise((resolve) => {
           this.updateScroll();
           resolve();
@@ -147,13 +146,25 @@ class Chat extends Component {
             newMessage: '',
           });
           promiseScroll.then(()=> {
-            if (answer.reaction !== '' && answer.reaction !== undefined) {
+            let r;
+            console.log(this.state.currentQuestion.textArea)
+            if (this.state.currentQuestion.textArea){
+              console.log(answer.body);
+              if (answer.body===''){
+                r = { message: "Ok, tu veux pas me répondre mais c'est pas grave !", color: 1 };
+              }else{
+                r = { message: "Merci pour ta réponse !😘", color: 1 };
+              }
+            }else{
+              r = { message: answer.reaction, color: 1 };
+            }
+            if ((answer.reaction !== '' && answer.reaction !== undefined) || (this.state.currentQuestion.textArea)){
               this.setState({ loading: true });
               this.updateScroll();
               setTimeout(() => {
                 this.setState({ loading: false });
                 this.setState({
-                  chat: this.state.chat.concat({ message: answer.reaction, color: 1 }),
+                  chat: this.state.chat.concat(r),
                 });
                 this.updateScroll();
                 resolve();

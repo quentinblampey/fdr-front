@@ -70,12 +70,8 @@ class RadialChart extends Component {
             <div className="radialbar">
               <Chart
                 options={options}
-                series={[
-                  this.props.proportions[0],
-                  this.props.proportions[1],
-                  this.props.proportions[2],
-                  this.props.proportions[3],
-                ]}
+                series={
+                  this.props.proportions}
                 type="radialBar"
                 height="380"
               />

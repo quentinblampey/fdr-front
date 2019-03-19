@@ -147,9 +147,7 @@ class Chat extends Component {
           });
           promiseScroll.then(()=> {
             let r;
-            console.log(this.state.currentQuestion.textArea)
             if (this.state.currentQuestion.textArea){
-              console.log(answer.body);
               if (answer.body===''){
                 r = { message: "Ok, tu veux pas me répondre mais c'est pas grave !", color: 1 };
               }else{

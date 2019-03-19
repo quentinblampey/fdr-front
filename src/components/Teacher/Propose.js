@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
 /* eslint-disable prefer-const */
 /* eslint-disable no-underscore-dangle */
@@ -18,7 +19,7 @@ class Propose extends Component {
     super(props);
     this.state = {
       duration: 15,
-      number: 0,
+      number: 1,
       date: new Date(),
       numberTot: 0,
       plage: [],
@@ -42,6 +43,10 @@ class Propose extends Component {
       const {
         number, date, plage, duration, numberTot,
       } = this.state;
+      if (number <= 0 || number >= 31 || duration <= 4 || duration >= 61) {
+        window.alert('Veuillez rentrer un nombre de  créneau entre 1 et 30 et une durée entre 5 et 60 minutes');
+        return 0;
+      }
       // eslint-disable-next-line prefer-const
       let heureFin = new Date();
       heureFin.setHours(date.getHours());

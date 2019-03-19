@@ -11,6 +11,7 @@ import DatePicker from 'react-datepicker';
 import url from '../../config';
 // import computeStats from './ComputeStats';
 import SC from './ScoreChart';
+import ReactTooltip from 'react-tooltip';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -26,12 +27,13 @@ class Begin extends Component {
     this.state = {
       user: { details: { name: 'undefined' }, ue: [] },
       textContrat: '',
+      saved :true,
     };
   }
 
   onChange = (e) => {
     const textContrat = e.target.value;
-    this.setState({ textContrat });
+    this.setState({ textContrat , saved:false});
   };
 
   componentDidMount() {
@@ -49,7 +51,7 @@ class Begin extends Component {
     axios.post(`${url}/api/users/textContrat/${this.props.match.params.id}`, {textContrat:this.state.textContrat}).then((res) => {
       // console.log(res.data);
       console.log(res.data);
-      this.setState({ user: res.data });
+      this.setState({ user: res.data, saved:true});
     });
   }
 
@@ -86,15 +88,31 @@ class Begin extends Component {
                               {(this.state.user.ue.length === 0) ? (
                                 <h5>Cet étudiant n'a pas encore signalé d'UEs</h5>
                               ) : (
-                                this.state.user.ue.map(ue => (
-                                  <div key={ue.name}>{ue.name}</div>
-                                ))
+                                <ul className="list-group" style={{ width:'95%', margin: '10px'}}>
+                                      {this.state.user.ue.map((ue) => (
+                                        <div key={ue.name}>
+                                          <ReactTooltip multiline />
+                                          <li data-tip={ue.message} className={"row list-group-item-"+ue.status} style={{'border-radius':'10px', width:'100%', margin: '5px 0px', padding: '0px 0px 0px 10px', display:'flex', 'flex-direction': 'row', 'justify-content':'space-between', 'align-items':'center'}}>
+                                              <div>
+                                                  {ue.name}
+                                              </div>
+                                          </li>
+                                        </div>
+                                      ))}
+                              </ul>
                               )}
                               {(this.state.user.ue.length > 0 &&
                                 <div>
-                                <h5>
-                                  Contrat pédagogique : texte
+                                <div className="row justify-content-between">
+                                <h5 className="col-9">
+                                  &nbsp;Commentaire sur le contrat
                                 </h5>
+                                <div className="col-3">
+                                  {this.state.saved && (
+                                    <h5 className="badge badge-pill badge-success">Saved</h5>
+                                  )}
+                                </div>
+                                </div>
                                 <textarea
                                 className="form-control"
                                 id="exampleFormControlTextarea1"
@@ -102,8 +120,8 @@ class Begin extends Component {
                                 onChange={this.onChange}
                                 />
                                 <button type="submit" className="modale" onClick={this.save.bind(this)}>
-                                            <p>ENREGISTRER</p>
-                                        </button>
+                                  <p>ENREGISTRER</p>
+                                </button>
                                 </div>
                               )}
                             </div>

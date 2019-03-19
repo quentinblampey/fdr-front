@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import Form from 'react-bootstrap/Form';
-import { Checkbox } from 'react-bootstrap/FormCheck';
-import { DropdownButton } from 'react-bootstrap';
 import Dropdown from 'react-bootstrap/Dropdown'
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import Modal from 'react-responsive-modal';
 import FooterStop from './FooterStop';
 import url from '../../config';
-import Modal from 'react-responsive-modal';
 import Test from './test';
 import liste from './listeUE';
 import './Begin.scss';
@@ -24,22 +20,17 @@ class Contrat extends Component {
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.send = this.send.bind(this);
-    this.choice = this.choice.bind(this);
-    this.feedback = this.feedback.bind(this);
   }
 
   handleInputChange(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    console.log(value);
     const name = target.name;
-    console.log(name);
     let UEs = this.state.UEs;
     UEs[name].checked = value;
     this.setState({
       UEs,
     });
-    console.log(this.state.UEs);
   }
 
 
@@ -47,9 +38,9 @@ class Contrat extends Component {
     axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
         let aux=[];
         liste.forEach(element => {
-            aux.push({name:element, checked:(res.data.ue.filter((x) => element.name===x.name).length ===1), comment:false})
+            aux.push({name:element, checked:(res.data.ue.filter((x) => element===x.name).length >0), comment:false})
         })
-        this.setState({ user: res.data , UEs:aux});
+        this.setState({ user: res.data, UEs:aux});
       });
   }
 
@@ -59,52 +50,25 @@ class Contrat extends Component {
     };
 
     send() {
-      let { user, status, UEs } = this.state;
+      const { UEs } = this.state;
       axios.post(`${url}/api/contrats/${this.props.match.params.id}`, { UEs }).then(() => {
         axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
             UEs.forEach(element => {
                 element.checked = (res.data.ue.filter((x) => element.name===x.name).length ===1);
             });
-            console.log(res.data);
             this.setState({ user: res.data , UEs:UEs, status:'feedback'});
           });
       });
     }
 
-    feedback = () => {
-        console.log(this.state.status);
-        if (this.state.status==='choice'){
-            this.setState({ status:'feedback' });
-        }
+    etat = (nextEtat) => {
+        this.setState({ status: nextEtat });
     }
-    choice = () => {
-        console.log(this.state.status);
-        if (this.state.status==='feedback'){
-            this.setState({ status:'choice' });
-        }
-      }
     
     options = (status, name) => {
-        console.log('here i am')
         axios.post(`${url}/api/contrats/options/${this.props.match.params.id}`, { name, status }).then((res) => {
-                console.log(res.data);
                 this.setState({ user: res.data});
               });
-      }
-
-      onClose(name){
-        let a = [];
-        this.state.UEs.forEach(element =>{
-            if (element.name === name){
-                let aux = element;
-                aux.comment = !element.comment;
-                a.push(aux);
-            }
-            else{
-                a.push(element);
-            }
-        })
-        this.setState({UEs:a});
       }
 
       comment = (name) => {
@@ -123,12 +87,10 @@ class Contrat extends Component {
       }  
 
       sendComment = (name) => {
-        console.log('here i am')
         let comment = this.state.comment;
         axios.post(`${url}/api/contrats/comment/${this.props.match.params.id}`, { name, comment }).then((res) => {
-                console.log(res.data);
                 this.setState({ user: res.data, comment:''});
-                this.onClose(name);
+                this.comment(name);
               });
       }
 
@@ -140,16 +102,16 @@ class Contrat extends Component {
           <div className="component">
           <h3 className="titre-cadre" style={{ position: 'absolute', top:'70px'}}> MES CONTRATS </h3>
             <div className="btn-group" role="group" aria-label="Basic example" style={{ position: 'absolute', top:'140px'}}>
-                  <button type="button" className="btn btn-light" onClick={this.choice}>Choisir mes UE</button>
-                  <button type="button" className="btn btn-light" onClick={this.feedback}>Feedback sur mes UE</button>
+                  <button type="button" className="btn btn-light" onClick={this.etat.bind(this, 'choice')}>Choix</button>
+                  <button type="button" className="btn btn-light" onClick={this.etat.bind(this, 'feedback')}>Feedback</button>
+                  <button type="button" className="btn btn-light" onClick={this.etat.bind(this, 'comment')}>Commentaire</button>
                 </div>
                 {this.state.status === 'choice' && (
                     <div className="text-center" style={{
                         width:'100%',
                         position: 'absolute',
-                        left:'5%',
                         top: '190px',
-                        bottom:'75px',
+                        bottom:'105px',
                         overflow: 'scroll',
                         overflowX: 'hidden'}}>
                         <form>
@@ -171,9 +133,16 @@ class Contrat extends Component {
                     </div>
                 )}
                 {(this.state.status === 'feedback' && this.state.user.ue)&& (
-                    <ul className="list-group" style={{ width:'90%', margin: '10px'}}>
+                    <ul className="list-group" style={{
+                        width:'90%',
+                        position: 'absolute',
+                        top: '190px',
+                        bottom:'105px',
+                        overflow: 'scroll',
+                        overflowX: 'hidden',
+                        margin:'5px'}}>
                             {this.state.user.ue.map((ue) => (
-                                <li key={ue.name} className={"row list-group-item-"+ue.status} style={{'border-radius':'10px', width:'100%', margin: '5px 0px', padding: '0px 0px 0px 10px', display:'flex', 'flex-direction': 'row', 'justify-content':'space-between', 'align-items':'center'}}>
+                                <li key={ue.name} className={"row list-group-item-"+ue.status} style={{minHeight:'45px', borderRadius:'10px', width:'100%', margin: '5px 0px', padding: '0px 0px 0px 10px', display:'flex', flexDirection: 'row', justifyContent:'space-between', alignItems:'center'}}>
                                     <div>
                                         {ue.name}
                                     </div>
@@ -189,7 +158,7 @@ class Contrat extends Component {
                                             <Dropdown.Item onClick={this.comment.bind(this, ue.name)}>Commentaire</Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
-                                    <Modal open={this.state.UEs.filter(element => element.name===ue.name)[0].comment} onClose={this.onClose.bind(this, ue.name)} center>
+                                    <Modal open={this.state.UEs.filter(element => element.name===ue.name)[0].comment} onClose={this.comment.bind(this, ue.name)} center>
                                         <h2>Entre ton commentaire</h2>
                                         <textarea
                                         className="form-control"
@@ -207,6 +176,11 @@ class Contrat extends Component {
                                 </li>
                             ))}
                     </ul>
+                )}
+                {this.state.status === 'comment' && (
+                    <div style={{ color : '#fefefe', margin: '10px'}}>
+                        {this.state.user.textContrat}
+                    </div>
                 )}
           </div>
               <FooterStop />

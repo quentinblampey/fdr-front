@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
 import axios from 'axios';
-import ReactTooltip from 'react-tooltip';
 import { Link } from 'react-router-dom';
 import url from '../../config';
 import variables from '../../globalSCSS/color.scss';

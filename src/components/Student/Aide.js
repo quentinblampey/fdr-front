@@ -1,9 +1,9 @@
 /* eslint-disable react/prefer-stateless-function */
 /* eslint-disable react/no-multi-comp */
 import React, { Component } from 'react';
+import {ToastsContainer, ToastsStore} from 'react-toasts';
 import './Begin.scss';
 import axios from 'axios';
-
 import Modal from 'react-responsive-modal';
 import FooterStop from './FooterStop';
 import Test from './test';
@@ -35,10 +35,10 @@ class Exit extends Component {
       this.setState({ user: res.data });
       axios.get(`${url}/api/slots/getfree`).then((res2) => {
         this.setState({ rdvs: res2.data });
-        axios.get(`${url}/users/current/${this.props.match.params.id}`).then((curRDV) => {
+        axios.get(`${url}/api/users/current/${this.props.match.params.id}`).then((curRDV) => {
           this.setState({ current: curRDV.data });
           axios
-            .get(`${url}/api/passed-slots/${this.props.match.params.id}`)
+            .get(`${url}/api/users/passed-slots/${this.props.match.params.id}`)
             .then((passRDV) => {
               this.setState({ passed: passRDV.data });
             });
@@ -81,6 +81,7 @@ class Exit extends Component {
       axios.post(`${url}/api/users/aide/${user._id}/2`, { message }).then((res) => {
         this.setState({ user: res.data });
         this.onCloseModal1();
+        ToastsStore.info("Demande d'aide envoyée");
       });
     };
 
@@ -149,7 +150,7 @@ class Exit extends Component {
             </div>
             <br />
             <div className="container">
-              {(current === '' || passed.length > 0) && (
+              {(current.length === 0 || passed.length > 0) && (
                 <div>
                   <button type="submit" className="help" onClick={this.onOpenModal3}>
                     <p>MES RENDEZ-VOUS</p>

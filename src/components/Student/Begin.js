@@ -61,10 +61,20 @@ class Begin extends Component {
                                     MON COACH CHATBOT
                                     <span> ”</span>
                                 </p>
-                                <p className="text-align"> Lancer le chat </p>
                             </button>
                         </Link>
                     </div>
+                    <Link to={`/chat/${this.props.match.params.id}`}>
+                        <i
+                          className="fa fa-play-circle"
+                          aria-hidden="true"
+                          style={{
+                                margin: 'auto',
+                                color: '#B92748',
+                                'font-size': '35px',
+                            }}
+                        />
+                    </Link>
                     <br />
                 </div>
                 <FooterStop />

@@ -25,7 +25,6 @@ class Exit extends Component {
       open1: false,
       open2: false,
       open3: false,
-      current: '',
       passed: [],
     };
   }
@@ -35,14 +34,11 @@ class Exit extends Component {
       this.setState({ user: res.data });
       axios.get(`${url}/api/slots/getfree`).then((res2) => {
         this.setState({ rdvs: res2.data });
-        axios.get(`${url}/api/users/current/${this.props.match.params.id}`).then((curRDV) => {
-          this.setState({ current: curRDV.data });
           axios
             .get(`${url}/api/users/passed-slots/${this.props.match.params.id}`)
             .then((passRDV) => {
               this.setState({ passed: passRDV.data });
             });
-        });
       });
     });
   }
@@ -158,7 +154,6 @@ class Exit extends Component {
                     open={this.state.open3}
                     closeModal={this.onCloseModal3}
                     openModal={this.onOpenModal3}
-                    current={this.state.current}
                     user = {this.state.user}
                     id={this.props.match.params.id}
                   />
@@ -231,7 +226,7 @@ class ModalRDV extends Component {
           <br />
           <form>
                             {this.state.slots.map((slot,i) => (
-                                <div>
+                                <div key={i}>
                                     <label>
                                         <input
                                         name={i}
@@ -265,9 +260,12 @@ class ModalMesRDV extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.user !== this.props.user) {
-      axios.get(`${url}/api/slots/${this.props.user.currentSlot}`).then((slot) => {
-        this.setState({ date: slot.data.date});
-      })
+      if (this.props.user.currentSlot !== "") {
+        console.log(this.props.user.currentSlot);
+        axios.get(`${url}/api/slots/${this.props.user.currentSlot}`).then((slot) => {
+          this.setState({ date: slot.data.date});
+        })
+      }
     }
   }
 
@@ -277,7 +275,7 @@ class ModalMesRDV extends Component {
         <br />
         <h2>Mes Rendez-vous</h2>
         <p>Ici, tu peux voir ton prochain créneau de rendez-vous :</p>
-        { this.props.user.currentSlot !== "" && (<p>{this.state.date}</p>)}
+        <p> {this.state.date} </p>
         <br />
         <button type="submit" className="modale" onClick={this.props.closeModal}>
           <p>FERMER</p>

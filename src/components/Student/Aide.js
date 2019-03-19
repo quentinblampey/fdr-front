@@ -151,10 +151,10 @@ class Exit extends Component {
             </div>
             <br />
             <div className="container">
-              {(current.length === 0 || passed.length > 0) && (
+              {(!(this.state.user.currentSlot === "")) && (
                 <div>
                   <button type="submit" className="help" onClick={this.onOpenModal3}>
-                    <p>MES RENDEZ-VOUS</p>
+                    <p>MON RENDEZ-VOUS</p>
                   </button>
                   <ModalMesRDV
                     open={this.state.open3}
@@ -268,15 +268,6 @@ class ModalMesRDV extends Component {
     this.state = {
       date: 'Aucun rendez-vous',
     };
-  }
-
-  componentDidMount() {
-    console.log('hi')
-    console.log(this.props);
-    axios.get(`${url}/api/slots/${this.props.user.currentSlot}`).then((slot) => {
-      console.log(slot);
-      this.setState({ date: slot.data.date});
-    })
   }
 
   componentDidUpdate(prevProps) {

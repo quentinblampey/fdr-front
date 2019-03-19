@@ -102,10 +102,10 @@ class Exit extends Component {
                 <Modal open={open1} onClose={this.onCloseModal1} center>
                   <h2>Demander de l&apos;aide</h2>
                   <p>
-                                    Ici, tu peux contacter ton enseignant référendsi tu as besoin de
+                                    Ici, tu peux contacter ton enseignant référent si tu as besoin de
                                     conseils ou de soutient. Tu peux aussi lui joindre un message.
                                     Si tu ne veux pas en ajouter, clique juste sur
-                                    &bdquo;Envoyer&bdquo;.
+                                    "Envoyer".
                   </p>
 
                   <textarea

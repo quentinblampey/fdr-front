@@ -8,7 +8,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Modal from 'react-responsive-modal';
 import FooterStop from './FooterStop';
 import url from '../../config';
 import './Begin.scss';
@@ -47,10 +46,6 @@ class Begin extends Component {
     };
 
     render() {
-        const {
- user, open1, open2, message, rdvs,
-} = this.state;
-        const i = 0;
         return (
             <div>
                 <Test onglet="chatbot" id={this.props.match.params.id} />

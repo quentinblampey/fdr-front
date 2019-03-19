@@ -107,11 +107,12 @@ class Contrat extends Component {
                   <button type="button" className="btn btn-light" onClick={this.etat.bind(this, 'comment')}>Commentaire</button>
                 </div>
                 {this.state.status === 'choice' && (
-                    <div className="text-center" style={{
+                    <div style={{
+                        marginLeft:'10%',
                         width:'100%',
                         position: 'absolute',
                         top: '190px',
-                        bottom:'105px',
+                        bottom:'80px',
                         overflow: 'scroll',
                         overflowX: 'hidden'}}>
                         <form>
@@ -129,7 +130,7 @@ class Contrat extends Component {
                                 </div>
                             ))}
                         </form>
-                        <button className="help" onClick={this.send}>Valider</button>
+                        <button className="help" style={{marginLeft:'40%'}} onClick={this.send}>Valider</button>
                     </div>
                 )}
                 {(this.state.status === 'feedback' && this.state.user.ue)&& (
@@ -179,7 +180,11 @@ class Contrat extends Component {
                 )}
                 {this.state.status === 'comment' && (
                     <div style={{ color : '#fefefe', margin: '10px'}}>
-                        {this.state.user.textContrat}
+                        {(this.state.user.textContrat) ? (
+                            this.state.user.textContrat
+                        ):(
+                            "Votre enseignant n'a pas encore renseigné de commentaire concernant votre contrat"
+                        )}
                     </div>
                 )}
           </div>

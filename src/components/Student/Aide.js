@@ -123,16 +123,16 @@ class Exit extends Component {
                 </Modal>
               </div>
             ) : (
-              <div className="container">
+              <div>
                 <button type="submit" className="help" disabled>
-                  <p>DEMANDE D&apos;AIDE ENVOYÉE</p>
+                  <p>Demande d'aide envoyée</p>
                 </button>
                 <br />
               </div>
             )}
-
+            { user.helped ? (<p style={{color: '#fefefe'}}> Votre professeur veut un rendez-vous !</p>) : (<p style={{color: '#fefefe'}}>Votre professeur n'a pas encore cherché à vous reçevoir</p>)}
             <div className="container">
-              {rdvs.length !== 0 && (
+              {(rdvs.length !== 0 && user.helped) && (
                 <div>
                   <button type="submit" className="help" onClick={this.onOpenModal2}>
                     <p>CRÉNEAUX DISPONIBLES</p>
@@ -160,6 +160,7 @@ class Exit extends Component {
                     closeModal={this.onCloseModal3}
                     openModal={this.onOpenModal3}
                     current={this.state.current}
+                    user = {this.state.user}
                     id={this.props.match.params.id}
                   />
                 </div>
@@ -261,12 +262,37 @@ class ModalRDV extends Component {
 }
 
 class ModalMesRDV extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: 'Aucun rendez-vous',
+    };
+  }
+
+  componentDidMount() {
+    console.log('hi')
+    console.log(this.props);
+    axios.get(`${url}/api/slots/${this.props.user.currentSlot}`).then((slot) => {
+      console.log(slot);
+      this.setState({ date: slot.data.date});
+    })
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.user !== this.props.user) {
+      axios.get(`${url}/api/slots/${this.props.user.currentSlot}`).then((slot) => {
+        this.setState({ date: slot.data.date});
+      })
+    }
+  }
+
   render() {
     return (
       <Modal open={this.props.open} onClose={this.props.closeModal} center>
         <br />
         <h2>Mes Rendez-vous</h2>
-        <p>Ici, tu peux voir les créneaux qui t'ont été attribués, passés ou futur.</p>
+        <p>Ici, tu peux voir ton prochain créneau de rendez-vous :</p>
+        { this.props.user.currentSlot !== "" && (<p>{this.state.date}</p>)}
         <br />
         <button type="submit" className="modale" onClick={this.props.closeModal}>
           <p>FERMER</p>

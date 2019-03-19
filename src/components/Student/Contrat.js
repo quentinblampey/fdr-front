@@ -138,7 +138,7 @@ class Contrat extends Component {
               <Test onglet="contrat" id={this.props.match.params.id} />
               
           <div className="component">
-          <h3 className="titre-cadre" style={{ position: 'absolute', top:'70px'}}> MES CONTRATS </h3>
+          <h3 className="titre-cadre"> MES CONTRATS </h3>
             <div className="btn-group" role="group" aria-label="Basic example" style={{ position: 'absolute', top:'140px'}}>
                   <button type="button" className="btn btn-light" onClick={this.choice}>Choisir mes UE</button>
                   <button type="button" className="btn btn-light" onClick={this.feedback}>Feedback sur mes UE</button>

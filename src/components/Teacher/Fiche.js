@@ -1,3 +1,4 @@
+/* eslint-disable prefer-template */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/jsx-indent */
 /* eslint-disable react/no-multi-comp */
@@ -8,10 +9,10 @@ import DatePicker from 'react-datepicker';
 // import { Link } from 'react-router-dom';
 // import FooterStop from './FooterStop'
 // import PropTypes from 'prop-types';
+import ReactTooltip from 'react-tooltip';
 import url from '../../config';
 // import computeStats from './ComputeStats';
 import SC from './ScoreChart';
-import ReactTooltip from 'react-tooltip';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -27,33 +28,41 @@ class Begin extends Component {
     this.state = {
       user: { details: { name: 'undefined' }, ue: [] },
       textContrat: '',
-      saved :true,
+      saved: true,
     };
   }
-
-  onChange = (e) => {
-    const textContrat = e.target.value;
-    this.setState({ textContrat , saved:false});
-  };
 
   componentDidMount() {
     // const { id } = this.props;
     // this.props.match.params.id
     // eslint-disable-next-line react/destructuring-assignment react/prop-types
     axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
-      this.setState({ user: res.data , textContrat: res.data.textContrat});
+      // console.log(res.data);
+      // console.log(res.data.ue);
+      this.setState({ user: res.data, textContrat: res.data.textContrat });
     });
   }
 
-  save = () => {
-    axios.post(`${url}/api/users/textContrat/${this.props.match.params.id}`, {textContrat:this.state.textContrat}).then((res) => {
-      this.setState({ user: res.data, saved:true});
-    });
-  }
+onChange = (e) => {
+  const textContrat = e.target.value;
+  this.setState({ textContrat, saved: false });
+};
 
-  render() {
-    const { user } = this.state;
-    return (
+    save = () => {
+      axios
+        .post(`${url}/api/users/textContrat/${this.props.match.params.id}`, {
+          textContrat: this.state.textContrat,
+        })
+        .then((res) => {
+          // console.log(res.data);
+          // console.log(res.data);
+          this.setState({ user: res.data, saved: true });
+        });
+    };
+
+    render() {
+      const { user } = this.state;
+      return (
             <div className="container">
                 <h2 className="text-center">
                     {" Fiche de l'étudiant : "}
@@ -76,52 +85,74 @@ class Begin extends Component {
                     <div className="col-6">
                         <Recap id={this.props.match.params.id} />
                         <div>
-                        <div className="card">
-                            <div className="card-header">
-                                <h2>Contrat pédagogique</h2>
-                            </div>
-                            <div>
-                              {(this.state.user.ue.length === 0) ? (
-                                <h5>Cet étudiant n'a pas encore signalé d'UEs</h5>
-                              ) : (
-                                <ul className="list-group" style={{ width:'95%', margin: '10px'}}>
-                                      {this.state.user.ue.map((ue) => (
-                                        <div key={ue.name}>
-                                          <ReactTooltip multiline />
-                                          <li data-tip={ue.message} className={"row list-group-item-"+ue.status} style={{'border-radius':'10px', width:'100%', margin: '5px 0px', padding: '0px 0px 0px 10px', display:'flex', 'flex-direction': 'row', 'justify-content':'space-between', 'align-items':'center'}}>
-                                              <div>
-                                                  {ue.name}
-                                              </div>
-                                          </li>
-                                        </div>
-                                      ))}
-                              </ul>
-                              )}
-                              {(this.state.user.ue.length > 0 &&
+                            <div className="card">
+                                <div className="card-header">
+                                    <h2>Contrat pédagogique</h2>
+                                </div>
                                 <div>
-                                <div className="row justify-content-between">
-                                <h5 className="col-9">
-                                  &nbsp;Commentaire sur le contrat
-                                </h5>
-                                <div className="col-3">
-                                  {this.state.saved && (
-                                    <h5 className="badge badge-pill badge-success">Saved</h5>
-                                  )}
+                                    {this.state.user.ue.length === 0 ? (
+                                        <h5>Cet étudiant n'a pas encore signalé d'UEs</h5>
+                                    ) : (
+                                        <ul
+                                          className="list-group"
+                                          style={{ width: '95%', margin: '10px' }}
+                                        >
+                                            {this.state.user.ue.map(ue => (
+                                                <div key={ue.name}>
+                                                    <ReactTooltip multiline />
+                                                    <li
+                                                      data-tip={ue.message}
+                                                      className={
+                                                            'row list-group-item-' + ue.status
+                                                        }
+                                                      style={{
+                                                        'border-radius': '10px',
+                                                        width: '100%',
+                                                        margin: '5px 0px',
+                                                        padding: '0px 0px 0px 10px',
+                                                        display: 'flex',
+                                                        'flex-direction': 'row',
+                                                        'justify-content': 'space-between',
+                                                        'align-items': 'center',
+                                                      }}
+                                                    >
+                                                        <div>{ue.name}</div>
+                                                    </li>
+                                                </div>
+                                            ))}
+                                        </ul>
+                                    )}
+                                    {this.state.user.ue.length > 0 && (
+                                        <div>
+                                            <div className="row justify-content-between">
+                                                <h5 className="col-9">
+                                                    &nbsp;Commentaire sur le contrat
+                                                </h5>
+                                                <div className="col-3">
+                                                    {this.state.saved && (
+                                                        <h5 className="badge badge-pill badge-success">
+                                                            Saved
+                                                        </h5>
+                                                    )}
+                                                </div>
+                                            </div>
+                                            <textarea
+                                              className="form-control"
+                                              id="exampleFormControlTextarea1"
+                                              value={this.state.textContrat}
+                                              onChange={this.onChange}
+                                            />
+                                            <button
+                                              type="submit"
+                                              className="modale"
+                                              onClick={this.save.bind(this)}
+                                            >
+                                                <p>ENREGISTRER</p>
+                                            </button>
+                                        </div>
+                                    )}
                                 </div>
-                                </div>
-                                <textarea
-                                className="form-control"
-                                id="exampleFormControlTextarea1"
-                                value={this.state.textContrat}
-                                onChange={this.onChange}
-                                />
-                                <button type="submit" className="modale" onClick={this.save.bind(this)}>
-                                  <p>ENREGISTRER</p>
-                                </button>
-                                </div>
-                              )}
                             </div>
-                        </div>
                         </div>
                     </div>
                     <div className=" col-6">
@@ -144,8 +175,8 @@ class Begin extends Component {
                     </div>
                 </div>
             </div>
-    );
-  }
+      );
+    }
 }
 
 // Liste et affichage des scores
@@ -360,7 +391,7 @@ class Aide extends Component {
   }
 
   componentDidMount() {
-    axios.get(`${url}/api/rdv/${this.props.id}`).then((resp) => {
+    axios.get(`${url}/api/slots/rdvu/${this.props.id}`).then((resp) => {
       this.setState({ taken: resp.data });
     });
   }
@@ -371,8 +402,8 @@ class Aide extends Component {
       const { date } = this.state;
       const horaire = `${date.getDate()}/${date.getMonth()
             + 1}/${date.getFullYear()} à ${date.getHours()}h${date.getMinutes()}`;
-      axios.post(`${url}/api/rdv/newrdv/${this.props.id}`, { horr: horaire }).then((res) => {
-        axios.get(`${url}/api/rdv/${this.props.id}`).then((resp) => {
+      axios.post(`${url}/api/slots/newrdv/${this.props.id}`, { horr: horaire }).then(() => {
+        axios.get(`${url}/api/slots/rdvu/${this.props.id}`).then((resp) => {
           this.setState({ taken: resp.data });
         });
       });
@@ -407,11 +438,12 @@ class Aide extends Component {
                   i += 1;
                   return (
                         <div key={i}>
-                            {horaire}
+                            {horaire.date}
                             <br />
                         </div>
                   );
                 })}
+                <br />
             </div>
       );
     }

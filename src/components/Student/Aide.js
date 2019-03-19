@@ -125,7 +125,18 @@ class Exit extends Component {
                 <br />
               </div>
             )}
-            { user.helped ? (<p style={{color: '#fefefe'}}> Votre professeur veut un rendez-vous !</p>) : (<p style={{color: '#fefefe'}}>Votre professeur n'a pas encore cherché à vous recevoir</p>)}
+            { user.helped ? (
+              <div style={{ color: '#fefefe' }} className="container">
+                Votre professeur veut un rendez-vous !
+                <button type="submit" className="help" onClick={this.onOpenModal2}>
+                  <p>CRÉNEAUX DISPONIBLES</p>
+                </button>
+              </div>
+            ) : (
+              <p style={{ color: '#fefefe' }} className="container">
+                Votre professeur n'a pas encore cherché à vous reçevoir.
+              </p>
+            )}
             <div className="container">
               {(rdvs.length !== 0 && user.helped) && (
                 <div>

@@ -1,3 +1,6 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable prefer-const */
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-undef */
 /* eslint-disable no-alert */
 /* eslint-disable react/no-unescaped-entities */
@@ -19,7 +22,12 @@ class Propose extends Component {
       date: new Date(),
       numberTot: 0,
       plage: [],
+      slots: [],
     };
+  }
+
+  componentDidMount() {
+    this.reload();
   }
 
     changeDuration = (e) => {
@@ -45,6 +53,7 @@ class Propose extends Component {
           date: `${date.getDate()}/${date.getMonth()
                     + 1}/${date.getFullYear()} à ${heureFin.getHours()}h${heureFin.getMinutes()}`,
           duration: this.state.duration,
+          status: 'Non enregistré',
           id: plage.length + 1,
         });
         heureFin.setHours(
@@ -70,28 +79,70 @@ class Propose extends Component {
     };
 
     clearAll = () => {
-      if (window.confirm('Etes-vous sûr(e) de vouloir supprimer tous les créneaux?')) {
+      if (
+        window.confirm(
+          'Etes-vous sûr(e) de vouloir supprimer tous les créneaux non enregistrés?',
+        )
+      ) {
         const plage = [];
         const numberTot = 0;
         this.setState({ plage, numberTot });
       }
     };
 
-    confirmAll = () => {
-      const { plage } = this.state;
-      plage.map((slot) => {
-        Axios.post(`${url}/api/slots/`, { duration: slot.duration, date: slot.date }).then(
+    clearOne = (e) => {
+      if (
+        window.confirm(
+          "Etes-vous sûr(e) de vouloir supprimer ce créneau? Un étudiant l'avait peut-être déjà demandé...",
+        )
+      ) {
+        const id = e.target.value;
+        Axios.delete(`${url}/api/slots/TbAa3CpZXgS1apnKjCnj3VdnkIxMhlny/clear/${id}`).then(
           () => {
             console.log('ok');
+            this.reload();
           },
         );
-        return 0;
-      });
+      }
+    };
+
+    confirmAll = () => {
+      const tot = this.state.plage.length;
+      let count = 0;
+      if (
+        window.confirm(
+          'Etes-vous sûr(e) de vouloir enregistrer et proposer tous les créneaux non enregistrés?',
+        )
+      ) {
+        const { plage } = this.state;
+        plage.map((slot) => {
+          Axios.post(`${url}/api/slots/`, { duration: slot.duration, date: slot.date }).then(
+            () => {
+              console.log('ok');
+              count += 1;
+              if (count === tot) {
+                this.setState({ plage: [] }, () => this.reload());
+              }
+            },
+          );
+        });
+      }
     };
 
     onChange = date => this.setState({ date });
 
+    reload() {
+      let tabSlots = [];
+      Axios.get(`${url}/api/slots/`).then((slots) => {
+        slots.data.map((slot) => {
+          tabSlots.push({ date: slot.date, status: 'Proposé aux étudiants', id: slot._id });
+        });
+        this.setState({ slots: tabSlots });
+      });
+    }
+
     render() {
+      const { plage, slots } = this.state;
       return (
         <div className="container">
           <h2>
@@ -154,12 +205,45 @@ class Propose extends Component {
             <div>
               <ul className="list-group">
                 <li className="list-group-item list-group-item-secondary">Créneaux</li>
-                {this.state.plage.map(creneaux => (
+                {slots.map(creneaux => (
                   <li key={creneaux.id} className="list-group-item">
-                    {creneaux.date}
+                    <div className="row">
+                      <div className="col">
+                        {creneaux.date}
+                      </div>
+                      <div className="col">
+(
+                        {creneaux.status}
+)
+                      </div>
+                      <div className="col">
+                        <button
+                          type="button"
+                          className="btn btn-danger"
+                          value={creneaux.id}
+                          onClick={this.clearOne}
+                        >
+                          X
+                        </button>
+                      </div>
+                    </div>
                   </li>
                 ))}
-                {this.state.plage.length === 0 && (
+                {plage.map(creneaux => (
+                  <li key={creneaux.id} className="list-group-item">
+                    <div className="row">
+                      <div className="col">
+                        {creneaux.date}
+                      </div>
+                      <div className="col">
+(
+                        {creneaux.status}
+)
+                      </div>
+                    </div>
+                  </li>
+                ))}
+                {plage.length === 0 && slots.length === 0 && (
                 <li className="list-group-item">Pas de crénaux proposés</li>
                 )}
               </ul>

@@ -137,7 +137,7 @@ class Exit extends Component {
                 <br />
                 <br />
                 <button type="submit" className="help" onClick={this.onOpenModal4}>
-                  <p>HORAIRES PROPOSÉS</p>
+                  <p>PRISE DE RDV DIRECTE</p>
                 </button>
                 <ModalRDVEnseignant
                     open={this.state.open4}
@@ -156,7 +156,7 @@ class Exit extends Component {
               {(!user.currentSlot && user.helped) && (
                 <div>
                   <button type="submit" className="help" onClick={this.onOpenModal2}>
-                    <p>CRÉNEAUX DISPONIBLES</p>
+                    <p>CHOIX DE CRÉNEAUX</p>
                   </button>
                   <ModalRDV
                     open={this.state.open2}

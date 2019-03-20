@@ -115,7 +115,7 @@ class Contrat extends Component {
                         <form>
                             {this.state.UEs.map((ue, i) => (
                                 <div key={ue.name} style={{ color : '#fefefe', margin:'10px', width:'100%'}}>
-                                    <div style={{ width:'100%', paddingLeft:'5%'}}>
+                                    <div style={{ width:'100%'}}>
                                         <Switch style={{margin:'30px'}} onChange={this.handleInputChange.bind(this, i)} checked={ue.checked} uncheckedIcon={false} checkedIcon={false} width={40} height={15} handleDiameter={20}/>
                                         {" "+ue.name}
                                     </div>

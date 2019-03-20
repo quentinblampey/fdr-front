@@ -6,6 +6,7 @@
 /* eslint-disable no-alert */
 /* eslint-disable react/no-unescaped-entities */
 import React, { Component } from 'react';
+import { ToastsStore } from 'react-toasts';
 import './Propose.scss';
 import './FicheCourte.scss';
 import DatePicker from 'react-datepicker';
@@ -125,6 +126,7 @@ class Propose extends Component {
               count += 1;
               if (count === tot) {
                 this.setState({ plage: [] }, () => this.reload());
+                ToastsStore.info("Les étudiants concernés ont été prévenus par mail!");
               }
             },
           );

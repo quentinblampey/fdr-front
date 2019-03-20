@@ -11,6 +11,11 @@ class Navbar extends Component {
           <Link to="/enseignant">
             <button className="btn btn-primary">Accueil</button>
           </Link>
+          <Link to="/enseignant/propose">
+            <button className="btn btn-primary">
+                            Proposer des creneaux de Rendez-vous
+            </button>
+          </Link>
         </nav>
       </div>
     );

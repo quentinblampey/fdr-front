@@ -110,17 +110,6 @@ class VueEnseignant extends Component {
               />
             </div>
             <div className="bloc-center">
-              <Link to="/enseignant/propose">
-                <div className="row text-center s12 m12 l12">
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    style={{ width: '100%' }}
-                  >
-                                    Proposer des creneaux de Rendez-vous
-                  </button>
-                </div>
-              </Link>
               <div className="row text-center">
                 <button
                   type="button"

@@ -42,30 +42,33 @@ class VueEtudiant extends Component {
     render() {
       const { pseudo } = this.state;
       return (
-        <div className="text-center component">
-          <div className="container">
-            <div className="panel panel-default">
-              <div className="panel-body">
-                <h3>INSCRIS-TOI ICI !</h3>
-                <p style={{ color: '#fefefe' }}> Renseigne ton email</p>
-                <form onSubmit={this.onSubmit}>
-                  <input
-                    type="email"
-                    className="form-control"
-                    name="pseudo"
-                    value={pseudo}
-                    onChange={this.onChange}
-                    placeholder="nom@exemple.com"
-                  />
-                  <button type="submit" className="sign">
-                                    Me connecter
-                  </button>
-                </form>
-                <br />
+        <div>
+          <div className="color4" />
+          <div className="text-center component">
+            <div className="container">
+              <div className="panel panel-default">
+                <div className="panel-body">
+                  <h3>INSCRIS-TOI ICI !</h3>
+                  <p style={{ color: '#fefefe' }}> Renseigne ton email</p>
+                  <form onSubmit={this.onSubmit}>
+                    <input
+                      type="email"
+                      className="form-control"
+                      name="pseudo"
+                      value={pseudo}
+                      onChange={this.onChange}
+                      placeholder="nom@exemple.com"
+                    />
+                    <button type="submit" className="sign">
+                                        Me connecter
+                    </button>
+                  </form>
+                  <br />
+                </div>
               </div>
             </div>
+            <FooterStop />
           </div>
-          <FooterStop />
         </div>
       );
     }

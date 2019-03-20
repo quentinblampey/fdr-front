@@ -6,7 +6,7 @@ import { ToastsStore } from 'react-toasts';
 
 class FooterStop extends Component {
     sendLove = () => {
-      ToastsStore.info("Vous avez envoyé \n de l'amour au chatbot, \n Elle t'aime aussi ❤️");
+      ToastsStore.info("T'as envoyé \n de l'amour au chatbot, \n Elle t'aime aussi ❤️");
     };
 
     render() {

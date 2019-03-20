@@ -128,9 +128,6 @@ class Exit extends Component {
             { user.helped ? (
               <div style={{ color: '#fefefe' }} className="container">
                 Votre professeur veut un rendez-vous !
-                <button type="submit" className="help" onClick={this.onOpenModal2}>
-                  <p>CRÉNEAUX DISPONIBLES</p>
-                </button>
               </div>
             ) : (
               <p style={{ color: '#fefefe' }} className="container">

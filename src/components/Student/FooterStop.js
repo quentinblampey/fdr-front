@@ -8,7 +8,7 @@ class FooterStop extends Component {
     return (
       <div>
         <nav
-          className="navbar fixed-bottom2 navbar-light bg-light"
+          className="navbar fixed-bottom navbar-light bg-light"
           style={{ display: 'flex', justifyContent: 'center' }}
         >
           <a href="https://goo.gl/forms/NkNRuP0SJ4LnZ23w1" className="stop">

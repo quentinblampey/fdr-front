@@ -136,7 +136,7 @@ class Propose extends Component {
 
     reload() {
       let tabSlots = [];
-      Axios.get(`${url}/api/slots/`).then((slots) => {
+      Axios.get(`${url}/api/slots/getfree`).then((slots) => {
         slots.data.map((slot) => {
           tabSlots.push({ date: slot.date, status: 'Proposé aux étudiants', id: slot._id });
         });

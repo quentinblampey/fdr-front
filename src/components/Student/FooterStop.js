@@ -21,7 +21,7 @@ class FooterStop extends Component {
                 height: '50px',
                 width: '50px',
                 border: '1px solid rgb(201, 2, 69)',
-                'border-radius': '25px',
+                borderRadius: '25px',
                 display: 'flex',
                 background: 'none',
                 justifyContent: 'center',
@@ -35,7 +35,7 @@ class FooterStop extends Component {
                 style={{
                   margin: 'auto',
                   color: 'rgb(201, 2, 69)',
-                  'font-size': '20px',
+                  fontSize: '20px',
                 }}
               />
             </button>

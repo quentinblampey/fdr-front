@@ -88,7 +88,7 @@ class Exit extends Component {
     };
 
     render() {
-      const { user, open1, message, rdvs } = this.state;
+      const { user, open1, message } = this.state;
       return (
         <div>
           <Test onglet="aide" id={this.props.match.params.id} />

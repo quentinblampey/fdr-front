@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prefer-stateless-function */
 /* eslint-disable react/no-multi-comp */
 import React, { Component } from 'react';
@@ -25,7 +27,7 @@ class Exit extends Component {
       open1: false,
       open2: false,
       open3: false,
-      passed: [],
+      open4: false,
     };
   }
 
@@ -34,11 +36,6 @@ class Exit extends Component {
       this.setState({ user: res.data });
       axios.get(`${url}/api/slots/getfree`).then((res2) => {
         this.setState({ rdvs: res2.data });
-          axios
-            .get(`${url}/api/users/passed-slots/${this.props.match.params.id}`)
-            .then((passRDV) => {
-              this.setState({ passed: passRDV.data });
-            });
       });
     });
   }
@@ -65,6 +62,14 @@ class Exit extends Component {
 
     onCloseModal3 = () => {
       this.setState({ open3: false });
+    };
+
+    onOpenModal4 = () => {
+      this.setState({ open4: true });
+    };
+
+    onCloseModal4 = () => {
+      this.setState({ open4: false });
     };
 
     onChange = (e) => {
@@ -128,6 +133,18 @@ class Exit extends Component {
             { user.helped ? (
               <div style={{ color: '#fefefe' }} className="container">
                 Votre professeur veut un rendez-vous !
+                <br />
+                <br />
+                <button type="submit" className="help" onClick={this.onOpenModal4}>
+                  <p>HORAIRES PROPOSÉS</p>
+                </button>
+                <ModalRDVEnseignant
+                    open={this.state.open4}
+                    closeModal={this.onCloseModal4}
+                    openModal={this.onOpenModal4}
+                    id={this.props.match.params.id}
+                  />
+                <br />
               </div>
             ) : (
               <p style={{ color: '#fefefe' }} className="container">
@@ -162,7 +179,7 @@ class Exit extends Component {
                     open={this.state.open3}
                     closeModal={this.onCloseModal3}
                     openModal={this.onOpenModal3}
-                    user = {this.state.user}
+                    user={this.state.user}
                     id={this.props.match.params.id}
                   />
                 </div>
@@ -266,24 +283,72 @@ class ModalMesRDV extends Component {
     };
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.user !== this.props.user) {
-      if (this.props.user.currentSlot !== "") {
-        console.log(this.props.user.currentSlot);
-        axios.get(`${url}/api/slots/${this.props.user.currentSlot}`).then((slot) => {
-          this.setState({ date: slot.data.date});
-        })
-      }
-    }
-  }
-
   render() {
     return (
       <Modal open={this.props.open} onClose={this.props.closeModal} center>
         <br />
         <h2>Mes Rendez-vous</h2>
         <p>Ici, tu peux voir ton prochain créneau de rendez-vous :</p>
-        <p> {this.state.date} </p>
+        <p>
+          {this.state.date}
+        </p>
+        <br />
+        <button type="submit" className="modale" onClick={this.props.closeModal}>
+          <p>FERMER</p>
+        </button>
+        <br />
+      </Modal>
+    );
+  }
+}
+
+class ModalRDVEnseignant extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      proposed: [],
+    };
+  }
+
+  componentDidMount() {
+    this.update();
+  }
+
+
+
+  update = () => {
+    axios.get(`${url}/api/slots/rdvu/${this.props.id}`).then((resp) => {
+      this.setState({ proposed: resp.data });
+    });
+  }
+
+  onAccept = (id) => {
+    console.log(id);
+    axios.put(`${url}/api/slots/rdvOK/${this.props.id}`, { idRDV: id }).then((resp) => {
+      this.setState({ proposed: [resp.data] });
+      this.update();
+    });
+  }
+
+  render() {
+    const { proposed } = this.state;
+    return (
+      <Modal open={this.props.open} onClose={this.props.closeModal} center>
+        <br />
+        <h2>Horaires proposés par ton enseignant</h2>
+        <p>
+          Suite à ta demande d'aide, ton enseignant t'a proposé un (des) rendez-vous(s).
+          Tu peux choisir celui qui t'arrange le plus et l'accepter.
+        </p>
+        { !(proposed.length === 1 && proposed[0].affectation !== '') && proposed.map(slot => (
+          <div key={slot._id}>
+            {slot.date}
+            {' '}
+            <button type="submit" className="modale" onClick={() => this.onAccept(slot._id)}>
+              <p>Ok</p>
+            </button>
+          </div>
+        ))}
         <br />
         <button type="submit" className="modale" onClick={this.props.closeModal}>
           <p>FERMER</p>

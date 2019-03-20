@@ -147,7 +147,7 @@ class Chat extends Component {
           });
           promiseScroll.then(()=> {
             let r;
-            if (this.state.currentQuestion.textArea){
+            if (this.state.currentQuestion.textArea && !([151, 152, 153].includes(this.state.currentQuestion.idQ))){
               if (answer.body===''){
                 r = { message: "Ok, tu veux pas me répondre mais c'est pas grave !", color: 1 };
               }else{
@@ -156,7 +156,8 @@ class Chat extends Component {
             }else{
               r = { message: answer.reaction, color: 1 };
             }
-            if ((answer.reaction !== '' && answer.reaction !== undefined) || (this.state.currentQuestion.textArea)){
+            console.log(r)
+            if ((answer.reaction !== '' && answer.reaction !== undefined) || (this.state.currentQuestion.textArea && r.message)){
               this.setState({ loading: true });
               this.updateScroll();
               setTimeout(() => {

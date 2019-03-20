@@ -330,6 +330,8 @@ class ModalRDVEnseignant extends Component {
     axios.put(`${url}/api/slots/rdvOK/${this.props.id}`, { idRDV: id }).then((resp) => {
       this.setState({ proposed: [resp.data] });
       this.update();
+      ToastsStore.info("L'enseignant a été prévenu par mail !");
+      ToastsStore.info("Tu a été prévenu par mail et tu peux \n télécharger le RDV dans ton calendrier!");
     });
   }
 

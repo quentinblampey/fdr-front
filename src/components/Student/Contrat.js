@@ -25,7 +25,6 @@ class Contrat extends Component {
 
   handleInputChange(event, event2) {
     let UEs = this.state.UEs;
-    console.log(event, event2);
     UEs[event].checked = event2;
     this.setState({
       UEs,

@@ -8,6 +8,7 @@ import Modal from 'react-responsive-modal';
 import FooterStop from './FooterStop';
 import Test from './test';
 import url from '../../config';
+import Switch from "react-switch";
 // import axios from 'axios';
 // import { Link } from 'react-router-dom';
 // import FooterStop from './FooterStop'
@@ -135,7 +136,7 @@ class Exit extends Component {
               </p>
             )}
             <div className="container">
-              {(rdvs.length !== 0 && user.helped) && (
+              {(!user.currentSlot && user.helped) && (
                 <div>
                   <button type="submit" className="help" onClick={this.onOpenModal2}>
                     <p>CRÉNEAUX DISPONIBLES</p>
@@ -197,22 +198,20 @@ class ModalRDV extends Component {
     };
 
     componentDidMount() {
-      axios.get(`${url}/api/slots`).then((slots) => {
+      axios.get(`${url}/api/slots/getfree`).then((slots) => {
         let ins = [];
         slots.data.forEach((slot) => { ins.push({id: slot._id, date: slot.date,checked:(this.props.user.chosenSlots.indexOf(slot._id) > -1)})})
         this.setState({ slots: ins})
       })
     }
 
-    handleInputChange(event) {
-      const target = event.target;
-      const value = target.type === 'checkbox' ? target.checked : target.value;
-      const i = target.name;
+    handleInputChange(event, event2) {
       let slots = this.state.slots;
-      slots[i].checked = value;
+      slots[event].checked = event2;
       this.setState({
         slots,
       });
+      
     }
 
     send = () => {
@@ -235,14 +234,9 @@ class ModalRDV extends Component {
           <form>
                             {this.state.slots.map((slot,i) => (
                                 <div key={i}>
-                                    <label>
-                                        <input
-                                        name={i}
-                                        type="checkbox"
-                                        checked={slot.checked}
-                                        onChange={this.handleInputChange}
-                                    />
-                                        {slot.date}
+                                    <Switch style={{margin:'30px'}} onChange={this.handleInputChange.bind(this, i)} checked={slot.checked} uncheckedIcon={false} checkedIcon={false} width={40} height={15} offHandleColor={'#cdcdcd'} onHandleColor={'#cdcdcd'} handleDiameter={20}/>
+                                    <label style={{padding: '10px'}} >
+                                        {' '+slot.date}{ slot.date[slot.date.length -2] === 'h' && '0'}
                                     </label>
                                 </div>
                             ))}
@@ -269,7 +263,6 @@ class ModalMesRDV extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.user !== this.props.user) {
       if (this.props.user.currentSlot !== "") {
-        console.log(this.props.user.currentSlot);
         axios.get(`${url}/api/slots/${this.props.user.currentSlot}`).then((slot) => {
           this.setState({ date: slot.data.date});
         })
@@ -283,7 +276,7 @@ class ModalMesRDV extends Component {
         <br />
         <h2>Mes Rendez-vous</h2>
         <p>Ici, tu peux voir ton prochain créneau de rendez-vous :</p>
-        <p> {this.state.date} </p>
+        <p> {this.state.date}{ this.state.date[this.state.date.length -2] === 'h' && '0'} </p>
         <br />
         <button type="submit" className="modale" onClick={this.props.closeModal}>
           <p>FERMER</p>

@@ -58,7 +58,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: calc(100vh - #{$bottom2} - #{$tripleTop});
+    height: calc(100vh - #{$bottom} - #{$tripleTop});
     background-image: linear-gradient(0deg, $color1, $color4);
 }
 
@@ -103,5 +103,6 @@
 
     &:hover {
         background: $color4;
+        color: $white;
     }
 }

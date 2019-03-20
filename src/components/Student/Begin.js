@@ -65,15 +65,27 @@ class Begin extends Component {
                         </Link>
                     </div>
                     <Link to={`/chat/${this.props.match.params.id}`}>
-                        <i
-                          className="fa fa-play-circle"
-                          aria-hidden="true"
+                        <div
                           style={{
-                                margin: 'auto',
-                                color: '#B92748',
-                                'font-size': '35px',
+                                height: '50px',
+                                width: '50px',
+                                border: '1px solid white',
+                                'border-radius': '25px',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
                             }}
-                        />
+                        >
+                            <i
+                              className="fa fa-share"
+                              aria-hidden="true"
+                              style={{
+                                    margin: 'auto',
+                                    color: '#fefefe',
+                                    'font-size': '20px',
+                                }}
+                            />
+                        </div>
                     </Link>
                     <br />
                 </div>

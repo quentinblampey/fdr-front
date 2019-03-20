@@ -314,8 +314,6 @@ class ModalRDVEnseignant extends Component {
     this.update();
   }
 
-
-
   update = () => {
     axios.get(`${url}/api/slots/rdvu/${this.props.id}`).then((resp) => {
       this.setState({ proposed: resp.data });

@@ -94,43 +94,44 @@ class Exit extends Component {
           <Test onglet="aide" id={this.props.match.params.id} />
           <div className="component">
             <h3 className="titre-cadre"> DEMANDE D&apos;AIDE </h3>
-            <div style={{ position: 'absolute', top: '180px' }} >
-            {!user.aide ? (
+            <div style={{ position: 'absolute', top: '180px', display: 'flex', flexDirection: 'column', alignItems:'center'}} >
+            {!user.aide && (
               <div className="container">
-                <button type="submit" className="help" onClick={this.onOpenModal1}>
-                  <p>DEMANDER DE L&apos;AIDE</p>
+              <button type="submit" className="help" onClick={this.onOpenModal1}>
+                <p>DEMANDER DE L&apos;AIDE</p>
+              </button>
+              <Modal open={open1} onClose={this.onCloseModal1} center>
+                <h2>Demander de l&apos;aide</h2>
+                <p>
+                                  Ici, tu peux contacter ton enseignant référent si tu as besoin de
+                                  conseils ou de soutient. Tu peux aussi lui joindre un message.
+                                  Si tu ne veux pas en ajouter, clique juste sur
+                                  "Envoyer".
+                </p>
+
+                <textarea
+                  className="form-control"
+                  id="exampleFormControlTextarea1"
+                  rows="2"
+                  value={message}
+                  onChange={this.onChange}
+                />
+
+                <button type="submit" className="modale" onClick={this.demAide}>
+                  <p>ENVOYER</p>
                 </button>
-                <Modal open={open1} onClose={this.onCloseModal1} center>
-                  <h2>Demander de l&apos;aide</h2>
-                  <p>
-                                    Ici, tu peux contacter ton enseignant référent si tu as besoin de
-                                    conseils ou de soutient. Tu peux aussi lui joindre un message.
-                                    Si tu ne veux pas en ajouter, clique juste sur
-                                    "Envoyer".
-                  </p>
-
-                  <textarea
-                    className="form-control"
-                    id="exampleFormControlTextarea1"
-                    rows="2"
-                    value={message}
-                    onChange={this.onChange}
-                  />
-
-                  <button type="submit" className="modale" onClick={this.demAide}>
-                    <p>ENVOYER</p>
-                  </button>
-                </Modal>
-              </div>
-            ) : (
-              <div>
+              </Modal>
+            </div>
+            )}
+            { (user.aide && !user.currentSlot) && (
+              <div style={{margin:'auto'}} >
                 <button type="submit" className="help" disabled>
                   <p>Demande d'aide envoyée</p>
                 </button>
                 <br />
               </div>
             )}
-            { (user.helped && !(user.currentSlot))? (
+            { (user.helped && !(user.currentSlot)) && (
               <div style={{ color: '#fefefe' }} className="container">
                 Votre professeur veut un rendez-vous !
                 <br />
@@ -144,16 +145,7 @@ class Exit extends Component {
                     openModal={this.onOpenModal4}
                     id={this.props.match.params.id}
                   />
-                <br />
-              </div>
-            ) : (
-              <p style={{ color: '#fefefe' }} className="container">
-                Votre professeur n'a pas encore cherché à vous reçevoir.
-              </p>
-            )}
-            <div className="container">
-              {(!user.currentSlot && user.helped) && (
-                <div>
+                  <div>
                   <button type="submit" className="help" onClick={this.onOpenModal2}>
                     <p>CHOIX DE CRÉNEAUX</p>
                   </button>
@@ -166,8 +158,14 @@ class Exit extends Component {
                     user={this.state.user}
                   />
                 </div>
-              )}
-            </div>
+              </div>
+            )}
+
+            { (!user.helped) && (
+              <p style={{ color: '#fefefe', margin:'10px 0px'}} className="container text-center">
+                Votre professeur n'a pas encore cherché à vous recevoir. Vous ne pouvez donc pas encore choisir de créneau de rendez-vous.
+              </p>
+            )}
             <br />
             <div className="container">
               {(!(this.state.user.currentSlot === "")) && (
@@ -343,6 +341,9 @@ class ModalRDVEnseignant extends Component {
           Suite à ta demande d'aide, ton enseignant t'a proposé un (des) rendez-vous(s).
           Tu peux choisir celui qui t'arrange le plus et l'accepter.
         </p>
+        { proposed.length === 0 && (
+          <p>Tu n'as pas encore reçu de propositions de rendez-vous de la part de ton enseignant référent.</p>
+        )}
         { !(proposed.length === 1 && proposed[0].affectation !== '') && proposed.map(slot => (
           <div key={slot._id}>
             {slot.date}

@@ -131,7 +131,7 @@ class Exit extends Component {
                 <br />
               </div>
             )}
-            { user.helped ? (
+            { (user.helped && !(user.currentSlot))? (
               <div style={{ color: '#fefefe' }} className="container">
                 Votre professeur veut un rendez-vous !
                 <br />

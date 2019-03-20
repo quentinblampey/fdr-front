@@ -7,6 +7,7 @@ import url from '../../config';
 import Test from './test';
 import liste from './listeUE';
 import './Begin.scss';
+import Switch from "react-switch";
 
 class Contrat extends Component {
   constructor(props) {
@@ -22,15 +23,14 @@ class Contrat extends Component {
     this.send = this.send.bind(this);
   }
 
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
+  handleInputChange(event, event2) {
     let UEs = this.state.UEs;
-    UEs[name].checked = value;
+    console.log(event, event2);
+    UEs[event].checked = event2;
     this.setState({
       UEs,
     });
+    
   }
 
 
@@ -108,8 +108,8 @@ class Contrat extends Component {
                 </div>
                 {this.state.status === 'choice' && (
                     <div style={{
-                        marginLeft:'10%',
-                        width:'100%',
+                        paddingLeft:'5%',
+                        width:'100vw',
                         position: 'absolute',
                         top: '190px',
                         bottom:'80px',
@@ -117,16 +117,11 @@ class Contrat extends Component {
                         overflowX: 'hidden'}}>
                         <form>
                             {this.state.UEs.map((ue, i) => (
-                                <div key={ue.name} style={{ color : '#fefefe', margin: '10px'}}>
-                                    <label>
-                                        <input
-                                        name={i}
-                                        type="checkbox"
-                                        checked={ue.checked}
-                                        onChange={this.handleInputChange}
-                                    />
-                                        {ue.name}
-                                    </label>
+                                <div key={ue.name} style={{ color : '#fefefe', margin:'10px', width:'100%'}}>
+                                    <div style={{ width:'100%', paddingLeft:'5%'}}>
+                                        <Switch style={{margin:'30px'}} onChange={this.handleInputChange.bind(this, i)} checked={ue.checked} uncheckedIcon={false} checkedIcon={false} width={40} height={15} handleDiameter={20}/>
+                                        {" "+ue.name}
+                                    </div>
                                 </div>
                             ))}
                         </form>

@@ -108,10 +108,9 @@ class Contrat extends Component {
                 </div>
                 {this.state.status === 'choice' && (
                     <div style={{
-                        paddingLeft:'10%',
                         position: 'absolute',
                         top: '190px',
-                        bottom:'80px',
+                        bottom:'100px',
                         overflow: 'scroll',
                         overflowX: 'hidden'}}>
                         <form>
@@ -124,7 +123,7 @@ class Contrat extends Component {
                                 </div>
                             ))}
                         </form>
-                        <button className="help" style={{marginLeft:'40%'}} onClick={this.send}>Valider</button>
+                        <button className="help" style={{margin: '5px 0px', width: '100%'}} onClick={this.send}>Valider</button>
                     </div>
                 )}
                 {(this.state.status === 'feedback' && this.state.user.ue)&& (

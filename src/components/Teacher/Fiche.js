@@ -91,7 +91,7 @@ onChange = (e) => {
                                 </div>
                                 <div>
                                     {this.state.user.ue.length === 0 ? (
-                                        <h5>Cet étudiant n'a pas encore signalé d'UEs</h5>
+                                        <h5>Cet étudiant n'a pas encore signalé d'UEs. C'est la raison pour laquelle vous ne pouvez pas encore établir de contrat pédagogique.</h5>
                                     ) : (
                                         <ul
                                           className="list-group"

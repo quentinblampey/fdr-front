@@ -94,12 +94,12 @@ class Exit extends Component {
           <Test onglet="aide" id={this.props.match.params.id} />
           <div className="component">
             <h3 className="titre-cadre"> DEMANDE D&apos;AIDE </h3>
+            <div style={{ position: 'absolute', top: '180px' }} >
             {!user.aide ? (
               <div className="container">
                 <button type="submit" className="help" onClick={this.onOpenModal1}>
                   <p>DEMANDER DE L&apos;AIDE</p>
                 </button>
-                <br />
                 <Modal open={open1} onClose={this.onCloseModal1} center>
                   <h2>Demander de l&apos;aide</h2>
                   <p>
@@ -116,7 +116,6 @@ class Exit extends Component {
                     value={message}
                     onChange={this.onChange}
                   />
-                  <br />
 
                   <button type="submit" className="modale" onClick={this.demAide}>
                     <p>ENVOYER</p>
@@ -137,7 +136,7 @@ class Exit extends Component {
                 <br />
                 <br />
                 <button type="submit" className="help" onClick={this.onOpenModal4}>
-                  <p>HORAIRES PROPOSÉS</p>
+                  <p>PRISE DE RDV DIRECTE</p>
                 </button>
                 <ModalRDVEnseignant
                     open={this.state.open4}
@@ -156,7 +155,7 @@ class Exit extends Component {
               {(!user.currentSlot && user.helped) && (
                 <div>
                   <button type="submit" className="help" onClick={this.onOpenModal2}>
-                    <p>CRÉNEAUX DISPONIBLES</p>
+                    <p>CHOIX DE CRÉNEAUX</p>
                   </button>
                   <ModalRDV
                     open={this.state.open2}
@@ -185,6 +184,7 @@ class Exit extends Component {
                   />
                 </div>
               )}
+            </div>
             </div>
           </div>
           <FooterStop />

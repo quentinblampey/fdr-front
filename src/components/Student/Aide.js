@@ -245,6 +245,7 @@ class ModalRDV extends Component {
                     demander plusieurs. Un de ceux que tu as demandé te sera attribué en fonction
                     des disponibilités.
           </p>
+          { this.state.slots.length === 0 && <p> Aucun créenau proposé.</p>}
           <br />
           <form>
                             {this.state.slots.map((slot,i) => (
@@ -257,11 +258,6 @@ class ModalRDV extends Component {
                             ))}
                         </form>
                         <button className="modale" onClick={this.send}>Valider</button>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
         </Modal>
       );
     }

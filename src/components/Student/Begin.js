@@ -19,7 +19,6 @@ class Begin extends Component {
         // this.demAide = this.demAide.bind(this);
         this.state = {
             user: '',
-            rdvs: [],
             open1: false,
             open2: false,
             message: '',
@@ -31,9 +30,6 @@ class Begin extends Component {
     componentDidMount() {
         axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then(res => {
             this.setState({ user: res.data });
-            axios.get(`${url}/api/rdv/${this.props.match.params.id}`).then(res2 => {
-                this.setState({ rdvs: res2.data });
-            });
         });
     }
 
@@ -70,7 +66,7 @@ class Begin extends Component {
                                 height: '50px',
                                 width: '50px',
                                 border: '1px solid white',
-                                'border-radius': '25px',
+                                borderRadius: '25px',
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
@@ -82,7 +78,7 @@ class Begin extends Component {
                               style={{
                                     margin: 'auto',
                                     color: '#fefefe',
-                                    'font-size': '20px',
+                                    fontSize: '20px',
                                 }}
                             />
                         </div>

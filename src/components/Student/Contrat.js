@@ -151,7 +151,7 @@ class Contrat extends Component {
                                             <Dropdown.Item onClick={this.comment.bind(this, ue.name)}>Commentaire</Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
-                                    <Modal open={this.state.UEs.filter(element => element.name===ue.name)[0].comment} onClose={this.comment.bind(this, ue.name)} center>
+                                    <Modal style={{ zIndex:10}} open={this.state.UEs.filter(element => element.name===ue.name)[0].comment} onClose={this.comment.bind(this, ue.name)} center>
                                         <h2>Entre ton commentaire</h2>
                                         <textarea
                                         className="form-control"

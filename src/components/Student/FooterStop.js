@@ -14,7 +14,7 @@ class FooterStop extends Component {
         <div>
           <nav
             className="navbar fixed-bottom navbar-light bg-light"
-            style={{ display: 'flex', justifyContent: 'center' }}
+            style={{ display: 'flex', justifyContent: 'center', zIndex: 1 }}
           >
             <button
               style={{

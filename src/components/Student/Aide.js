@@ -100,7 +100,7 @@ class Exit extends Component {
               <button type="submit" className="help" onClick={this.onOpenModal1}>
                 <p>DEMANDER DE L&apos;AIDE</p>
               </button>
-              <Modal open={open1} onClose={this.onCloseModal1} center>
+              <Modal style={{ zIndex:10}} open={open1} onClose={this.onCloseModal1} center>
                 <h2>Demander de l&apos;aide</h2>
                 <p>
                                   Ici, tu peux contacter ton enseignant référent si tu as besoin de
@@ -238,7 +238,7 @@ class ModalRDV extends Component {
 
     render() {
       return (
-        <Modal open={this.props.open} onClose={this.props.closeModal} center>
+        <Modal style={{ zIndex:10}} open={this.props.open} onClose={this.props.closeModal} center>
           <h2>Demander un créneau de rendez-vous</h2>
           <p>
                     Ici, tu peux voir les créneaux qu'a proposé ton enseignant référent et en
@@ -290,7 +290,7 @@ class ModalMesRDV extends Component {
 
   render() {
     return (
-      <Modal open={this.props.open} onClose={this.props.closeModal} center>
+      <Modal style={{ zIndex:10}} open={this.props.open} onClose={this.props.closeModal} center>
         <br />
         <h2>Mes Rendez-vous</h2>
         <p>Ici, tu peux voir ton prochain créneau de rendez-vous :</p>
@@ -342,7 +342,8 @@ class ModalRDVEnseignant extends Component {
   render() {
     const { proposed } = this.state;
     return (
-      <Modal open={this.props.open} onClose={this.props.closeModal} center>
+      <Modal style={{ zIndex:10}}
+      open={this.props.open} onClose={this.props.closeModal} center>
         <br />
         <h2>Horaires proposés par ton enseignant</h2>
         <p>

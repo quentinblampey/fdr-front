@@ -108,8 +108,7 @@ class Contrat extends Component {
                 </div>
                 {this.state.status === 'choice' && (
                     <div style={{
-                        marginLeft:'10%',
-                        width:'100%',
+                        paddingLeft:'10%',
                         position: 'absolute',
                         top: '190px',
                         bottom:'80px',

@@ -258,6 +258,13 @@ class ModalRDV extends Component {
                             ))}
                         </form>
                         <button className="modale" onClick={this.send}>Valider</button>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
         </Modal>
       );
     }
@@ -295,6 +302,9 @@ class ModalMesRDV extends Component {
         <button type="submit" className="modale" onClick={this.props.closeModal}>
           <p>FERMER</p>
         </button>
+        <br />
+        <br />
+        <br />
         <br />
       </Modal>
     );
@@ -355,6 +365,13 @@ class ModalRDVEnseignant extends Component {
         <button type="submit" className="modale" onClick={this.props.closeModal}>
           <p>FERMER</p>
         </button>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <br />
       </Modal>
     );

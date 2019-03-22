@@ -20,9 +20,10 @@ class Contrat extends Component {
     ],
         user:{ue:[]},
         status: 'choice',
-        displayStatus: 'Mes Ues',
+        displayStatus: 'Mes UEs',
         dropdownDatas:  [{status: 'choice', displayStatus : 'Mes UEs'}, {status: 'feedback', displayStatus :'Mes Feedbacks'}, {status:'comment', displayStatus :'Mes Commentaires'}, {status: 'engagement', displayStatus :'Mes Engagements'}, {status:'reflexions', displayStatus :'Mes Reflexions'}],
         UEs: [],
+        myComment:'',
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.send = this.send.bind(this);
@@ -51,10 +52,17 @@ class Contrat extends Component {
       });
   }
 
-    onChange = (e) => {
-      const comment = e.target.value;
-      this.setState({ comment });
-    };
+  onChange = (e) => {
+    const comment = e.target.value;
+    this.setState({ comment });
+  };
+
+  onChangeMy = (e) => {
+    const myComment = e.target.value;
+    this.setState({ myComment });
+  };
+
+
 
     send() {
       const { UEs } = this.state;
@@ -110,6 +118,10 @@ class Contrat extends Component {
           this.setState({selectedEngagement:undefined})
       }
 
+      save(){
+
+      }
+
     render() {
       return (
           <div>
@@ -119,7 +131,7 @@ class Contrat extends Component {
           <h3 className="titre-cadre"> MES CONTRATS </h3>
             <div className="row justify-content-center" style={{position: 'absolute', top:'140px'}}>
             {(this.state.selectedEngagement && this.state.status === 'engagement') && (
-                <button type="button" class="btn btn-light" onClick={this.resetSelected.bind(this)}>Retour</button>
+                <button type="button" className="btn btn-light" onClick={this.resetSelected.bind(this)}>Retour</button>
             )}
                 <Dropdown>
                                         <Dropdown.Toggle variant="light" id="dropdown-basic">
@@ -128,7 +140,7 @@ class Contrat extends Component {
 
                                         <Dropdown.Menu alignRight>
                                             {this.state.dropdownDatas.filter(element => element.status !==this.state.status).map(d => (
-                                                <Dropdown.Item onClick={this.etat.bind(this, d.status, d.displayStatus)}>{d.displayStatus}</Dropdown.Item>
+                                                <Dropdown.Item key={d.status} onClick={this.etat.bind(this, d.status, d.displayStatus)}>{d.displayStatus}</Dropdown.Item>
                                             ))}
                                         </Dropdown.Menu>
                                     </Dropdown>
@@ -203,7 +215,18 @@ class Contrat extends Component {
                     </ul>
                 )}
                 {this.state.status === 'comment' && (
-                    <div style={{ color : '#fefefe', margin: '10px'}}>
+                    <div style={{ color : '#fefefe', margin: '10px', marginTop:'90px'}}>
+                        <textarea className="form-control"
+                                id="exampleFormControlTextarea1"
+                                value={this.state.myComment}
+                                onChange={this.onChangeMy}
+                                placeholder={"Ecrivez ici un commentaire sur votre contrat"}
+                                style={{width:'95%'}}
+                        />&nbsp;
+                        <button type="submit"
+                                className="modale"
+                                onClick={this.save.bind(this)}
+                        ><p>ENREGISTRER</p></button><br/>
                         {(this.state.user.textContrat) ? (
                             this.state.user.textContrat
                         ):(
@@ -212,26 +235,26 @@ class Contrat extends Component {
                     </div>
                 )}
                 {this.state.status === 'engagement' && (
-                    <div style={{ color : '#fefefe', margin: '10px'}}>
+                    <div style={{ color : '#fefefe', margin: '10px', marginTop:'90px'}}>
                         {(this.state.engagements.length===0) ? (
                             "Vous n'avez pas encore d'engagements"
                         ):(
                             (!this.state.selectedEngagement) ? (
                                 this.state.engagements.map((engagement, i)=> (
-                                    <div className="row">
-                                        <button type="button" style={{width:'80%'}} class="btn btn-outline-light col self-align-center" onClick={this.selectEngagement.bind(this, engagement)}>{"Rendez-vous du "+engagement.date}</button>
+                                    <div key={engagement.date} className="row">
+                                        <button type="button" style={{width:'80%'}} className="btn btn-outline-light col self-align-center" onClick={this.selectEngagement.bind(this, engagement)}>{"Rendez-vous du "+engagement.date}</button>
                                     </div>
                                 ))
                             ) : (
                                 <div style={{marginTop:'30px'}}>
                                     <div>{"Rendez-vous du "+this.state.selectedEngagement.date}</div>
-                                    <div class="row">
-                                    <button class="btn btn-outline-light" style={{width:'80%', textAlign:'left', margin:'10px'}}>
+                                    <div className="row">
+                                    <button className="btn btn-outline-light" style={{width:'80%', textAlign:'left', margin:'10px'}}>
                                         {this.state.selectedEngagement.student}
                                     </button>
                                     </div>
-                                    <div class="row justify-content-end">
-                                    <button class="btn btn-outline-light" style={{width:'80%', textAlign:'left', margin:'10px'}}>
+                                    <div className="row justify-content-end">
+                                    <button className="btn btn-outline-light" style={{width:'80%', textAlign:'left', margin:'10px'}}>
                                         {this.state.selectedEngagement.teacher}
                                     </button>
                                     </div>
@@ -240,7 +263,7 @@ class Contrat extends Component {
                         )}
                         {!this.state.selectedEngagement && (
                             <div className="row">
-                            <button type="button" style={{width:'80%'}} class="btn btn-outline-light col self-align-center">+</button>
+                            <button type="button" style={{width:'80%'}} className="btn btn-outline-light col self-align-center">+</button>
                         </div>
                         )}
                     </div>

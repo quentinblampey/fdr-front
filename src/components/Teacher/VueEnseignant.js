@@ -101,35 +101,73 @@ class VueEnseignant extends Component {
               <div className="text-center">
                 <h2> Étudiants </h2>
               </div>
-              <h5>Filtrer les étudiants par : </h5>
-              <div className="row text-center">
+              <div className="text-center" style={{ display: 'flex' }}>
                 <button
                   type="button"
-                  className="btn btn-primary col"
-                  style={{ width: '10%' }}
+                  className="btn btn-primary"
+                  style={{ width: '44%' , padding: '3px'}}
                   onClick={this.updateSort.bind(this, 'mean')}
                 >
-                                Difficultés
+                                En difficultés
                 </button>
 
                 <button
                   type="button"
-                  className="btn btn-primary col"
-                  style={{ width: '50%' }}
+                  className="btn btn-primary"
+                  style={{ width: '56%' , padding: '3px'}}
                   onClick={this.updateFilterHelp.bind(this)}
                 >
-                                Demande d'aide
+                                Demandes d'aide
                 </button>
               </div>
               {(filter.length !== 0 || filterHelp || sortScore.length !== 0) && (
-                <div>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'flex-left',
+                    background: '#eee',
+                    borderRadius: '5px',
+                    margin: '5px 0px',
+                  }}
+                >
                   <button
                     type="button"
                     className="btn btn-warning"
                     onClick={this.updateSortPseudo.bind(this)}
                   >
-                                    Réinitialiser le tri/filtres
+                    <i
+                      className="fa fa-times"
+                      style={{ color: '#fefefe' }}
+                      aria-hidden="true"
+                    />
                   </button>
+                  <div className="container">
+                    <div className="filters">
+                      <p> Filtres :</p>
+                      {filter.map(filt => (
+                        <div key={filt} className="filter">
+                          {' '}
+                          {filt}
+                          {' '}
+                        </div>
+                      ))}
+                      <div className="filter">
+                        {' '}
+                        {filterHelp && 'Demande aide'}
+                        {' '}
+                      </div>
+                    </div>
+                    <div className="sorts">
+                      <p> Tri :</p>
+                      {sortScore.map(sort => (
+                        <div key={sort} className="sort">
+                          {' '}
+                          {sort}
+                          {' '}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               )}
               <Filtered

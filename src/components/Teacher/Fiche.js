@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable react/button-has-type */
 /* eslint-disable prefer-template */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/jsx-indent */
@@ -146,14 +148,19 @@ class Begin extends Component {
                                                         'align-items': 'center',
                                                       }}
                                                     >
-                                                        <div>{ue.name}</div>
+                                                        <div>
+                                                            {ue.name}
+                                                            {ue.dateValid !== '' && (
+                                                                <div>{ue.dateValid}</div>
+                                                            )}
+                                                        </div>
                                                     </li>
                                                 </div>
                                             ))}
                                         </ul>
                                     )}
                                     {this.state.user.ue.length > 0 && (
-                                        <div>
+                                        <div className="container">
                                             <div className="row justify-content-between">
                                                 <h5 className="col-9">
                                                     &nbsp;Commentaire sur le contrat
@@ -161,7 +168,7 @@ class Begin extends Component {
                                                 <div className="col-3">
                                                     {this.state.saved && (
                                                         <h5 className="badge badge-pill badge-success">
-                                                            Saved
+                                                            Enregistré
                                                         </h5>
                                                     )}
                                                 </div>
@@ -172,6 +179,7 @@ class Begin extends Component {
                                               value={this.state.textContrat}
                                               onChange={this.onChange}
                                             />
+                                            &nbsp;
                                             <button
                                               type="submit"
                                               className="modale"
@@ -182,8 +190,10 @@ class Begin extends Component {
                                         </div>
                                     )}
                                 </div>
+                                <br />
                             </div>
                         </div>
+                        <br />
                     </div>
                     <div className=" col-6">
                         <div className="card">
@@ -305,98 +315,98 @@ class Recap extends Component {
     }
 
     return (
-            <div>
-                <div className="card bg-light mb-3">
-                    <div className="card-header">
-                        <h2>Informations personnelles</h2>
-                    </div>
-                    <ul className="list-group list-group-flush">
-                        <li className="list-group-item">
-                            <h5 className="card-title">
-                                {' '}
-                                Motivation générale :
+            <div className="card bg-light mb-3">
+                <div className="card-header">
+                    <h2>Informations personnelles</h2>
+                </div>
+                <ul className="list-group list-group-flush">
+                    <li className="list-group-item">
+                        <h5 className="card-title">
+                            {' '}
+                            Motivation générale :
 {' '}
 {parseFloat(score.motivation).toFixed(2)}
-                                /10
-                            </h5>
-                        </li>
+                            /10
+                        </h5>
+                    </li>
 
-                        <li className="list-group-item">
-                            <h5 className="card-title">
-                                {' '}
-                                Utilisation et fidélité :
+                    <li className="list-group-item">
+                        <h5 className="card-title">
+                            {' '}
+                            Utilisation et fidélité :
 {' '}
 {parseFloat(score.fidelity).toFixed(2)}
-                                /10
-                            </h5>
-                            <p className="card-text">
+                            /10
+                        </h5>
+                        <p className="card-text">
 {' '}
 Dernière session de chat :
 {lastChat}
 {' '}
 
-                            </p>
-                            <p className="card-text">
-                                {' '}
-                                Nombre de sessions de chat :
+                        </p>
+                        <p className="card-text">
+                            {' '}
+                            Nombre de sessions de chat :
 {' '}
-                                {fidelity ? user.numberChats.length : '0'}
+{fidelity
+  ? user.numberChats.length
+  : '0'}
 {' '}
-                            </p>
-                            <p className="card-text">
-                                {' '}
-                                Nombre de réponses :
+                        </p>
+                        <p className="card-text">
 {' '}
+Nombre de réponses :
 {user.numberQuestions}
 {' '}
-                            </p>
-                            <p className="card-text">
+
+                        </p>
+                        <p className="card-text">
 {' '}
 Date d&apos;inscription :
 {firstLog}
 {' '}
 
-                            </p>
-                        </li>
+                        </p>
+                    </li>
 
-                        <li className="list-group-item">
-                            <h5 className="card-title">
-                                {' '}
-                                Style de vie :
+                    <li className="list-group-item">
+                        <h5 className="card-title">
+                            {' '}
+                            Style de vie :
 {' '}
 {parseFloat(score.lifestyle).toFixed(2)}
-                                /10
-                            </h5>
-                        </li>
+                            /10
+                        </h5>
+                    </li>
 
-                        <li className="list-group-item">
-                            <h5 className="card-title">
-                                {' '}
-                                Intégration :
+                    <li className="list-group-item">
+                        <h5 className="card-title">
+                            {' '}
+                            Intégration :
 {' '}
 {parseFloat(score.integration).toFixed(2)}
-                                /10
-                            </h5>
-                        </li>
+                            /10
+                        </h5>
+                    </li>
 
-                        <li className="list-group-item">
-                            <h5 className="card-title">
-                                Pertinence de l&apos;orientation :
+                    <li className="list-group-item">
+                        <h5 className="card-title">
+                            Pertinence de l&apos;orientation :
 {' '}
-                                {parseFloat(score.noOrientation).toFixed(2)}
-                                /10
-                            </h5>
-                        </li>
-                    </ul>
+                            {parseFloat(score.noOrientation).toFixed(2)}
+                            /10
+                        </h5>
+                    </li>
+                </ul>
 
-                    <div className="card-footer">
-                        <h4 className="card-title">
-                            Score moyen :
+                <div className="card-footer">
+                    <h4 className="card-title">
+                        Score moyen :
 {' '}
 {parseFloat(average).toFixed(2)}
-                            /10
-                        </h4>
-                    </div>
+                        /10
+                    </h4>
                 </div>
             </div>
     );

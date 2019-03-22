@@ -14,35 +14,6 @@ class Filtered extends Component {
   render() {
     return (
       <div className="container">
-        {!this.props.helped && (
-        <div className="container">
-          <div className="filters">
-            <p> Filtres :</p>
-            {this.props.filter.map(filter => (
-              <div key={filter} className="filter">
-                {' '}
-                {filter}
-                {' '}
-              </div>
-            ))}
-            <div className="filter">
-              {' '}
-              {this.props.filterHelp && 'Demande aide'}
-              {' '}
-            </div>
-          </div>
-          <div className="sorts">
-            <p> Tri :</p>
-            {this.props.sortScore.map(sort => (
-              <div key={sort} className="sort">
-                {' '}
-                {sort}
-                {' '}
-              </div>
-            ))}
-          </div>
-        </div>
-        )}
         {this.props.helped && (
         <div>
           <ReactTooltip multiline />

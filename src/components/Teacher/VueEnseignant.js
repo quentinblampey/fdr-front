@@ -180,8 +180,7 @@ class VueEnseignant extends Component {
                 users={this.state.users}
               />
             </div>
-            <div className="bloc-center">
-              <div className="row">
+            <div className="bloc-center" style={{ display:'flex'}} >
                 <div className="chart">
                   <br />
                   <RadialChart
@@ -197,7 +196,6 @@ class VueEnseignant extends Component {
                   <br />
                   <Repartition updateSort={this.state.updateSort} />
                 </div>
-              </div>
             </div>
             <div className="filtered">
               <Filtered

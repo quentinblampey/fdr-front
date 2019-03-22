@@ -45,10 +45,21 @@ class Repartition extends Component {
 
     return (
       <div>
-        <p>
-          <h5>Répartition par critère</h5>
-        </p>
-        <Info part="repartition" />
+        <div
+          style={{
+            background: '#eee',
+            borderRadius: '5px',
+            color: variables.graph1,
+            padding: '10px',
+            width: '310px',
+            margin: 'auto',
+          }}
+        >
+          <p>
+            <h5 style={{ margin: '0px' }}>Répartition par critère</h5>
+          </p>
+          <Info part="repartition" />
+        </div>
         <br />
         <div className="container">
           <div className="card">

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Chart from 'react-apexcharts';
 import Info from './Info';
+import variables from '../../globalSCSS/color.scss';
 
 class RadialChart extends Component {
   constructor(props) {
@@ -46,18 +47,28 @@ class RadialChart extends Component {
 
     return (
       <div className="container">
-        <p>
-          <h5>Repartition par profil</h5>
-        </p>
-        <Info part="profils" />
+        <div
+          style={{
+            background: '#eee',
+            borderRadius: '5px',
+            color: variables.graph1,
+            padding: '10px',
+            width: '310px',
+            margin: 'auto',
+          }}
+        >
+          <p>
+            <h5 style={{ margin: '0px' }}>Répartition par profil</h5>
+          </p>
+          <Info part="profils" />
+        </div>
         <br />
         <div>
           <div>
             {this.props.profils.map((a, i) => (
               <div key={i} style={{ color: this.props.colors[i], marginLeft: '7%' }}>
                 {a}
-                {' '}
-:
+                {' : '}
                 {this.props.proportions[i]}
 %
               </div>

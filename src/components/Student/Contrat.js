@@ -15,8 +15,13 @@ class Contrat extends Component {
     // this.demAide = this.demAide.bind(this);
     this.state = {
         comment:'',
+        engagements:[{date: "21 Mars", student:"Je m'engage à aller en TD", validation:true, teacher:"Ok j'ai noté ton engagement"},
+        {date: "21 Juin", student:"Je m'engage à aller en Amphi des fois", validation:false, teacher:"Pas sur que ça soit suffisant.."}
+    ],
         user:{ue:[]},
         status: 'choice',
+        displayStatus: 'Mes Ues',
+        dropdownDatas:  [{status: 'choice', displayStatus : 'Mes UEs'}, {status: 'feedback', displayStatus :'Mes Feedbacks'}, {status:'comment', displayStatus :'Mes Commentaires'}, {status: 'engagement', displayStatus :'Mes Engagements'}, {status:'reflexions', displayStatus :'Mes Reflexions'}],
         UEs: [],
     };
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -55,13 +60,14 @@ class Contrat extends Component {
             UEs.forEach(element => {
                 element.checked = (res.data.ue.filter((x) => element.name===x.name).length ===1);
             });
-            this.setState({ user: res.data , UEs:UEs, status:'feedback'});
+            this.setState({ user: res.data , UEs:UEs, status:'feedback', displayStatus: 'Mes Feedbacks'});
           });
       });
     }
 
-    etat = (nextEtat) => {
-        this.setState({ status: nextEtat });
+    etat = (nextEtat, nextDisplayEtat) => {
+        this.setState({ status: nextEtat, displayStatus: nextDisplayEtat });
+        this.resetSelected();
     }
     
     options = (status, name) => {
@@ -93,17 +99,36 @@ class Contrat extends Component {
               });
       }
 
+      selectEngagement(engagement){
+          this.setState({selectedEngagement:engagement})
+      }
+
+      resetSelected(){
+          this.setState({selectedEngagement:undefined})
+      }
+
     render() {
       return (
           <div>
               <Test onglet="contrat" id={this.props.match.params.id} />
               
-          <div className="component">
+          <div className="component row justify-content-center" style={{ margin:'0px' }} >
           <h3 className="titre-cadre"> MES CONTRATS </h3>
-            <div className="btn-group" role="group" aria-label="Basic example" style={{ position: 'absolute', top:'140px'}}>
-                  <button type="button" className="btn btn-light" onClick={this.etat.bind(this, 'choice')}>Choix</button>
-                  <button type="button" className="btn btn-light" onClick={this.etat.bind(this, 'feedback')}>Feedback</button>
-                  <button type="button" className="btn btn-light" onClick={this.etat.bind(this, 'comment')}>Commentaire</button>
+            <div className="row justify-content-center" style={{position: 'absolute', top:'140px'}}>
+            {(this.state.selectedEngagement && this.state.status === 'engagement') && (
+                <button type="button" class="btn btn-light" onClick={this.resetSelected.bind(this)}>Retour</button>
+            )}
+                <Dropdown>
+                                        <Dropdown.Toggle variant="light" id="dropdown-basic">
+                                            {this.state.displayStatus}
+                                        </Dropdown.Toggle>
+
+                                        <Dropdown.Menu alignRight>
+                                            {this.state.dropdownDatas.filter(element => element.status !==this.state.status).map(d => (
+                                                <Dropdown.Item onClick={this.etat.bind(this, d.status, d.displayStatus)}>{d.displayStatus}</Dropdown.Item>
+                                            ))}
+                                        </Dropdown.Menu>
+                                    </Dropdown>
                 </div>
                 {this.state.status === 'choice' && (
                     <div style={{
@@ -114,7 +139,7 @@ class Contrat extends Component {
                         overflowX: 'hidden'}}>
                         <form>
                             {this.state.UEs.map((ue, i) => (
-                                <div key={ue.name} style={{ color : '#fefefe', margin:'10px', width:'100%'}}>
+                                <div key={ue.name} style={{ color : '#fefefe', margin:'10px', width:'100%-10px'}}>
                                     <div style={{ width:'100%'}}>
                                         <Switch style={{margin:'30px'}} onChange={this.handleInputChange.bind(this, i)} checked={ue.checked} uncheckedIcon={false} checkedIcon={false} width={40} height={15} handleDiameter={20}/>
                                         {" "+ue.name}
@@ -145,10 +170,14 @@ class Contrat extends Component {
                                         </Dropdown.Toggle>
 
                                         <Dropdown.Menu alignRight>
-                                            <Dropdown.Item onClick={this.options.bind(this, "success", ue.name)}>Validé !</Dropdown.Item>
+                                            <Dropdown.Header>Suivi de l'UE</Dropdown.Header>
                                             <Dropdown.Item onClick={this.options.bind(this, "warning", ue.name)}>Signaler des difficulté</Dropdown.Item>
-                                            <Dropdown.Item onClick={this.options.bind(this, "danger", ue.name)}>Echec</Dropdown.Item>
                                             <Dropdown.Item onClick={this.comment.bind(this, ue.name)}>Commentaire</Dropdown.Item>
+                                            <Dropdown.Item onClick={this.comment.bind(this, ue.name)}>Absence à une évaluation</Dropdown.Item>
+                                            <Dropdown.Divider />
+                                            <Dropdown.Header>Fin de l'UE</Dropdown.Header>
+                                            <Dropdown.Item onClick={this.options.bind(this, "success", ue.name)}>Validé</Dropdown.Item>
+                                            <Dropdown.Item onClick={this.options.bind(this, "danger", ue.name)}>Non validé</Dropdown.Item>
                                         </Dropdown.Menu>
                                     </Dropdown>
                                     <Modal style={{ zIndex:10}} open={this.state.UEs.filter(element => element.name===ue.name)[0].comment} onClose={this.comment.bind(this, ue.name)} center>
@@ -176,6 +205,40 @@ class Contrat extends Component {
                             this.state.user.textContrat
                         ):(
                             "Votre enseignant n'a pas encore renseigné de commentaire concernant votre contrat"
+                        )}
+                    </div>
+                )}
+                {this.state.status === 'engagement' && (
+                    <div style={{ color : '#fefefe', margin: '10px'}}>
+                        {(this.state.engagements.length===0) ? (
+                            "Vous n'avez pas encore d'engagements"
+                        ):(
+                            (!this.state.selectedEngagement) ? (
+                                this.state.engagements.map((engagement, i)=> (
+                                    <div className="row">
+                                        <button type="button" style={{width:'80%'}} class="btn btn-outline-light col self-align-center" onClick={this.selectEngagement.bind(this, engagement)}>{"Rendez-vous du "+engagement.date}</button>
+                                    </div>
+                                ))
+                            ) : (
+                                <div style={{marginTop:'30px'}}>
+                                    <div>{"Rendez-vous du "+this.state.selectedEngagement.date}</div>
+                                    <div class="row">
+                                    <button class="btn btn-outline-light" style={{width:'80%', textAlign:'left', margin:'10px'}}>
+                                        {this.state.selectedEngagement.student}
+                                    </button>
+                                    </div>
+                                    <div class="row justify-content-end">
+                                    <button class="btn btn-outline-light" style={{width:'80%', textAlign:'left', margin:'10px'}}>
+                                        {this.state.selectedEngagement.teacher}
+                                    </button>
+                                    </div>
+                                </div>
+                            )
+                        )}
+                        {!this.state.selectedEngagement && (
+                            <div className="row">
+                            <button type="button" style={{width:'80%'}} class="btn btn-outline-light col self-align-center">+</button>
+                        </div>
                         )}
                     </div>
                 )}

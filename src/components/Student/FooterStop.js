@@ -23,8 +23,8 @@ class FooterStop extends Component {
           >
             <button
               style={{
-                height: '50px',
-                width: '50px',
+                height: '40px',
+                width: '40px',
                 border: '1px solid rgb(201, 2, 69)',
                 borderRadius: '25px',
                 display: 'flex',

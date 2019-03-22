@@ -232,6 +232,7 @@ class Contrat extends Component {
                         ):(
                             "Votre enseignant n'a pas encore renseigné de commentaire concernant votre contrat"
                         )}
+                        <br/><br/> Cette fonctionnalité est en cours de développement
                     </div>
                 )}
                 {this.state.status === 'engagement' && (
@@ -266,6 +267,11 @@ class Contrat extends Component {
                             <button type="button" style={{width:'80%'}} className="btn btn-outline-light col self-align-center">+</button>
                         </div>
                         )}
+                    </div>
+                )}
+                {this.state.status === 'reflexions' && (
+                    <div style={{ color : '#fefefe', margin: '50px 10px 10px 10px'}}>
+                        Cette fonctionnalité est en cours de développement
                     </div>
                 )}
           </div>

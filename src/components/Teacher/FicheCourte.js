@@ -30,7 +30,6 @@ class FicheCourte extends Component {
                 <Link to={`/enseignant/fiche/${this.props.user._id}`} target="_blank">
                     <div className="card1">
                         <div className="header">
-                            <ReactTooltip multiline />
                             {this.props.user.aide && (
                                 <span
                                     className="badge badge-pill badge-danger"
@@ -41,7 +40,6 @@ class FicheCourte extends Component {
                             )}
                             {this.props.user.score.mean < 5 && (
                                 <div>
-                                    <ReactTooltip multiline />
                                     <span
                                         className="badge badge-pill badge-warning"
                                         data-tip="Le chatbot a repéré un étudiant <br /> qui mérite votre attention!"

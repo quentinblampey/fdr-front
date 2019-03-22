@@ -25,6 +25,11 @@ class Navbar extends Component {
                 </Link>
               </li>
               <li className="nav-item">
+                <Link to="/enseignant/explication">
+                  <div className="link">Guide</div>
+                </Link>
+              </li>
+              <li className="nav-item">
                 <Link to="/enseignant/propose">
                   <div className="link">Proposer des créneaux de rendez-vous</div>
                 </Link>

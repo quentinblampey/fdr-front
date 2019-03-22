@@ -9,6 +9,7 @@ import FicheCourte from './FicheCourte';
 import Repartition from './Repartition';
 import Profils from './Profils';
 import HistoricUpdate from './HistoricUpdate';
+import Explication from './Explication';
 import Nav from '../Navbar';
 import Propose from './Propose';
 
@@ -102,6 +103,7 @@ class RouterEns extends Component {
               <Nav />
               <Route exact path="/fakefiche" component={FicheCourte} />
               <Route exact path="/enseignant/automation" component={HistoricUpdate} />
+              <Route exact path="/enseignant/explication" component={Explication} />
               <Route exact path="/enseignant" component={VueEnseignant} />
               <Route path="/enseignant/propose" component={Propose} />
               <Route

@@ -9,7 +9,6 @@ import Contrat from './components/Student/Contrat';
 import Test from './components/Student/test';
 import VueEtudiant from './components/Student/VueEtudiant';
 import RouterEns from './components/Teacher/RouterEnseignant';
-import Explication from './components/Teacher/Explication';
 import IE from './components/IE';
 
 class App extends Component {
@@ -27,7 +26,6 @@ class App extends Component {
           <Route exact path="/" component={VueEtudiant} />
           <Route exact path="/etudiant" component={VueEtudiant} />
           <Route exact path="/contrat/:id" component={Contrat} />
-          <Route exact path="/explication" component={Explication} />
           <Route path="/chat/:id" component={Chat} />
           <Route path="/aide/:id" component={Aide} />
           <Route path="/test/:onglet" component={Test} />

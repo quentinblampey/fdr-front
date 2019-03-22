@@ -13,9 +13,11 @@ class Navbar extends Component {
             <i
               className="fa fa-tint"
               aria-hidden="true"
-              style={{ color: '#fefefe', fontSize: '25px', margin: '10px' }}
+              style={{ color: '#fefefe', fontSize: '30px', margin: '10px' }}
             />
-            <div className="title">Océane - Vue enseignant</div>
+            <div className="title" style={{ fontSize: '35px' }}>
+                            Océane
+            </div>
           </div>
           <form className="form-inline">
             <ul className="navbar-nav">

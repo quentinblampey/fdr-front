@@ -10,6 +10,11 @@ class Navbar extends Component {
       <div>
         <nav className="navbar navbar-expand-lg navbar-light bg-primary">
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <i
+              className="fa fa-tint"
+              aria-hidden="true"
+              style={{ color: '#fefefe', fontSize: '25px', margin: '10px' }}
+            />
             <div className="title">Océane - Vue enseignant</div>
           </div>
           <form className="form-inline">

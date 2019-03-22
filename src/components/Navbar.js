@@ -21,7 +21,7 @@ class Navbar extends Component {
               </li>
               <li className="nav-item">
                 <Link to="/enseignant/propose">
-                  <div className="link">Proposer des creneaux de Rendez-vous</div>
+                  <div className="link">Proposer des créneaux de rendez-vous</div>
                 </Link>
               </li>
             </ul>

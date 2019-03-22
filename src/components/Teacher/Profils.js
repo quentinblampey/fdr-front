@@ -46,14 +46,11 @@ class RadialChart extends Component {
 
     return (
       <div className="container">
-        <div className="row">
-          <div className="col-10">
-            <h5>Repartition des étudiants selon leurs profils</h5>
-          </div>
-          <div className="col-2">
-            <Info part="profils" />
-          </div>
-        </div>
+        <p>
+          <h5>Repartition par profil</h5>
+        </p>
+        <Info part="profils" />
+        <br />
         <div>
           <div>
             {this.props.profils.map((a, i) => (
@@ -70,8 +67,7 @@ class RadialChart extends Component {
             <div className="radialbar">
               <Chart
                 options={options}
-                series={
-                  this.props.proportions}
+                series={this.props.proportions}
                 type="radialBar"
                 height="380"
               />

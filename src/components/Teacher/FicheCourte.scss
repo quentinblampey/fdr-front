@@ -5,6 +5,7 @@
     width: 250px;
     height: 150px;
     margin: $margin2 0px;
+    margin-right: $margin1;
     background: $grayLight;
     border: none;
     border-radius: $normal;
@@ -12,7 +13,7 @@
     flex-direction: row;
 
     & .header {
-        width: 100px;
+        width: 120px;
         height: 100%;
         border-radius: $normal;
         background: $blue;
@@ -61,13 +62,13 @@
         }
 
         & .other {
-            margin-left: 10px;
+            margin-left: 5px;
         }
 
         & .bars {
             display: flex;
             flex-direction: row;
-            margin-left: 10px;
+            margin-left: 5px;
 
             & .progress-container {
                 background: $white;

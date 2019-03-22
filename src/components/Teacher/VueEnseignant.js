@@ -16,7 +16,7 @@ class VueEnseignant extends Component {
       sort: ['pseudo'],
       sortScore: [],
       filterHelp: false,
-      profils: ['Employés', 'Sportifs', 'Handicapés', 'Artistes', 'Etudiants étrangers'],
+      profils: ['Employés', 'Sportifs', 'Handicapés', 'Artistes', 'Internationaux'],
       profilsName: ['employe', 'athlete', 'disabled', 'artist', 'foreigner'],
       proportions: [0, 0, 0, 0, 0],
       colors: [variables.graph1, variables.graph2, variables.graph3, variables.graph4],
@@ -93,11 +93,45 @@ class VueEnseignant extends Component {
     }
 
     render() {
+      const { sortScore, filter, filterHelp } = this.state;
       return (
         <div className="container text-center">
-          <h1 className="jumbotron-heading">Aide à la réussite</h1>
           <div className="row dashboard">
             <div className="filtered">
+              <div className="text-center">
+                <h2> Étudiants </h2>
+              </div>
+              <h5>Filtrer les étudiants par : </h5>
+              <div className="row text-center">
+                <button
+                  type="button"
+                  className="btn btn-primary col"
+                  style={{ width: '10%' }}
+                  onClick={this.updateSort.bind(this, 'mean')}
+                >
+                                Difficultés
+                </button>
+
+                <button
+                  type="button"
+                  className="btn btn-primary col"
+                  style={{ width: '50%' }}
+                  onClick={this.updateFilterHelp.bind(this)}
+                >
+                                Demande d'aide
+                </button>
+              </div>
+              {(filter.length !== 0 || filterHelp || sortScore.length !== 0) && (
+                <div>
+                  <button
+                    type="button"
+                    className="btn btn-warning"
+                    onClick={this.updateSortPseudo.bind(this)}
+                  >
+                                    Réinitialiser le tri/filtres
+                  </button>
+                </div>
+              )}
               <Filtered
                 filter={this.state.filter}
                 filterHelp={this.state.filterHelp}
@@ -109,34 +143,6 @@ class VueEnseignant extends Component {
               />
             </div>
             <div className="bloc-center">
-              <div className="row text-center">
-                <button
-                  type="button"
-                  className="btn btn-primary col"
-                  style={{ width: '100%' }}
-                  onClick={this.updateSortPseudo.bind(this)}
-                >
-                                Liste complète
-                </button>
-
-                <button
-                  type="button"
-                  className="btn btn-primary col"
-                  style={{ width: '100%' }}
-                  onClick={this.updateSort.bind(this, 'mean')}
-                >
-                                Étudiants en difficulté
-                </button>
-
-                <button
-                  type="button"
-                  className="btn btn-primary col"
-                  style={{ width: '100%' }}
-                  onClick={this.updateFilterHelp.bind(this)}
-                >
-                                Étudiants en demande d'aide
-                </button>
-              </div>
               <div className="row">
                 <div className="chart">
                   <br />

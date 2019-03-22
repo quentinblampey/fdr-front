@@ -45,14 +45,11 @@ class Repartition extends Component {
 
     return (
       <div>
-        <div className="row">
-          <div className="col-10">
-            <h5>Répartition des étudiants suivant les 5 critères.</h5>
-          </div>
-          <div className="col-2">
-            <Info part="repartition" />
-          </div>
-        </div>
+        <p>
+          <h5>Répartition par critère</h5>
+        </p>
+        <Info part="repartition" />
+        <br />
         <div className="container">
           <div className="card">
             <div className="card-header">Légende : proportion d'étudiants </div>

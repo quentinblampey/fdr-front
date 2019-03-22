@@ -8,9 +8,9 @@ class Info extends Component {
     this.state = {
       texts: {
         profils:
-                    'Dans cette partie du Dashboard, <br/>vous pouvez clicker sur chacun <br/>des elements afin que la liste des <br/>étudiants proposés soit filtrée pour <br/>ce profil.',
+                    'Dans cette partie du Dashboard, <br/>vous pouvez cliquer sur chacun <br/>des elements afin que la liste des <br/>étudiants proposés soit filtrée pour <br/>ce profil.',
         repartition:
-                    'Dans cette partie du Dashboard, <br/>vous pouvez clicker sur chacun <br/>des élements afin que la liste des <br/>étudiants proposés soit ordonnée en <br/>fonction de ce critère.',
+                    'Dans cette partie du Dashboard, <br/>vous pouvez cliquer sur chacun <br/>des élements afin que la liste des <br/>étudiants proposés soit ordonnée en <br/>fonction de ce critère.',
       },
     };
   }

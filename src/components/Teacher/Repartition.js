@@ -63,15 +63,32 @@ class Repartition extends Component {
           <div className="card">
             <div className="card-header">Légende : proportion d'étudiants </div>
             <ul className="list-group list-group-flush">
-              <li className="list-group-item d-flex justify-content-center">
+              <li
+                className="list-group-item d-flex justify-content-center"
+              >
                                 Notes de &nbsp; &nbsp;
-                <span className="badge badge-pill badge-danger">0 à 4</span>
+                <span
+                  className="badge badge-pill badge-danger"
+                  style={{ paddingTop: '5px' }}
+                >
+                                    0 à 4
+                </span>
                 {' '}
-&nbsp;
-                <span className="badge badge-pill badge-warning">4 à 7</span>
+                                &nbsp;
+                <span
+                  className="badge badge-pill badge-warning"
+                  style={{ paddingTop: '5px' }}
+                >
+                                    4 à 7
+                </span>
                 {' '}
-&nbsp;
-                <span className="badge badge-pill badge-success">7 à 10</span>
+                                &nbsp;
+                <span
+                  className="badge badge-pill badge-success"
+                  style={{ paddingTop: '5px' }}
+                >
+                                    7 à 10
+                </span>
               </li>
             </ul>
           </div>

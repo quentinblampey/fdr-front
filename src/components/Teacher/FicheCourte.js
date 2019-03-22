@@ -32,18 +32,18 @@ class FicheCourte extends Component {
                         <div className="header">
                             {this.props.user.aide && (
                                 <div>
-                                <ReactTooltip multiline/>
-                                <span
-                                    className="badge badge-pill badge-danger"
-                                    data-tip={this.props.user.aideMessage}
-                                >
-                                    Aide
-                                </span>
+                                    <ReactTooltip multiline />
+                                    <span
+                                        className="badge badge-pill badge-danger"
+                                        data-tip={this.props.user.aideMessage}
+                                    >
+                                        Aide
+                                    </span>
                                 </div>
                             )}
                             {this.props.user.score.mean < 5 && (
                                 <div>
-                                    <ReactTooltip multiline/>
+                                    <ReactTooltip multiline />
                                     <span
                                         className="badge badge-pill badge-warning"
                                         data-tip="Le chatbot a repéré un étudiant <br /> qui mérite votre attention!"
@@ -70,15 +70,16 @@ class FicheCourte extends Component {
                         </div>
                         <div className="scores">
                             <div className="other">
-                                <p>M</p>
+                                <ReactTooltip multiline />
+                                <p data-tip="Motivation pour les cours">M</p>
 {' '}
-<p>L</p>
+                                <p data-tip="Lifestyle">L</p>
 {' '}
-<p>I</p>
+<p data-tip="Intégration">I</p>
 {' '}
-<p>F</p>
+                                <p data-tip="Fidelité à Océane">F</p>
 {' '}
-<p>O</p>
+                                <p data-tip="Orientation">O</p>
                             </div>
                             <div className="bars">
                                 <div className="progress-container">
@@ -142,7 +143,7 @@ class FicheCourte extends Component {
                 </Link>
                 {!this.props.user.helped && (
                     <div>
-                        <ReactTooltip multiline/>
+                        <ReactTooltip multiline />
                         <button
                             onClick={() => {
                                 this.props.help(this.props.user._id);

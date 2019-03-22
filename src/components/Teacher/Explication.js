@@ -177,20 +177,32 @@ il est
         </div>
         <h2> 3 - Contrats </h2>
 
-        <p> Lorem ipsum</p>
+        <p>Dans cette partie, les enseignants référents peuvent gérer le contrat pédagogique en lien 
+          avec l'étudiant. Pour cela, il dispose de différentes foncionnalités accessibles grâce au menu déroulant.</p>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
-          <h4> 2.1 Lorem ipsum </h4>
-          <p> Lorem ipsum </p>
+          <h4> 3.1 UEs choisies </h4>
+          <p> Dans cette section, l'enseignant peut accéder aux UEs choisies par l'étudiant dont les couleurs correspndent 
+            à l'état déclaré par l'étudiant (validé, non validé, en difficulté. Il peut en outre accéder au commentaire 
+            laissé par l'étudiant au survol de l'UE) </p>
         </div>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
-          <h4> 2.2 Lorem ipsum </h4>
-          <p> Lorem ipsum</p>
+          <h4> 3.2 Commentaires </h4>
+          <p> Dans cette section, l'enseignant peut accéder au commentaire général sur le contrat saisi par l'étudiant. 
+            Il peut également saisir ou modifier son propre commentaire</p>
         </div>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
-          <h4> 2.3 Lorem ipsum </h4>
-          <p> Lorem ipsum</p>
+          <h4> 3.3 Engagements </h4>
+          <p> Dans cette section, l'enseignant pourra accéder à la liste des compte-rendus des entretiens saisis par 
+            l'étudiants. Il peut également saisir sa réaction aux engagements de l'étudiant(approbation, information 
+            complémentaire etc...)</p>
         </div>
-        <img src={img5} alt=" " style={{ height: '400px', margin: '20px auto' }} />
+        <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
+          <h4> 3.4 Reflexions </h4>
+          <p> Dans cette section, l'enseignant pourra accéder à la liste des compte-rendus des entretiens avec d'autres intervenants saisis par 
+            l'étudiants. Il peut également saisir sa réaction aux engagements de l'étudiant(approbation, information 
+            complémentaire etc...)</p>
+        </div>
+        <img src={img5} alt=" " style={{ height: '250px', margin: '20px auto' }} />
       </div>
     );
   }

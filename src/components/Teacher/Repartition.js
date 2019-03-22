@@ -55,9 +55,7 @@ class Repartition extends Component {
             margin: 'auto',
           }}
         >
-          <p>
-            <h5 style={{ margin: '0px' }}>Répartition par critère</h5>
-          </p>
+          <h5 style={{ margin: '0px' }}>Répartition par critère</h5>
           <Info part="repartition" />
         </div>
         <br />

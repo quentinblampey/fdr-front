@@ -57,9 +57,7 @@ class RadialChart extends Component {
             margin: 'auto',
           }}
         >
-          <p>
-            <h5 style={{ margin: '0px' }}>Répartition par profil</h5>
-          </p>
+          <h5 style={{ margin: '0px' }}>Répartition par profil</h5>
           <Info part="profils" />
         </div>
         <br />

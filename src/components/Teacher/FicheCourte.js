@@ -31,15 +31,19 @@ class FicheCourte extends Component {
                     <div className="card1">
                         <div className="header">
                             {this.props.user.aide && (
+                                <div>
+                                <ReactTooltip multiline/>
                                 <span
                                     className="badge badge-pill badge-danger"
                                     data-tip={this.props.user.aideMessage}
                                 >
                                     Aide
                                 </span>
+                                </div>
                             )}
                             {this.props.user.score.mean < 5 && (
                                 <div>
+                                    <ReactTooltip multiline/>
                                     <span
                                         className="badge badge-pill badge-warning"
                                         data-tip="Le chatbot a repéré un étudiant <br /> qui mérite votre attention!"

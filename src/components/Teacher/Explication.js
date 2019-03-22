@@ -34,14 +34,14 @@ class Info extends Component {
             {' '}
                         Au dessus du nom de l'étudiant peut apparaître une ou deux pastille "Aide".
                         Une vignette aide de couleur orange signifie que le chatbot a remarqué que
-                        cet étudiant a besoin d'aide, et il est recommendé de l'aider. Une pastille
+                        cet étudiant a besoin d'aide, et il est recommandé de l'aider. Une pastille
                         rouge signifie que l'étudiant a demandé de l'aide, et il est alors possible
                         de voir son message de demande d'aide au survol de cette pastille.
             {' '}
           </p>
           <p>
             {' '}
-                        Au clique sur une fiche, un onglet s'ouvre et affiche un peu plus de détail
+                        Au clic sur une fiche, un onglet s'ouvre et affiche un peu plus de détail
                         sur cet étudiant.
             {' '}
           </p>
@@ -54,13 +54,13 @@ class Info extends Component {
             {' '}
                         Le dashboard, en plus de l'affichage des étudiants, propose différents
                         indicateurs globaux, donnant donc au professeur des outils pour sonder
-                        l'état de sa cohorte dans sa gloabilté et non étudiant par étudiant.
+                        l'état de sa cohorte dans sa globalité et non étudiant par étudiant.
           </p>
           <p>
             {' '}
-                        Le graphique suivant affiche de pourcentage de caractéristiques présentes
-                        dans la cohorte, comme le pourcentage d'étudiant sportifs de haut niveau,
-                        employés en parralèle, étudiant internationnal etc...
+                        Le graphique suivant affiche les pourcentages de certaines caractéristiques
+                        présentes dans la cohorte, comme le pourcentage d'étudiants sportifs de haut
+                        niveau, employés en parallèle, étudiants internationaux etc...
             {' '}
           </p>
           <img src={img2} alt=" " style={{ height: '500px', margin: '20px auto' }} />
@@ -88,19 +88,19 @@ class Info extends Component {
             <span style={{ fontFamily: 'MsBoldItalic' }}> Tris : </span>
             {' '}
 il est possible
-                        de trier les étudiants par chacun des 5 indicateurs en cliquant sur la jauge
-                        correspondante, mais aussi de trier les étudiants par difficulté (prennant
-                        en compte les 5 critères).
+                        de trier les étudiants selon chacun des 5 indicateurs en cliquant sur la
+                        jauge correspondante, mais aussi de trier les étudiants selon leur niveau de
+                        difficulté (prenant en compte les 5 critères).
           </p>
           <p>
             {' '}
             <span style={{ fontFamily: 'MsBoldItalic' }}> Filtres : </span>
             {' '}
 il est
-                        possible de filtrer les étudiants selon leur caractéristique, par exemple si
-                        ils sont oui ou non sportif de haut niveau / étudiant internationnal / ...
-                        Mais surtout il est possible de récupérer seulement les étudiants ayant
-                        demandé de l'aide en appliquant le filtre correspondant.
+                        possible de filtrer les étudiants selon leurs caractéristiques, par exemple
+                        si ils sont ou non sportif de haut niveau / étudiant international / ... Il
+                        est également possible de récupérer seulement les étudiants ayant demandé de
+                        l'aide en appliquant le filtre correspondant.
             {' '}
           </p>
           <p>
@@ -112,7 +112,7 @@ il est
           <img src={img4} alt=" " style={{ height: '150px', margin: '20px auto' }} />
         </div>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
-          <h4> 1.4 Principe de l'acceptation de demande de rendez-vous </h4>
+          <h4> 1.4 Gestion des demandes de rendez-vous </h4>
           <p>
             {' '}
                         Imaginons qu'un professeur souhaite reçevoir 5 étudiants cette semaine.
@@ -157,7 +157,7 @@ il est
                         individuellement un ou plusieurs créneau de rendez-vous. L'étudiant doit
                         donc ensuite, de son côté, accepter un des créneaux proposé. Il est possible
                         de proposer un créneau par un jusqu'à ce que l'étudiant en accepte un, pour
-                        éviter les trous dans le planning du professeur
+                        éviter les trous dans le planning du professeur.
           </p>
         </div>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
@@ -171,7 +171,7 @@ il est
                         barre de navigation), et les étudiants de leur côté choisiront tous les
                         créneaux où ils sont disponibles. Ensuite, un algorithme sera lancé de sorte
                         à trouver une solution qui convient aux étudiants et au professeur. Si il
-                        n'existe pas de solution, seront favorisés les étudiants ayant le plus grand
+                        n'existe pas de solution, seront favorisés les étudiants ayant le plus
                         besoin d'aide.
           </p>
         </div>

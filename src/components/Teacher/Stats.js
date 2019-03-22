@@ -31,7 +31,7 @@ class VueEnseignant extends Component {
 
   render() {
       return (
-        <div class="container">
+        <div className="container">
           <h1>STATISTIQUES</h1>
         </div>
       )

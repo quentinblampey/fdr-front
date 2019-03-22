@@ -15,6 +15,7 @@ import ReactTooltip from 'react-tooltip';
 import url from '../../config';
 // import computeStats from './ComputeStats';
 import SC from './ScoreChart';
+import Dropdown from 'react-bootstrap/Dropdown'
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -31,6 +32,9 @@ class Begin extends Component {
       user: { details: { name: 'undefined' }, ue: [] },
       textContrat: '',
       saved: true,
+      status: 'choice',
+      displayStatus: 'UEs choisies',
+      dropdownDatas:  [{status: 'choice', displayStatus : 'UEs choisies'}, {status:'comment', displayStatus :'Commentaires'}, {status: 'engagement', displayStatus :'Engagements'}, {status:'reflexions', displayStatus :'Reflexions'}],
     };
   }
 
@@ -71,6 +75,10 @@ class Begin extends Component {
         this.load();
       });
     };
+
+    etat = (nextEtat, nextDisplayEtat) => {
+      this.setState({ status: nextEtat, displayStatus: nextDisplayEtat });
+    }
 
     render() {
       const { user } = this.state;
@@ -118,7 +126,19 @@ class Begin extends Component {
                                     <h2>Contrat pédagogique</h2>
                                 </div>
                                 <div>
-                                    {this.state.user.ue.length === 0 ? (
+                                  <Dropdown>
+                                        <Dropdown.Toggle variant="light" id="dropdown-basic">
+                                            {this.state.displayStatus}
+                                        </Dropdown.Toggle>
+
+                                        <Dropdown.Menu alignRight>
+                                            {this.state.dropdownDatas.filter(element => element.status !==this.state.status).map(d => (
+                                                <Dropdown.Item onClick={this.etat.bind(this, d.status, d.displayStatus)}>{d.displayStatus}</Dropdown.Item>
+                                            ))}
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+                                    {this.state.status==='choice' && (
+                                      this.state.user.ue.length === 0 ? (
                                         <h5>
                                             Cet étudiant n'a pas encore signalé d'UEs. C'est la
                                             raison pour laquelle vous ne pouvez pas encore établir
@@ -158,8 +178,9 @@ class Begin extends Component {
                                                 </div>
                                             ))}
                                         </ul>
+                                    )
                                     )}
-                                    {this.state.user.ue.length > 0 && (
+                                    {this.state.status==='comment' && (
                                         <div className="container">
                                             <div className="row justify-content-between">
                                                 <h5 className="col-9">
@@ -187,6 +208,11 @@ class Begin extends Component {
                                             >
                                                 <p>ENREGISTRER</p>
                                             </button>
+                                        </div>
+                                    )}
+                                    {['reflexions', 'engagement'].includes(this.state.status) && (
+                                        <div className="container">
+                                            Cette fonctionnalité est en cours de développement
                                         </div>
                                     )}
                                 </div>

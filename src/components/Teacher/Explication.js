@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import img1 from './img/1.png';
 import img2 from './img/2.png';
 import img3 from './img/3.png';
+import img4 from './img/4.png';
+import img5 from './img/5.png';
 
 class Info extends Component {
   render() {
@@ -78,9 +80,8 @@ class Info extends Component {
           <h4> 1.3 Filtres et tris </h4>
           <p>
             {' '}
-                        Le dashboard, en plus de l'affichage des étudiants, permet d'appliquer
-                        différents filtres et tris sur la cohorte, donnant donc au professeur des
-                        outils pour analyser sa cohorte dans sa globalité.
+                        Les précédents indicateurs peuvent être utilisés pour filtrer ou trier la
+                        vue des étudiants.
           </p>
           <p>
             {' '}
@@ -102,6 +103,13 @@ il est
                         demandé de l'aide en appliquant le filtre correspondant.
             {' '}
           </p>
+          <p>
+            {' '}
+                        Lorsqu'un filtre ou tri est ajouté, il se voit directement sur la colonne de
+                        gauche. Il est possible de supprimer tous les filtres et tris en cliquant
+                        sur le bouton jaune.
+          </p>
+          <img src={img4} alt=" " style={{ height: '150px', margin: '20px auto' }} />
         </div>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
           <h4> 1.4 Principe de l'acceptation de demande de rendez-vous </h4>
@@ -182,6 +190,7 @@ il est
           <h4> 2.3 Lorem ipsum </h4>
           <p> Lorem ipsum</p>
         </div>
+        <img src={img5} alt=" " style={{ height: '400px', margin: '20px auto' }} />
       </div>
     );
   }

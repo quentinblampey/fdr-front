@@ -36,17 +36,21 @@ class Begin extends Component {
     // const { id } = this.props;
     // this.props.match.params.id
     // eslint-disable-next-line react/destructuring-assignment react/prop-types
-    axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
-      // console.log(res.data);
-      // console.log(res.data.ue);
-      this.setState({ user: res.data, textContrat: res.data.textContrat });
-    });
+    this.load();
   }
 
-onChange = (e) => {
-  const textContrat = e.target.value;
-  this.setState({ textContrat, saved: false });
-};
+    load = () => {
+      axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
+        // console.log(res.data);
+        // console.log(res.data.ue);
+        this.setState({ user: res.data, textContrat: res.data.textContrat });
+      });
+    };
+
+    onChange = (e) => {
+      const textContrat = e.target.value;
+      this.setState({ textContrat, saved: false });
+    };
 
     save = () => {
       axios
@@ -58,6 +62,12 @@ onChange = (e) => {
           // console.log(res.data);
           this.setState({ user: res.data, saved: true });
         });
+    };
+
+    help = (id) => {
+      axios.post(`${url}/api/users/help/${id}`).then(() => {
+        this.load();
+      });
     };
 
     render() {
@@ -80,7 +90,23 @@ onChange = (e) => {
 {user.pseudo}
 {' '}
                 </p>
-
+                <p>
+                    {!user.helped && (
+                        <div>
+                            <ReactTooltip multiline />
+                            <button
+                              multiline
+                              onClick={() => {
+                                this.help(user._id);
+                              }}
+                              className="btn btn-success"
+                              data-tip="Cliquez-ici pour pouvoir proposer<br />des rendez-vous à cet étudiant"
+                            >
+                                Proposer de l'aide à cet étudiant
+                            </button>
+                        </div>
+                    )}
+                </p>
                 <div className="row">
                     <div className="col-6">
                         <Recap id={this.props.match.params.id} />
@@ -91,7 +117,11 @@ onChange = (e) => {
                                 </div>
                                 <div>
                                     {this.state.user.ue.length === 0 ? (
-                                        <h5>Cet étudiant n'a pas encore signalé d'UEs. C'est la raison pour laquelle vous ne pouvez pas encore établir de contrat pédagogique.</h5>
+                                        <h5>
+                                            Cet étudiant n'a pas encore signalé d'UEs. C'est la
+                                            raison pour laquelle vous ne pouvez pas encore établir
+                                            de contrat pédagogique.
+                                        </h5>
                                     ) : (
                                         <ul
                                           className="list-group"

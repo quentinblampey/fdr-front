@@ -1,3 +1,4 @@
+/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import './Navbar.scss';
 // import axios from 'axios';
@@ -7,15 +8,24 @@ class Navbar extends Component {
   render() {
     return (
       <div>
-        <nav>
-          <Link to="/enseignant">
-            <button className="btn btn-primary">Accueil</button>
-          </Link>
-          <Link to="/enseignant/propose">
-            <button className="btn btn-primary">
-                            Proposer des creneaux de Rendez-vous
-            </button>
-          </Link>
+        <nav className="navbar navbar-expand-lg navbar-light bg-primary">
+          <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <div className="title">Océane - Vue enseignant</div>
+          </div>
+          <form className="form-inline">
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <Link to="/enseignant">
+                  <div className="link">Dashboard</div>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/enseignant/propose">
+                  <div className="link">Proposer des creneaux de Rendez-vous</div>
+                </Link>
+              </li>
+            </ul>
+          </form>
         </nav>
       </div>
     );

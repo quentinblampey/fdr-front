@@ -2,10 +2,10 @@
 @import '../globalSCSS/size.scss';
 
 nav {
-    background: $white;
     display: flex;
     justify-content: center;
     padding: $margin1;
+    margin-bottom: $margin3;
 }
 
 .home {
@@ -21,5 +21,23 @@ nav {
         background: $color4;
         color: $white;
         transition: 0.3s;
+    }
+}
+
+.title {
+    color: $white;
+    font-size: 18pt;
+    margin-right: 20pt;
+}
+
+.link {
+    padding: $margin2;
+    color: $white;
+    margin: $margin0;
+    margin-top: $margin0;
+
+    &:hover {
+        color: $white;
+        transition: 0.2s;
     }
 }

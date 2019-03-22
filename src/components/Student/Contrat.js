@@ -215,13 +215,13 @@ class Contrat extends Component {
                     </ul>
                 )}
                 {this.state.status === 'comment' && (
-                    <div style={{ color : '#fefefe', margin: '10px', marginTop:'90px'}}>
+                    <div style={{ color : '#fefefe', margin: '50px 10px 10px 10px'}}>
                         <textarea className="form-control"
                                 id="exampleFormControlTextarea1"
                                 value={this.state.myComment}
                                 onChange={this.onChangeMy}
                                 placeholder={"Ecrivez ici un commentaire sur votre contrat"}
-                                style={{width:'95%'}}
+                                style={{width:'95%', marginBottom:'10px'}}
                         />&nbsp;
                         <button type="submit"
                                 className="modale"

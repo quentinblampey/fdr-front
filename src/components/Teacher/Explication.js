@@ -181,7 +181,7 @@ il est
           avec l'étudiant. Pour cela, il dispose de différentes foncionnalités accessibles grâce au menu déroulant.</p>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
           <h4> 3.1 UEs choisies </h4>
-          <p> Dans cette section, l'enseignant peut accéder aux UEs choisies par l'étudiant dont les couleurs correspndent 
+          <p> Dans cette section, l'enseignant peut accéder aux UEs choisies par l'étudiant dont les couleurs correspondent 
             à l'état déclaré par l'étudiant (validé, non validé, en difficulté. Il peut en outre accéder au commentaire 
             laissé par l'étudiant au survol de l'UE) </p>
         </div>

@@ -22,7 +22,6 @@ class Info extends Component {
   render() {
     return (
       <div>
-        <ReactTooltip multiline />
         <button
           type="button"
           className="btn btn-primary rounded-circle"

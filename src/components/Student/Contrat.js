@@ -45,6 +45,9 @@ class Contrat extends Component {
             aux.push({name:element, checked:(res.data.ue.filter((x) => element===x.name).length >0), comment:false})
         })
         this.setState({ user: res.data, UEs:aux});
+        alert(
+            "La partie contrat n'est pas reglementaire, elle ne sert qu'à communiquer entre l'enseignant et l'étudiant sur sa réussite / ses difficultés / ses engagements concernant ses UEs.",
+          );
       });
   }
 

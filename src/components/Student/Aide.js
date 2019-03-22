@@ -252,7 +252,7 @@ class ModalRDV extends Component {
                                 <div key={i}>
                                     <Switch style={{margin:'30px'}} onChange={this.handleInputChange.bind(this, i)} checked={slot.checked} uncheckedIcon={false} checkedIcon={false} width={40} height={15} offHandleColor={'#cdcdcd'} onHandleColor={'#cdcdcd'} handleDiameter={20}/>
                                     <label style={{padding: '10px'}} >
-                                        {' '+slot.date}{ slot.date[slot.date.length -2] === 'h' && '0'}
+                                        {' '+slot.date}
                                     </label>
                                 </div>
                             ))}
@@ -296,7 +296,6 @@ class ModalMesRDV extends Component {
         <p>Ici, tu peux voir ton prochain créneau de rendez-vous :</p>
         <p>
           {this.state.date}
-          { this.state.date[this.state.date.length -2] === 'h' && '0'}
         </p>
         <br />
         <button type="submit" className="modale" onClick={this.props.closeModal}>

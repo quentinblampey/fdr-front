@@ -101,9 +101,37 @@ class RouterEns extends Component {
       }
       if (!authorized && fail) {
         return (
-          <div className="container text-center">
-            <h2>Interface enseignant</h2>
-            <p>Entrez le code</p>
+          <div
+            className="container text-center"
+            style={{
+              background: variables.graph1,
+              borderRadius: '10px',
+              padding: '20px',
+              width: '600px',
+              marginTop: '100px',
+            }}
+          >
+            <div style={{ display: 'flex' }}>
+              {' '}
+              <i
+                className="fa fa-tint"
+                aria-hidden="true"
+                style={{ color: '#fefefe', fontSize: '30px', margin: '10px' }}
+              />
+              <div className="title" style={{ fontSize: '35px' }}>
+                            Océane
+              </div>
+            </div>
+            <div
+              style={{
+                margin: '20px',
+                width: '80%',
+                height: '1px',
+                background: '#fefefe',
+              }}
+            />
+            <h2 style={{ color: '#fefefe' }}>Interface enseignant</h2>
+            <p style={{ color: '#fefefe' }}>Entrez le code</p>
             <form onSubmit={this.onSubmit}>
               <input
                 type="password"
@@ -113,7 +141,7 @@ class RouterEns extends Component {
                 onChange={this.onChange}
                 placeholder="Mot de passe"
               />
-              <button type="submit" className="btn btn-success">
+              <button type="submit" className="btn btn-dark">
                             Me connecter
               </button>
             </form>

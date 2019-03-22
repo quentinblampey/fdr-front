@@ -103,9 +103,8 @@ class Begin extends Component {
                 <p>
                     {!user.helped && (
                         <div>
-                            <ReactTooltip multiline />
+                          <ReactTooltip multiline/>
                             <button
-                              multiline
                               onClick={() => {
                                 this.help(user._id);
                               }}

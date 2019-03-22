@@ -14,7 +14,12 @@ class FooterStop extends Component {
         <div>
           <nav
             className="navbar fixed-bottom navbar-light bg-light"
-            style={{ display: 'flex', justifyContent: 'center', zIndex: 1 }}
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              zIndex: 1,
+              marginBottom: '0px',
+            }}
           >
             <button
               style={{
@@ -40,8 +45,16 @@ class FooterStop extends Component {
               />
             </button>
             <a href="https://goo.gl/forms/NkNRuP0SJ4LnZ23w1" className="stop">
-              <button type="submit" className="btn btn-danger">
-                            ARRÊTER L'ÉVALUATION
+              <button
+                type="submit"
+                className="btn btn-danger"
+                style={{
+                  width: '200px',
+                  height: '60px',
+                  borderRadius: '30px',
+                }}
+              >
+                            Questionnaire de satisfaction
               </button>
             </a>
           </nav>

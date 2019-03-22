@@ -138,9 +138,8 @@ class FicheCourte extends Component {
                 </Link>
                 {!this.props.user.helped && (
                     <div>
-                        <ReactTooltip multiline />
+                        <ReactTooltip multiline/>
                         <button
-                            multiline
                             onClick={() => {
                                 this.props.help(this.props.user._id);
                             }}

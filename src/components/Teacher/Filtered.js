@@ -16,6 +16,7 @@ class Filtered extends Component {
       <div className="container">
         {this.props.helped && (
         <div>
+          <ReactTooltip multiline/>
           <div
             data-tip="Etudiants auxquels vous voulez <br />proposer de l'aide. Accedez<br />à sa fiche pour proposer<br />un horaire"
           >

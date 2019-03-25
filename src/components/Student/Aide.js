@@ -103,9 +103,9 @@ class Exit extends Component {
               <Modal style={{ zIndex:10}} open={open1} onClose={this.onCloseModal1} center>
                 <h2>Demander de l&apos;aide</h2>
                 <p>
-                                  Ici, tu peux contacter ton enseignant référent si tu as besoin de
-                                  conseils ou de soutient. Tu peux aussi lui joindre un message.
-                                  Si tu ne veux pas en ajouter, clique juste sur
+                                  Ici, vous pouvez contacter votre enseignant référent si vous avez besoin de
+                                  conseils ou de soutient. Vous pouvez aussi lui joindre un message.
+                                  Si vous ne voulez pas en ajouter, cliquez juste sur
                                   "Envoyer".
                 </p>
 
@@ -133,7 +133,7 @@ class Exit extends Component {
             )}
             { (user.helped && !(user.currentSlot)) && (
               <div style={{ color: '#fefefe' }} className="container">
-                Votre professeur veut un rendez-vous !
+                Votre enseignant référent veut un rendez-vous !
                 <br />
                 <br />
                 <button type="submit" className="help" onClick={this.onOpenModal4}>
@@ -163,7 +163,7 @@ class Exit extends Component {
 
             { (!user.helped) && (
               <p style={{ color: '#fefefe', margin:'10px 0px'}} className="container text-center">
-                Votre professeur n'a pas encore cherché à vous recevoir. Vous ne pouvez donc pas encore choisir de créneau de rendez-vous.
+                Votre enseignant référent n'a pas encore cherché à vous recevoir. Vous ne pouvez donc pas encore choisir de créneau de rendez-vous.
               </p>
             )}
             <br />
@@ -241,11 +241,11 @@ class ModalRDV extends Component {
         <Modal style={{ zIndex:10}} open={this.props.open} onClose={this.props.closeModal} center>
           <h2>Demander un créneau de rendez-vous</h2>
           <p>
-                    Ici, tu peux voir les créneaux qu'a proposé ton enseignant référent et en
-                    demander plusieurs. Un de ceux que tu as demandé te sera attribué en fonction
+                    Ici, vous pouvez voir les créneaux qu'a proposé votre enseignant référent et en
+                    demander plusieurs. Un de ceux que vous avez demandé vous sera attribué en fonction
                     des disponibilités.
           </p>
-          { this.state.slots.length === 0 && <p> Aucun créenau proposé.</p>}
+          { this.state.slots.length === 0 && <p> Aucun créneau proposé.</p>}
           <br />
           <form>
                             {this.state.slots.map((slot,i) => (
@@ -293,7 +293,7 @@ class ModalMesRDV extends Component {
       <Modal style={{ zIndex:10}} open={this.props.open} onClose={this.props.closeModal} center>
         <br />
         <h2>Mes Rendez-vous</h2>
-        <p>Ici, tu peux voir ton prochain créneau de rendez-vous :</p>
+        <p>Ici, vous pouvez voir votre prochain créneau de rendez-vous :</p>
         <p>
           {this.state.date}
         </p>
@@ -334,7 +334,7 @@ class ModalRDVEnseignant extends Component {
       this.setState({ proposed: [resp.data] });
       this.update();
       ToastsStore.info("L'enseignant a été prévenu par mail !");
-      ToastsStore.info("Tu a été prévenu par mail et tu peux \n télécharger le RDV dans ton calendrier!");
+      ToastsStore.info("Vous avez été prévenu par mail et vous pouvez \n télécharger le RDV dans votre calendrier!");
     });
   }
 
@@ -344,13 +344,13 @@ class ModalRDVEnseignant extends Component {
       <Modal style={{ zIndex:10}}
       open={this.props.open} onClose={this.props.closeModal} center>
         <br />
-        <h2>Horaires proposés par ton enseignant</h2>
+        <h2>Horaires proposés par votre enseignant</h2>
         <p>
-          Suite à ta demande d'aide, ton enseignant t'a proposé un (des) rendez-vous(s).
-          Tu peux choisir celui qui t'arrange le plus et l'accepter.
+          Suite à votre demande d'aide, votre enseignant vous a proposé un (des) rendez-vous(s).
+          Vous pouvez choisir celui qui vous arrange le plus et l'accepter.
         </p>
         { proposed.length === 0 && (
-          <p>Tu n'as pas encore reçu de propositions de rendez-vous de la part de ton enseignant référent.</p>
+          <p>Vous n'avez pas encore reçu de propositions de rendez-vous de la part de votre enseignant référent.</p>
         )}
         { !(proposed.length === 1 && proposed[0].affectation !== '') && proposed.map(slot => (
           <div key={slot._id}>

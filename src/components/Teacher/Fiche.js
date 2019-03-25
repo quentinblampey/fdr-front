@@ -381,14 +381,14 @@ class Recap extends Component {
                         </h5>
                         <p className="card-text">
 {' '}
-Dernière session de chat :
+Dernière session de discussion avec le chatbot :
 {lastChat}
 {' '}
 
                         </p>
                         <p className="card-text">
                             {' '}
-                            Nombre de sessions de chat :
+                            Nombre de sessions de discussion avec le chatbot :
 {' '}
 {fidelity
   ? user.numberChats.length

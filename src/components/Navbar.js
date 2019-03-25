@@ -23,7 +23,7 @@ class Navbar extends Component {
             <ul className="navbar-nav">
               <li className="nav-item">
                 <Link to="/enseignant">
-                  <div className="link">Dashboard</div>
+                  <div className="link">Tableau de bord</div>
                 </Link>
               </li>
               <li className="nav-item">

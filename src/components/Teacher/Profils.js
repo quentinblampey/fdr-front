@@ -53,7 +53,7 @@ class RadialChart extends Component {
             borderRadius: '5px',
             color: variables.graph1,
             padding: '10px',
-            width: '310px',
+            width: '250px',
             margin: 'auto',
           }}
         >
@@ -78,7 +78,7 @@ class RadialChart extends Component {
                 options={options}
                 series={this.props.proportions}
                 type="radialBar"
-                height="380"
+                height="340"
               />
             </div>
           </div>

@@ -2,11 +2,54 @@
 @import '../../globalSCSS/size.scss';
 
 .fieldState {
-    font-color: $black;
+    color: $black;
     margin: 4%;
     padding-bottom: 2opx;
 }
 
 h1 {
     font-weight: 300;
+}
+
+.legend-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+
+    & .head {
+        background: $grayLight;
+        border-radius: 10px 10px 0 0;
+        padding: 10px 0px;
+    }
+
+    & .content {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background: #fafafa;
+        padding: 10px 0px;
+        border-radius: 0 0 10px 10px;
+
+        & p {
+            padding-top: 15px;
+        }
+
+        & .pastille {
+            font-size: 15px;
+            width: 45px;
+            height: 30px;
+            border-radius: 15px;
+            padding-top: 4px;
+        }
+
+        & .green,
+        .red {
+            color: $white;
+        }
+
+        & .yellow {
+            background: #ffc107;
+        }
+    }
 }

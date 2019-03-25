@@ -19,5 +19,10 @@
 }
 
 .bloc-center {
-    width: 700px;
+    width: 550px;
+
+    & > div {
+        margin: 0px;
+        padding: 0px;
+    }
 }

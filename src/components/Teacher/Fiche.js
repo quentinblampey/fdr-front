@@ -7,6 +7,7 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Collapse } from 'reactstrap';
 import DatePicker from 'react-datepicker';
 // import { Link } from 'react-router-dom';
 // import FooterStop from './FooterStop'
@@ -18,6 +19,7 @@ import url from '../../config';
 import SC from './ScoreChart';
 
 import 'react-datepicker/dist/react-datepicker.css';
+import Button from 'react-bootstrap/Button';
 
 class Begin extends Component {
   /* propTypes = {
@@ -33,6 +35,7 @@ class Begin extends Component {
       textContrat: '',
       saved: true,
       status: 'choice',
+      collapse: false,
       displayStatus: 'UEs choisies',
       dropdownDatas: [
         { status: 'choice', displayStatus: 'UEs choisies' },
@@ -81,12 +84,17 @@ class Begin extends Component {
       });
     };
 
+    onCollapse = () => {
+      const { collapse } = this.state;
+      this.setState({ collapse: !collapse });
+    };
+
     etat = (nextEtat, nextDisplayEtat) => {
       this.setState({ status: nextEtat, displayStatus: nextDisplayEtat });
     };
 
     render() {
-      const { user } = this.state;
+      const { user, collapse } = this.state;
       return (
             <div className="container">
                 <h2 className="text-center">
@@ -124,6 +132,13 @@ class Begin extends Component {
                 <div className="row">
                     <div className="col-6">
                         <Recap id={this.props.match.params.id} />
+                        <button className="btn btn-success" onClick={this.onCollapse}>Collapse</button>
+                        <Collapse isOpen={collapse}>
+                          Anim pariatur cliche reprehenderit,
+                          enim eiusmod high life accusamus terry richardson ad squid. Nihil
+                          anim keffiyeh helvetica, craft beer labore wes anderson cred
+                          nesciunt sapiente ea proident.
+                        </Collapse>
                         <div>
                             <div className="card">
                                 <div className="card-header">

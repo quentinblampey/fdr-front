@@ -34,6 +34,7 @@
         "react-toastify": "^4.5.2",
         "react-toasts": "^3.0.1",
         "react-tooltip": "^3.10.0",
+        "reactstrap": "^7.1.0",
         "rebound": "^0.1.0",
         "serve-favicon": "^2.5.0"
     },

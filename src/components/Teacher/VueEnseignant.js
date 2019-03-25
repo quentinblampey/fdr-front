@@ -18,6 +18,19 @@ class VueEnseignant extends Component {
       filterHelp: false,
       profils: ['Employés', 'Sportifs', 'Handicapés', 'Artistes', 'Internationaux'],
       profilsName: ['employe', 'athlete', 'disabled', 'artist', 'foreigner'],
+      translate: {
+        employe : 'Employés',
+        disabled : 'Handicapés',
+        foreigner : 'Internationaux',
+        artist : 'Artistes',
+        athlete : 'Sportifs de haut niveau',
+        mean : 'Synthèse',
+        motivation : 'Motivation',
+        lifestyle : 'Style de vie',
+        fidelity : 'Fidélité',
+        noOrientation : 'Orientation',
+        integration : 'Intégration'
+      },
       proportions: [0, 0, 0, 0, 0],
       colors: [variables.graph1, variables.graph2, variables.graph3, variables.graph4],
       updateFilter: this.updateFilter.bind(this),
@@ -26,6 +39,8 @@ class VueEnseignant extends Component {
       loadUsers: this.loadUsers.bind(this),
       users: [],
       usersHelped: [],
+      number: 0,
+      numberHelp: 0,
     };
   }
 
@@ -46,7 +61,11 @@ class VueEnseignant extends Component {
           .then((res) => {
             this.setState({ users: res.data });
             axios.get(`${url}/api/users/helped`).then((res) => {
-              this.setState({ usersHelped: res.data });
+              this.setState({ usersHelped: res.data, numberHelp: res.data.length });
+              axios.get(`${url}/api/users/number`).then((resNb) => {
+                console.log(resNb.data);
+                this.setState({ number: resNb.data.nombre - this.state.numberHelp });
+              });
             });
           });
       });
@@ -93,31 +112,36 @@ class VueEnseignant extends Component {
     }
 
     render() {
-      const { sortScore, filter, filterHelp } = this.state;
+      const { sortScore, filter, filterHelp, number } = this.state;
       return (
         <div className="container text-center">
           <div className="row dashboard">
             <div className="filtered">
               <div className="text-center">
-                <h2> Étudiants </h2>
+                <h2> Étudiants en L1 </h2>
               </div>
+              <h5>
+                Nombre d'étudiants :
+                {' '}
+                { number }
+              </h5>
               <div className="text-center" style={{ display: 'flex' }}>
                 <button
                   type="button"
                   className="btn btn-primary"
-                  style={{ width: '44%' , padding: '3px'}}
+                  style={{ width: '40%' , padding: '3px'}}
                   onClick={this.updateSort.bind(this, 'mean')}
                 >
-                                En difficultés
+                                En difficulté
                 </button>
 
                 <button
                   type="button"
                   className="btn btn-primary"
-                  style={{ width: '56%' , padding: '3px'}}
+                  style={{ width: '60%' , padding: '3px'}}
                   onClick={this.updateFilterHelp.bind(this)}
                 >
-                                Demandes d'aide
+                                En demande d'aide
                 </button>
               </div>
               {(filter.length !== 0 || filterHelp || sortScore.length !== 0) && (
@@ -147,7 +171,7 @@ class VueEnseignant extends Component {
                       {filter.map(filt => (
                         <div key={filt} className="filter">
                           {' '}
-                          {filt}
+                          {this.state.translate[filt]}
                           {' '}
                         </div>
                       ))}
@@ -162,7 +186,7 @@ class VueEnseignant extends Component {
                       {sortScore.map(sort => (
                         <div key={sort} className="sort">
                           {' '}
-                          {sort}
+                          {this.state.translate[sort]}
                           {' '}
                         </div>
                       ))}

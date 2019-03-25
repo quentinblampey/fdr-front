@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-indent */
+/* eslint-disable indent */
 import React, { Component } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown'
 import axios from 'axios';
@@ -126,7 +128,9 @@ class Contrat extends Component {
               <Test onglet="contrat" id={this.props.match.params.id} />
               
           <div className="component row justify-content-center" style={{ margin:'0px' }} >
-          <h3 className="titre-cadre"> MES CONTRATS </h3>
+          <h3 className="titre-cadre">CONTRAT
+          <div className="sstitre-cadre">DE RÉUSSITE</div>
+          </h3>
             <div className="row justify-content-center" style={{position: 'absolute', top:'140px'}}>
             {(this.state.selectedEngagement && this.state.status === 'engagement') && (
                 <button type="button" className="btn btn-light" onClick={this.resetSelected.bind(this)}>Retour</button>

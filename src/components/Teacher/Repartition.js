@@ -13,7 +13,7 @@ class Repartition extends Component {
     this.state = {
       fields: [
         { field: 'motivation', title: 'Motivation', repartition: [] },
-        { field: 'lifestyle', title: 'Lifestyle', repartition: [] },
+        { field: 'lifestyle', title: 'Style de vie', repartition: [] },
         { field: 'fidelity', title: 'Fidelite', repartition: [] },
         { field: 'noOrientation', title: 'Besoin de réorientation', repartition: [] },
         { field: 'integration', title: 'Intégration', repartition: [] },
@@ -44,14 +44,14 @@ class Repartition extends Component {
     const colors = [variables.graph3, variables.graph1, variables.graph2];
 
     return (
-      <div>
+      <div style={{ width: '250px' }}>
         <div
           style={{
             background: '#eee',
             borderRadius: '5px',
             color: variables.graph1,
             padding: '10px',
-            width: '310px',
+            width: '100%',
             margin: 'auto',
           }}
         >
@@ -59,38 +59,13 @@ class Repartition extends Component {
           <Info part="repartition" />
         </div>
         <br />
-        <div className="container">
-          <div className="card">
-            <div className="card-header">Légende : proportion d'étudiants </div>
-            <ul className="list-group list-group-flush">
-              <li
-                className="list-group-item d-flex justify-content-center"
-              >
-                                Notes de &nbsp; &nbsp;
-                <span
-                  className="badge badge-pill badge-danger"
-                  style={{ paddingTop: '5px' }}
-                >
-                                    0 à 4
-                </span>
-                {' '}
-                                &nbsp;
-                <span
-                  className="badge badge-pill badge-warning"
-                  style={{ paddingTop: '5px' }}
-                >
-                                    4 à 7
-                </span>
-                {' '}
-                                &nbsp;
-                <span
-                  className="badge badge-pill badge-success"
-                  style={{ paddingTop: '5px' }}
-                >
-                                    7 à 10
-                </span>
-              </li>
-            </ul>
+        <div className="legend-box">
+          <div className="head">Légende</div>
+          <div className="content">
+            <p> Notes de </p>
+            <div className="pastille red"> 0 à 4 </div>
+            <div className="pastille yellow"> 4 à 7 </div>
+            <div className="pastille green"> 7 à 10 </div>
           </div>
         </div>
 

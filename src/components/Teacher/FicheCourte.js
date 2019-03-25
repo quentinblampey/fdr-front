@@ -73,7 +73,7 @@ class FicheCourte extends Component {
                                 <ReactTooltip multiline />
                                 <p data-tip="Motivation pour les cours">M</p>
 {' '}
-                                <p data-tip="Lifestyle">L</p>
+                                <p data-tip="Style de vie">S</p>
 {' '}
 <p data-tip="Intégration">I</p>
 {' '}

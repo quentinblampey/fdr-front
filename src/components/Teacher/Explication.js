@@ -10,24 +10,24 @@ class Info extends Component {
     return (
       <div style={{ padding: '20px' }}>
         <h1 className="text-center"> Guide de l'interface enseignant </h1>
-        <h2> 1 - Dashboard </h2>
+        <h2> 1 - Tableau de bord </h2>
         <p>
           {' '}
-                    L'interface enseignant est composée entre autres d'un Dashboard. Avec celui-ci,
-                    chaque enseignant référent pourra, en un coup d'oeil, avoir une vue sur l'état des
-                    étudiants sous sa responsabilité.
+                    L'interface enseignant est composée entre autres d'un tableau de bord. Avec
+                    celui-ci, chaque enseignant référent pourra, en un coup d'oeil, avoir une vue
+                    sur l'état des étudiants sous sa responsabilité.
           {' '}
         </p>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
           <h4> 1.1 Fiche récapitulative étudiant </h4>
           <p>
             {' '}
-                        Chaque enseignant référent verra une liste de fiches récapitulative de la situation
-                        de chaque étudiant (voir ci-dessous) grâce à 5 indicateurs de réussite : sa
-                        motivation pour les cours (M comme motivation), son style de vie (L comme
-                        lifestyle), son intégration au sein de l'établissement (I comme
-                        intégration), sa fidelité à l'application (F comme fidelité) et son besoin
-                        ou non de réorientation (O comme orientation).
+                        Chaque enseignant référent verra une liste de fiches récapitulative de la
+                        situation de chaque étudiant (voir ci-dessous) grâce à 5 indicateurs de
+                        réussite : sa motivation pour les cours (M comme motivation), son style de
+                        vie (S comme style de vie), son intégration au sein de l'établissement (I
+                        comme intégration), sa fidelité à l'application (F comme fidelité) et son
+                        besoin ou non de réorientation (O comme orientation).
             {' '}
           </p>
           <p>
@@ -52,9 +52,9 @@ class Info extends Component {
           <h4> 1.2 Indicateurs globaux </h4>
           <p>
             {' '}
-                        Le dashboard, en plus de l'affichage des étudiants, propose différents
-                        indicateurs globaux, donnant donc à l'enseignant référent des outils pour sonder
-                        l'état de sa cohorte dans sa globalité et non étudiant par étudiant.
+                        Le tableau de bord, en plus de l'affichage des étudiants, propose différents
+                        indicateurs globaux, donnant donc au enseignant référent des outils pour
+                        sonder l'état de sa cohorte dans sa globalité et non étudiant par étudiant.
           </p>
           <p>
             {' '}
@@ -98,9 +98,9 @@ il est possible
             {' '}
 il est
                         possible de filtrer les étudiants selon leurs caractéristiques, par exemple
-                        si ils sont ou non sportif de haut niveau / étudiant international / ... Il
-                        est également possible de récupérer seulement les étudiants ayant demandé de
-                        l'aide en appliquant le filtre correspondant.
+                        si ils sont ou non sportifs de haut niveau / étudiants internationaux / ...
+                        Il est également possible de récupérer seulement les étudiants ayant demandé
+                        de l'aide en appliquant le filtre correspondant.
             {' '}
           </p>
           <p>
@@ -115,16 +115,16 @@ il est
           <h4> 1.4 Gestion des demandes de rendez-vous </h4>
           <p>
             {' '}
-                        Imaginons qu'un enseignant référent souhaite reçevoir 5 étudiants cette semaine.
-                        Grâce aux dashboard et ses différents outils, l'enseignant référent peut aisément
-                        choisir les étudiants qu'il veut voir en priorité dans le but de les aider.
-                        Par exemple, il peut appliquer le filtre "demande d'aide" pour récupérer
-                        tous les étudiants ayant demandé de l'aide, ajouter le tri par étudiant en
-                        difficulté et choisir les 5 premiers élèves. Par "choisir", on entend
-                        accepter la demande de rendez-vous, ce qui ne signifie pas prendre
-                        rendez-vous ! Une fois les 5 demande de rendez-vous acceptées, les étudiants
-                        choisis seront placés dans la colonne de droite du dashboard, et il faudra
-                        planifier les rendez-vous (voir partie 2).
+                        Imaginons qu'un enseignant référent souhaite reçevoir 5 étudiants cette
+                        semaine. Grâce aux tableau de bord et ses différents outils, le enseignant
+                        référent peut aisément choisir les étudiants qu'il veut voir en priorité
+                        dans le but de les aider. Par exemple, il peut appliquer le filtre "demande
+                        d'aide" pour récupérer tous les étudiants ayant demandé de l'aide, ajouter
+                        le tri par étudiant en difficulté et choisir les 5 premiers élèves. Par
+                        "choisir", on entend accepter la demande de rendez-vous, ce qui ne signifie
+                        pas prendre rendez-vous ! Une fois les 5 demandes de rendez-vous acceptées,
+                        les étudiants choisis seront placés dans la colonne de droite du tableau de
+                        bord, et il faudra planifier les rendez-vous (voir partie 2).
           </p>
           <p>
             {' '}
@@ -187,20 +187,32 @@ il est
         </div>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
           <h4> 3.2 Commentaires </h4>
-          <p> Dans cette section, l'enseignant peut accéder au commentaire général sur le contrat saisi par l'étudiant. 
-            Il peut également saisir ou modifier son propre commentaire</p>
+          <p>
+            {' '}
+                        Dans cette section, l'enseignant peut accéder au commentaire général sur le
+                        contrat saisi par l'étudiant. Il peut également saisir ou modifier son
+                        propre commentaire
+          </p>
         </div>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
           <h4> 3.3 Engagements </h4>
-          <p> Dans cette section, l'enseignant pourra accéder à la liste des compte-rendus des entretiens saisis par 
-            l'étudiants. Il peut également saisir sa réaction aux engagements de l'étudiant(approbation, information 
-            complémentaire etc...)</p>
+          <p>
+            {' '}
+                        Dans cette section, l'enseignant pourra accéder à la liste des compte-rendus
+                        des entretiens saisis par l'étudiants. Il peut également saisir sa réaction
+                        aux engagements de l'étudiant(approbation, information complémentaire
+                        etc...)
+          </p>
         </div>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
           <h4> 3.4 Reflexions </h4>
-          <p> Dans cette section, l'enseignant pourra accéder à la liste des compte-rendus des entretiens avec d'autres intervenants saisis par 
-            l'étudiant. Il peut également saisir sa réaction aux engagements de l'étudiant(approbation, information 
-            complémentaire etc...)</p>
+          <p>
+            {' '}
+                        Dans cette section, l'enseignant pourra accéder à la liste des compte-rendus
+                        des entretiens avec d'autres intervenants saisis par l'étudiants. Il peut
+                        également saisir sa réaction aux engagements de l'étudiant(approbation,
+                        information complémentaire etc...)
+          </p>
         </div>
         <img src={img5} alt=" " style={{ height: '250px', margin: '20px auto' }} />
       </div>

@@ -133,6 +133,9 @@ button {
     color: $color4;
     font-size: 30px;
     font-family: 'MsBoldItalic';
+    & .sstitre-cadre {
+        font-size: 10px;
+    }
 }
 
 .color4 {

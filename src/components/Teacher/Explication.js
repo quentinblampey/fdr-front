@@ -14,7 +14,7 @@ class Info extends Component {
         <p>
           {' '}
                     L'interface enseignant est composée entre autres d'un Dashboard. Avec celui-ci,
-                    chaque professeur pourra, en un coup d'oeil, avoir une vue sur l'état des
+                    chaque enseignant référent pourra, en un coup d'oeil, avoir une vue sur l'état des
                     étudiants sous sa responsabilité.
           {' '}
         </p>
@@ -22,7 +22,7 @@ class Info extends Component {
           <h4> 1.1 Fiche récapitulative étudiant </h4>
           <p>
             {' '}
-                        Chaque professeur verra une liste de fiches récapitulative de la situation
+                        Chaque enseignant référent verra une liste de fiches récapitulative de la situation
                         de chaque étudiant (voir ci-dessous) grâce à 5 indicateurs de réussite : sa
                         motivation pour les cours (M comme motivation), son style de vie (L comme
                         lifestyle), son intégration au sein de l'établissement (I comme
@@ -53,7 +53,7 @@ class Info extends Component {
           <p>
             {' '}
                         Le dashboard, en plus de l'affichage des étudiants, propose différents
-                        indicateurs globaux, donnant donc au professeur des outils pour sonder
+                        indicateurs globaux, donnant donc à l'enseignant référent des outils pour sonder
                         l'état de sa cohorte dans sa globalité et non étudiant par étudiant.
           </p>
           <p>
@@ -71,7 +71,7 @@ class Info extends Component {
                         indicateur, qui montre le pourcentage d'étudiants "dans le rouge" pour cet
                         indicateur, ceux "dans le orange" et ceux "dans le vert". Ici, par exemple,
                         50% de la cohorte est "moyennement motivée" (couleur orange), et l'autre
-                        moitié est suffisemment motivée (couleur verte).
+                        moitié est suffisamment motivée (couleur verte).
           </p>
           <img src={img3} alt=" " style={{ height: '500px', margin: '20px auto' }} />
         </div>
@@ -115,8 +115,8 @@ il est
           <h4> 1.4 Gestion des demandes de rendez-vous </h4>
           <p>
             {' '}
-                        Imaginons qu'un professeur souhaite reçevoir 5 étudiants cette semaine.
-                        Grâce aux dashboard et ses différents outils, le professeur peut aisément
+                        Imaginons qu'un enseignant référent souhaite reçevoir 5 étudiants cette semaine.
+                        Grâce aux dashboard et ses différents outils, l'enseignant référent peut aisément
                         choisir les étudiants qu'il veut voir en priorité dans le but de les aider.
                         Par exemple, il peut appliquer le filtre "demande d'aide" pour récupérer
                         tous les étudiants ayant demandé de l'aide, ajouter le tri par étudiant en
@@ -137,15 +137,15 @@ il est
 
         <p>
           {' '}
-                    Afin de convenir à tous les professeurs, il est possible de choisir les créneaux
+                    Afin de satisfaire au mieux tous les enseignants référents, il est possible de choisir les créneaux
                     de rendez-vous de 3 manières différentes.
         </p>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
           <h4> 2.1 Par mail </h4>
           <p>
             {' '}
-                        Sur les fiches détaillées des étudiants est indiqué leur email. Le
-                        professeur est donc libre de le contacter par mail directement.
+                        Le mail de l'étudiant est donné dans la fiche détaillée. L'enseignant référent
+                         est donc libre de le contacter par mail directement.
             {' '}
           </p>
         </div>
@@ -153,11 +153,11 @@ il est
           <h4> 2.2 Via l'interface, étudiant par étudiant </h4>
           <p>
             {' '}
-                        Sur les fiches détaillées des étudiants, il est possible de leur proposer
+                        Sur la fiche détaillée de l'étudiant, il est possible de lui proposer
                         individuellement un ou plusieurs créneau de rendez-vous. L'étudiant doit
-                        donc ensuite, de son côté, accepter un des créneaux proposé. Il est possible
-                        de proposer un créneau par un jusqu'à ce que l'étudiant en accepte un, pour
-                        éviter les trous dans le planning du professeur.
+                        donc ensuite, de son côté, accepter un des créneaux proposés. Il est possible
+                        de proposer les créneaux un par un jusqu'à ce que l'étudiant en accepte un, pour
+                        éviter les trous dans le planning de l'enseignant référent.
           </p>
         </div>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
@@ -165,12 +165,12 @@ il est
           <p>
             {' '}
                         La planification de rendez-vous avec l'étudiant peut être difficile et
-                        chronophage, car les étudiants comme les professeurs ont des impératifs et
-                        n'aiment pas avoir des trous dans leur planning. Le professeur peut donc
+                        chronophage, car les étudiants comme les enseignants référents ont des impératifs et
+                        n'aiment pas avoir des trous dans leur planning. L'enseignant référent peut donc
                         simplement proposer sa plage de rendez-vous (via l'onglet associé dans la
                         barre de navigation), et les étudiants de leur côté choisiront tous les
                         créneaux où ils sont disponibles. Ensuite, un algorithme sera lancé de sorte
-                        à trouver une solution qui convient aux étudiants et au professeur. Si il
+                        à trouver une solution qui convient aux étudiants et à l'enseignant référent. S'il
                         n'existe pas de solution, seront favorisés les étudiants ayant le plus
                         besoin d'aide.
           </p>
@@ -178,12 +178,12 @@ il est
         <h2> 3 - Contrats </h2>
 
         <p>Dans cette partie, les enseignants référents peuvent gérer le contrat pédagogique en lien 
-          avec l'étudiant. Pour cela, il dispose de différentes foncionnalités accessibles grâce au menu déroulant.</p>
+          avec l'étudiant. Pour cela, il dispose de différentes fonctionnalités accessibles grâce au menu déroulant.</p>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
           <h4> 3.1 UEs choisies </h4>
           <p> Dans cette section, l'enseignant peut accéder aux UEs choisies par l'étudiant dont les couleurs correspondent 
-            à l'état déclaré par l'étudiant (validé, non validé, en difficulté. Il peut en outre accéder au commentaire 
-            laissé par l'étudiant au survol de l'UE) </p>
+            à l'état déclaré par l'étudiant (validé, non validé, en difficulté). Il peut en outre accéder au commentaire 
+            laissé par l'étudiant au survol de l'UE. </p>
         </div>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
           <h4> 3.2 Commentaires </h4>
@@ -199,7 +199,7 @@ il est
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
           <h4> 3.4 Reflexions </h4>
           <p> Dans cette section, l'enseignant pourra accéder à la liste des compte-rendus des entretiens avec d'autres intervenants saisis par 
-            l'étudiants. Il peut également saisir sa réaction aux engagements de l'étudiant(approbation, information 
+            l'étudiant. Il peut également saisir sa réaction aux engagements de l'étudiant(approbation, information 
             complémentaire etc...)</p>
         </div>
         <img src={img5} alt=" " style={{ height: '250px', margin: '20px auto' }} />

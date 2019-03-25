@@ -48,8 +48,8 @@ class VueEtudiant extends Component {
             <div className="container">
               <div className="panel panel-default">
                 <div className="panel-body">
-                  <h3>INSCRIS-TOI ICI !</h3>
-                  <p style={{ color: '#fefefe' }}> Renseigne ton email</p>
+                  <h3>Inscris-toi ici !</h3>
+                  <p style={{ color: '#fefefe' }}> Renseigne ton e-mail pour participer à l'expérimentation</p>
                   <form onSubmit={this.onSubmit}>
                     <input
                       type="email"

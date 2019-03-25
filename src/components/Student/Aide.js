@@ -104,7 +104,7 @@ class Exit extends Component {
                 <h2>Demander de l&apos;aide</h2>
                 <p>
                                   Ici, tu peux contacter ton enseignant référent si tu as besoin de
-                                  conseils ou de soutient. Tu peux aussi lui joindre un message.
+                                  conseils ou de soutien. Tu peux aussi lui joindre un message.
                                   Si tu ne veux pas en ajouter, clique juste sur
                                   "Envoyer".
                 </p>
@@ -133,7 +133,7 @@ class Exit extends Component {
             )}
             { (user.helped && !(user.currentSlot)) && (
               <div style={{ color: '#fefefe' }} className="container">
-                Votre professeur veut un rendez-vous !
+                Votre enseignant référent veut un rendez-vous !
                 <br />
                 <br />
                 <button type="submit" className="help" onClick={this.onOpenModal4}>
@@ -163,7 +163,7 @@ class Exit extends Component {
 
             { (!user.helped) && (
               <p style={{ color: '#fefefe', margin:'10px 0px'}} className="container text-center">
-                Votre professeur n'a pas encore cherché à vous recevoir. Vous ne pouvez donc pas encore choisir de créneau de rendez-vous.
+                Votre enseignant référent n'a pas encore cherché à vous recevoir. Vous ne pouvez donc pas encore choisir de créneau de rendez-vous.
               </p>
             )}
             <br />

@@ -98,9 +98,9 @@ il est possible
             {' '}
 il est
                         possible de filtrer les étudiants selon leurs caractéristiques, par exemple
-                        si ils sont ou non sportif de haut niveau / étudiant international / ... Il
-                        est également possible de récupérer seulement les étudiants ayant demandé de
-                        l'aide en appliquant le filtre correspondant.
+                        si ils sont ou non sportifs de haut niveau / étudiants internationaux / ...
+                        Il est également possible de récupérer seulement les étudiants ayant demandé
+                        de l'aide en appliquant le filtre correspondant.
             {' '}
           </p>
           <p>
@@ -122,7 +122,7 @@ il est
                         d'aide" pour récupérer tous les étudiants ayant demandé de l'aide, ajouter
                         le tri par étudiant en difficulté et choisir les 5 premiers élèves. Par
                         "choisir", on entend accepter la demande de rendez-vous, ce qui ne signifie
-                        pas prendre rendez-vous ! Une fois les 5 demande de rendez-vous acceptées,
+                        pas prendre rendez-vous ! Une fois les 5 demandes de rendez-vous acceptées,
                         les étudiants choisis seront placés dans la colonne de droite du tableau de
                         bord, et il faudra planifier les rendez-vous (voir partie 2).
           </p>

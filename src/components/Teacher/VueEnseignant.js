@@ -18,6 +18,19 @@ class VueEnseignant extends Component {
       filterHelp: false,
       profils: ['Employés', 'Sportifs', 'Handicapés', 'Artistes', 'Internationaux'],
       profilsName: ['employe', 'athlete', 'disabled', 'artist', 'foreigner'],
+      translate: {
+        employe : 'Employés',
+        disabled : 'Handicapés',
+        foreigner : 'Internationaux',
+        artist : 'Artistes',
+        athlete : 'Sportifs de haut niveau',
+        mean : 'Synthèse',
+        motivation : 'Motivation',
+        lifestyle : 'Style de vie',
+        fidelity : 'Fidélité',
+        noOrientation : 'Orientation',
+        integration : 'Intégration'
+      },
       proportions: [0, 0, 0, 0, 0],
       colors: [variables.graph1, variables.graph2, variables.graph3, variables.graph4],
       updateFilter: this.updateFilter.bind(this),
@@ -99,7 +112,7 @@ class VueEnseignant extends Component {
           <div className="row dashboard">
             <div className="filtered">
               <div className="text-center">
-                <h2> Étudiants </h2>
+                <h2> Étudiants de L1</h2>
               </div>
               <div className="text-center" style={{ display: 'flex' }}>
                 <button
@@ -147,7 +160,7 @@ class VueEnseignant extends Component {
                       {filter.map(filt => (
                         <div key={filt} className="filter">
                           {' '}
-                          {filt}
+                          {this.state.translate[filt]}
                           {' '}
                         </div>
                       ))}
@@ -162,7 +175,7 @@ class VueEnseignant extends Component {
                       {sortScore.map(sort => (
                         <div key={sort} className="sort">
                           {' '}
-                          {sort== 'mean' ? 'Synthèse' : sort}
+                          {this.state.translate[sort]}
                           {' '}
                         </div>
                       ))}

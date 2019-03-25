@@ -12,10 +12,10 @@ import DatePicker from 'react-datepicker';
 // import FooterStop from './FooterStop'
 // import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
+import Dropdown from 'react-bootstrap/Dropdown';
 import url from '../../config';
 // import computeStats from './ComputeStats';
 import SC from './ScoreChart';
-import Dropdown from 'react-bootstrap/Dropdown'
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -34,7 +34,12 @@ class Begin extends Component {
       saved: true,
       status: 'choice',
       displayStatus: 'UEs choisies',
-      dropdownDatas:  [{status: 'choice', displayStatus : 'UEs choisies'}, {status:'comment', displayStatus :'Commentaires'}, {status: 'engagement', displayStatus :'Engagements'}, {status:'reflexions', displayStatus :'Reflexions'}],
+      dropdownDatas: [
+        { status: 'choice', displayStatus: 'UEs choisies' },
+        { status: 'comment', displayStatus: 'Commentaires' },
+        { status: 'engagement', displayStatus: 'Engagements' },
+        { status: 'reflexions', displayStatus: 'Reflexions' },
+      ],
     };
   }
 
@@ -78,7 +83,7 @@ class Begin extends Component {
 
     etat = (nextEtat, nextDisplayEtat) => {
       this.setState({ status: nextEtat, displayStatus: nextDisplayEtat });
-    }
+    };
 
     render() {
       const { user } = this.state;
@@ -103,7 +108,7 @@ class Begin extends Component {
                 <p>
                     {!user.helped && (
                         <div>
-                          <ReactTooltip multiline/>
+                            <ReactTooltip multiline />
                             <button
                               onClick={() => {
                                 this.help(user._id);
@@ -125,61 +130,72 @@ class Begin extends Component {
                                     <h2>Contrat pédagogique</h2>
                                 </div>
                                 <div>
-                                  <Dropdown>
+                                    <Dropdown>
                                         <Dropdown.Toggle variant="light" id="dropdown-basic">
                                             {this.state.displayStatus}
                                         </Dropdown.Toggle>
 
                                         <Dropdown.Menu alignRight>
-                                            {this.state.dropdownDatas.filter(element => element.status !==this.state.status).map(d => (
-                                                <Dropdown.Item onClick={this.etat.bind(this, d.status, d.displayStatus)}>{d.displayStatus}</Dropdown.Item>
-                                            ))}
+                                            {this.state.dropdownDatas
+                                              .filter(
+                                                element => element.status !== this.state.status,
+                                              )
+                                              .map(d => (
+                                                    <Dropdown.Item
+                                                      onClick={this.etat.bind(
+                                                        this,
+                                                        d.status,
+                                                        d.displayStatus,
+                                                      )}
+                                                    >
+                                                        {d.displayStatus}
+                                                    </Dropdown.Item>
+                                              ))}
                                         </Dropdown.Menu>
                                     </Dropdown>
-                                    {this.state.status==='choice' && (
-                                      this.state.user.ue.length === 0 ? (
-                                        <h5>
-                                            Cet étudiant n'a pas encore signalé d'UEs. C'est la
-                                            raison pour laquelle vous ne pouvez pas encore établir
-                                            de contrat pédagogique.
-                                        </h5>
-                                    ) : (
-                                        <ul
-                                          className="list-group"
-                                          style={{ width: '95%', margin: '10px' }}
-                                        >
-                                            {this.state.user.ue.map(ue => (
-                                                <div key={ue.name}>
-                                                    <ReactTooltip multiline />
-                                                    <li
-                                                      data-tip={ue.message}
-                                                      className={
-                                                            'row list-group-item-' + ue.status
-                                                        }
-                                                      style={{
-                                                        'border-radius': '10px',
-                                                        width: '100%',
-                                                        margin: '5px 0px',
-                                                        padding: '0px 0px 0px 10px',
-                                                        display: 'flex',
-                                                        'flex-direction': 'row',
-                                                        'justify-content': 'space-between',
-                                                        'align-items': 'center',
-                                                      }}
-                                                    >
-                                                        <div>
-                                                            {ue.name}
-                                                            {ue.dateValid !== '' && (
-                                                                <div>{ue.dateValid}</div>
-                                                            )}
-                                                        </div>
-                                                    </li>
-                                                </div>
-                                            ))}
-                                        </ul>
-                                    )
-                                    )}
-                                    {this.state.status==='comment' && (
+                                    {this.state.status === 'choice'
+                                        && (this.state.user.ue.length === 0 ? (
+                                            <h5>
+                                                Cet étudiant n'a pas encore signalé d'UEs. C'est la
+                                                raison pour laquelle vous ne pouvez pas encore
+                                                établir de contrat pédagogique.
+                                            </h5>
+                                        ) : (
+                                            <ul
+                                              className="list-group"
+                                              style={{ width: '95%', margin: '10px' }}
+                                            >
+                                                {this.state.user.ue.map(ue => (
+                                                    <div key={ue.name}>
+                                                        <ReactTooltip multiline />
+                                                        <li
+                                                          data-tip={ue.message}
+                                                          className={
+                                                                'row list-group-item-' + ue.status
+                                                            }
+                                                          style={{
+                                                            'border-radius': '10px',
+                                                            width: '100%',
+                                                            margin: '5px 0px',
+                                                            padding: '0px 0px 0px 10px',
+                                                            display: 'flex',
+                                                            'flex-direction': 'row',
+                                                            'justify-content': 'space-between',
+                                                            'align-items': 'center',
+                                                          }}
+                                                        >
+                                                            <div>
+                                                                {ue.name}
+                                                                {ue.dateValid !== '' && (
+                                                                    <div>{ue.dateValid}</div>
+                                                                )}
+                                                            </div>
+                                                        </li>
+                                                    </div>
+                                                ))}
+                                            </ul>
+                                        ))}
+                                    {this.state.status === 'comment' && (
                                         <div className="container">
                                             <div className="row justify-content-between">
                                                 <h5 className="col-9">
@@ -350,7 +366,7 @@ class Recap extends Component {
                             {' '}
                             Motivation générale :
 {' '}
-{parseFloat(score.motivation).toFixed(2)}
+{parseFloat(score.motivation).toFixed(0)}
                             /10
                         </h5>
                     </li>
@@ -360,7 +376,7 @@ class Recap extends Component {
                             {' '}
                             Utilisation et fidélité :
 {' '}
-{parseFloat(score.fidelity).toFixed(2)}
+{parseFloat(score.fidelity).toFixed(0)}
                             /10
                         </h5>
                         <p className="card-text">
@@ -400,7 +416,7 @@ Date d&apos;inscription :
                             {' '}
                             Style de vie :
 {' '}
-{parseFloat(score.lifestyle).toFixed(2)}
+{parseFloat(score.lifestyle).toFixed(0)}
                             /10
                         </h5>
                     </li>
@@ -410,7 +426,7 @@ Date d&apos;inscription :
                             {' '}
                             Intégration :
 {' '}
-{parseFloat(score.integration).toFixed(2)}
+{parseFloat(score.integration).toFixed(0)}
                             /10
                         </h5>
                     </li>
@@ -419,7 +435,7 @@ Date d&apos;inscription :
                         <h5 className="card-title">
                             Pertinence de l&apos;orientation :
 {' '}
-                            {parseFloat(score.noOrientation).toFixed(2)}
+                            {parseFloat(score.noOrientation).toFixed(0)}
                             /10
                         </h5>
                     </li>
@@ -429,7 +445,7 @@ Date d&apos;inscription :
                     <h4 className="card-title">
                         Score moyen :
 {' '}
-{parseFloat(average).toFixed(2)}
+{parseFloat(average).toFixed(0)}
                         /10
                     </h4>
                 </div>
@@ -465,8 +481,15 @@ class Aide extends Component {
 
     proposeRdv = () => {
       const { date } = this.state;
-      const horaire = `${date.getDate()}/${date.getMonth()
-            + 1}/${date.getFullYear()} à ${date.getHours()}h${date.getMinutes()}`;
+      let minutes = date.getMinutes();
+      let mois = String(date.getMonth() + 1);
+      if (minutes === 0) {
+        minutes = String('00');
+      }
+      if (mois.length === 1) {
+        mois = '0' + mois;
+      }
+      const horaire = `${date.getDate()}/${mois}/${date.getFullYear()} à ${date.getHours()}h${minutes}`;
       axios.post(`${url}/api/slots/newrdv/${this.props.id}`, { horr: horaire }).then(() => {
         axios.get(`${url}/api/slots/rdvu/${this.props.id}`).then((resp) => {
           this.setState({ taken: resp.data });

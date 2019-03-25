@@ -1,3 +1,4 @@
+/* eslint-disable prefer-template */
 /* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
 /* eslint-disable prefer-const */
@@ -44,6 +45,10 @@ class Propose extends Component {
       const {
         number, date, plage, duration, numberTot,
       } = this.state;
+      let mois = String(date.getMonth() + 1);
+      if (mois.length === 1) {
+        mois = '0' + mois;
+      }
       if (number <= 0 || number >= 31 || duration <= 4 || duration >= 61) {
         window.alert('Veuillez rentrer un nombre de  créneau entre 1 et 30 et une durée entre 5 et 60 minutes');
         return 0;
@@ -55,9 +60,12 @@ class Propose extends Component {
       let count = 0;
       while (count < number) {
         count += 1;
+        let minutes = heureFin.getMinutes();
+        if (minutes === 0) {
+          minutes = String('00');
+        }
         plage.push({
-          date: `${date.getDate()}/${date.getMonth()
-                    + 1}/${date.getFullYear()} à ${heureFin.getHours()}h${heureFin.getMinutes()}`,
+          date: `${date.getDate()}/${mois}/${date.getFullYear()} à ${heureFin.getHours()}h${minutes}`,
           duration: this.state.duration,
           status: 'Non enregistré',
           id: plage.length + 1,
@@ -71,17 +79,6 @@ class Propose extends Component {
         // heureFin.setMinutes(heureFin.getMinutes());
       }
       this.setState({ plage, numberTot: numberTot + number });
-    };
-
-    addDate = () => {
-      const { plage, date, numberTot } = this.state;
-      const numberTotbis = numberTot + 1;
-      plage.push({
-        horaire: `${date.getDate()}/${date.getMonth()
-                + 1}/${date.getFullYear()} à ${date.getHours()}h${date.getMinutes()}`,
-        id: plage.length + 1,
-      });
-      this.setState({ plage, date: new Date(), numberTot: numberTotbis });
     };
 
     clearAll = () => {
@@ -126,7 +123,7 @@ class Propose extends Component {
               count += 1;
               if (count === tot) {
                 this.setState({ plage: [] }, () => this.reload());
-                ToastsStore.info("Les étudiants concernés ont été prévenus par mail!");
+                ToastsStore.info('Les étudiants concernés ont été prévenus par mail!');
               }
             },
           );

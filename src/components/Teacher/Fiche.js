@@ -58,6 +58,7 @@ class Begin extends Component {
         // console.log(res.data);
         // console.log(res.data.ue);
         this.setState({ user: res.data, textContrat: res.data.textContrat });
+        console.log(this.state.user);
       });
     };
 
@@ -92,6 +93,18 @@ class Begin extends Component {
     etat = (nextEtat, nextDisplayEtat) => {
       this.setState({ status: nextEtat, displayStatus: nextDisplayEtat });
     };
+
+    updateTeacherComment = (id) => {
+      axios.post(`${url}/api/engagements/comment/${id}/${this.state.user._id}`, { comment: document.getElementById(id).value }).then(() => {
+        this.load();
+      });
+    }
+
+    validate = (id) => {
+      axios.post(`${url}/api/engagements/validate/${id}/${this.state.user._id}`).then(() => {
+        this.load();
+      });
+    }
 
     render() {
       const { user, collapse } = this.state;
@@ -242,7 +255,17 @@ class Begin extends Component {
                                     )}
                                     {['reflexions', 'engagement'].includes(this.state.status) && (
                                         <div className="container">
-                                            Cette fonctionnalité est en cours de développement
+                                            {this.state.user.engagements.map(engagement => (
+                                              <div>
+                                                  <p> Date : {engagement.date}</p>
+                                                  <p> Commentaire élève : {engagement.student}</p>
+                                                  <p> Commentaire prof : {engagement.teacher}</p>
+                                                  <textarea id={engagement._id} ></textarea>
+                                                  <button  className="btn btn-info" onClick={ () => { this.updateTeacherComment(engagement._id) } }> Envoyer </button>
+                                                  <p> Validé : {engagement.isValidated ? 'Oui' : 'Non'}</p>
+                                                  <button className="btn btn-success" onClick={() => {this.validate(engagement._id)}}> Valider </button>
+                                              </ div>
+                                            ))}
                                         </div>
                                     )}
                                 </div>

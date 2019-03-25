@@ -16,7 +16,7 @@ class VueEtudiant extends Component {
     axios.get(`${url}/api/users/`).then((res) => {
       this.setState({ pseudo: '', pseudos: res.data });
       alert(
-        "Cette application est le début de développement d'une app utilisée pour suivre, coacher et repérer d'éventuels étudiants décrocheurs dans les licences. Imaginez vous que vous venez d'entrer en licence, et participez à une (ou plusieurs) conversation avec le chatbot. Remplissez ensuite le questionnaire de satisfaction disponible en cliquant sur le bouton 'Arrêter l'évaluation'. ",
+        "Cette application est le début de développement d'une application utilisée pour suivre, coacher et repérer d'éventuels étudiants en difficulté dans les licences. Imaginez vous que vous venez d'entrer en licence, et participez à une (ou plusieurs) conversation avec le chatbot. Remplissez ensuite le questionnaire de satisfaction disponible en cliquant sur le bouton 'Arrêter l'évaluation'. ",
       );
     });
   }

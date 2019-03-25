@@ -39,6 +39,8 @@ class VueEnseignant extends Component {
       loadUsers: this.loadUsers.bind(this),
       users: [],
       usersHelped: [],
+      number: 0,
+      numberHelp: 0,
     };
   }
 
@@ -59,7 +61,11 @@ class VueEnseignant extends Component {
           .then((res) => {
             this.setState({ users: res.data });
             axios.get(`${url}/api/users/helped`).then((res) => {
-              this.setState({ usersHelped: res.data });
+              this.setState({ usersHelped: res.data, numberHelp: res.data.length });
+              axios.get(`${url}/api/users/number`).then((resNb) => {
+                console.log(resNb.data);
+                this.setState({ number: resNb.data.nombre - this.state.numberHelp });
+              });
             });
           });
       });
@@ -106,14 +112,19 @@ class VueEnseignant extends Component {
     }
 
     render() {
-      const { sortScore, filter, filterHelp } = this.state;
+      const { sortScore, filter, filterHelp, number } = this.state;
       return (
         <div className="container text-center">
           <div className="row dashboard">
             <div className="filtered">
               <div className="text-center">
-                <h2> Étudiants de L1</h2>
+                <h2> Étudiants en L1 </h2>
               </div>
+              <h5>
+                Nombre d'étudiants total :
+                {' '}
+                { number }
+              </h5>
               <div className="text-center" style={{ display: 'flex' }}>
                 <button
                   type="button"

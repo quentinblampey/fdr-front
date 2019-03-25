@@ -16,6 +16,7 @@ class Contrat extends Component {
     super(props);
     // this.demAide = this.demAide.bind(this);
     this.state = {
+        modal:{name:"", field:""},
         comment:'',
         engagements:[{date: "21 Mars", student:"Je m'engage à aller en TD", validation:true, teacher:"Ok j'ai noté ton engagement"},
         {date: "21 Juin", student:"Je m'engage à aller en Amphi des fois", validation:false, teacher:"Pas sur que ça soit suffisant.."}
@@ -45,11 +46,11 @@ class Contrat extends Component {
     axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
         let aux=[];
         liste.forEach(element => {
-            aux.push({name:element, checked:(res.data.ue.filter((x) => element===x.name).length >0), comment:false})
+            aux.push({name:element, checked:(res.data.ue.filter((x) => element===x.name).length >0)})
         })
         this.setState({ user: res.data, UEs:aux});
         alert(
-            "La partie contrat n'est pas reglementaire, elle ne sert qu'à communiquer entre l'enseignant et l'étudiant sur sa réussite / ses difficultés / ses engagements concernant ses UEs.",
+            "Note : notre parti-pris est que le Contrat n'est pas reglementaire, elle ne sert qu'à communiquer entre l'enseignant et l'étudiant sur sa réussite / ses difficultés / ses engagements concernant ses UEs.",
           );
       });
   }
@@ -89,26 +90,23 @@ class Contrat extends Component {
               });
       }
 
-      comment = (name) => {
-        let a = [];
-        this.state.UEs.forEach(element =>{
-            if (element.name === name){
-                let aux = element;
-                aux.comment = !element.comment;
-                a.push(aux);
-            }
-            else{
-                a.push(element);
-            }
-        })
-        this.setState({UEs:a});
+      modal = (name, field) => {
+        let modal;
+        if (this.state.modal.name === ""){
+            modal={name:name, field:field};
+        } else{
+            modal={name:"", field:""};
+        }
+        this.setState({modal});
       }  
 
-      sendComment = (name) => {
+      sendModal = () => {
         let comment = this.state.comment;
-        axios.post(`${url}/api/contrats/comment/${this.props.match.params.id}`, { name, comment }).then((res) => {
+        let name = this.state.modal.name;
+        let field = this.state.modal.field
+        axios.post(`${url}/api/contrats/modal/${this.props.match.params.id}`, { name, comment, field }).then((res) => {
                 this.setState({ user: res.data, comment:''});
-                this.comment(name);
+                this.modal(this.state.modal.name, this.state.modal.field);
               });
       }
 
@@ -161,7 +159,7 @@ class Contrat extends Component {
                                 <div key={ue.name} style={{ color : '#fefefe', margin:'10px', width:'100%-10px'}}>
                                     <div style={{ width:'100%'}}>
                                         <Switch style={{margin:'30px'}} onChange={this.handleInputChange.bind(this, i)} checked={ue.checked} uncheckedIcon={false} checkedIcon={false} width={40} height={15} handleDiameter={20}/>
-                                        {" "+ue.name}
+                                        {" S"+ue.name}
                                     </div>
                                 </div>
                             ))}
@@ -169,54 +167,62 @@ class Contrat extends Component {
                         <button className="help" style={{margin: '5px 0px', width: '100%'}} onClick={this.send}>Valider</button>
                     </div>
                 )}
-                {(this.state.status === 'feedback' && this.state.user.ue)&& (
-                    <ul className="list-group" style={{
-                        width:'90%',
-                        position: 'absolute',
-                        top: '190px',
-                        bottom:'105px',
-                        overflow: 'scroll',
-                        overflowX: 'hidden',
-                        margin:'5px'}}>
-                            {this.state.user.ue.map((ue) => (
-                                <li key={ue.name} className={"row list-group-item-"+ue.status} style={{minHeight:'45px', borderRadius:'10px', width:'100%', margin: '5px 0px', padding: '0px 0px 0px 10px', display:'flex', flexDirection: 'row', justifyContent:'space-between', alignItems:'center'}}>
-                                    <div>
-                                        {ue.name}
-                                    </div>
-                                    <div className="dropdown">
-                                    <Dropdown>
-                                        <Dropdown.Toggle variant="light" id="dropdown-basic">
-                                        </Dropdown.Toggle>
-
-                                        <Dropdown.Menu alignRight>
-                                            <Dropdown.Header>Suivi de l'UE</Dropdown.Header>
-                                            <Dropdown.Item onClick={this.options.bind(this, "warning", ue.name)}>Signaler des difficulté</Dropdown.Item>
-                                            <Dropdown.Item onClick={this.comment.bind(this, ue.name)}>Commentaire</Dropdown.Item>
-                                            <Dropdown.Item onClick={this.comment.bind(this, ue.name)}>Absence à une évaluation</Dropdown.Item>
-                                            <Dropdown.Divider />
-                                            <Dropdown.Header>Fin de l'UE</Dropdown.Header>
-                                            <Dropdown.Item onClick={this.options.bind(this, "success", ue.name)}>Validé</Dropdown.Item>
-                                            <Dropdown.Item onClick={this.options.bind(this, "danger", ue.name)}>Non validé</Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
-                                    <Modal style={{ zIndex:10}} open={this.state.UEs.filter(element => element.name===ue.name)[0].comment} onClose={this.comment.bind(this, ue.name)} center>
-                                        <h2>Entre ton commentaire</h2>
-                                        <textarea
-                                        className="form-control"
-                                        id="exampleFormControlTextarea1"
-                                        rows="2"
-                                        value={this.state.comment}
-                                        onChange={this.onChange}
-                                        />
-                                        <br />
-                                        <button type="submit" className="modale" onClick={this.sendComment.bind(this, ue.name)}>
-                                            <p>ENVOYER</p>
-                                        </button>
-                                    </Modal>
-                                    </div>
-                                </li>
-                            ))}
-                    </ul>
+                {(this.state.status === 'feedback' )&& (
+                    (this.state.user.ue.length > 0) ? (
+                        <ul className="list-group" style={{
+                            width:'90%',
+                            position: 'absolute',
+                            top: '190px',
+                            bottom:'105px',
+                            overflow: 'scroll',
+                            overflowX: 'hidden',
+                            margin:'5px'}}>
+                                {this.state.user.ue.map((ue) => (
+                                    <li key={ue.name} className={"row list-group-item-"+ue.status} style={{minHeight:'45px', borderRadius:'10px', width:'100%', margin: '5px 0px', padding: '0px 0px 0px 10px', display:'flex', flexDirection: 'row', justifyContent:'space-between', alignItems:'center'}}>
+                                        <div>
+                                            {ue.name}
+                                        </div>
+                                        <div className="dropdown">
+                                        <Dropdown>
+                                            <Dropdown.Toggle variant="light" id="dropdown-basic">
+                                            </Dropdown.Toggle>
+    
+                                            <Dropdown.Menu alignRight>
+                                                <Dropdown.Header>Suivi de l'UE</Dropdown.Header>
+                                                <Dropdown.Item onClick={this.options.bind(this, "warning", ue.name)}>Signaler des difficulté</Dropdown.Item>
+                                                <Dropdown.Item onClick={this.modal.bind(this, ue.name, "comment")}>Commentaire</Dropdown.Item>
+                                                <Dropdown.Item onClick={this.modal.bind(this, ue.name, "missing")}>Absence à une évaluation</Dropdown.Item>
+                                                <Dropdown.Divider />
+                                                <Dropdown.Header>Fin de l'UE</Dropdown.Header>
+                                                <Dropdown.Item onClick={this.options.bind(this, "success", ue.name)}>Validé</Dropdown.Item>
+                                                <Dropdown.Item onClick={this.options.bind(this, "danger", ue.name)}>Non validé</Dropdown.Item>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
+                                        <Modal style={{ zIndex:10}} open={this.state.modal.name!==''} onClose={this.modal.bind(this, this.state.modal.name, this.state.modal.field)} center>
+                                            {this.state.modal.field === "comment" ? (
+                                                <h2>Entre ton commentaire</h2>
+                                            ):(
+                                                <h2>Entre ton motif d'absence</h2>
+                                            )}
+                                            <textarea
+                                            className="form-control"
+                                            id="exampleFormControlTextarea1"
+                                            rows="2"
+                                            value={this.state.comment}
+                                            onChange={this.onChange}
+                                            />
+                                            <br />
+                                            <button type="submit" className="modale" onClick={this.sendModal}>
+                                                <p>ENVOYER</p>
+                                            </button>
+                                        </Modal>
+                                        </div>
+                                    </li>
+                                ))}
+                        </ul>
+                    ) :(
+                        <div style={{ color : '#fefefe', margin: '10px 10px 10px 10px'}}>Vous devez valider des choix d'UE pour pouvoir exprimer vos feedbacks à sur ces UEs</div>
+                    )
                 )}
                 {this.state.status === 'comment' && (
                     <div style={{ color : '#fefefe', margin: '50px 10px 10px 10px'}}>
@@ -252,13 +258,17 @@ class Contrat extends Component {
                                 ))
                             ) : (
                                 <div style={{marginTop:'30px'}}>
-                                    <div>{"Rendez-vous du "+this.state.selectedEngagement.date}</div>
+                                    <h5 style={{marginBottom:'20px'}}>{"Rendez-vous du "+this.state.selectedEngagement.date}</h5>
                                     <div className="row">
+                                    <div style={{width:'80%', textAlign:'left', marginLeft:'20px'}}>
+                                        {" Votre compte-rendu :"}
+                                    </div>
                                     <button className="btn btn-outline-light" style={{width:'80%', textAlign:'left', margin:'10px'}}>
                                         {this.state.selectedEngagement.student}
                                     </button>
                                     </div>
                                     <div className="row justify-content-end">
+                                    <div style={{width:'80%', textAlign:'left', marginLeft:'20px'}}>Réponse votre enseignant référent :</div>
                                     <button className="btn btn-outline-light" style={{width:'80%', textAlign:'left', margin:'10px'}}>
                                         {this.state.selectedEngagement.teacher}
                                     </button>

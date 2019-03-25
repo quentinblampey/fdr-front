@@ -71,7 +71,7 @@ class Info extends Component {
                         indicateur, qui montre le pourcentage d'étudiants "dans le rouge" pour cet
                         indicateur, ceux "dans le orange" et ceux "dans le vert". Ici, par exemple,
                         50% de la cohorte est "moyennement motivée" (couleur orange), et l'autre
-                        moitié est suffisemment motivée (couleur verte).
+                        moitié est suffisamment motivée (couleur verte).
           </p>
           <img src={img3} alt=" " style={{ height: '500px', margin: '20px auto' }} />
         </div>
@@ -137,15 +137,15 @@ il est
 
         <p>
           {' '}
-                    Afin de convenir à tous les enseignant référents, il est possible de choisir les
-                    créneaux de rendez-vous de 3 manières différentes.
+                    Afin de satisfaire au mieux tous les enseignants référents, il est possible de choisir les créneaux
+                    de rendez-vous de 3 manières différentes.
         </p>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
           <h4> 2.1 Par mail </h4>
           <p>
             {' '}
-                        Sur les fiches détaillées des étudiants est indiqué leur email. Le
-                        enseignant référent est donc libre de le contacter par mail directement.
+                        Le mail de l'étudiant est donné dans la fiche détaillée. L'enseignant référent
+                         est donc libre de le contacter par mail directement.
             {' '}
           </p>
         </div>
@@ -153,11 +153,11 @@ il est
           <h4> 2.2 Via l'interface, étudiant par étudiant </h4>
           <p>
             {' '}
-                        Sur les fiches détaillées des étudiants, il est possible de leur proposer
+                        Sur la fiche détaillée de l'étudiant, il est possible de lui proposer
                         individuellement un ou plusieurs créneau de rendez-vous. L'étudiant doit
-                        donc ensuite, de son côté, accepter un des créneaux proposé. Il est possible
-                        de proposer un créneau par un jusqu'à ce que l'étudiant en accepte un, pour
-                        éviter les trous dans le planning du enseignant référent.
+                        donc ensuite, de son côté, accepter un des créneaux proposés. Il est possible
+                        de proposer les créneaux un par un jusqu'à ce que l'étudiant en accepte un, pour
+                        éviter les trous dans le planning de l'enseignant référent.
           </p>
         </div>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
@@ -165,33 +165,25 @@ il est
           <p>
             {' '}
                         La planification de rendez-vous avec l'étudiant peut être difficile et
-                        chronophage, car les étudiants comme les enseignant référents ont des
-                        impératifs et n'aiment pas avoir des trous dans leur planning. Le enseignant
-                        référent peut donc simplement proposer sa plage de rendez-vous (via l'onglet
-                        associé dans la barre de navigation), et les étudiants de leur côté
-                        choisiront tous les créneaux où ils sont disponibles. Ensuite, un algorithme
-                        sera lancé de sorte à trouver une solution qui convient aux étudiants et au
-                        enseignant référent. Si il n'existe pas de solution, seront favorisés les
-                        étudiants ayant le plus besoin d'aide.
+                        chronophage, car les étudiants comme les enseignants référents ont des impératifs et
+                        n'aiment pas avoir des trous dans leur planning. L'enseignant référent peut donc
+                        simplement proposer sa plage de rendez-vous (via l'onglet associé dans la
+                        barre de navigation), et les étudiants de leur côté choisiront tous les
+                        créneaux où ils sont disponibles. Ensuite, un algorithme sera lancé de sorte
+                        à trouver une solution qui convient aux étudiants et à l'enseignant référent. S'il
+                        n'existe pas de solution, seront favorisés les étudiants ayant le plus
+                        besoin d'aide.
           </p>
         </div>
         <h2> 3 - Contrats </h2>
 
-        <p>
-                    Dans cette partie, les enseignants référents peuvent gérer le contrat
-                    pédagogique en lien avec l'étudiant. Pour cela, il dispose de différentes
-                    foncionnalités accessibles grâce au menu déroulant.
-        </p>
+        <p>Dans cette partie, les enseignants référents peuvent gérer le contrat pédagogique en lien 
+          avec l'étudiant. Pour cela, il dispose de différentes fonctionnalités accessibles grâce au menu déroulant.</p>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
           <h4> 3.1 UEs choisies </h4>
-          <p>
-            {' '}
-                        Dans cette section, l'enseignant peut accéder aux UEs choisies par
-                        l'étudiant dont les couleurs correspondent à l'état déclaré par l'étudiant
-                        (validé, non validé, en difficulté. Il peut en outre accéder au commentaire
-                        laissé par l'étudiant au survol de l'UE)
-            {' '}
-          </p>
+          <p> Dans cette section, l'enseignant peut accéder aux UEs choisies par l'étudiant dont les couleurs correspondent 
+            à l'état déclaré par l'étudiant (validé, non validé, en difficulté). Il peut en outre accéder au commentaire 
+            laissé par l'étudiant au survol de l'UE. </p>
         </div>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
           <h4> 3.2 Commentaires </h4>

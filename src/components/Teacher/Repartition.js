@@ -60,7 +60,7 @@ class Repartition extends Component {
         </div>
         <br />
         <div className="legend-box">
-          <div className="head">Légende : répartition des étudiants par indicateur</div>
+          <div className="head">Légende</div>
           <div className="content">
             <p> Notes de </p>
             <div className="pastille red"> 0 à 4 </div>

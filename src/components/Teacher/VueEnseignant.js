@@ -121,7 +121,7 @@ class VueEnseignant extends Component {
                 <h2> Étudiants en L1 </h2>
               </div>
               <h5>
-                Nombre d'étudiants total :
+                Nombre d'étudiants :
                 {' '}
                 { number }
               </h5>

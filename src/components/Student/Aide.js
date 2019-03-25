@@ -133,7 +133,7 @@ class Exit extends Component {
             )}
             { (user.helped && !(user.currentSlot)) && (
               <div style={{ color: '#fefefe' }} className="container">
-                Votre professeur veut un rendez-vous !
+                Votre enseignant référent veut un rendez-vous !
                 <br />
                 <br />
                 <button type="submit" className="help" onClick={this.onOpenModal4}>
@@ -163,7 +163,7 @@ class Exit extends Component {
 
             { (!user.helped) && (
               <p style={{ color: '#fefefe', margin:'10px 0px'}} className="container text-center">
-                Votre professeur n'a pas encore cherché à vous recevoir. Vous ne pouvez donc pas encore choisir de créneau de rendez-vous.
+                Votre enseignant référent n'a pas encore cherché à vous recevoir. Vous ne pouvez donc pas encore choisir de créneau de rendez-vous.
               </p>
             )}
             <br />

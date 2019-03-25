@@ -105,19 +105,19 @@ class VueEnseignant extends Component {
                 <button
                   type="button"
                   className="btn btn-primary"
-                  style={{ width: '44%' , padding: '3px'}}
+                  style={{ width: '40%' , padding: '3px'}}
                   onClick={this.updateSort.bind(this, 'mean')}
                 >
-                                En difficultés
+                                En difficulté
                 </button>
 
                 <button
                   type="button"
                   className="btn btn-primary"
-                  style={{ width: '56%' , padding: '3px'}}
+                  style={{ width: '60%' , padding: '3px'}}
                   onClick={this.updateFilterHelp.bind(this)}
                 >
-                                Demandes d'aide
+                                En demande d'aide
                 </button>
               </div>
               {(filter.length !== 0 || filterHelp || sortScore.length !== 0) && (
@@ -162,7 +162,7 @@ class VueEnseignant extends Component {
                       {sortScore.map(sort => (
                         <div key={sort} className="sort">
                           {' '}
-                          {sort}
+                          {sort== 'mean' ? 'Synthèse' : sort}
                           {' '}
                         </div>
                       ))}

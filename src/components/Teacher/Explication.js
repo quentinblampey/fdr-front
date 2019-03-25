@@ -10,24 +10,24 @@ class Info extends Component {
     return (
       <div style={{ padding: '20px' }}>
         <h1 className="text-center"> Guide de l'interface enseignant </h1>
-        <h2> 1 - Dashboard </h2>
+        <h2> 1 - Tableau de bord </h2>
         <p>
           {' '}
-                    L'interface enseignant est composée entre autres d'un Dashboard. Avec celui-ci,
-                    chaque professeur pourra, en un coup d'oeil, avoir une vue sur l'état des
-                    étudiants sous sa responsabilité.
+                    L'interface enseignant est composée entre autres d'un tableau de bord. Avec
+                    celui-ci, chaque enseignant référent pourra, en un coup d'oeil, avoir une vue
+                    sur l'état des étudiants sous sa responsabilité.
           {' '}
         </p>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
           <h4> 1.1 Fiche récapitulative étudiant </h4>
           <p>
             {' '}
-                        Chaque professeur verra une liste de fiches récapitulative de la situation
-                        de chaque étudiant (voir ci-dessous) grâce à 5 indicateurs de réussite : sa
-                        motivation pour les cours (M comme motivation), son style de vie (L comme
-                        lifestyle), son intégration au sein de l'établissement (I comme
-                        intégration), sa fidelité à l'application (F comme fidelité) et son besoin
-                        ou non de réorientation (O comme orientation).
+                        Chaque enseignant référent verra une liste de fiches récapitulative de la
+                        situation de chaque étudiant (voir ci-dessous) grâce à 5 indicateurs de
+                        réussite : sa motivation pour les cours (M comme motivation), son style de
+                        vie (S comme style de vie), son intégration au sein de l'établissement (I
+                        comme intégration), sa fidelité à l'application (F comme fidelité) et son
+                        besoin ou non de réorientation (O comme orientation).
             {' '}
           </p>
           <p>
@@ -52,9 +52,9 @@ class Info extends Component {
           <h4> 1.2 Indicateurs globaux </h4>
           <p>
             {' '}
-                        Le dashboard, en plus de l'affichage des étudiants, propose différents
-                        indicateurs globaux, donnant donc au professeur des outils pour sonder
-                        l'état de sa cohorte dans sa globalité et non étudiant par étudiant.
+                        Le tableau de bord, en plus de l'affichage des étudiants, propose différents
+                        indicateurs globaux, donnant donc au enseignant référent des outils pour
+                        sonder l'état de sa cohorte dans sa globalité et non étudiant par étudiant.
           </p>
           <p>
             {' '}
@@ -115,16 +115,16 @@ il est
           <h4> 1.4 Gestion des demandes de rendez-vous </h4>
           <p>
             {' '}
-                        Imaginons qu'un professeur souhaite reçevoir 5 étudiants cette semaine.
-                        Grâce aux dashboard et ses différents outils, le professeur peut aisément
-                        choisir les étudiants qu'il veut voir en priorité dans le but de les aider.
-                        Par exemple, il peut appliquer le filtre "demande d'aide" pour récupérer
-                        tous les étudiants ayant demandé de l'aide, ajouter le tri par étudiant en
-                        difficulté et choisir les 5 premiers élèves. Par "choisir", on entend
-                        accepter la demande de rendez-vous, ce qui ne signifie pas prendre
-                        rendez-vous ! Une fois les 5 demande de rendez-vous acceptées, les étudiants
-                        choisis seront placés dans la colonne de droite du dashboard, et il faudra
-                        planifier les rendez-vous (voir partie 2).
+                        Imaginons qu'un enseignant référent souhaite reçevoir 5 étudiants cette
+                        semaine. Grâce aux tableau de bord et ses différents outils, le enseignant
+                        référent peut aisément choisir les étudiants qu'il veut voir en priorité
+                        dans le but de les aider. Par exemple, il peut appliquer le filtre "demande
+                        d'aide" pour récupérer tous les étudiants ayant demandé de l'aide, ajouter
+                        le tri par étudiant en difficulté et choisir les 5 premiers élèves. Par
+                        "choisir", on entend accepter la demande de rendez-vous, ce qui ne signifie
+                        pas prendre rendez-vous ! Une fois les 5 demande de rendez-vous acceptées,
+                        les étudiants choisis seront placés dans la colonne de droite du tableau de
+                        bord, et il faudra planifier les rendez-vous (voir partie 2).
           </p>
           <p>
             {' '}
@@ -137,15 +137,15 @@ il est
 
         <p>
           {' '}
-                    Afin de convenir à tous les professeurs, il est possible de choisir les créneaux
-                    de rendez-vous de 3 manières différentes.
+                    Afin de convenir à tous les enseignant référents, il est possible de choisir les
+                    créneaux de rendez-vous de 3 manières différentes.
         </p>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
           <h4> 2.1 Par mail </h4>
           <p>
             {' '}
                         Sur les fiches détaillées des étudiants est indiqué leur email. Le
-                        professeur est donc libre de le contacter par mail directement.
+                        enseignant référent est donc libre de le contacter par mail directement.
             {' '}
           </p>
         </div>
@@ -157,7 +157,7 @@ il est
                         individuellement un ou plusieurs créneau de rendez-vous. L'étudiant doit
                         donc ensuite, de son côté, accepter un des créneaux proposé. Il est possible
                         de proposer un créneau par un jusqu'à ce que l'étudiant en accepte un, pour
-                        éviter les trous dans le planning du professeur.
+                        éviter les trous dans le planning du enseignant référent.
           </p>
         </div>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
@@ -165,42 +165,62 @@ il est
           <p>
             {' '}
                         La planification de rendez-vous avec l'étudiant peut être difficile et
-                        chronophage, car les étudiants comme les professeurs ont des impératifs et
-                        n'aiment pas avoir des trous dans leur planning. Le professeur peut donc
-                        simplement proposer sa plage de rendez-vous (via l'onglet associé dans la
-                        barre de navigation), et les étudiants de leur côté choisiront tous les
-                        créneaux où ils sont disponibles. Ensuite, un algorithme sera lancé de sorte
-                        à trouver une solution qui convient aux étudiants et au professeur. Si il
-                        n'existe pas de solution, seront favorisés les étudiants ayant le plus
-                        besoin d'aide.
+                        chronophage, car les étudiants comme les enseignant référents ont des
+                        impératifs et n'aiment pas avoir des trous dans leur planning. Le enseignant
+                        référent peut donc simplement proposer sa plage de rendez-vous (via l'onglet
+                        associé dans la barre de navigation), et les étudiants de leur côté
+                        choisiront tous les créneaux où ils sont disponibles. Ensuite, un algorithme
+                        sera lancé de sorte à trouver une solution qui convient aux étudiants et au
+                        enseignant référent. Si il n'existe pas de solution, seront favorisés les
+                        étudiants ayant le plus besoin d'aide.
           </p>
         </div>
         <h2> 3 - Contrats </h2>
 
-        <p>Dans cette partie, les enseignants référents peuvent gérer le contrat pédagogique en lien 
-          avec l'étudiant. Pour cela, il dispose de différentes foncionnalités accessibles grâce au menu déroulant.</p>
+        <p>
+                    Dans cette partie, les enseignants référents peuvent gérer le contrat
+                    pédagogique en lien avec l'étudiant. Pour cela, il dispose de différentes
+                    foncionnalités accessibles grâce au menu déroulant.
+        </p>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
           <h4> 3.1 UEs choisies </h4>
-          <p> Dans cette section, l'enseignant peut accéder aux UEs choisies par l'étudiant dont les couleurs correspondent 
-            à l'état déclaré par l'étudiant (validé, non validé, en difficulté. Il peut en outre accéder au commentaire 
-            laissé par l'étudiant au survol de l'UE) </p>
+          <p>
+            {' '}
+                        Dans cette section, l'enseignant peut accéder aux UEs choisies par
+                        l'étudiant dont les couleurs correspondent à l'état déclaré par l'étudiant
+                        (validé, non validé, en difficulté. Il peut en outre accéder au commentaire
+                        laissé par l'étudiant au survol de l'UE)
+            {' '}
+          </p>
         </div>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
           <h4> 3.2 Commentaires </h4>
-          <p> Dans cette section, l'enseignant peut accéder au commentaire général sur le contrat saisi par l'étudiant. 
-            Il peut également saisir ou modifier son propre commentaire</p>
+          <p>
+            {' '}
+                        Dans cette section, l'enseignant peut accéder au commentaire général sur le
+                        contrat saisi par l'étudiant. Il peut également saisir ou modifier son
+                        propre commentaire
+          </p>
         </div>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
           <h4> 3.3 Engagements </h4>
-          <p> Dans cette section, l'enseignant pourra accéder à la liste des compte-rendus des entretiens saisis par 
-            l'étudiants. Il peut également saisir sa réaction aux engagements de l'étudiant(approbation, information 
-            complémentaire etc...)</p>
+          <p>
+            {' '}
+                        Dans cette section, l'enseignant pourra accéder à la liste des compte-rendus
+                        des entretiens saisis par l'étudiants. Il peut également saisir sa réaction
+                        aux engagements de l'étudiant(approbation, information complémentaire
+                        etc...)
+          </p>
         </div>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
           <h4> 3.4 Reflexions </h4>
-          <p> Dans cette section, l'enseignant pourra accéder à la liste des compte-rendus des entretiens avec d'autres intervenants saisis par 
-            l'étudiants. Il peut également saisir sa réaction aux engagements de l'étudiant(approbation, information 
-            complémentaire etc...)</p>
+          <p>
+            {' '}
+                        Dans cette section, l'enseignant pourra accéder à la liste des compte-rendus
+                        des entretiens avec d'autres intervenants saisis par l'étudiants. Il peut
+                        également saisir sa réaction aux engagements de l'étudiant(approbation,
+                        information complémentaire etc...)
+          </p>
         </div>
         <img src={img5} alt=" " style={{ height: '250px', margin: '20px auto' }} />
       </div>

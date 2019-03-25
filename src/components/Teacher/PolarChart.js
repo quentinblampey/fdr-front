@@ -16,7 +16,7 @@ class PolarChart extends Component {
         labels: [
           'Motivation',
           'Fidélité',
-          'Lifestyle',
+          'Style de vie',
           'Intégration',
           'Non besoin de réorientation',
         ],

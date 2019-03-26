@@ -10,7 +10,7 @@ class Feedbacks extends Component {
 
     render() {
 
-    console.log(this.props.modal);
+    console.log(this.props.modalFeedbacks);
 
         return (
             (this.props.user.ue.length > 0) ? (
@@ -34,13 +34,13 @@ class Feedbacks extends Component {
 
                                     <Dropdown.Menu alignRight>
                                         <Dropdown.Header>Suivi de l'UE</Dropdown.Header>
-                                        <Dropdown.Item onClick={this.props.options.bind("warning", ue.name)}>Signaler des difficulté</Dropdown.Item>
-                                        <Dropdown.Item onClick={this.props.modal.bind(ue.name, "comment")}>Commentaire</Dropdown.Item>
-                                        <Dropdown.Item onClick={this.props.modal.bind(ue.name, "missing")}>Absence à une évaluation</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.props.options("warning", ue.name)}>Signaler des difficulté</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.props.modal(ue.name, "comment")}>Commentaire</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.props.modal(ue.name, "missing")}>Absence à une évaluation</Dropdown.Item>
                                         <Dropdown.Divider />
                                         <Dropdown.Header>Fin de l'UE</Dropdown.Header>
-                                        <Dropdown.Item onClick={this.props.options.bind("success", ue.name)}>Validé</Dropdown.Item>
-                                        <Dropdown.Item onClick={this.props.options.bind("danger", ue.name)}>Non validé</Dropdown.Item>
+                                        <Dropdown.Item onClick={()=>this.props.options("success", ue.name)}>Validé</Dropdown.Item>
+                                        <Dropdown.Item onClick={()=>this.props.options("danger", ue.name)}>Non validé</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                                 <Modal style={{ zIndex:10}} open={this.props.modalFeedbacks.name!==''} onClose={this.props.modal.bind(this.props.modalFeedbacks.name, this.props.modalFeedbacks.field)} center>

@@ -1,37 +1,18 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable react/button-has-type */
-/* eslint-disable prefer-template */
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable react/jsx-indent */
-/* eslint-disable react/no-multi-comp */
-/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Collapse } from 'reactstrap';
 import DatePicker from 'react-datepicker';
-// import { Link } from 'react-router-dom';
-// import FooterStop from './FooterStop'
-// import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 import Dropdown from 'react-bootstrap/Dropdown';
-import Button from 'react-bootstrap/Button';
 import FicheCourte from '../FicheCourte';
 import url from '../../../../../config';
-// import computeStats from './ComputeStats';
 import SC from './ScoreChart';
 import Engagement from './Engagement';
-
 import 'react-datepicker/dist/react-datepicker.css';
 
 class Begin extends Component {
-  /* propTypes = {
-      match: PropTypes.number.isRequired,
-      params: PropTypes.number.isRequired,
-      id: PropTypes.number.isRequired,
-    }; */
   constructor(props) {
     super(props);
-    // this.computeStats = this.computeStats.bind(this)
     this.state = {
       user: { details: { name: 'undefined' }, ue: [] },
       textContrat: '',
@@ -50,18 +31,12 @@ class Begin extends Component {
   }
 
   componentDidMount() {
-    // const { id } = this.props;
-    // this.props.match.params.id
-    // eslint-disable-next-line react/destructuring-assignment react/prop-types
     this.load();
   }
 
     load = () => {
       axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
-        // console.log(res.data);
-        // console.log(res.data.ue);
         this.setState({ user: res.data, textContrat: res.data.textContrat });
-        // console.log(this.state.user);
       });
     };
 
@@ -76,8 +51,6 @@ class Begin extends Component {
           textContrat: this.state.textContrat,
         })
         .then((res) => {
-          // console.log(res.data);
-          // console.log(res.data);
           this.setState({ user: res.data, saved: true });
         });
     };
@@ -329,15 +302,9 @@ class Begin extends Component {
 
 // Gestion des demandes d'aide
 class Aide extends Component {
-  /* propTypes = {
-      match: PropTypes.number.isRequired,
-      params: PropTypes.number.isRequired,
-      id: PropTypes.number.isRequired,
-    }; */
 
   constructor(props) {
     super(props);
-    // this.computeStats = this.computeStats.bind(this)
     this.state = {
       date: new Date(),
       taken: [],
@@ -440,15 +407,8 @@ class Aide extends Component {
 }
 
 class Graph extends Component {
-  /* propTypes = {
-      match: PropTypes.number.isRequired,
-      params: PropTypes.number.isRequired,
-      id: PropTypes.number.isRequired,
-    }; */
-
   constructor(props) {
     super(props);
-    // this.computeStats = this.computeStats.bind(this)
     this.state = {
       collapse: false,
     };

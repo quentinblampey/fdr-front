@@ -4,10 +4,6 @@ import { Link } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
 
 class FicheCourte extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
 
     getColor = (val) => {
         if (val <= 6) {

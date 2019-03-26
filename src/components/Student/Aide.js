@@ -9,7 +9,7 @@ import url from '../../config';
 import Switch from "react-switch";
 import colors from '../../globalSCSS/color.scss';
 
-class Exit extends Component {
+class Aide extends Component {
   constructor(props) {
     super(props);
     this.onOpenModal2 = this.onOpenModal2.bind(this);
@@ -371,4 +371,4 @@ class ModalRDVEnseignant extends Component {
   }
 }
 
-export default Exit;
+export default Aide;

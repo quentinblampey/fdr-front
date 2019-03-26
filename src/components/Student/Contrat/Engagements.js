@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import '../Begin.scss';
-import Dropdown from 'react-bootstrap/Dropdown';
 import Modal from 'react-responsive-modal';
 
 class Engagements extends Component {

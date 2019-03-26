@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../Begin.scss';
 
 class Advice extends Component {
     constructor(props) {

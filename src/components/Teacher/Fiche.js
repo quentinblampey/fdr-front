@@ -19,6 +19,7 @@ import FicheCourte from './FicheCourte';
 import url from '../../config';
 // import computeStats from './ComputeStats';
 import SC from './ScoreChart';
+import Engagement from './Engagement';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -39,11 +40,13 @@ class Begin extends Component {
       displayStatus: 'UEs choisies',
       dropdownDatas: [
         { status: 'choice', displayStatus: 'UEs choisies' },
-        { status: 'comment', displayStatus: 'Commentaires' },
+        { status: 'comment', displayStatus: 'Mes conseils' },
         { status: 'engagement', displayStatus: 'Engagements' },
         { status: 'reflexions', displayStatus: 'Reflexions' },
       ],
     };
+    this.validate = this.validate.bind(this);
+    this.updateTeacherComment = this.updateTeacherComment.bind(this)
   }
 
   componentDidMount() {
@@ -225,7 +228,7 @@ class Begin extends Component {
                                         <div className="container">
                                             <div className="row justify-content-between">
                                                 <h5 className="col-9">
-                                                    &nbsp;Commentaire sur le contrat
+                                                    &nbsp;Mes conseils sur le contrat
                                                 </h5>
                                                 <div className="col-3">
                                                     {this.state.saved && (
@@ -251,55 +254,28 @@ class Begin extends Component {
                                             </button>
                                         </div>
                                     )}
-                                    {['reflexions', 'engagement'].includes(this.state.status) && (
+                                    {['engagement'].includes(this.state.status) && (
                                         <div className="container">
                                             {this.state.user.engagements.map(engagement => (
-                                                <div>
-                                                    <p>
-{' '}
-Date :
-{engagement.date}
-                                                    </p>
-                                                    <p>
-{' '}
-Commentaire élève :
-{engagement.student}
-                                                    </p>
-                                                    <p>
-{' '}
-Commentaire prof :
-{engagement.teacher}
-                                                    </p>
-                                                    <textarea id={engagement._id} />
-                                                    <button
-                                                      className="btn btn-info"
-                                                      onClick={() => {
-                                                        this.updateTeacherComment(
-                                                          engagement._id,
-                                                        );
-                                                      }}
-                                                    >
-                                                        {' '}
-                                                        Envoyer
-{' '}
-                                                    </button>
-                                                    <p>
-                                                        {' '}
-                                                        Validé :
-{' '}
-                                                        {engagement.isValidated ? 'Oui' : 'Non'}
-                                                    </p>
-                                                    <button
-                                                      className="btn btn-success"
-                                                      onClick={() => {
-                                                        this.validate(engagement._id);
-                                                      }}
-                                                    >
-                                                        {' '}
-                                                        Valider
-{' '}
-                                                    </button>
-                                                </div>
+                                              <div>
+                                                  { engagement.contact === "Enseignant référent" && (
+                                                 <div>
+                                                    <Engagement engagement={engagement} ens={true} userId={this.state.user._id} validate={this.validate} updateTeacherComment={this.updateTeacherComment} />
+                                                 </div>
+                                                )}
+                                              </ div>
+                                            ))}
+                                        </div>
+                                    )}
+                                    {['reflexions'].includes(this.state.status) && (
+                                        <div className="container">
+                                            {this.state.user.engagements.map(engagement => (
+    
+                                              <div>
+                                                { engagement.contact !== "Enseignant référent" && (
+                                                    <Engagement engagement={engagement} ens={false} userId={this.state.user._id} validate={this.validate} updateTeacherComment={this.updateTeacherComment} />
+                                                )}
+                                              </ div>
                                             ))}
                                         </div>
                                     )}

@@ -29,15 +29,17 @@ class Engagements extends Component {
                                 <div style={{marginTop:'30px'}}>
                                     <h5 style={{marginBottom:'20px'}}>{"Rendez-vous du "+this.props.selectedEngagement.date+" - "+this.props.selectedEngagement.contact}</h5>
                                     <div className="row" style={{width:'100%'}}>
-                                    <div style={{width:'80%', textAlign:'left', marginLeft:'20px'}}>
+                                    <div style={{marginLeft:'15px'}}>
                                         {" Votre compte-rendu :"}
                                     </div>
+                                    <div className="row" style={{width:'80%', textAlign:'left', marginLeft:'15px'}}>
                                     <button disabled className="btn btn-outline-light" style={{width:'75%', textAlign:'left', margin:'10px'}}>
                                         {this.props.selectedEngagement.student}
                                     </button>
                                     {this.props.selectedEngagement.isValidated && (
-                                    <button type="button" class="btn btn-success rounded-circle">{"Validé"}</button>
+                                    <button disabled type="button" class="btn btn-success rounded-circle">{"Validé"}</button>
                                     )}
+                                    </div>
                                     </div>
                                     {(this.props.selectedEngagement.teacher !== "") ? (
                                         <div className="row justify-content-end">

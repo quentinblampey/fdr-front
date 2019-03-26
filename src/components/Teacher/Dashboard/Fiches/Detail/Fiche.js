@@ -103,7 +103,7 @@ class Begin extends Component {
 {' '}
                             </p>
                         </h2>
-                        <p>
+                        <div>
                             {!user.helped && (
                                 <div>
                                     <ReactTooltip multiline />
@@ -118,7 +118,7 @@ class Begin extends Component {
                                     </button>
                                 </div>
                             )}
-                        </p>
+                        </div>
                     </div>
                     <div className="col-lg-4 col-sm-9 col-md-9 col-xl-4 offset-sm-3 offset-md-4 offset-lg-0 offset-xl-0 text-center">
                         {user.details.name !== 'undefined' && (
@@ -441,7 +441,7 @@ class Graph extends Component {
                 </div>
 
                 <Collapse isOpen={collapse}>
-                    <SC id={this.props.id} />
+                    <SC id={this.props.id}/>
                 </Collapse>
             </div>
       );

@@ -4,7 +4,7 @@ import axios from 'axios';
 // import FooterStop from './FooterStop'
 import url from '../../../../config';
 import './Repartition.scss';
-import variables from '../../globalSCSS/color.scss';
+import variables from '../../../../globalSCSS/color.scss';
 import Info from './Info';
 
 class Repartition extends Component {

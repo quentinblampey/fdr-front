@@ -6,7 +6,7 @@ import FooterStop from './Footer';
 import url from '../../config';
 import Onglets from './Onglets';
 import liste from './Contrat/listeUE';
-import './Begin.scss';
+import './Accueil.scss';
 import Switch from 'react-switch';
 
 class Contrat extends Component {

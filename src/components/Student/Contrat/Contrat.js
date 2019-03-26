@@ -8,7 +8,7 @@ import Test from '../Onglets';
 import liste from './listeUE';
 import UEs from './UEs';
 import Feedbacks from './Feedbacks';
-import '../Begin.scss';
+import '../AccueilChat/Accueil.scss';
 
 class Contrat extends Component {
   constructor(props) {

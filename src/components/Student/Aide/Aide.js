@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { ToastsStore } from 'react-toasts';
-import './Begin.scss';
+import '../AccueilChat/Accueil.scss';
 import axios from 'axios';
 import Modal from 'react-responsive-modal';
 import FooterStop from '../Footer';
 import Onglets from '../Onglets';
 import url from '../../../config';
 import Switch from "react-switch";
-import colors from '../../globalSCSS/color.scss';
+import colors from '../../../globalSCSS/color.scss';
 
 class Aide extends Component {
   constructor(props) {

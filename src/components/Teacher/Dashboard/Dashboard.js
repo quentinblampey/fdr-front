@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import url from '../../../config';
-import variables from '../../globalSCSS/color.scss';
+import variables from '../../../globalSCSS/color.scss';
 import RadialChart from './Data/Profils';
 import Repartition from './Data/Repartition';
 import Filtered from './Fiches/Filtered';

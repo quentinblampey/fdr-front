@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Chart from 'react-apexcharts';
 import Info from './Info';
-import variables from '../../globalSCSS/color.scss';
+import variables from '../../../../globalSCSS/color.scss';
 
 class RadialChart extends Component {
   constructor(props) {

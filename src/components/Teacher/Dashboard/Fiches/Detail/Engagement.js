@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './Repartition.scss';
 import {
   Form, FormGroup, Label, Input,
 } from 'reactstrap';

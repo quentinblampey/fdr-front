@@ -1,7 +1,7 @@
 import React from 'react';
 import { BeatLoader } from 'react-spinners';
-import colors from '../../../globalSCSS/color.scss';
-import sizes from '../../../globalSCSS/size.scss';
+import colors from '../../../../globalSCSS/color.scss';
+import sizes from '../../../../globalSCSS/size.scss';
 
 class Loading extends React.Component {
   constructor(props) {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ToastsContainer, ToastsStore } from 'react-toasts';
-import Chat from './components/Student/Chat/Chat';
+import Chat from './components/Student/AccueilChat/Chat/Chat';
 import AccueilChat from './components/Student/AccueilChat/Accueil';
 import Aide from './components/Student/Aide/Aide';
 import Contrat from './components/Student/Contrat/Contrat';

@@ -5,7 +5,7 @@ import Chat from './components/Student/Chat/Chat';
 import Begin from './components/Student/Begin';
 import Aide from './components/Student/Aide';
 import Contrat from './components/Student/Contrat';
-import VueEtudiant from './components/Student/VueEtudiant';
+import Portail from './components/Student/Portail';
 import RouterEns from './components/Teacher/RouterEnseignant';
 import IE from './components/IE';
 
@@ -21,8 +21,8 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route exact path="/" component={VueEtudiant} />
-          <Route exact path="/etudiant" component={VueEtudiant} />
+          <Route exact path="/" component={Portail} />
+          <Route exact path="/etudiant" component={Portail} />
           <Route exact path="/contrat/:id" component={Contrat} />
           <Route path="/chat/:id" component={Chat} />
           <Route path="/aide/:id" component={Aide} />

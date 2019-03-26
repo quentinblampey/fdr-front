@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import url from '../../config';
-import './VueEtudiant.scss';
+import './Portail.scss';
 import FooterStop from './FooterStop';
 
 class VueEtudiant extends Component {
@@ -49,7 +49,10 @@ class VueEtudiant extends Component {
               <div className="panel panel-default">
                 <div className="panel-body">
                   <h3>Inscris-toi ici !</h3>
-                  <p style={{ color: '#fefefe' }}> Renseigne ton e-mail pour participer à l'expérimentation</p>
+                  <p style={{ color: '#fefefe' }}>
+                    {' '}
+                                    Renseigne ton e-mail pour participer à l'expérimentation
+                  </p>
                   <form onSubmit={this.onSubmit}>
                     <input
                       type="email"

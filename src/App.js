@@ -4,14 +4,8 @@ import { ToastsContainer, ToastsStore } from 'react-toasts';
 import Chat from './components/Student/Chat/Chat';
 import Begin from './components/Student/Begin';
 import Aide from './components/Student/Aide';
-<<<<<<< HEAD
-import Contrat from './components/Student/Contrat/Contrat';
-import Test from './components/Student/test';
-import VueEtudiant from './components/Student/VueEtudiant';
-=======
 import Contrat from './components/Student/Contrat';
 import Portail from './components/Student/Portail';
->>>>>>> qf25
 import RouterEns from './components/Teacher/RouterEnseignant';
 import IE from './components/IE';
 

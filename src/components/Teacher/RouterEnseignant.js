@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import axios from 'axios';
-import url from '../../config';
 import VueEnseignant from './VueEnseignant';
 import Fiche from './Fiche';
 import Filtered from './Filtered';
@@ -10,9 +8,8 @@ import Repartition from './Repartition';
 import Profils from './Profils';
 import HistoricUpdate from './HistoricUpdate';
 import Explication from './Explication';
-import Nav from '../Navbar';
+import Nav from './Navbar';
 import Propose from './Propose';
-import variables from '../../globalSCSS/color.scss';
 
 class RouterEns extends Component {
   componentDidMount() {}

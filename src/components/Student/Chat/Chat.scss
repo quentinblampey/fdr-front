@@ -1,20 +1,6 @@
 @import '../../../globalSCSS/color.scss';
 @import '../../../globalSCSS/size.scss';
 
-/*
-.chatbox {
-    height: calc(100vh - $top - $bottom);
-    width: 100%;
-    margin: 0px;
-    margin-top: $top;
-    overflow: scroll;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-*/
-
 .chatbox {
     width: 100%;
     margin: 0px;
@@ -28,58 +14,8 @@
     align-items: flex-start;
 }
 
-// Others
-
-.send-box {
-    height: $box;
-    width: $box;
-    background: $color1;
-    border-radius: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0px;
-    margin: 0px;
-    & :hover {
-        color: $white;
-    }
-}
-
-.send {
-    color: $white;
-    font-size: $plusSize;
-    padding-bottom: 8px;
-    & :hover {
-        color: $white;
-    }
-}
-
-.send-bar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin: $margin2;
-}
-
 .loading {
     margin-left: $margin2;
-}
-
-.choice {
-    border: 1px solid $color4;
-    height: 30px;
-    padding: 0px 10px;
-    border-radius: 20px;
-    background: none;
-    color: $color4;
-    font-family: 'MsSemiBoldItalic';
-    font-size: 15px;
-
-    &:hover {
-        background: $color4;
-        color: $white;
-        transition: 0.3s;
-    }
 }
 
 .arrow {
@@ -98,4 +34,54 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    .send-bar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: $margin2;
+
+        & .send-box {
+            height: $box;
+            width: $box;
+            background: $color1;
+            border-radius: 10%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
+            margin: 0px;
+            & :hover {
+                color: $white;
+            }
+
+            & .send {
+                color: $white;
+                font-size: $plusSize;
+                padding-bottom: 8px;
+                & :hover {
+                    color: $white;
+                }
+            }
+        }
+    }
+
+    & .response-bar {
+        & .choice {
+            border: 1px solid $color4;
+            height: 30px;
+            padding: 0px 10px;
+            border-radius: 20px;
+            background: none;
+            color: $color4;
+            font-family: 'MsSemiBoldItalic';
+            font-size: 15px;
+
+            &:hover {
+                background: $color4;
+                color: $white;
+                transition: 0.3s;
+            }
+        }
+    }
 }

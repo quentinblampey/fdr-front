@@ -1,7 +1,5 @@
-/* eslint-disable react/jsx-indent */
-/* eslint-disable indent */
 import React, { Component } from 'react';
-import Dropdown from 'react-bootstrap/Dropdown'
+import Dropdown from 'react-bootstrap/Dropdown';
 import axios from 'axios';
 import Modal from 'react-responsive-modal';
 import FooterStop from '../FooterStop';
@@ -64,37 +62,44 @@ class Contrat extends Component {
   };
 
     send() {
-      const { UEs } = this.state;
-      axios.post(`${url}/api/contrats/${this.props.match.params.id}`, { UEs }).then(() => {
-        axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
-            UEs.forEach(element => {
-                element.checked = (res.data.ue.filter((x) => element.name===x.name).length ===1);
+        const { UEs } = this.state;
+        axios.post(`${url}/api/contrats/${this.props.match.params.id}`, { UEs }).then(() => {
+            axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
+                UEs.forEach((element) => {
+                    element.checked = res.data.ue.filter(x => element.name === x.name).length === 1;
+                });
+                this.setState({
+                    user: res.data,
+                    UEs,
+                    status: 'feedback',
+                    displayStatus: 'Mes Feedbacks',
+                });
             });
-            this.setState({ user: res.data , UEs:UEs, status:'feedback', displayStatus: 'Mes Feedbacks'});
-          });
-      });
+        });
     }
 
     etat = (nextEtat, nextDisplayEtat) => {
         this.setState({ status: nextEtat, displayStatus: nextDisplayEtat });
         this.resetSelected();
-    }
-    
-    options = (status, name) => {
-        axios.post(`${url}/api/contrats/options/${this.props.match.params.id}`, { name, status }).then((res) => {
-                this.setState({ user: res.data});
-              });
-      }
+    };
 
-      modal = (name, field) => {
+    options = (status, name) => {
+        axios
+            .post(`${url}/api/contrats/options/${this.props.match.params.id}`, { name, status })
+            .then((res) => {
+                this.setState({ user: res.data });
+            });
+    };
+
+    modal = (name, field) => {
         let modal;
-        if (this.state.modal.name === ""){
-            modal={name:name, field:field};
-        } else{
-            modal={name:"", field:""};
+        if (this.state.modal.name === '') {
+            modal = { name, field };
+        } else {
+            modal = { name: '', field: '' };
         }
-        this.setState({modal});
-      }  
+        this.setState({ modal });
+    };
 
       sendModal = () => {
         let comment = this.state.comment;
@@ -132,13 +137,15 @@ class Contrat extends Component {
           this.setState({selectedEngagement:engagement})
       }
 
-      resetSelected(){
-          this.setState({selectedEngagement:undefined})
-      }
+    selectEngagement(engagement) {
+        this.setState({ selectedEngagement: engagement });
+    }
 
-      save(){
+    resetSelected() {
+        this.setState({ selectedEngagement: undefined });
+    }
 
-      }
+    save() {}
 
     render() {
 
@@ -185,6 +192,49 @@ class Contrat extends Component {
                                         <div>
                                             {ue.name}
                                         </div>
+                                    </div>
+                                ))}
+                            </form>
+                            <button
+                              className="help"
+                              style={{ margin: '5px 0px', width: '100%' }}
+                              onClick={this.send}
+                            >
+                                Valider
+                            </button>
+                        </div>
+                    )}
+                    {this.state.status === 'feedback'
+                        && (this.state.user.ue.length > 0 ? (
+                            <ul
+                              className="list-group"
+                              style={{
+                                    width: '90%',
+                                    position: 'absolute',
+                                    top: '190px',
+                                    bottom: '105px',
+                                    overflow: 'scroll',
+                                    overflowX: 'hidden',
+                                    margin: '5px',
+                                }}
+                            >
+                                {this.state.user.ue.map(ue => (
+                                    <li
+                                      key={ue.name}
+                                      className={`row list-group-item-${ue.status}`}
+                                      style={{
+                                            minHeight: '45px',
+                                            borderRadius: '10px',
+                                            width: '100%',
+                                            margin: '5px 0px',
+                                            padding: '0px 0px 0px 10px',
+                                            display: 'flex',
+                                            flexDirection: 'row',
+                                            justifyContent: 'space-between',
+                                            alignItems: 'center',
+                                        }}
+                                    >
+                                        <div>{ue.name}</div>
                                         <div className="dropdown">
                                         <Dropdown>
                                             <Dropdown.Toggle variant="light" id="dropdown-basic">
@@ -247,7 +297,14 @@ class Contrat extends Component {
                             (!this.state.selectedEngagement) ? (
                                 this.state.user.engagements.filter(engagement => engagement.contact === "Enseignant référent").map((engagement, i)=> (
                                     <div key={engagement.date} className="row">
-                                        <button type="button" style={{width:'80%'}} className="btn btn-outline-light col self-align-center" onClick={this.selectEngagement.bind(this, engagement)}>{"Rendez-vous du "+engagement.date}</button>
+                                        <button
+                                          type="button"
+                                          style={{ width: '80%' }}
+                                          className="btn btn-outline-light col self-align-center"
+                                          onClick={this.selectEngagement.bind(this, engagement)}
+                                        >
+                                            {`Rendez-vous du ${engagement.date}`}
+                                        </button>
                                     </div>
                                 ))
                             ) : (
@@ -378,7 +435,7 @@ class Contrat extends Component {
           </div>
               <FooterStop />
             </div>
-      );
+        );
     }
 }
 

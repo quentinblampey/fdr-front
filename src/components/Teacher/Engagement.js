@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Repartition.scss';
 import {
-  Button, Form, FormGroup, Label, Input, FormText,
+  Form, FormGroup, Label, Input,
 } from 'reactstrap';
 
 class Repartition extends Component {

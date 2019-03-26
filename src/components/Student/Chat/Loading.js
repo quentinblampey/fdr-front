@@ -1,14 +1,7 @@
 import React from 'react';
-// import { css } from '@emotion/core';
 import { BeatLoader } from 'react-spinners';
-
-/*
-const override = css`
-    display: block;
-    margin: 0 auto;
-    border-color: red;
-`;
-*/
+import colors from '../../../globalSCSS/color.scss';
+import sizes from '../../../globalSCSS/size.scss';
 
 class Loading extends React.Component {
   constructor(props) {
@@ -20,7 +13,12 @@ class Loading extends React.Component {
     const { loading } = this.props;
     return (
       <div className="sweet-loading">
-        <BeatLoader sizeUnit="px" size={12} color="rgb(38,34,98)" loading={loading} />
+        <BeatLoader
+          sizeUnit="px"
+          size={sizes.loaderSize}
+          color={colors.color1}
+          loading={loading}
+        />
       </div>
     );
   }

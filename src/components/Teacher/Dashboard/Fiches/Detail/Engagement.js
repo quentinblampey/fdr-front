@@ -10,31 +10,36 @@ class Repartition extends Component {
         <Form>
           <p>
             {' '}
-Date :
+                        Date : &nbsp;
             {this.props.engagement.date}
           </p>
           {!this.props.ens && (
           <p>
             {' '}
-Contact :
+                            Contact : &nbsp;
             {this.props.engagement.contact}
           </p>
           )}
           <p>
             {' '}
-Commentaire élève :
+                        Commentaire de l'élève : &nbsp;
             {this.props.engagement.student}
           </p>
           <p>
             {' '}
-Commentaire prof :
+                        Votre commentaire : &nbsp;
             {this.props.engagement.teacher}
           </p>
           <FormGroup>
-            <Label for="exampleText">Text Area</Label>
-            <Input type="textarea" name="text" id={this.props.engagement._id} />
+            <Label for="exampleText" />
+            <Input
+              type="textarea"
+              placeholder="Votre commentaire"
+              name="text"
+              id={this.props.engagement._id}
+            />
           </FormGroup>
-          <div
+          <button
             className="btn btn-info"
             onClick={() => {
               this.props.updateTeacherComment(this.props.engagement._id);
@@ -43,23 +48,21 @@ Commentaire prof :
             {' '}
                         Envoyer
             {' '}
-          </div>
-          <p>
-            {this.props.engagement.isValidated ? (
-              <div className="btn btn-success"> Contrat validé </div>
-            ) : (
-              <button
-                className="btn btn-success"
-                onClick={() => {
-                  this.props.validate(this.props.engagement._id);
-                }}
-              >
-                {' '}
-                                Valider le contrat
-                {' '}
-              </button>
-            )}
-          </p>
+          </button>
+          {this.props.engagement.isValidated ? (
+            <button className="btn btn-success"> Contrat validé </button>
+          ) : (
+            <button
+              className="btn btn-success"
+              onClick={() => {
+                this.props.validate(this.props.engagement._id);
+              }}
+            >
+              {' '}
+                            Valider le contrat
+              {' '}
+            </button>
+          )}
         </Form>
       </div>
     );

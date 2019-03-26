@@ -160,7 +160,8 @@ class Begin extends Component {
                                 <div className="card-header">
                                     <h2>Contrat pédagogique</h2>
                                 </div>
-                                <div>
+                                <br />
+                                <div className="container">
                                     <Dropdown>
                                         <Dropdown.Toggle variant="light" id="dropdown-basic">
                                             {this.state.displayStatus}
@@ -184,6 +185,8 @@ class Begin extends Component {
                                               ))}
                                         </Dropdown.Menu>
                                     </Dropdown>
+                                    </div>
+                                    <br />
                                     {this.state.status === 'choice'
                                         && (this.state.user.ue.length === 0 ? (
                                             <h5 className="container">
@@ -240,6 +243,7 @@ class Begin extends Component {
                                                     )}
                                                 </div>
                                             </div>
+                                            <br />
                                             <textarea
                                               className="form-control"
                                               id="exampleFormControlTextarea1"
@@ -256,10 +260,11 @@ class Begin extends Component {
                                             </button>
                                         </div>
                                     )}
+                                    <ul class="list-group list-group-flush">
                                     {['engagement'].includes(this.state.status) && (
-                                        <div className="container">
+                                        <div>
                                             {this.state.user.engagements.map(engagement => (
-                                                <div>
+                                                <li class="list-group-item">
                                                     {engagement.contact
                                                         === 'Enseignant référent' && (
                                                         <div>
@@ -274,14 +279,14 @@ class Begin extends Component {
                                                             />
                                                         </div>
                                                     )}
-                                                </div>
+                                                </li>
                                             ))}
                                         </div>
                                     )}
                                     {['reflexions'].includes(this.state.status) && (
-                                        <div className="container">
+                                        <div>
                                             {this.state.user.engagements.map(engagement => (
-                                                <div>
+                                                <li class="list-group-item">
                                                     {engagement.contact
                                                         !== 'Enseignant référent' && (
                                                         <Engagement
@@ -294,11 +299,11 @@ class Begin extends Component {
                                                             }
                                                         />
                                                     )}
-                                                </div>
+                                                </li>
                                             ))}
                                         </div>
                                     )}
-                                </div>
+                                    </ul>
                                 <br />
                             </div>
                         </div>

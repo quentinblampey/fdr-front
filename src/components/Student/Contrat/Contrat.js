@@ -60,6 +60,7 @@ class Contrat extends Component {
   }
 
   onChange = (e) => {
+    console.log(e.target.name)
     const name = e.target.name;
     const value = e.target.value;
     this.setState({ [name]: value });
@@ -96,6 +97,7 @@ class Contrat extends Component {
     };
 
       modal = (name, field) => {
+        console.log(name, field);
         let modalFeedbacks;
         if (this.state.modalFeedbacks.name === ""){
             modalFeedbacks={name:name, field:field};
@@ -109,7 +111,6 @@ class Contrat extends Component {
         let comment = this.state.comment;
         let name = this.state.modalFeedbacks.name;
         let field = this.state.modalFeedbacks.field;
-        console.log(comment);
         axios.post(`${url}/api/contrats/modal/${this.props.match.params.id}`, { name, comment, field }).then((res) => {
                 this.setState({ user: res.data, comment:''});
                 this.modal(this.state.modalFeedbacks.name, this.state.modalFeedbacks.field);
@@ -117,7 +118,6 @@ class Contrat extends Component {
       }
 
       sendCR = () => {
-          console.log(this.state);
         const {date, student, contact} = this.state;
         axios.post(`${url}/api/engagements/${this.props.match.params.id}`, { date, student, contact }).then((res) => {
             let auxUser = this.state.user;

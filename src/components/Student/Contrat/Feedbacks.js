@@ -8,8 +8,7 @@ class Feedbacks extends Component {
     super(props);
   }
 
-  render() {
-    console.log(this.props.modal);
+    console.log(this.props.modalFeedbacks);
 
     return this.props.user.ue.length > 0 ? (
       <ul
@@ -45,78 +44,45 @@ class Feedbacks extends Component {
               <Dropdown>
                 <Dropdown.Toggle variant="light" id="dropdown-basic" />
 
-                <Dropdown.Menu alignRight>
-                  <Dropdown.Header>Suivi de l'UE</Dropdown.Header>
-                  <Dropdown.Item
-                    onClick={this.props.options.bind('warning', ue.name)}
-                  >
-                                        Signaler des difficulté
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    onClick={this.props.modal.bind(ue.name, 'comment')}
-                  >
-                                        Commentaire
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    onClick={this.props.modal.bind(ue.name, 'missing')}
-                  >
-                                        Absence à une évaluation
-                  </Dropdown.Item>
-                  <Dropdown.Divider />
-                  <Dropdown.Header>Fin de l'UE</Dropdown.Header>
-                  <Dropdown.Item
-                    onClick={this.props.options.bind('success', ue.name)}
-                  >
-                                        Validé
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    onClick={this.props.options.bind('danger', ue.name)}
-                  >
-                                        Non validé
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-              <Modal
-                style={{ zIndex: 10 }}
-                open={this.props.modalFeedbacks.name !== ''}
-                onClose={this.props.modal.bind(
-                  this.props.modalFeedbacks.name,
-                  this.props.modalFeedbacks.field,
-                )}
-                center
-              >
-                {this.props.modalFeedbacks.field === 'comment' ? (
-                  <h2>Entre ton commentaire</h2>
-                ) : (
-                  <h2>Entre ton motif d'absence</h2>
-                )}
-                <textarea
-                  className="form-control"
-                  id="exampleFormControlTextarea1"
-                  rows="2"
-                  value={this.props.comment}
-                  name="comment"
-                  onChange={this.props.onChange}
-                />
-                <br />
-                <button
-                  type="submit"
-                  className="modale"
-                  onClick={this.props.sendModal}
-                >
-                  <p>ENVOYER</p>
-                </button>
-              </Modal>
-            </div>
-          </li>
-        ))}
-      </ul>
-    ) : (
-      <div style={{ color: '#fefefe', margin: '10px 10px 10px 10px' }}>
-                Vous devez valider des choix d'UE pour pouvoir exprimer vos feedbacks à sur ces UEs
-      </div>
-    );
-  }
+                                    <Dropdown.Menu alignRight>
+                                        <Dropdown.Header>Suivi de l'UE</Dropdown.Header>
+                                        <Dropdown.Item onClick={() => this.props.options("warning", ue.name)}>Signaler des difficulté</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.props.modal(ue.name, "comment")}>Commentaire</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => this.props.modal(ue.name, "missing")}>Absence à une évaluation</Dropdown.Item>
+                                        <Dropdown.Divider />
+                                        <Dropdown.Header>Fin de l'UE</Dropdown.Header>
+                                        <Dropdown.Item onClick={()=>this.props.options("success", ue.name)}>Validé</Dropdown.Item>
+                                        <Dropdown.Item onClick={()=>this.props.options("danger", ue.name)}>Non validé</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                                <Modal style={{ zIndex:10}} open={this.props.modalFeedbacks.name!==''} onClose={this.props.modal.bind(this.props.modalFeedbacks.name, this.props.modalFeedbacks.field)} center>
+                                    {this.props.modalFeedbacks.field === "comment" ? (
+                                        <h2>Entre ton commentaire</h2>
+                                    ):(
+                                        <h2>Entre ton motif d'absence</h2>
+                                    )}
+                                    <textarea
+                                    className="form-control"
+                                    id="exampleFormControlTextarea1"
+                                    rows="2"
+                                    value={this.props.comment}
+                                    name='comment'
+                                    onChange={this.props.onChange}
+                                    />
+                                    <br />
+                                    <button type="submit" className="modale" onClick={this.props.sendModal}>
+                                        <p>ENVOYER</p>
+                                    </button>
+                                </Modal>
+                                </div>
+                            </li>
+                        ))}
+                </ul>
+            ) :(
+                <div style={{ color : '#fefefe', margin: '10px 10px 10px 10px'}}>Vous devez valider des choix d'UE pour pouvoir exprimer vos feedbacks à sur ces UEs</div>
+            )
+        );
+    }
 }
 
 export default Feedbacks;

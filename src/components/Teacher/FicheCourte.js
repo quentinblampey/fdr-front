@@ -141,7 +141,7 @@ class FicheCourte extends Component {
                         </div>
                     </div>
                 </Link>
-                {!this.props.user.helped && (
+                {!this.props.user.helped && this.props.fiche === false && (
                     <div>
                         <ReactTooltip multiline />
                         <button

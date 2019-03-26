@@ -30,7 +30,12 @@ class Filtered extends Component {
         )}
         <div className="container-fiches box">
           {this.props.users.map(user => (
-            <FicheCourte key={user._id} user={user} help={this.props.help} />
+            <FicheCourte
+              key={user._id}
+              user={user}
+              help={this.props.help}
+              fiche={false}
+            />
           ))}
         </div>
       </div>

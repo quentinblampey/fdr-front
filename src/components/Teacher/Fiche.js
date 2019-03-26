@@ -14,12 +14,13 @@ import DatePicker from 'react-datepicker';
 // import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 import Dropdown from 'react-bootstrap/Dropdown';
+import Button from 'react-bootstrap/Button';
+import FicheCourte from './FicheCourte';
 import url from '../../config';
 // import computeStats from './ComputeStats';
 import SC from './ScoreChart';
 
 import 'react-datepicker/dist/react-datepicker.css';
-import Button from 'react-bootstrap/Button';
 
 class Begin extends Component {
   /* propTypes = {
@@ -35,7 +36,6 @@ class Begin extends Component {
       textContrat: '',
       saved: true,
       status: 'choice',
-      collapse: false,
       displayStatus: 'UEs choisies',
       dropdownDatas: [
         { status: 'choice', displayStatus: 'UEs choisies' },
@@ -58,7 +58,7 @@ class Begin extends Component {
         // console.log(res.data);
         // console.log(res.data.ue);
         this.setState({ user: res.data, textContrat: res.data.textContrat });
-        console.log(this.state.user);
+        // console.log(this.state.user);
       });
     };
 
@@ -85,47 +85,48 @@ class Begin extends Component {
       });
     };
 
-    onCollapse = () => {
-      const { collapse } = this.state;
-      this.setState({ collapse: !collapse });
-    };
-
     etat = (nextEtat, nextDisplayEtat) => {
       this.setState({ status: nextEtat, displayStatus: nextDisplayEtat });
     };
 
     updateTeacherComment = (id) => {
-      axios.post(`${url}/api/engagements/comment/${id}/${this.state.user._id}`, { comment: document.getElementById(id).value }).then(() => {
-        this.load();
-      });
-    }
+      axios
+        .post(`${url}/api/engagements/comment/${id}/${this.state.user._id}`, {
+          comment: document.getElementById(id).value,
+        })
+        .then(() => {
+          this.load();
+        });
+    };
 
     validate = (id) => {
       axios.post(`${url}/api/engagements/validate/${id}/${this.state.user._id}`).then(() => {
         this.load();
       });
-    }
+    };
 
     render() {
       const { user, collapse } = this.state;
       return (
             <div className="container">
-                <h2 className="text-center">
+              <div className="row">
+              <div className="col-9">
+                <h2>
                     {" Fiche de l'étudiant : "}
                     {user.details.name}
+                    <p>
                     {user.aide && (
-                        <p>
+                        
                             <span className="badge badge-pill badge-danger">
                                 Cet étudiant a demandé de l'aide !
                             </span>
-                        </p>
+                        
                     )}
-                </h2>
-                <p>
-{' '}
+                  <br />
+                    {' '}
 {user.pseudo}
-{' '}
-                </p>
+{' '}</p>
+                </h2>
                 <p>
                     {!user.helped && (
                         <div>
@@ -142,16 +143,13 @@ class Begin extends Component {
                         </div>
                     )}
                 </p>
+                </div>
+                <div className="col-3">
+                      {user.details.name !== 'undefined' && <FicheCourte user={user} help={user.help} fiche />}
+                </div>
+              </div>
                 <div className="row">
                     <div className="col-6">
-                        <Recap id={this.props.match.params.id} />
-                        <button className="btn btn-success" onClick={this.onCollapse}>Collapse</button>
-                        <Collapse isOpen={collapse}>
-                          Anim pariatur cliche reprehenderit,
-                          enim eiusmod high life accusamus terry richardson ad squid. Nihil
-                          anim keffiyeh helvetica, craft beer labore wes anderson cred
-                          nesciunt sapiente ea proident.
-                        </Collapse>
                         <div>
                             <div className="card">
                                 <div className="card-header">
@@ -256,15 +254,52 @@ class Begin extends Component {
                                     {['reflexions', 'engagement'].includes(this.state.status) && (
                                         <div className="container">
                                             {this.state.user.engagements.map(engagement => (
-                                              <div>
-                                                  <p> Date : {engagement.date}</p>
-                                                  <p> Commentaire élève : {engagement.student}</p>
-                                                  <p> Commentaire prof : {engagement.teacher}</p>
-                                                  <textarea id={engagement._id} ></textarea>
-                                                  <button  className="btn btn-info" onClick={ () => { this.updateTeacherComment(engagement._id) } }> Envoyer </button>
-                                                  <p> Validé : {engagement.isValidated ? 'Oui' : 'Non'}</p>
-                                                  <button className="btn btn-success" onClick={() => {this.validate(engagement._id)}}> Valider </button>
-                                              </ div>
+                                                <div>
+                                                    <p>
+{' '}
+Date :
+{engagement.date}
+                                                    </p>
+                                                    <p>
+{' '}
+Commentaire élève :
+{engagement.student}
+                                                    </p>
+                                                    <p>
+{' '}
+Commentaire prof :
+{engagement.teacher}
+                                                    </p>
+                                                    <textarea id={engagement._id} />
+                                                    <button
+                                                      className="btn btn-info"
+                                                      onClick={() => {
+                                                        this.updateTeacherComment(
+                                                          engagement._id,
+                                                        );
+                                                      }}
+                                                    >
+                                                        {' '}
+                                                        Envoyer
+{' '}
+                                                    </button>
+                                                    <p>
+                                                        {' '}
+                                                        Validé :
+{' '}
+                                                        {engagement.isValidated ? 'Oui' : 'Non'}
+                                                    </p>
+                                                    <button
+                                                      className="btn btn-success"
+                                                      onClick={() => {
+                                                        this.validate(engagement._id);
+                                                      }}
+                                                    >
+                                                        {' '}
+                                                        Valider
+{' '}
+                                                    </button>
+                                                </div>
                                             ))}
                                         </div>
                                     )}
@@ -314,6 +349,7 @@ class Recap extends Component {
       firstLog: '',
       score: [],
       average: 0,
+      collapse: false,
     };
   }
 
@@ -374,111 +410,125 @@ class Recap extends Component {
     });
   }
 
-  /* toDisplay(dateMongo) {
+    onCollapse = () => {
+      const { collapse } = this.state;
+      this.setState({ collapse: !collapse });
+    };
+
+    /* toDisplay(dateMongo) {
     const tab = dateMongo.split('T')[0].split('-');
     const tab2 = this.tab.split('T')[0].split('-');
     return `${tab[2]}/${tab[1]}/${tab[0]}`;
   } */
 
-  render() {
-    /* let motivation;
+    render() {
+      /* let motivation;
     let lifestyle;
     let integration;
     let noOrientation; */
-    let fidelity = false;
-    const {
-      user, score, firstLog, average, lastChat,
-    } = this.state;
-    if (user.numberChats !== undefined && user.numberChats !== null) {
-      fidelity = true;
-    }
+      let fidelity = false;
+      const {
+        user, score, firstLog, average, lastChat, collapse,
+      } = this.state;
+      if (user.numberChats !== undefined && user.numberChats !== null) {
+        fidelity = true;
+      }
 
-    return (
+      return (
             <div className="card bg-light mb-3">
-                <div className="card-header">
-                    <h2>Informations personnelles</h2>
+                <div className="btn card-header" onClick={this.onCollapse}>
+                    <h2>
+                        Informations personnelles &nbsp;
+                        {collapse && (
+                          <div>
+                            <i className="fas fa-chevron-up" />
+                          </div>
+                        )}
+                        {!collapse && (
+                          <div>
+                            <i className="fas fa-chevron-down" />
+                          </div>
+                        )}
+                    </h2>
                 </div>
-                <ul className="list-group list-group-flush">
-                    <li className="list-group-item">
-                        <h5 className="card-title">
-                            {' '}
-                            Motivation générale :
+                <Collapse isOpen={collapse}>
+                    <ul className="list-group list-group-flush">
+                        <li className="list-group-item">
+                            <h5 className="card-title">
+                                {' '}
+                                Motivation générale :
 {' '}
 {parseFloat(score.motivation).toFixed(0)}
-                            /10
-                        </h5>
-                    </li>
+                                /10
+                            </h5>
+                        </li>
 
-                    <li className="list-group-item">
-                        <h5 className="card-title">
-                            {' '}
-                            Utilisation et fidélité :
+                        <li className="list-group-item">
+                            <h5 className="card-title">
+                                {' '}
+                                Utilisation et fidélité :
 {' '}
 {parseFloat(score.fidelity).toFixed(0)}
-                            /10
-                        </h5>
-                        <p className="card-text">
-{' '}
-Dernière session de discussion avec le chatbot :
+                                /10
+                            </h5>
+                            <p className="card-text">
+                                {' '}
+                                Dernière session de discussion avec le chatbot :
 {lastChat}
 {' '}
-
-                        </p>
-                        <p className="card-text">
-                            {' '}
-                            Nombre de sessions de discussion avec le chatbot :
+                            </p>
+                            <p className="card-text">
+                                {' '}
+                                Nombre de sessions de discussion avec le chatbot :
 {' '}
-{fidelity
-  ? user.numberChats.length
-  : '0'}
+                                {fidelity ? user.numberChats.length : '0'}
 {' '}
-                        </p>
-                        <p className="card-text">
-{' '}
-Nombre de réponses :
+                            </p>
+                            <p className="card-text">
+                                {' '}
+                                Nombre de réponses :
 {user.numberQuestions}
 {' '}
-
-                        </p>
-                        <p className="card-text">
+                            </p>
+                            <p className="card-text">
 {' '}
 Date d&apos;inscription :
 {firstLog}
 {' '}
 
-                        </p>
-                    </li>
+                            </p>
+                        </li>
 
-                    <li className="list-group-item">
-                        <h5 className="card-title">
-                            {' '}
-                            Style de vie :
+                        <li className="list-group-item">
+                            <h5 className="card-title">
+                                {' '}
+                                Style de vie :
 {' '}
 {parseFloat(score.lifestyle).toFixed(0)}
-                            /10
-                        </h5>
-                    </li>
+                                /10
+                            </h5>
+                        </li>
 
-                    <li className="list-group-item">
-                        <h5 className="card-title">
-                            {' '}
-                            Intégration :
+                        <li className="list-group-item">
+                            <h5 className="card-title">
+                                {' '}
+                                Intégration :
 {' '}
 {parseFloat(score.integration).toFixed(0)}
-                            /10
-                        </h5>
-                    </li>
+                                /10
+                            </h5>
+                        </li>
 
-                    <li className="list-group-item">
-                        <h5 className="card-title">
-                            Pertinence de l&apos;orientation :
+                        <li className="list-group-item">
+                            <h5 className="card-title">
+                                Pertinence de l&apos;orientation :
 {' '}
-                            {parseFloat(score.noOrientation).toFixed(0)}
-                            /10
-                        </h5>
-                    </li>
-                </ul>
-
+                                {parseFloat(score.noOrientation).toFixed(0)}
+                                /10
+                            </h5>
+                        </li>
+                    </ul>
+                </Collapse>
                 <div className="card-footer">
                     <h4 className="card-title">
                         Score moyen :
@@ -488,8 +538,8 @@ Date d&apos;inscription :
                     </h4>
                 </div>
             </div>
-    );
-  }
+      );
+    }
 }
 
 // Gestion des demandes d'aide

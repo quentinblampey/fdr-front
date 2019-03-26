@@ -8,7 +8,7 @@ class Engagements extends Component {
         return (
             <div style={{ padding:'10px', margin:'10px', color : '#fefefe', position: 'absolute', top: '190px', bottom: '100px', overflow: 'scroll', overflowX: 'hidden', width: '80%', marginRight:'0px'}}>
                         {(this.props.user.engagements.filter(engagement => this.props.page === engagement.contact || (this.props.page==="reflexion" && engagement.contact!=="Enseignant référent")).length===0) ? (
-                            <div className="row" style={{marginRight:'0px'}}>
+                            <div className="row" style={{marginLeft:'0px', width:'95%'}}>
                             <button type="button" className="btn btn-outline-light col self-align-center" disabled>{"Vous n'avez pas encore d'engagements"}</button>
                         </div>
                         ):( 

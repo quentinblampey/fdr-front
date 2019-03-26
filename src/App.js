@@ -4,7 +4,7 @@ import { ToastsContainer, ToastsStore } from 'react-toasts';
 import Chat from './components/Student/Chat/Chat';
 import Begin from './components/Student/Begin';
 import Aide from './components/Student/Aide';
-import Contrat from './components/Student/Contrat';
+import Contrat from './components/Student/Contrat/Contrat';
 import Portail from './components/Student/Portail';
 import RouterEns from './components/Teacher/RouterEnseignant';
 import IE from './components/IE';

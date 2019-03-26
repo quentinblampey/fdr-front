@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 import Chat from './components/Student/Chat/Chat';
 import Begin from './components/Student/Begin';
 import Aide from './components/Student/Aide';
-import Contrat from './components/Student/Contrat';
+import Contrat from './components/Student/Contrat/Contrat';
 import Test from './components/Student/test';
 import VueEtudiant from './components/Student/VueEtudiant';
 import RouterEns from './components/Teacher/RouterEnseignant';

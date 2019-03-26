@@ -192,9 +192,8 @@ class Contrat extends Component {
                                         <div>
                                             {ue.name}
                                         </div>
-                                    </div>
+                                    </li>
                                 ))}
-                            </form>
                             <button
                               className="help"
                               style={{ margin: '5px 0px', width: '100%' }}
@@ -202,8 +201,8 @@ class Contrat extends Component {
                             >
                                 Valider
                             </button>
-                        </div>
-                    )}
+                        </ul>
+                    ),
                     {this.state.status === 'feedback'
                         && (this.state.user.ue.length > 0 ? (
                             <ul

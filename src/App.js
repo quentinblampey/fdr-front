@@ -6,7 +6,6 @@ import Chat from './components/Student/Chat/Chat';
 import Begin from './components/Student/Begin';
 import Aide from './components/Student/Aide';
 import Contrat from './components/Student/Contrat';
-import Test from './components/Student/test';
 import VueEtudiant from './components/Student/VueEtudiant';
 import RouterEns from './components/Teacher/RouterEnseignant';
 import IE from './components/IE';
@@ -28,7 +27,6 @@ class App extends Component {
           <Route exact path="/contrat/:id" component={Contrat} />
           <Route path="/chat/:id" component={Chat} />
           <Route path="/aide/:id" component={Aide} />
-          <Route path="/test/:onglet" component={Test} />
           <Route path="/begin/:id" render={props => <Begin {...props} />} />
           <Route path="/enseignant" component={RouterEns} />
           <Route path="/ie" component={IE} />

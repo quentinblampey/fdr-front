@@ -1,24 +1,17 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable react/prefer-stateless-function */
-/* eslint-disable react/no-multi-comp */
 import React, { Component } from 'react';
 import { ToastsStore } from 'react-toasts';
 import './Begin.scss';
 import axios from 'axios';
 import Modal from 'react-responsive-modal';
 import FooterStop from './FooterStop';
-import Test from './test';
+import Onglets from './Onglets';
 import url from '../../config';
 import Switch from "react-switch";
-// import axios from 'axios';
-// import { Link } from 'react-router-dom';
-// import FooterStop from './FooterStop'
+import colors from '../../globalSCSS/color.scss';
 
 class Exit extends Component {
   constructor(props) {
     super(props);
-    // this.demAide = this.demAide.bind(this);
     this.onOpenModal2 = this.onOpenModal2.bind(this);
     this.onCloseModal2 = this.onCloseModal2.bind(this);
     this.state = {
@@ -91,7 +84,7 @@ class Exit extends Component {
       const { user, open1, message } = this.state;
       return (
         <div>
-          <Test onglet="aide" id={this.props.match.params.id} />
+          <Onglets onglet="aide" id={this.props.match.params.id} />
           <div className="component">
             <h3 className="titre-cadre"> DEMANDE D&apos;AIDE </h3>
             <div style={{ position: 'absolute', top: '180px', display: 'flex', flexDirection: 'column', alignItems:'center'}} >
@@ -132,7 +125,7 @@ class Exit extends Component {
               </div>
             )}
             { (user.helped && !(user.currentSlot)) && (
-              <div style={{ color: '#fefefe' }} className="container">
+              <div style={{ color: `${colors.colorWhite}` }} className="container">
                 Votre enseignant référent veut un rendez-vous !
                 <br />
                 <br />
@@ -162,7 +155,7 @@ class Exit extends Component {
             )}
 
             { (!user.helped) && (
-              <p style={{ color: '#fefefe', margin:'10px 0px'}} className="container text-center">
+              <p style={{ color: `${colors.colorWhite}`, margin:'10px 0px'}} className="container text-center">
                 Votre enseignant référent n'a pas encore cherché à vous recevoir. Vous ne pouvez donc pas encore choisir de créneau de rendez-vous.
               </p>
             )}

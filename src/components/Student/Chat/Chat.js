@@ -131,16 +131,14 @@ class Chat extends Component {
             }, () => { this.updateScroll() });
           }
       }else if (this.state.numberMandatory.includes(this.state.currentQuestion.idQ) && (isNaN(Number(answer.body)))) {
-        this.setState({newMessage:''});
-        this.setState({chat: this.state.chat.concat({ message: "Merci de rentrer un nombre valide entre 0 et 100", color: 1 })}, () => { this.updateScroll() });
+        this.setState({newMessage:'', chat: this.state.chat.concat({ message: "Merci de rentrer un nombre valide entre 0 et 100", color: 1 })}, () => { this.updateScroll() });
       }else {
         var promiseScroll = new Promise((resolve) => {
           this.updateScroll();
           resolve();
         })
         var promise = new Promise((resolve) => {
-          this.setState({error:false});
-          this.setState({
+          this.setState({error:false,
             chat: this.state.chat.concat({ message: answer.body, color: 0 }),
             newMessage: '',
           });

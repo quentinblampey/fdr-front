@@ -11,7 +11,8 @@ import { Link } from 'react-router-dom';
 import FooterStop from './FooterStop';
 import url from '../../config';
 import './Begin.scss';
-import Test from './test';
+import Onglets from './Onglets';
+import colors from '../../globalSCSS/color.scss';
 
 class Begin extends Component {
     constructor(props) {
@@ -44,7 +45,7 @@ class Begin extends Component {
     render() {
         return (
             <div>
-                <Test onglet="chatbot" id={this.props.match.params.id} />
+                <Onglets onglet="chatbot" id={this.props.match.params.id} />
                 <div className="component">
                     <div className="shape">
                         <div className="left">
@@ -77,7 +78,7 @@ class Begin extends Component {
                               aria-hidden="true"
                               style={{
                                     margin: 'auto',
-                                    color: '#fefefe',
+                                    color: `${colors.colorWhite}`,
                                     fontSize: '20px',
                                 }}
                             />

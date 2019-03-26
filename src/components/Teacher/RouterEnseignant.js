@@ -8,7 +8,7 @@ import Repartition from './Repartition';
 import Profils from './Profils';
 import HistoricUpdate from './HistoricUpdate';
 import Explication from './Explication';
-import Nav from '../Navbar';
+import Nav from './Navbar';
 import Propose from './Propose';
 
 class RouterEns extends Component {

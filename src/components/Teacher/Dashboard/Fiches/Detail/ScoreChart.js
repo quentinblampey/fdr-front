@@ -97,7 +97,7 @@ class HU extends Component {
 
   render() {
     return (
-      <div id="chart" style={{ width: '500px' }}>
+      <div id="chart" style={{ width: '400px' }}>
         <Chart
           options={this.state.options}
           series={this.state.series}

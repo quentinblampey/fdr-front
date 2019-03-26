@@ -8,6 +8,24 @@ class Repartition extends Component {
     return (
       <div>
         <Form>
+          {this.props.engagement.isValidated ? (
+            <span className="badge badge-pill badge-success">
+              {' '}
+                            Engagement validé !
+              {' '}
+            </span>
+          ) : (
+            <button
+              className="btn btn-success"
+              onClick={() => {
+                this.props.validate(this.props.engagement._id);
+              }}
+            >
+              {' '}
+                            Valider l'engagement
+              {' '}
+            </button>
+          )}
           <p>
             {' '}
                         Date : &nbsp;
@@ -46,23 +64,9 @@ class Repartition extends Component {
             }}
           >
             {' '}
-                        Envoyer
+                        Envoyer le commentaire
             {' '}
           </button>
-          {this.props.engagement.isValidated ? (
-            <button className="btn btn-success"> Contrat validé </button>
-          ) : (
-            <button
-              className="btn btn-success"
-              onClick={() => {
-                this.props.validate(this.props.engagement._id);
-              }}
-            >
-              {' '}
-                            Valider le contrat
-              {' '}
-            </button>
-          )}
         </Form>
       </div>
     );

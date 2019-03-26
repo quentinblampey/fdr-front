@@ -160,7 +160,8 @@ class Begin extends Component {
                                 <div className="card-header">
                                     <h2>Contrat pédagogique</h2>
                                 </div>
-                                <div>
+                                <div className="container">
+                                    <br />
                                     <Dropdown>
                                         <Dropdown.Toggle variant="light" id="dropdown-basic">
                                             {this.state.displayStatus}
@@ -217,9 +218,12 @@ class Begin extends Component {
                                                         >
                                                             <div>
                                                                 {ue.name}
-                                                                {ue.dateValid !== '' && (
+                                                                {ue.dateValid !== ''
+                                                                && ue.dateValid !== 'Validé en ' ? (
                                                                     <div>{ue.dateValid}</div>
-                                                                )}
+                                                                  ) : (
+                                                                    <div>Non validé</div>
+                                                                  )}
                                                             </div>
                                                         </li>
                                                     </div>

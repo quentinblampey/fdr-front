@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 // import { Link } from 'react-router-dom';
 // import FooterStop from './FooterStop'
-import url from '../../config';
+import url from '../../../../config';
 import './Repartition.scss';
-import variables from '../../globalSCSS/color.scss';
+import variables from '../../../../globalSCSS/color.scss';
 import Info from './Info';
 
 class Repartition extends Component {

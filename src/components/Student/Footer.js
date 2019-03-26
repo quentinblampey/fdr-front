@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './FooterStop.scss';
+import './Footer.scss';
 import { ToastsStore } from 'react-toasts';
 import colors from '../../globalSCSS/color.scss';
 
@@ -22,8 +22,8 @@ class FooterStop extends Component {
           >
             <button
               style={{
-                height: '40px',
-                width: '40px',
+                height: '50px',
+                width: '50px',
                 border: `1px solid ${colors.color1}`,
                 borderRadius: '25px',
                 display: 'flex',

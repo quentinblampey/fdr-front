@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import FooterStop from './FooterStop';
-import url from '../../config';
-import './Begin.scss';
-import Onglets from './Onglets';
-import colors from '../../globalSCSS/color.scss';
+import FooterStop from '../Footer';
+import url from '../../../config';
+import './Accueil.scss';
+import Onglets from '../Onglets';
+import colors from '../../../globalSCSS/color.scss';
 
 class Begin extends Component {
   constructor(props) {
@@ -47,7 +47,7 @@ class Begin extends Component {
                 <button type="submit" className="content">
                   <p>
                     <span>“ </span>
-                                    MON COACH CHATBOT
+                                    CHATER AVEC OCÉANE
                     <span> ”</span>
                   </p>
                 </button>

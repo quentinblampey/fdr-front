@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { ToastsStore } from 'react-toasts';
 import './Propose.scss';
-import './FicheCourte.scss';
+import '../Dashboard/Fiches/FicheCourte.scss';
 import DatePicker from 'react-datepicker';
 import Axios from 'axios';
-import url from '../../config';
+import url from '../../../config';
 
 class Propose extends Component {
   constructor(props) {

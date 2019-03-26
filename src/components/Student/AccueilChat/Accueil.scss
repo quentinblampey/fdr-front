@@ -1,5 +1,5 @@
-@import '../../globalSCSS/color.scss';
-@import '../../globalSCSS/size.scss';
+@import '../../../globalSCSS/color.scss';
+@import '../../../globalSCSS/size.scss';
 
 .shape {
     display: flex;
@@ -41,9 +41,9 @@
 
         & p {
             color: $color4;
-            font-size: 30px;
+            font-size: 28px;
             vertical-align: middle;
-            padding-top: 30px;
+            padding-top: 35px;
             margin: 0px;
             font-family: 'MsBoldItalic';
 

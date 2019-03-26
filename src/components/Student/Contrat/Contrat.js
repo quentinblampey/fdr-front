@@ -8,6 +8,8 @@ import Test from '../Onglets';
 import liste from './listeUE';
 import UEs from './UEs';
 import Feedbacks from './Feedbacks';
+import Advice from './Advice';
+import Engagements from './Engagements';
 import '../AccueilChat/Accueil.scss';
 
 class Contrat extends Component {
@@ -36,6 +38,9 @@ class Contrat extends Component {
     this.options = this.options.bind(this);
     this.onChange = this.onChange.bind(this);
     this.sendModal = this.sendModal.bind(this);
+    this.add = this.add.bind(this);
+    this.selectEngagement = this.selectEngagement.bind(this);
+    this.sendCR = this.sendCR.bind(this);
   }
 
   handleInputChange(checked, event, id) {
@@ -185,159 +190,14 @@ class Contrat extends Component {
                     <Feedbacks user={this.state.user} onChange={this.onChange} options={this.options} modal={this.modal} modalFeedbacks={this.state.modalFeedbacks} sendModal={this.sendModal}/>
                 )}
                 {this.state.status === 'comment' && (
-                    <div style={{ color : '#fefefe', margin: '50px 10px 10px 10px'}}>
-                        {(this.state.user.textContrat) ? (
-                            this.state.user.textContrat
-                        ):(
-                            "Votre enseignant n'a pas encore renseigné de conseils concernant votre contrat"
-                        )}
-                    </div>
+                    <Advice user={this.state.user}/>
                 )}
                 {this.state.status === 'engagement' && (
-                    <div style={{ color : '#fefefe', margin: '10px', marginTop:'90px'}}>
-                        {(this.state.user.engagements.filter(engagement => engagement.contact === "Enseignant référent").length===0) ? (
-                            <div className="row">
-                            <button type="button" style={{width:'80%'}} className="btn btn-outline-light col self-align-center" disabled>{"Vous n'avez pas encore d'engagements"}</button>
-                        </div>
-                        ):( 
-                            (!this.state.selectedEngagement) ? (
-                                this.state.user.engagements.filter(engagement => engagement.contact === "Enseignant référent").map((engagement, i)=> (
-                                    <div key={engagement.date} className="row">
-                                        <button
-                                          type="button"
-                                          style={{ width: '80%' }}
-                                          className="btn btn-outline-light col self-align-center"
-                                          onClick={this.selectEngagement.bind(this, engagement)}
-                                        >
-                                            {`Rendez-vous du ${engagement.date}`}
-                                        </button>
-                                    </div>
-                                ))
-                            ) : (
-                                <div style={{marginTop:'30px'}}>
-                                    <h5 style={{marginBottom:'20px'}}>{"Rendez-vous du "+this.state.selectedEngagement.date}</h5>
-                                    <div className="row" style={{width:'100%'}}>
-                                    <div style={{width:'80%', textAlign:'left', marginLeft:'20px'}}>
-                                        {" Votre compte-rendu :"}
-                                    </div>
-                                    <button disabled className="btn btn-outline-light" style={{width:'75%', textAlign:'left', margin:'10px'}}>
-                                        {this.state.selectedEngagement.student}
-                                    </button>
-                                    {this.state.selectedEngagement.isValidated && (
-                                    <button type="button" class="btn btn-success rounded-circle">{"Validé"}</button>
-                                    )}
-                                    </div>
-                                    {(this.state.selectedEngagement.teacher !== "") ? (
-                                        <div className="row justify-content-end">
-                                        <div style={{width:'80%', textAlign:'left', marginLeft:'20px'}}>Réponse votre enseignant référent :</div>
-                                        <button disabled className="btn btn-outline-light" style={{width:'80%', textAlign:'left', margin:'10px'}}>
-                                            {this.state.selectedEngagement.teacher}
-                                        </button>
-                                        </div>
-                                    ):(
-                                        <div className="row justify-content-end">
-                                        <div style={{width:'80%', textAlign:'left', marginLeft:'20px'}}>Votre enseignant n'a pas écrit de commentaire sur cet engagement.</div>
-                                        </div>
-                                    )}
-                                </div>
-                            )
-                        )}
-                        {!this.state.selectedEngagement && (
-                            <div className="row">
-                                <button type="button" style={{width:'80%'}} className="btn btn-outline-light col self-align-center" onClick={this.add.bind(this, "engagement")}>+</button>
-                            </div>
-                        )}
-                    </div>
+                    <Engagements page="engagements" onChange={this.onChange} sendCR={this.sendCR} user={this.state.user} selectedEngagement={this.state.selectedEngagement} add={this.add} selectEngagement={this.selectEngagement} newrdv={this.state.newrdv} date={this.state.date} contact={this.state.contact} student={this.state.student}/>
                 )}
                 {this.state.status === 'reflexions' && (
-                    <div style={{ color : '#fefefe', margin: '10px', marginTop:'90px'}}>
-                    {(this.state.user.engagements.filter(engagement => engagement.contact !== "Enseignant référent").length===0) ? (
-                        <div className="row">
-                        <button type="button" style={{width:'80%'}} className="btn btn-outline-light col self-align-center" disabled>{"Vous n'avez pas encore d'engagements"}</button>
-                    </div>
-                    ):(
-                        (!this.state.selectedEngagement) ? (
-                            this.state.user.engagements.filter(engagement => engagement.contact !== "Enseignant référent").map((engagement, i)=> (
-                                <div key={engagement.date} className="row">
-                                    <button type="button" style={{width:'80%'}} className="btn btn-outline-light col self-align-center" onClick={this.selectEngagement.bind(this, engagement)}>{"Rendez-vous du "+engagement.date}</button>
-                                </div>
-                            ))
-                        ) : (
-                            <div style={{marginTop:'30px'}}>
-                                <h5 style={{marginBottom:'20px'}}>{"Rendez-vous du "+this.state.selectedEngagement.date+" - "+this.state.selectedEngagement.contact}</h5>
-                                <div className="row" style={{width:'100%'}}>
-                                <div style={{width:'80%', textAlign:'left', marginLeft:'20px'}}>
-                                    {" Votre compte-rendu :"}
-                                </div>
-                                <button disabled className="btn btn-outline-light" style={{width:'75%', textAlign:'left', margin:'10px'}}>
-                                    {this.state.selectedEngagement.student}
-                                </button>
-                                {this.state.selectedEngagement.isValidated && (
-                                <button type="button" class="btn btn-success rounded-circle">{"Validé"}</button>
-                                )}
-                                </div>
-                                {(this.state.selectedEngagement.teacher !== "") ? (
-                                    <div className="row justify-content-end">
-                                    <div style={{width:'80%', textAlign:'left', marginLeft:'20px'}}>Réponse votre enseignant référent :</div>
-                                    <button disabled className="btn btn-outline-light" style={{width:'80%', textAlign:'left', margin:'10px'}}>
-                                        {this.state.selectedEngagement.teacher}
-                                    </button>
-                                    </div>
-                                ):(
-                                    <div className="row justify-content-end">
-                                    <div style={{width:'80%', textAlign:'left', marginLeft:'20px'}}>Votre enseignant n'a pas écrit de commentaire sur cet engagement.</div>
-                                    </div>
-                                )}
-                            </div>
-                        )
-                    )}
-                    {!this.state.selectedEngagement && (
-                        <div className="row">
-                            <button type="button" style={{width:'80%'}} className="btn btn-outline-light col self-align-center" onClick={this.add.bind(this, "reflexion")}>+</button>
-                        </div>
-                    )}
-                </div>
+                    <Engagements page="reflexions" onChange={this.onChange} sendCR={this.sendCR} user={this.state.user} selectedEngagement={this.state.selectedEngagement} add={this.add} selectEngagement={this.selectEngagement} newrdv={this.state.newrdv} date={this.state.date} contact={this.state.contact} student={this.state.student}/>
                 )}
-                <Modal style={{ zIndex:10}} open={this.state.newrdv !== ''} onClose={this.add.bind(this, this.state.newrdv)} center>
-                                            <h2>Nouveau compte-rendu</h2>
-                                            <label>Date :</label>
-                                            <textarea
-                                            className="form-control"
-                                            id="exampleFormControlTextarea1"
-                                            rows="2"
-                                            value={this.state.date}
-                                            onChange={this.onChange}
-                                            name="date"
-                                            />
-                                            <br />
-                                            {this.state.newrdv==='reflexion' && (
-                                                <div>
-                                                    <label>Contact :</label>
-                                                    <textarea
-                                                    className="form-control"
-                                                    id="exampleFormControlTextarea1"
-                                                    rows="2"
-                                                    value={this.state.contact}
-                                                    onChange={this.onChange}
-                                                    name="contact"
-                                                    />
-                                                    <br />
-                                                </div>
-                                            )}
-                                            <label>Description :</label>
-                                            <textarea
-                                            className="form-control"
-                                            id="exampleFormControlTextarea1"
-                                            rows="2"
-                                            value={this.state.student}
-                                            onChange={this.onChange}
-                                            name="student"
-                                            />
-                                            <br />
-                                            <button type="submit" className="modale" onClick={this.sendCR}>
-                                                <p>ENVOYER</p>
-                                            </button>
-                                        </Modal>
           </div>
               <FooterStop />
             </div>

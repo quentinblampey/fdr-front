@@ -105,7 +105,6 @@ class Chat extends Component {
                     this.updateUser();
                     this.updateScroll();
                   } else {
-                    this.setState({ loading: true });
                     this.updateScroll();
                     setTimeout(() => {
                       this.setState({ loading: false });
@@ -157,11 +156,10 @@ class Chat extends Component {
               r = { message: answer.reaction, color: 1 };
             }
             console.log(r)
+            this.setState({ loading: true });
             if ((answer.reaction !== '' && answer.reaction !== undefined) || (this.state.currentQuestion.textArea && r.message)){
-              this.setState({ loading: true });
               this.updateScroll();
               setTimeout(() => {
-                this.setState({ loading: false });
                 this.setState({
                   chat: this.state.chat.concat(r),
                 });

@@ -4,7 +4,7 @@ import axios from 'axios';
 import Modal from 'react-responsive-modal';
 import FooterStop from '../FooterStop';
 import url from '../../../config';
-import Test from '../test';
+import Test from '../Onglets';
 import liste from '../listeUE';
 import UEs from './UEs';
 import Feedbacks from './Feedbacks';

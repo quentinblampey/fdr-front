@@ -193,7 +193,7 @@ class Begin extends Component {
                                                     >
                                                         <div>
                                                             {ue.name}
-                                                            {ue.dateValid !== '' && (
+                                                            {(ue.dateValid !== '' && ue.dateValid !== 'Validé en ') && (
                                                                 <div>{ue.dateValid}</div>
                                                             )}
                                                         </div>

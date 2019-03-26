@@ -32,19 +32,19 @@ class Engagements extends Component {
                                     <div style={{marginLeft:'15px'}}>
                                         {" Votre compte-rendu :"}
                                     </div>
-                                    <div className="row" style={{width:'80%', textAlign:'left', marginLeft:'15px'}}>
-                                    <button disabled className="btn btn-outline-light" style={{width:'75%', textAlign:'left', margin:'10px'}}>
+                                    <div style={{width:'100%', textAlign:'left', marginLeft:'15px'}}>
+                                    <button className="btn btn-light" style={{width:'80%', textAlign:'left', margin:'10px'}}>
                                         {this.props.selectedEngagement.student}
                                     </button>
                                     {this.props.selectedEngagement.isValidated && (
-                                    <button disabled type="button" class="btn btn-success rounded-circle">{"Validé"}</button>
+                                    <button type="button" class="btn btn-success rounded">{"Validé"}</button>
                                     )}
                                     </div>
                                     </div>
                                     {(this.props.selectedEngagement.teacher !== "") ? (
                                         <div className="row justify-content-end">
                                         <div style={{width:'80%', textAlign:'left', marginLeft:'20px'}}>Réponse votre enseignant référent :</div>
-                                        <button disabled className="btn btn-outline-light" style={{width:'80%', textAlign:'left', margin:'10px'}}>
+                                        <button className="btn btn-light" style={{width:'80%', textAlign:'left', margin:'10px'}}>
                                             {this.props.selectedEngagement.teacher}
                                         </button>
                                         </div>

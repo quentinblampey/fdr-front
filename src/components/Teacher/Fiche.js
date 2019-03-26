@@ -40,7 +40,7 @@ class Begin extends Component {
       displayStatus: 'UEs choisies',
       dropdownDatas: [
         { status: 'choice', displayStatus: 'UEs choisies' },
-        { status: 'comment', displayStatus: 'Commentaires' },
+        { status: 'comment', displayStatus: 'Mes conseils' },
         { status: 'engagement', displayStatus: 'Engagements' },
         { status: 'reflexions', displayStatus: 'Reflexions' },
       ],
@@ -230,7 +230,7 @@ class Begin extends Component {
                                         <div className="container">
                                             <div className="row justify-content-between">
                                                 <h5 className="col-9">
-                                                    &nbsp;Commentaire sur le contrat
+                                                    &nbsp;Mes conseils sur le contrat
                                                 </h5>
                                                 <div className="col-3">
                                                     {this.state.saved && (

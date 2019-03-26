@@ -2,25 +2,22 @@ import React, { Component } from 'react';
 import Modal from 'react-responsive-modal';
 
 class Engagements extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
 
         return (
-            <div style={{ color : '#fefefe', position: 'absolute', top: '190px', bottom: '100px', overflow: 'scroll', overflowX: 'hidden', width:'80%'}}>
+            <div style={{ padding:'10px', margin:'10px', color : '#fefefe', position: 'absolute', top: '190px', bottom: '100px', overflow: 'scroll', overflowX: 'hidden', width: '80%', marginRight:'0px'}}>
                         {(this.props.user.engagements.filter(engagement => this.props.page === engagement.contact || (this.props.page==="reflexion" && engagement.contact!=="Enseignant référent")).length===0) ? (
-                            <div className="row">
-                            <button type="button" style={{width:'80%'}} className="btn btn-outline-light col self-align-center" disabled>{"Vous n'avez pas encore d'engagements"}</button>
+                            <div className="row" style={{marginRight:'0px'}}>
+                            <button type="button" className="btn btn-outline-light col self-align-center" disabled>{"Vous n'avez pas encore d'engagements"}</button>
                         </div>
                         ):( 
                             (!this.props.selectedEngagement) ? (
                                 this.props.user.engagements.filter(engagement => this.props.page === engagement.contact || (this.props.page==="reflexion" && engagement.contact!=="Enseignant référent")).map((engagement, i)=> (
-                                    <div key={engagement.date} className="row">
+                                    <div key={engagement.date} className="row" style={{width:'100%'}}>
                                         <button
                                           type="button"
-                                          style={{ width: '100%' }}
+                                          style={{ marginLeft: '15px' , marginBottom:'10px'}}
                                           className="btn btn-outline-light col self-align-center"
                                           onClick={() => this.props.selectEngagement(engagement)}
                                         >
@@ -58,8 +55,8 @@ class Engagements extends Component {
                             )
                         )}
                         {!this.props.selectedEngagement && (
-                            <div className="row">
-                                <button type="button" style={{width:'80%'}} className="btn btn-outline-light col self-align-center" onClick={() => this.props.add(this.props.page)}>+</button>
+                            <div className="row" style={{width:'100%'}}>
+                                <button type="button" style={{marginLeft:'15px', fontSize:'40px', padding:'0px'}} className="btn btn-light col self-align-center" onClick={() => this.props.add(this.props.page)}>+</button>
                             </div>
                         )}
                     <Modal style={{ zIndex:10}} open={this.props.newrdv !== ''} onClose={() => this.props.add(this.props.newrdv)} center>
@@ -98,7 +95,7 @@ class Engagements extends Component {
                                             name="student"
                                             />
                                             <br />
-                                            <button type="submit" className="modale" onClick={this.props.sendCR}>
+                                            <button type="submit" className="modale" onClick={() => this.props.sendCR(this.props.page)}>
                                                 <p>ENVOYER</p>
                                             </button>
                                         </Modal>

@@ -322,7 +322,6 @@ class ModalRDVEnseignant extends Component {
   }
 
   onAccept = (id) => {
-    console.log(id);
     axios.put(`${url}/api/slots/rdvOK/${this.props.id}`, { idRDV: id }).then((resp) => {
       this.setState({ proposed: [resp.data] });
       this.update();

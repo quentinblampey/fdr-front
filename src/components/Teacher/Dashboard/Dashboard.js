@@ -62,7 +62,6 @@ class VueEnseignant extends Component {
             axios.get(`${url}/api/users/helped`).then((res) => {
               this.setState({ usersHelped: res.data, numberHelp: res.data.length });
               axios.get(`${url}/api/users/number`).then((resNb) => {
-                console.log(resNb.data);
                 this.setState({ number: resNb.data.nombre - this.state.numberHelp });
               });
             });

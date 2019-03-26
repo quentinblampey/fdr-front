@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import axios from 'axios';
-import Modal from 'react-responsive-modal';
 import FooterStop from '../Footer';
 import url from '../../../config';
 import Test from '../Onglets';
@@ -22,7 +21,7 @@ class Contrat extends Component {
         comment:'',
         date:'',
         student:'',
-        contact:'Enseignant référent',
+        contact:'',
         engagements:[{date: "21 Mars", student:"Je m'engage à aller en TD", validation:true, teacher:"Ok j'ai noté ton engagement"},
         {date: "21 Juin", student:"Je m'engage à aller en Amphi des fois", validation:false, teacher:"Pas sur que ça soit suffisant.."}
     ],
@@ -65,7 +64,6 @@ class Contrat extends Component {
   }
 
   onChange = (e) => {
-    console.log(e.target.name)
     const name = e.target.name;
     const value = e.target.value;
     this.setState({ [name]: value });
@@ -102,7 +100,6 @@ class Contrat extends Component {
     };
 
       modal = (name, field) => {
-        console.log(name, field);
         let modalFeedbacks;
         if (this.state.modalFeedbacks.name === ""){
             modalFeedbacks={name:name, field:field};
@@ -122,28 +119,27 @@ class Contrat extends Component {
               });
       }
 
-      sendCR = () => {
-        const {date, student, contact} = this.state;
+      sendCR = (page) => {
+        let contact = this.state.contact;
+        const {date, student} = this.state;
+        if (page==='Enseignant référent'){
+            contact = 'Enseignant référent';
+            console.log(contact);
+        }
         axios.post(`${url}/api/engagements/${this.props.match.params.id}`, { date, student, contact }).then((res) => {
             let auxUser = this.state.user;
             auxUser.engagements.push(res.data);
-            this.setState({ user: auxUser, date:'', student:'', contact:'Enseignant référent'});
+            this.setState({ user: auxUser, date:'', student:'', contact:''});
             this.add("");
           });
       }
 
       add = (newrdv) => {
-          console.log(newrdv);
           if (this.state.newrdv!==""){
             this.setState({newrdv: ""});
           }else{
             this.setState({newrdv});
           }
-      }
-
-      selectEngagement(engagement){
-          console.log(engagement);
-          this.setState({selectedEngagement:engagement})
       }
 
     selectEngagement(engagement) {

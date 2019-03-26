@@ -16,10 +16,10 @@ import ReactTooltip from 'react-tooltip';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import FicheCourte from './FicheCourte';
-import url from '../../config';
+import url from '../../../../config';
 // import computeStats from './ComputeStats';
 import SC from './ScoreChart';
-import Engagement from './Engagement';
+import Engagement from './Detail/Engagement';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -160,8 +160,7 @@ class Begin extends Component {
                                 <div className="card-header">
                                     <h2>Contrat pédagogique</h2>
                                 </div>
-                                <div className="container">
-                                    <br />
+                                <div>
                                     <Dropdown>
                                         <Dropdown.Toggle variant="light" id="dropdown-basic">
                                             {this.state.displayStatus}
@@ -218,12 +217,9 @@ class Begin extends Component {
                                                         >
                                                             <div>
                                                                 {ue.name}
-                                                                {ue.dateValid !== ''
-                                                                && ue.dateValid !== 'Validé en ' ? (
+                                                                {ue.dateValid !== '' && (
                                                                     <div>{ue.dateValid}</div>
-                                                                  ) : (
-                                                                    <div>Non validé</div>
-                                                                  )}
+                                                                )}
                                                             </div>
                                                         </li>
                                                     </div>

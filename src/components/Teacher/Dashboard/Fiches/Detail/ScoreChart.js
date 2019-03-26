@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Chart from 'react-apexcharts';
-import url from '../../config';
+import url from '../../../../../config';
 
 class HU extends Component {
   constructor(props) {

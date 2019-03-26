@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './FicheCourte.scss';
+import '../Fiches/FicheCourte.scss';
 import ReactTooltip from 'react-tooltip';
 
 class Info extends Component {

@@ -1,36 +1,48 @@
 import React, { Component } from 'react';
-import '../Begin.scss';
+import '../AccueilChat/Accueil.scss';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Modal from 'react-responsive-modal';
 
 class Feedbacks extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
+  constructor(props) {
+    super(props);
+  }
 
     console.log(this.props.modalFeedbacks);
 
-        return (
-            (this.props.user.ue.length > 0) ? (
-                <ul className="list-group" style={{
-                    width:'90%',
-                    position: 'absolute',
-                    top: '190px',
-                    bottom:'105px',
-                    overflow: 'scroll',
-                    overflowX: 'hidden',
-                    margin:'5px'}}>
-                        {this.props.user.ue.map((ue) => (
-                            <li key={ue.name} className={"row list-group-item-"+ue.status} style={{minHeight:'45px', borderRadius:'10px', width:'100%', margin: '5px 0px', padding: '0px 0px 0px 10px', display:'flex', flexDirection: 'row', justifyContent:'space-between', alignItems:'center'}}>
-                                <div>
-                                    {ue.name}
-                                </div>
-                                <div className="dropdown">
-                                <Dropdown>
-                                    <Dropdown.Toggle variant="light" id="dropdown-basic">
-                                    </Dropdown.Toggle>
+    return this.props.user.ue.length > 0 ? (
+      <ul
+        className="list-group"
+        style={{
+          width: '90%',
+          position: 'absolute',
+          top: '190px',
+          bottom: '105px',
+          overflow: 'scroll',
+          overflowX: 'hidden',
+          margin: '5px',
+        }}
+      >
+        {this.props.user.ue.map(ue => (
+          <li
+            key={ue.name}
+            className={`row list-group-item-${ue.status}`}
+            style={{
+              minHeight: '45px',
+              borderRadius: '10px',
+              width: '100%',
+              margin: '5px 0px',
+              padding: '0px 0px 0px 10px',
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <div>{ue.name}</div>
+            <div className="dropdown">
+              <Dropdown>
+                <Dropdown.Toggle variant="light" id="dropdown-basic" />
 
                                     <Dropdown.Menu alignRight>
                                         <Dropdown.Header>Suivi de l'UE</Dropdown.Header>

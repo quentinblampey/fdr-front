@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import axios from 'axios';
 import Modal from 'react-responsive-modal';
-import FooterStop from '../FooterStop';
+import FooterStop from '../Footer';
 import url from '../../../config';
 import Test from '../Onglets';
-import liste from '../listeUE';
+import liste from './listeUE';
 import UEs from './UEs';
 import Feedbacks from './Feedbacks';
-import '../Begin.scss';
+import '../AccueilChat/Accueil.scss';
 
 class Contrat extends Component {
   constructor(props) {

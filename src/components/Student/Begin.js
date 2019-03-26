@@ -47,7 +47,7 @@ class Begin extends Component {
                 <button type="submit" className="content">
                   <p>
                     <span>“ </span>
-                                    MON COACH CHATBOT
+                                    CHATER AVEC OCÉANE
                     <span> ”</span>
                   </p>
                 </button>

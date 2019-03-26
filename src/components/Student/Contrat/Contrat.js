@@ -193,10 +193,10 @@ class Contrat extends Component {
                     <Advice user={this.state.user}/>
                 )}
                 {this.state.status === 'engagement' && (
-                    <Engagements page="engagements" onChange={this.onChange} sendCR={this.sendCR} user={this.state.user} selectedEngagement={this.state.selectedEngagement} add={this.add} selectEngagement={this.selectEngagement} newrdv={this.state.newrdv} date={this.state.date} contact={this.state.contact} student={this.state.student}/>
+                    <Engagements page="Enseignant référent" onChange={this.onChange} sendCR={this.sendCR} user={this.state.user} selectedEngagement={this.state.selectedEngagement} add={this.add} selectEngagement={this.selectEngagement} newrdv={this.state.newrdv} date={this.state.date} contact={this.state.contact} student={this.state.student}/>
                 )}
                 {this.state.status === 'reflexions' && (
-                    <Engagements page="reflexions" onChange={this.onChange} sendCR={this.sendCR} user={this.state.user} selectedEngagement={this.state.selectedEngagement} add={this.add} selectEngagement={this.selectEngagement} newrdv={this.state.newrdv} date={this.state.date} contact={this.state.contact} student={this.state.student}/>
+                    <Engagements page="reflexion" onChange={this.onChange} sendCR={this.sendCR} user={this.state.user} selectedEngagement={this.state.selectedEngagement} add={this.add} selectEngagement={this.selectEngagement} newrdv={this.state.newrdv} date={this.state.date} contact={this.state.contact} student={this.state.student}/>
                 )}
           </div>
               <FooterStop />

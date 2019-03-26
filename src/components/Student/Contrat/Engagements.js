@@ -9,19 +9,18 @@ class Engagements extends Component {
     render() {
 
         return (
-            <div>
-            <div style={{ color : '#fefefe', margin: '10px', marginTop:'90px'}}>
-                        {(this.props.user.engagements.filter(engagement => engagement.contact === "Enseignant référent").length===0) ? (
+            <div style={{ color : '#fefefe', position: 'absolute', top: '190px', bottom: '100px', overflow: 'scroll', overflowX: 'hidden', width:'80%'}}>
+                        {(this.props.user.engagements.filter(engagement => this.props.page === engagement.contact || (this.props.page==="reflexion" && engagement.contact!=="Enseignant référent")).length===0) ? (
                             <div className="row">
                             <button type="button" style={{width:'80%'}} className="btn btn-outline-light col self-align-center" disabled>{"Vous n'avez pas encore d'engagements"}</button>
                         </div>
                         ):( 
                             (!this.props.selectedEngagement) ? (
-                                this.props.user.engagements.filter(engagement => engagement.contact === "Enseignant référent").map((engagement, i)=> (
+                                this.props.user.engagements.filter(engagement => this.props.page === engagement.contact || (this.props.page==="reflexion" && engagement.contact!=="Enseignant référent")).map((engagement, i)=> (
                                     <div key={engagement.date} className="row">
                                         <button
                                           type="button"
-                                          style={{ width: '80%' }}
+                                          style={{ width: '100%' }}
                                           className="btn btn-outline-light col self-align-center"
                                           onClick={() => this.props.selectEngagement(engagement)}
                                         >
@@ -31,7 +30,7 @@ class Engagements extends Component {
                                 ))
                             ) : (
                                 <div style={{marginTop:'30px'}}>
-                                    <h5 style={{marginBottom:'20px'}}>{"Rendez-vous du "+this.props.selectedEngagement.date}</h5>
+                                    <h5 style={{marginBottom:'20px'}}>{"Rendez-vous du "+this.props.selectedEngagement.date+" - "+this.props.selectedEngagement.contact}</h5>
                                     <div className="row" style={{width:'100%'}}>
                                     <div style={{width:'80%', textAlign:'left', marginLeft:'20px'}}>
                                         {" Votre compte-rendu :"}
@@ -63,7 +62,6 @@ class Engagements extends Component {
                                 <button type="button" style={{width:'80%'}} className="btn btn-outline-light col self-align-center" onClick={() => this.props.add(this.props.page)}>+</button>
                             </div>
                         )}
-                    </div>
                     <Modal style={{ zIndex:10}} open={this.props.newrdv !== ''} onClose={() => this.props.add(this.props.newrdv)} center>
                                             <h2>Nouveau compte-rendu</h2>
                                             <label>Date :</label>

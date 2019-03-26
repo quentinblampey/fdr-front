@@ -16,10 +16,10 @@ import ReactTooltip from 'react-tooltip';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import FicheCourte from './FicheCourte';
-import url from '../../config';
+import url from '../../../../config';
 // import computeStats from './ComputeStats';
 import SC from './ScoreChart';
-import Engagement from './Engagement';
+import Engagement from './Detail/Engagement';
 
 import 'react-datepicker/dist/react-datepicker.css';
 

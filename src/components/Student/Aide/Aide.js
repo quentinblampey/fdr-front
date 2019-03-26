@@ -3,9 +3,9 @@ import { ToastsStore } from 'react-toasts';
 import './Begin.scss';
 import axios from 'axios';
 import Modal from 'react-responsive-modal';
-import FooterStop from './FooterStop';
-import Onglets from './Onglets';
-import url from '../../config';
+import FooterStop from '../Footer';
+import Onglets from '../Onglets';
+import url from '../../../config';
 import Switch from "react-switch";
 import colors from '../../globalSCSS/color.scss';
 

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import url from '../../config';
+import url from '../../../config';
 import variables from '../../globalSCSS/color.scss';
-import RadialChart from './Profils';
-import Repartition from './Repartition';
-import Filtered from './Filtered';
-import './VueEnseignant.scss';
+import RadialChart from './Data/Profils';
+import Repartition from './Data/Repartition';
+import Filtered from './Fiches/Filtered';
+import './Dashboard.scss';
 
 class VueEnseignant extends Component {
   constructor(props) {

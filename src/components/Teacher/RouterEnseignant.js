@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import VueEnseignant from './VueEnseignant';
-import Fiche from './Fiche';
-import Filtered from './Filtered';
-import FicheCourte from './FicheCourte';
-import Repartition from './Repartition';
-import Profils from './Profils';
+import VueEnseignant from './Dashboard/Dashboard';
+import Fiche from './Dashboard/Fiches/Detail/Fiche';
+import Filtered from './Dashboard/Fiches/Filtered';
+import FicheCourte from './Dashboard/Fiches/FicheCourte';
+import Repartition from './Dashboard/Data/Repartition';
+import Profils from './Dashboard/Data/Profils';
 import HistoricUpdate from './HistoricUpdate';
-import Explication from './Explication';
+import Explication from './Guide/Explication';
 import Nav from './Navbar';
-import Propose from './Propose';
+import Propose from './RDV/Propose';
 
 class RouterEns extends Component {
   componentDidMount() {}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './FooterStop.scss';
+import './Footer.scss';
 import { ToastsStore } from 'react-toasts';
 import colors from '../../globalSCSS/color.scss';
 

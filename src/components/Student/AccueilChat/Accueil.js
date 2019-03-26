@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import FooterStop from './FooterStop';
-import url from '../../config';
+import FooterStop from '../Footer';
+import url from '../../../config';
 import './Begin.scss';
-import Onglets from './Onglets';
+import Onglets from '../Onglets';
 import colors from '../../globalSCSS/color.scss';
 
 class Begin extends Component {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import url from '../../config';
 import './Portail.scss';
-import FooterStop from './FooterStop';
+import FooterStop from './Footer';
 
 class VueEtudiant extends Component {
   constructor(props) {

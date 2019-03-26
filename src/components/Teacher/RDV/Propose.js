@@ -4,7 +4,7 @@ import './Propose.scss';
 import './FicheCourte.scss';
 import DatePicker from 'react-datepicker';
 import Axios from 'axios';
-import url from '../../config';
+import url from '../../../config';
 
 class Propose extends Component {
   constructor(props) {

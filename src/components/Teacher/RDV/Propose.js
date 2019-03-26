@@ -143,7 +143,7 @@ class Propose extends Component {
     }
 
     render() {
-      const { plage, slots, ok } = this.state;
+      const { plage, slots } = this.state;
       return (
         <div className="container">
           <h2>

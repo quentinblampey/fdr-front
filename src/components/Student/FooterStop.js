@@ -1,6 +1,4 @@
-/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
-// import axios from 'axios';
 import './FooterStop.scss';
 import { ToastsStore } from 'react-toasts';
 import colors from '../../globalSCSS/color.scss';

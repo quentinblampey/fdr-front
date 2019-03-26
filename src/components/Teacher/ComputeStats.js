@@ -69,48 +69,6 @@ function updateNoOrientation() {
   return 0;
 }
 
-/*
-export default function computeStats(user) {
-  const tabScores = [];
-  let count = 0;
-  Object.keys(user.score).forEach((score) => {
-    if (score >= 0) {
-      tabScores.push(score);
-    } else {
-      let newScore;
-      switch (count) {
-        case 0:
-          newScore = updateMotivation(user);
-          break;
-
-        case 1:
-          newScore = updateFidelity(user);
-          break;
-
-        case 2:
-          newScore = updateLifestyle(user);
-          break;
-
-        case 3:
-          newScore = updateIntegration(user);
-          break;
-
-        case 4:
-          newScore = updateNoOrientation(user);
-          break;
-
-        default:
-          break;
-      }
-      tabScores.push(newScore);
-    }
-    count += 1;
-  });
-
-  return tabScores;
-}
-*/
-
 export default function computeStats(user) {
   return {
     motivation: updateMotivation(user),

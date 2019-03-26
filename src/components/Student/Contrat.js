@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-indent */
-/* eslint-disable indent */
 import React, { Component } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import axios from 'axios';
@@ -14,7 +12,6 @@ import Switch from 'react-switch';
 class Contrat extends Component {
     constructor(props) {
         super(props);
-        // this.demAide = this.demAide.bind(this);
         this.state = {
             modal: { name: '', field: '' },
             comment: '',

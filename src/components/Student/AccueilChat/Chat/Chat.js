@@ -3,7 +3,7 @@ import axios from 'axios';
 import MessageChat from './MessageChat';
 import './Chat.scss';
 import Loading from './Loading';
-import url from '../../../config';
+import url from '../../../../config';
 import { Link } from 'react-router-dom';
 
 class Chat extends Component {

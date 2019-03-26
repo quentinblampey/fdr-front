@@ -3,10 +3,6 @@ import '../AccueilChat/Accueil.scss';
 import Switch from 'react-switch';
 
 class UEs extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div

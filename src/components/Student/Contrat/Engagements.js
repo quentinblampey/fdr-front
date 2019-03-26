@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import Modal from 'react-responsive-modal';
 
 class Engagements extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
 

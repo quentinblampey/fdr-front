@@ -153,7 +153,6 @@ class Chat extends Component {
             }else{
               r = { message: answer.reaction, color: 1 };
             }
-            console.log(r)
             this.setState({ loading: true });
             if ((answer.reaction !== '' && answer.reaction !== undefined) || (this.state.currentQuestion.textArea && r.message)){
               this.updateScroll();

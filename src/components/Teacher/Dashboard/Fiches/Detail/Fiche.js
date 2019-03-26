@@ -77,7 +77,6 @@ class Begin extends Component {
 
     validate = (id) => {
       axios.post(`${url}/api/engagements/validate/${id}/${this.state.user._id}`).then(() => {
-        console.log('here !!');
         this.load();
       });
     };

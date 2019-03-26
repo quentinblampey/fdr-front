@@ -50,18 +50,12 @@ class Begin extends Component {
   }
 
   componentDidMount() {
-    // const { id } = this.props;
-    // this.props.match.params.id
-    // eslint-disable-next-line react/destructuring-assignment react/prop-types
     this.load();
   }
 
     load = () => {
       axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
-        // console.log(res.data);
-        // console.log(res.data.ue);
         this.setState({ user: res.data, textContrat: res.data.textContrat });
-        // console.log(this.state.user);
       });
     };
 
@@ -76,8 +70,6 @@ class Begin extends Component {
           textContrat: this.state.textContrat,
         })
         .then((res) => {
-          // console.log(res.data);
-          // console.log(res.data);
           this.setState({ user: res.data, saved: true });
         });
     };

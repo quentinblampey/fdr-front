@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import axios from 'axios';
-import Modal from 'react-responsive-modal';
 import FooterStop from '../Footer';
 import url from '../../../config';
 import Test from '../Onglets';
@@ -65,7 +64,6 @@ class Contrat extends Component {
   }
 
   onChange = (e) => {
-    console.log(e.target.name)
     const name = e.target.name;
     const value = e.target.value;
     this.setState({ [name]: value });
@@ -102,7 +100,6 @@ class Contrat extends Component {
     };
 
       modal = (name, field) => {
-        console.log(name, field);
         let modalFeedbacks;
         if (this.state.modalFeedbacks.name === ""){
             modalFeedbacks={name:name, field:field};
@@ -133,17 +130,11 @@ class Contrat extends Component {
       }
 
       add = (newrdv) => {
-          console.log(newrdv);
           if (this.state.newrdv!==""){
             this.setState({newrdv: ""});
           }else{
             this.setState({newrdv});
           }
-      }
-
-      selectEngagement(engagement){
-          console.log(engagement);
-          this.setState({selectedEngagement:engagement})
       }
 
     selectEngagement(engagement) {

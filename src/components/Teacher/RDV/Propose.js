@@ -3,7 +3,7 @@ import { ToastsStore } from 'react-toasts';
 import './Propose.scss';
 import '../Dashboard/Fiches/FicheCourte.scss';
 import DatePicker from 'react-datepicker';
-import Axios from 'axios';
+import axios from 'axios';
 import url from '../../../config';
 
 class Propose extends Component {
@@ -89,7 +89,7 @@ class Propose extends Component {
         )
       ) {
         const id = e.target.value;
-        Axios.delete(`${url}/api/slots/TbAa3CpZXgS1apnKjCnj3VdnkIxMhlny/clear/${id}`).then(
+        axios.delete(`${url}/api/slots/TbAa3CpZXgS1apnKjCnj3VdnkIxMhlny/clear/${id}`).then(
           () => {
             this.reload();
           },
@@ -106,8 +106,8 @@ class Propose extends Component {
         )
       ) {
         const { plage } = this.state;
-        plage.map((slot) => {
-          Axios.post(`${url}/api/slots/`, { duration: slot.duration, date: slot.date }).then(
+        plage.forEach((slot) => {
+          axios.post(`${url}/api/slots/`, { duration: slot.duration, date: slot.date }).then(
             () => {
               count += 1;
               if (count === tot) {
@@ -124,8 +124,8 @@ class Propose extends Component {
 
     reload() {
       let tabSlots = [];
-      Axios.get(`${url}/api/slots/getfree`).then((slots) => {
-        slots.data.map((slot) => {
+      axios.get(`${url}/api/slots/getfree`).then((slots) => {
+        slots.data.forEach((slot) => {
           tabSlots.push({ date: slot.date, status: 'Proposé aux étudiants', id: slot._id });
         });
         this.setState({ slots: tabSlots });

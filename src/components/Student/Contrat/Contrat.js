@@ -22,7 +22,7 @@ class Contrat extends Component {
         comment:'',
         date:'',
         student:'',
-        contact:'Enseignant référent',
+        contact:'',
         engagements:[{date: "21 Mars", student:"Je m'engage à aller en TD", validation:true, teacher:"Ok j'ai noté ton engagement"},
         {date: "21 Juin", student:"Je m'engage à aller en Amphi des fois", validation:false, teacher:"Pas sur que ça soit suffisant.."}
     ],

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { ToastsContainer, ToastsStore } from 'react-toasts';
-import Footer from './components/Footer';
 import Chat from './components/Student/Chat/Chat';
 import Begin from './components/Student/Begin';
 import Aide from './components/Student/Aide';
@@ -30,7 +29,6 @@ class App extends Component {
           <Route path="/begin/:id" render={props => <Begin {...props} />} />
           <Route path="/enseignant" component={RouterEns} />
           <Route path="/ie" component={IE} />
-          <Footer />
           <ToastsContainer store={ToastsStore} />
         </div>
       </Router>

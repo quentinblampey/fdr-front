@@ -265,10 +265,10 @@ class Begin extends Component {
                                     {['engagement'].includes(this.state.status) && (
                                         <div>
                                             {this.state.user.engagements.map(engagement => (
-                                                <li className="list-group-item">
+                                              <div>
                                                     {engagement.contact
                                                         === 'Enseignant référent' && (
-                                                        <div>
+                                                          <li className="list-group-item">
                                                             <Engagement
                                                               engagement={engagement}
                                                               ens
@@ -278,29 +278,32 @@ class Begin extends Component {
                                                                     this.updateTeacherComment
                                                                 }
                                                             />
-                                                        </div>
+                                                            
+                                                        </li>
                                                     )}
-                                                </li>
+                                              </div>
                                             ))}
                                         </div>
                                     )}
                                     {['reflexions'].includes(this.state.status) && (
                                         <div>
                                             {this.state.user.engagements.map(engagement => (
-                                                <li className="list-group-item">
-                                                    {engagement.contact
-                                                        !== 'Enseignant référent' && (
-                                                        <Engagement
-                                                          engagement={engagement}
-                                                          ens={false}
-                                                          userId={this.state.user._id}
-                                                          validate={this.validate}
-                                                          updateTeacherComment={
-                                                                this.updateTeacherComment
-                                                            }
-                                                        />
-                                                    )}
-                                                </li>
+                                              <div>
+                                                {engagement.contact
+                                                  !== 'Enseignant référent' && (
+                                                    <li className="list-group-item">
+                                                      <Engagement
+                                                        engagement={engagement}
+                                                        ens={false}
+                                                        userId={this.state.user._id}
+                                                        validate={this.validate}
+                                                        updateTeacherComment={
+                                                        this.updateTeacherComment
+                                                        }
+                                                      />
+                                                    </li>
+                                                )}
+                                              </div>
                                             ))}
                                         </div>
                                     )}

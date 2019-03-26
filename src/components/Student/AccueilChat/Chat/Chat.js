@@ -46,8 +46,9 @@ class Chat extends Component {
                 color: 1,
               },
             ]),
-            isFinish: true,
+            isFinish: true, loading: false
           });
+
         } else {
           if(r3.data.question.idQ >1){
               this.setState({
@@ -101,7 +102,7 @@ class Chat extends Component {
               .then((res) => {
                 axios.post(`${url}/api/questions/${this.props.match.params.id}`).then((res2) => {
                   if (res2.data.isFinish) {
-                    this.setState({ isFinish: true });
+                    this.setState({ isFinish: true, loading: false });
                     this.updateUser();
                     this.updateScroll();
                   } else {

@@ -15,7 +15,7 @@ class Repartition extends Component {
               {' '}
             </span>
           ) : (
-            <button
+            <div
               className="btn btn-success"
               onClick={() => {
                 this.props.validate(this.props.engagement._id);
@@ -24,7 +24,7 @@ class Repartition extends Component {
               {' '}
                             Valider l'engagement
               {' '}
-            </button>
+            </div>
           )}
           <p>
             {' '}
@@ -57,7 +57,7 @@ class Repartition extends Component {
               id={this.props.engagement._id}
             />
           </FormGroup>
-          <button
+          <div
             className="btn btn-info"
             onClick={() => {
               this.props.updateTeacherComment(this.props.engagement._id);
@@ -66,7 +66,7 @@ class Repartition extends Component {
             {' '}
                         Envoyer le commentaire
             {' '}
-          </button>
+          </div>
         </Form>
       </div>
     );

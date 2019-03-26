@@ -104,6 +104,7 @@ class Begin extends Component {
 
     validate = (id) => {
       axios.post(`${url}/api/engagements/validate/${id}/${this.state.user._id}`).then(() => {
+        console.log('here !!');
         this.load();
       });
     };
@@ -185,86 +186,86 @@ class Begin extends Component {
                                               ))}
                                         </Dropdown.Menu>
                                     </Dropdown>
-                                    </div>
-                                    <br />
-                                    {this.state.status === 'choice'
-                                        && (this.state.user.ue.length === 0 ? (
-                                            <h5 className="container">
-                                                Cet étudiant n'a pas encore signalé d'UEs. C'est la
-                                                raison pour laquelle vous ne pouvez pas encore
-                                                établir de contrat pédagogique.
-                                            </h5>
-                                        ) : (
-                                            <ul
-                                              className="list-group"
-                                              style={{ width: '95%', margin: '10px' }}
-                                            >
-                                                {this.state.user.ue.map(ue => (
-                                                    <div key={ue.name}>
-                                                        <ReactTooltip multiline />
-                                                        <li
-                                                          data-tip={ue.message}
-                                                          className={
-                                                                'row list-group-item-' + ue.status
-                                                            }
-                                                          style={{
-                                                            'border-radius': '10px',
-                                                            width: '100%',
-                                                            margin: '5px 0px',
-                                                            padding: '0px 0px 0px 10px',
-                                                            display: 'flex',
-                                                            'flex-direction': 'row',
-                                                            'justify-content': 'space-between',
-                                                            'align-items': 'center',
-                                                          }}
-                                                        >
-                                                            <div>
-                                                                {ue.name}
-                                                                {ue.dateValid !== '' && (
-                                                                    <div>{ue.dateValid}</div>
-                                                                )}
-                                                            </div>
-                                                        </li>
-                                                    </div>
-                                                ))}
-                                            </ul>
-                                        ))}
-                                    {this.state.status === 'comment' && (
-                                        <div className="container">
-                                            <div className="row justify-content-between">
-                                                <h5 className="col-9">
-                                                    &nbsp;Mes conseils sur le contrat
-                                                </h5>
-                                                <div className="col-3">
-                                                    {this.state.saved && (
-                                                        <h5 className="badge badge-pill badge-success">
-                                                            Enregistré
-                                                        </h5>
-                                                    )}
+                                </div>
+                                <br />
+                                {this.state.status === 'choice'
+                                    && (this.state.user.ue.length === 0 ? (
+                                        <h5 className="container">
+                                            Cet étudiant n'a pas encore signalé d'UEs. C'est la
+                                            raison pour laquelle vous ne pouvez pas encore établir
+                                            de contrat pédagogique.
+                                        </h5>
+                                    ) : (
+                                        <ul
+                                          className="list-group"
+                                          style={{ width: '95%', margin: '10px' }}
+                                        >
+                                            {this.state.user.ue.map(ue => (
+                                                <div key={ue.name}>
+                                                    <ReactTooltip multiline />
+                                                    <li
+                                                      data-tip={ue.message}
+                                                      className={
+                                                            'row list-group-item-' + ue.status
+                                                        }
+                                                      style={{
+                                                        'border-radius': '10px',
+                                                        width: '100%',
+                                                        margin: '5px 0px',
+                                                        padding: '0px 0px 0px 10px',
+                                                        display: 'flex',
+                                                        'flex-direction': 'row',
+                                                        'justify-content': 'space-between',
+                                                        'align-items': 'center',
+                                                      }}
+                                                    >
+                                                        <div>
+                                                            {ue.name}
+                                                            {ue.dateValid !== '' && (
+                                                                <div>{ue.dateValid}</div>
+                                                            )}
+                                                        </div>
+                                                    </li>
                                                 </div>
+                                            ))}
+                                        </ul>
+                                    ))}
+                                {this.state.status === 'comment' && (
+                                    <div className="container">
+                                        <div className="row justify-content-between">
+                                            <h5 className="col-9">
+                                                &nbsp;Mes conseils sur le contrat
+                                            </h5>
+                                            <div className="col-3">
+                                                {this.state.saved && (
+                                                    <h5 className="badge badge-pill badge-success">
+                                                        Enregistré
+                                                    </h5>
+                                                )}
                                             </div>
-                                            <br />
-                                            <textarea
-                                              className="form-control"
-                                              id="exampleFormControlTextarea1"
-                                              value={this.state.textContrat}
-                                              onChange={this.onChange}
-                                            />
-                                            &nbsp;
-                                            <button
-                                              type="submit"
-                                              className="modale"
-                                              onClick={this.save.bind(this)}
-                                            >
-                                                <p>ENREGISTRER</p>
-                                            </button>
                                         </div>
-                                    )}
-                                    <ul class="list-group list-group-flush">
+                                        <br />
+                                        <textarea
+                                          className="form-control"
+                                          id="exampleFormControlTextarea1"
+                                          value={this.state.textContrat}
+                                          onChange={this.onChange}
+                                        />
+                                        &nbsp;
+                                        <button
+                                          type="submit"
+                                          className="modale"
+                                          onClick={this.save.bind(this)}
+                                        >
+                                            <p>ENREGISTRER</p>
+                                        </button>
+                                    </div>
+                                )}
+                                <ul className="list-group list-group-flush">
                                     {['engagement'].includes(this.state.status) && (
                                         <div>
                                             {this.state.user.engagements.map(engagement => (
-                                                <li class="list-group-item">
+                                                <li className="list-group-item">
                                                     {engagement.contact
                                                         === 'Enseignant référent' && (
                                                         <div>
@@ -286,7 +287,7 @@ class Begin extends Component {
                                     {['reflexions'].includes(this.state.status) && (
                                         <div>
                                             {this.state.user.engagements.map(engagement => (
-                                                <li class="list-group-item">
+                                                <li className="list-group-item">
                                                     {engagement.contact
                                                         !== 'Enseignant référent' && (
                                                         <Engagement
@@ -303,7 +304,7 @@ class Begin extends Component {
                                             ))}
                                         </div>
                                     )}
-                                    </ul>
+                                </ul>
                                 <br />
                             </div>
                         </div>

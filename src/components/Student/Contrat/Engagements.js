@@ -6,7 +6,7 @@ class Engagements extends Component {
     render() {
 
         return (
-            <div style={{ margin:'10px', color : '#fefefe', position: 'absolute', top: '190px', bottom: '100px', overflow: 'scroll', overflowX: 'hidden', width: '80%', marginRight:'0px'}}>
+            <div style={{ padding:'10px', margin:'10px', color : '#fefefe', position: 'absolute', top: '190px', bottom: '100px', overflow: 'scroll', overflowX: 'hidden', width: '80%', marginRight:'0px'}}>
                         {(this.props.user.engagements.filter(engagement => this.props.page === engagement.contact || (this.props.page==="reflexion" && engagement.contact!=="Enseignant référent")).length===0) ? (
                             <div className="row" style={{marginRight:'0px'}}>
                             <button type="button" className="btn btn-outline-light col self-align-center" disabled>{"Vous n'avez pas encore d'engagements"}</button>
@@ -95,7 +95,7 @@ class Engagements extends Component {
                                             name="student"
                                             />
                                             <br />
-                                            <button type="submit" className="modale" onClick={this.props.sendCR}>
+                                            <button type="submit" className="modale" onClick={() => this.props.sendCR(this.props.page)}>
                                                 <p>ENVOYER</p>
                                             </button>
                                         </Modal>

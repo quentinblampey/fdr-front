@@ -119,12 +119,17 @@ class Contrat extends Component {
               });
       }
 
-      sendCR = () => {
-        const {date, student, contact} = this.state;
+      sendCR = (page) => {
+        let contact = this.state.contact;
+        const {date, student} = this.state;
+        if (page==='Enseignant référent'){
+            contact = 'Enseignant référent';
+            console.log(contact);
+        }
         axios.post(`${url}/api/engagements/${this.props.match.params.id}`, { date, student, contact }).then((res) => {
             let auxUser = this.state.user;
             auxUser.engagements.push(res.data);
-            this.setState({ user: auxUser, date:'', student:'', contact:'Enseignant référent'});
+            this.setState({ user: auxUser, date:'', student:'', contact:''});
             this.add("");
           });
       }

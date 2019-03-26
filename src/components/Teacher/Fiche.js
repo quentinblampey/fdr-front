@@ -46,7 +46,7 @@ class Begin extends Component {
       ],
     };
     this.validate = this.validate.bind(this);
-    this.updateTeacherComment = this.updateTeacherComment.bind(this)
+    this.updateTeacherComment = this.updateTeacherComment.bind(this);
   }
 
   componentDidMount() {
@@ -109,48 +109,50 @@ class Begin extends Component {
     };
 
     render() {
-      const { user, collapse } = this.state;
+      const { user } = this.state;
       return (
             <div className="container">
-              <div className="row">
-              <div className="col-9">
-                <h2>
-                    {" Fiche de l'étudiant : "}
-                    {user.details.name}
-                    <p>
-                    {user.aide && (
-                        
-                            <span className="badge badge-pill badge-danger">
-                                Cet étudiant a demandé de l'aide !
-                            </span>
-                        
-                    )}
-                  <br />
-                    {' '}
+                <div className="row">
+                    <div className="col-lg-8 col-sm-12 col-xl-8 text-center">
+                        <h2>
+                            {" Fiche de l'étudiant : "}
+                            {user.details.name}
+                            <p>
+                                {user.aide && (
+                                    <span className="badge badge-pill badge-danger">
+                                        Cet étudiant a demandé de l'aide !
+                                    </span>
+                                )}
+                                <br />
+{' '}
 {user.pseudo}
-{' '}</p>
-                </h2>
-                <p>
-                    {!user.helped && (
-                        <div>
-                            <ReactTooltip multiline />
-                            <button
-                              onClick={() => {
-                                this.help(user._id);
-                              }}
-                              className="btn btn-success"
-                              data-tip="Cliquez-ici pour pouvoir proposer<br />des rendez-vous à cet étudiant"
-                            >
-                                Proposer de l'aide à cet étudiant
-                            </button>
-                        </div>
-                    )}
-                </p>
+{' '}
+                            </p>
+                        </h2>
+                        <p>
+                            {!user.helped && (
+                                <div>
+                                    <ReactTooltip multiline />
+                                    <button
+                                      onClick={() => {
+                                        this.help(user._id);
+                                      }}
+                                      className="btn btn-success"
+                                      data-tip="Cliquez-ici pour pouvoir proposer<br />des rendez-vous à cet étudiant"
+                                    >
+                                        Proposer de l'aide à cet étudiant
+                                    </button>
+                                </div>
+                            )}
+                        </p>
+                    </div>
+                    <div className="col-lg-4 col-sm-9 col-md-9 col-xl-4 offset-sm-3 offset-md-4 offset-lg-0 offset-xl-0 text-center">
+                        {user.details.name !== 'undefined' && (
+                            <FicheCourte user={user} help={user.help} fiche />
+                        )}
+                    </div>
                 </div>
-                <div className="col-3">
-                      {user.details.name !== 'undefined' && <FicheCourte user={user} help={user.help} fiche />}
-                </div>
-              </div>
+                <br />
                 <div className="row">
                     <div className="col-6">
                         <div>
@@ -184,7 +186,7 @@ class Begin extends Component {
                                     </Dropdown>
                                     {this.state.status === 'choice'
                                         && (this.state.user.ue.length === 0 ? (
-                                            <h5>
+                                            <h5 className="container">
                                                 Cet étudiant n'a pas encore signalé d'UEs. C'est la
                                                 raison pour laquelle vous ne pouvez pas encore
                                                 établir de contrat pédagogique.
@@ -257,25 +259,42 @@ class Begin extends Component {
                                     {['engagement'].includes(this.state.status) && (
                                         <div className="container">
                                             {this.state.user.engagements.map(engagement => (
-                                              <div>
-                                                  { engagement.contact === "Enseignant référent" && (
-                                                 <div>
-                                                    <Engagement engagement={engagement} ens={true} userId={this.state.user._id} validate={this.validate} updateTeacherComment={this.updateTeacherComment} />
-                                                 </div>
-                                                )}
-                                              </ div>
+                                                <div>
+                                                    {engagement.contact
+                                                        === 'Enseignant référent' && (
+                                                        <div>
+                                                            <Engagement
+                                                              engagement={engagement}
+                                                              ens
+                                                              userId={this.state.user._id}
+                                                              validate={this.validate}
+                                                              updateTeacherComment={
+                                                                    this.updateTeacherComment
+                                                                }
+                                                            />
+                                                        </div>
+                                                    )}
+                                                </div>
                                             ))}
                                         </div>
                                     )}
                                     {['reflexions'].includes(this.state.status) && (
                                         <div className="container">
                                             {this.state.user.engagements.map(engagement => (
-    
-                                              <div>
-                                                { engagement.contact !== "Enseignant référent" && (
-                                                    <Engagement engagement={engagement} ens={false} userId={this.state.user._id} validate={this.validate} updateTeacherComment={this.updateTeacherComment} />
-                                                )}
-                                              </ div>
+                                                <div>
+                                                    {engagement.contact
+                                                        !== 'Enseignant référent' && (
+                                                        <Engagement
+                                                          engagement={engagement}
+                                                          ens={false}
+                                                          userId={this.state.user._id}
+                                                          validate={this.validate}
+                                                          updateTeacherComment={
+                                                                this.updateTeacherComment
+                                                            }
+                                                        />
+                                                    )}
+                                                </div>
                                             ))}
                                         </div>
                                     )}
@@ -286,232 +305,13 @@ class Begin extends Component {
                         <br />
                     </div>
                     <div className=" col-6">
-                        <div className="card">
-                            <div className="card-header">
-                                <h2>Evolution des indicateurs</h2>
-                            </div>
-                            <SC id={this.props.match.params.id} />
-                        </div>
+                        <Graph id={this.props.match.params.id} />
                         <br />
                         {user.helped && (
-                            <div className="card">
-                                <div className="card-header">
-                                    <h2>Gestion des rendez-vous</h2>
-                                </div>
-                                <Aide id={this.props.match.params.id} />
-                            </div>
+                            <Aide id={this.props.match.params.id} name={user.details.name} />
                         )}
                         <br />
                     </div>
-                </div>
-            </div>
-      );
-    }
-}
-
-// Liste et affichage des scores
-class Recap extends Component {
-  /* propTypes = {
-      match: PropTypes.number.isRequired,
-      params: PropTypes.number.isRequired,
-      id: PropTypes.number.isRequired,
-    }; */
-  constructor(props) {
-    super(props);
-    // this.computeStats = this.computeStats.bind(this)
-    this.state = {
-      user: { details: { name: 'undefined' } },
-      lastChat: '',
-      firstLog: '',
-      score: [],
-      average: 0,
-      collapse: false,
-    };
-  }
-
-  componentDidMount() {
-    // const { id } = this.props;
-    // this.props.match.params.id
-    // eslint-disable-next-line react/destructuring-assignment react/prop-types
-    axios.get(`${url}/api/users/getid/${this.props.id}`).then((res) => {
-      this.setState({ user: res.data }, () => {
-        const { user } = this.state;
-        const scores = user.score;
-
-        /*
-        let color = '';
-        if (scores.fidelity > 7) {
-          color = 'green';
-        } else if (scores.fidelity < 4) {
-          color = 'red';
-        } else {
-          color = 'orange';
-        }
-        */
-
-        // Coloration de l'indicateur INVESTISSEMENT
-        if (user.numberChats !== undefined && user.numberChats !== null) {
-          // const nbChats = user.numberChats.length;
-
-          const tab = user.registration.split('T')[0].split('-');
-          const reg = `${tab[2]}/${tab[1]}/${tab[0]}`;
-          let last = ' Aucune session';
-          if (
-            user.numberChats !== undefined
-                        && user.numberChats.length !== 0
-                        && user.numberChats !== null
-          ) {
-            const tab2 = user.numberChats[user.numberChats.length - 1]
-              .split('T')[0]
-              .split('-');
-            last = `${tab2[2]}/${tab2[1]}/${tab2[0]}`;
-          }
-
-          this.setState({
-            user: res.data,
-            // color: `list-group-item ${color}`,
-            score: scores,
-            firstLog: reg,
-            lastChat: last,
-            average:
-                            (scores.motivation
-                                + scores.fidelity
-                                + scores.lifestyle
-                                + scores.integration
-                                + scores.noOrientation)
-                            / 5,
-          });
-        }
-      });
-    });
-  }
-
-    onCollapse = () => {
-      const { collapse } = this.state;
-      this.setState({ collapse: !collapse });
-    };
-
-    /* toDisplay(dateMongo) {
-    const tab = dateMongo.split('T')[0].split('-');
-    const tab2 = this.tab.split('T')[0].split('-');
-    return `${tab[2]}/${tab[1]}/${tab[0]}`;
-  } */
-
-    render() {
-      /* let motivation;
-    let lifestyle;
-    let integration;
-    let noOrientation; */
-      let fidelity = false;
-      const {
-        user, score, firstLog, average, lastChat, collapse,
-      } = this.state;
-      if (user.numberChats !== undefined && user.numberChats !== null) {
-        fidelity = true;
-      }
-
-      return (
-            <div className="card bg-light mb-3">
-                <div className="btn card-header" onClick={this.onCollapse}>
-                    <h2>
-                        Informations personnelles &nbsp;
-                        {collapse && (
-                          <div>
-                            <i className="fas fa-chevron-up" />
-                          </div>
-                        )}
-                        {!collapse && (
-                          <div>
-                            <i className="fas fa-chevron-down" />
-                          </div>
-                        )}
-                    </h2>
-                </div>
-                <Collapse isOpen={collapse}>
-                    <ul className="list-group list-group-flush">
-                        <li className="list-group-item">
-                            <h5 className="card-title">
-                                {' '}
-                                Motivation générale :
-{' '}
-{parseFloat(score.motivation).toFixed(0)}
-                                /10
-                            </h5>
-                        </li>
-
-                        <li className="list-group-item">
-                            <h5 className="card-title">
-                                {' '}
-                                Utilisation et fidélité :
-{' '}
-{parseFloat(score.fidelity).toFixed(0)}
-                                /10
-                            </h5>
-                            <p className="card-text">
-                                {' '}
-                                Dernière session de discussion avec le chatbot :
-{lastChat}
-{' '}
-                            </p>
-                            <p className="card-text">
-                                {' '}
-                                Nombre de sessions de discussion avec le chatbot :
-{' '}
-                                {fidelity ? user.numberChats.length : '0'}
-{' '}
-                            </p>
-                            <p className="card-text">
-                                {' '}
-                                Nombre de réponses :
-{user.numberQuestions}
-{' '}
-                            </p>
-                            <p className="card-text">
-{' '}
-Date d&apos;inscription :
-{firstLog}
-{' '}
-
-                            </p>
-                        </li>
-
-                        <li className="list-group-item">
-                            <h5 className="card-title">
-                                {' '}
-                                Style de vie :
-{' '}
-{parseFloat(score.lifestyle).toFixed(0)}
-                                /10
-                            </h5>
-                        </li>
-
-                        <li className="list-group-item">
-                            <h5 className="card-title">
-                                {' '}
-                                Intégration :
-{' '}
-{parseFloat(score.integration).toFixed(0)}
-                                /10
-                            </h5>
-                        </li>
-
-                        <li className="list-group-item">
-                            <h5 className="card-title">
-                                Pertinence de l&apos;orientation :
-{' '}
-                                {parseFloat(score.noOrientation).toFixed(0)}
-                                /10
-                            </h5>
-                        </li>
-                    </ul>
-                </Collapse>
-                <div className="card-footer">
-                    <h4 className="card-title">
-                        Score moyen :
-{' '}
-{parseFloat(average).toFixed(0)}
-                        /10
-                    </h4>
                 </div>
             </div>
       );
@@ -532,6 +332,7 @@ class Aide extends Component {
     this.state = {
       date: new Date(),
       taken: [],
+      collapse: false,
     };
   }
 
@@ -542,6 +343,11 @@ class Aide extends Component {
   }
 
     onChange = date => this.setState({ date });
+
+    onCollapse = () => {
+      const { collapse } = this.state;
+      this.setState({ collapse: !collapse });
+    };
 
     proposeRdv = () => {
       const { date } = this.state;
@@ -563,39 +369,111 @@ class Aide extends Component {
 
     render() {
       let i = 0;
-      const { taken } = this.state;
+      const { taken, collapse } = this.state;
       return (
-            <div className="container">
-                <br />
-                <h2>Proposer un rendez-vous</h2>
-                <br />
-                <DatePicker
-                  selected={this.state.date}
-                  onChange={this.onChange}
-                  showTimeSelect
-                  timeFormat="HH:mm"
-                  timeIntervals={15}
-                  dateFormat="d/MM/yyyy, h:mm aa"
-                  timeCaption="time"
-                  placeholderText="Choisir l'horaire"
-                />
+            <div className="card">
+                <div className="btn card-header" onClick={this.onCollapse}>
+                    <h2>
+                        Rendez-vous avec
 {' '}
-                <button type="button" className="btn btn-success" onClick={this.proposeRdv}>
-                    Proposer l'horaire
-                </button>
-                <br />
-                <br />
-                <h2>Horaires déjà proposés : </h2>
-                {taken.map((horaire) => {
-                  i += 1;
-                  return (
-                        <div key={i}>
-                            {horaire.date}
-                            <br />
-                        </div>
-                  );
-                })}
-                <br />
+{this.props.name}
+{' '}
+&nbsp;
+{collapse && (
+                            <div>
+                                <i className="fas fa-chevron-up" />
+                            </div>
+)}
+                        {!collapse && (
+                            <div>
+                                <i className="fas fa-chevron-down" />
+                            </div>
+                        )}
+                    </h2>
+                </div>
+                <Collapse isOpen={collapse}>
+                    <div className="container">
+                        <br />
+                        <h2>Proposer un rendez-vous</h2>
+                        <br />
+                        <DatePicker
+                          selected={this.state.date}
+                          onChange={this.onChange}
+                          showTimeSelect
+                          timeFormat="HH:mm"
+                          timeIntervals={15}
+                          dateFormat="d/MM/yyyy, h:mm aa"
+                          timeCaption="time"
+                          placeholderText="Choisir l'horaire"
+                        />
+{' '}
+                        <button type="button" className="btn btn-success" onClick={this.proposeRdv}>
+                            Proposer l'horaire
+                        </button>
+                        <br />
+                        <br />
+                        <h2>Horaires déjà proposés : </h2>
+                        {taken.map((horaire) => {
+                          i += 1;
+                          return (
+                                <div key={i}>
+                                    {horaire.date}
+                                    <br />
+                                </div>
+                          );
+                        })}
+                        <br />
+                    </div>
+                </Collapse>
+            </div>
+      );
+    }
+}
+
+class Graph extends Component {
+  /* propTypes = {
+      match: PropTypes.number.isRequired,
+      params: PropTypes.number.isRequired,
+      id: PropTypes.number.isRequired,
+    }; */
+
+  constructor(props) {
+    super(props);
+    // this.computeStats = this.computeStats.bind(this)
+    this.state = {
+      collapse: false,
+    };
+  }
+
+    onCollapse = () => {
+      const { collapse } = this.state;
+      this.setState({ collapse: !collapse });
+    };
+
+    render() {
+      const i = 0;
+      const { collapse } = this.state;
+      return (
+            <div className="card">
+                <div className="btn card-header" onClick={this.onCollapse}>
+                    <h2>
+                        Évolution des indicateurs
+                        {collapse && (
+                            <div>
+                                <i className="fas fa-chevron-up" />
+                            </div>
+                        )}
+                        {!collapse && (
+                            <div>
+                                <i className="fas fa-chevron-down" />
+                            </div>
+                        )}
+                    </h2>
+                </div>
+
+                <Collapse isOpen={collapse}>
+                    <SC id={this.props.id} />
+                </Collapse>
             </div>
       );
     }

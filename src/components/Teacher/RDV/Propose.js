@@ -16,6 +16,7 @@ class Propose extends Component {
       numberTot: 0,
       plage: [],
       slots: [],
+      ok: false,
     };
   }
 
@@ -67,7 +68,11 @@ class Propose extends Component {
           0,
         );
       }
-      this.setState({ plage, numberTot: numberTot + number });
+      let ok = false;
+      if (plage.length !== 0) {
+        ok = true 
+      }
+      this.setState({ plage, numberTot: numberTot + number, ok: ok });
     };
 
     clearAll = () => {
@@ -100,24 +105,29 @@ class Propose extends Component {
     confirmAll = () => {
       const tot = this.state.plage.length;
       let count = 0;
+      const { ok } = this.state;
+      if (!ok) {
+        window.alert("Vous devez ajouter les  créneaux d'abord !")
+      } else {
       if (
         window.confirm(
           'Etes-vous sûr(e) de vouloir enregistrer et proposer tous les créneaux non enregistrés?',
         )
       ) {
         const { plage } = this.state;
-        plage.map((slot) => {
+        plage.forEach((slot) => {
           Axios.post(`${url}/api/slots/`, { duration: slot.duration, date: slot.date }).then(
             () => {
               count += 1;
               if (count === tot) {
-                this.setState({ plage: [] }, () => this.reload());
+                this.setState({ plage: [], ok: false }, () => this.reload());
                 ToastsStore.info('Les étudiants concernés ont été prévenus par mail!');
               }
             },
           );
         });
       }
+    }
     };
 
     onChange = date => this.setState({ date });
@@ -125,7 +135,7 @@ class Propose extends Component {
     reload() {
       let tabSlots = [];
       Axios.get(`${url}/api/slots/getfree`).then((slots) => {
-        slots.data.map((slot) => {
+        slots.data.forEach((slot) => {
           tabSlots.push({ date: slot.date, status: 'Proposé aux étudiants', id: slot._id });
         });
         this.setState({ slots: tabSlots });
@@ -133,7 +143,7 @@ class Propose extends Component {
     }
 
     render() {
-      const { plage, slots } = this.state;
+      const { plage, slots, ok } = this.state;
       return (
         <div className="container">
           <h2>
@@ -189,6 +199,7 @@ class Propose extends Component {
                 className="btn btn-success"
                 onClick={this.computeCreneaux}
               >
+                Ajouter ces créneaux &nbsp;
                 <i className="fas fa-plus" />
               </button>
               <br />
@@ -214,7 +225,7 @@ class Propose extends Component {
                           value={creneaux.id}
                           onClick={this.clearOne}
                         >
-                          X
+                          <i className="fas fa-times" />
                         </button>
                       </div>
                     </div>
@@ -242,7 +253,7 @@ class Propose extends Component {
                             Effacer tous les créneaux
               </button>
               <button type="button" className="btn btn-success" onClick={this.confirmAll}>
-                            Confirmer ces créneaux
+                          Confirmer ces créneaux
               </button>
             </div>
           </div>

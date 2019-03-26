@@ -1,8 +1,7 @@
-/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
-// import axios from 'axios';
 import './FooterStop.scss';
 import { ToastsStore } from 'react-toasts';
+import colors from '../../globalSCSS/color.scss';
 
 class FooterStop extends Component {
     sendLove = () => {
@@ -25,7 +24,7 @@ class FooterStop extends Component {
               style={{
                 height: '40px',
                 width: '40px',
-                border: '1px solid rgb(201, 2, 69)',
+                border: `1px solid ${colors.color1}`,
                 borderRadius: '25px',
                 display: 'flex',
                 background: 'none',
@@ -39,7 +38,7 @@ class FooterStop extends Component {
                 aria-hidden="true"
                 style={{
                   margin: 'auto',
-                  color: 'rgb(201, 2, 69)',
+                  color: `${colors.color1}`,
                   fontSize: '20px',
                 }}
               />

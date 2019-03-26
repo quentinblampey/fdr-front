@@ -1,8 +1,7 @@
-/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import './Navbar.scss';
-// import axios from 'axios';
 import { Link } from 'react-router-dom';
+import colors from '../../globalSCSS/color.scss';
 
 class Navbar extends Component {
   render() {
@@ -13,7 +12,11 @@ class Navbar extends Component {
             <i
               className="fa fa-tint"
               aria-hidden="true"
-              style={{ color: '#fefefe', fontSize: '30px', margin: '10px' }}
+              style={{
+                color: `${colors.colorWhite}`,
+                fontSize: '30px',
+                margin: '10px',
+              }}
             />
             <div className="title" style={{ fontSize: '35px' }}>
                             Océane

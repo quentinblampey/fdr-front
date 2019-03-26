@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-indent */
-/* eslint-disable indent */
 import React, { Component } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import axios from 'axios';
@@ -68,27 +66,34 @@ class Contrat extends Component {
   };
 
     send() {
-      const { UEs } = this.state;
-      axios.post(`${url}/api/contrats/${this.props.match.params.id}`, { UEs }).then(() => {
-        axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
-            UEs.forEach(element => {
-                element.checked = (res.data.ue.filter((x) => element.name===x.name).length ===1);
+        const { UEs } = this.state;
+        axios.post(`${url}/api/contrats/${this.props.match.params.id}`, { UEs }).then(() => {
+            axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
+                UEs.forEach((element) => {
+                    element.checked = res.data.ue.filter(x => element.name === x.name).length === 1;
+                });
+                this.setState({
+                    user: res.data,
+                    UEs,
+                    status: 'feedback',
+                    displayStatus: 'Mes Feedbacks',
+                });
             });
-            this.setState({ user: res.data , UEs:UEs, status:'feedback', displayStatus: 'Mes Feedbacks'});
-          });
-      });
+        });
     }
 
     etat = (nextEtat, nextDisplayEtat) => {
         this.setState({ status: nextEtat, displayStatus: nextDisplayEtat });
         this.resetSelected();
-    }
-    
+    };
+
     options = (status, name) => {
-        axios.post(`${url}/api/contrats/options/${this.props.match.params.id}`, { name, status }).then((res) => {
-                this.setState({ user: res.data});
-              });
-      }
+        axios
+            .post(`${url}/api/contrats/options/${this.props.match.params.id}`, { name, status })
+            .then((res) => {
+                this.setState({ user: res.data });
+            });
+    };
 
       modal = (name, field) => {
         let modalFeedbacks;
@@ -136,13 +141,15 @@ class Contrat extends Component {
           this.setState({selectedEngagement:engagement})
       }
 
-      resetSelected(){
-          this.setState({selectedEngagement:undefined})
-      }
+    selectEngagement(engagement) {
+        this.setState({ selectedEngagement: engagement });
+    }
 
-      save(){
+    resetSelected() {
+        this.setState({ selectedEngagement: undefined });
+    }
 
-      }
+    save() {}
 
     render() {
 
@@ -196,7 +203,14 @@ class Contrat extends Component {
                             (!this.state.selectedEngagement) ? (
                                 this.state.user.engagements.filter(engagement => engagement.contact === "Enseignant référent").map((engagement, i)=> (
                                     <div key={engagement.date} className="row">
-                                        <button type="button" style={{width:'80%'}} className="btn btn-outline-light col self-align-center" onClick={this.selectEngagement.bind(this, engagement)}>{"Rendez-vous du "+engagement.date}</button>
+                                        <button
+                                          type="button"
+                                          style={{ width: '80%' }}
+                                          className="btn btn-outline-light col self-align-center"
+                                          onClick={this.selectEngagement.bind(this, engagement)}
+                                        >
+                                            {`Rendez-vous du ${engagement.date}`}
+                                        </button>
                                     </div>
                                 ))
                             ) : (
@@ -327,7 +341,7 @@ class Contrat extends Component {
           </div>
               <FooterStop />
             </div>
-      );
+        );
     }
 }
 

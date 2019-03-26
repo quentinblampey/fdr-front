@@ -1,11 +1,3 @@
-/* eslint-disable prefer-template */
-/* eslint-disable consistent-return */
-/* eslint-disable array-callback-return */
-/* eslint-disable prefer-const */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-undef */
-/* eslint-disable no-alert */
-/* eslint-disable react/no-unescaped-entities */
 import React, { Component } from 'react';
 import { ToastsStore } from 'react-toasts';
 import './Propose.scss';
@@ -13,8 +5,6 @@ import './FicheCourte.scss';
 import DatePicker from 'react-datepicker';
 import Axios from 'axios';
 import url from '../../config';
-// import ReactTooltip from 'react-tooltip';
-// import axios from 'axios';
 
 class Propose extends Component {
   constructor(props) {
@@ -76,7 +66,6 @@ class Propose extends Component {
           0,
           0,
         );
-        // heureFin.setMinutes(heureFin.getMinutes());
       }
       this.setState({ plage, numberTot: numberTot + number });
     };

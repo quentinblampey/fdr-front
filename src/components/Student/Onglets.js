@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './test.scss';
+import './Onglets.scss';
 
-class Test extends Component {
+class Onglets extends Component {
   render() {
     return (
       <div>
@@ -61,4 +61,4 @@ class Test extends Component {
   }
 }
 
-export default Test;
+export default Onglets;

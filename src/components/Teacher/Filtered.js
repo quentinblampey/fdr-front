@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
 import ReactTooltip from 'react-tooltip';
 import FicheCourte from './FicheCourte';
-// import url from '../../config';
 import './Filtered.scss';
 
 class Filtered extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
     return (
       <div className="container">

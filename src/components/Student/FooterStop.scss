@@ -2,15 +2,15 @@
 @import '../../globalSCSS/size.scss';
 
 .stop button {
-    border: 1px solid $color4;
+    border: 1px solid $color1;
     height: 40px;
     padding: 0px 20px;
     border-radius: 20px;
     background: none;
-    color: $color4;
+    color: $color1;
     font-family: 'MsSemiBoldItalic';
 
     &:hover {
-        background: $color4;
+        background: $color1;
     }
 }

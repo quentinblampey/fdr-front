@@ -40,7 +40,7 @@ class UEs extends Component {
         <button
           className="help"
           style={{ margin: '5px 0px', width: '100%' }}
-          onClick={this.props.send}
+          onClick={() => this.props.send()}
         >
                     Valider
         </button>

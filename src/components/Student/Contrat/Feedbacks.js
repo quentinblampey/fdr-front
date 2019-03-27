@@ -44,7 +44,7 @@ class Feedbacks extends Component {
                   <Dropdown.Item
                     onClick={() => this.props.options('warning', ue.name)}
                   >
-                                        Signaler des difficulté
+                                        Signaler des difficultés
                   </Dropdown.Item>
                   <Dropdown.Item
                     onClick={() => this.props.modal(ue.name, 'comment')}

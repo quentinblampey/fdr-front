@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Onglets.scss';
 
+/*
+Navbar for the student interface to navigate between the views Contrat, Chat and Aide.
+*/
 class Onglets extends Component {
   render() {
     return (

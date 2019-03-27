@@ -17,11 +17,15 @@ class App extends Component {
 
   componentDidMount() {}
 
+  /*
+Global router of the application.
+The route /enseignant leads to another router for the teacher interface.
+*/
   render() {
     return (
       <Router>
         <div>
-          <Route exact path="/" component={Portail} /> 
+          <Route exact path="/" component={Portail} />
           <Route exact path="/etudiant" component={Portail} />
           <Route exact path="/contrat/:id" component={Contrat} />
           <Route path="/chat/:id" component={Chat} />

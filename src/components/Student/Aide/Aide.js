@@ -9,72 +9,93 @@ import url from '../../../config';
 import Switch from "react-switch";
 import colors from '../../../globalSCSS/color.scss';
 
+/*
+Main help component, rendered in the router.
+*/
 class Aide extends Component {
   constructor(props) {
     super(props);
     this.onOpenModal2 = this.onOpenModal2.bind(this);
     this.onCloseModal2 = this.onCloseModal2.bind(this);
     this.state = {
-      user: '',
-      rdvs: [],
-      message: '',
-      open1: false,
+      user: '', // Stores the user
+      rdvs: [], // Table of the RDVs proposed by the teacher, if any.
+      message: '', // The message joined by the student to his help request.
+      // If the modals 1, 2, 3 or 4 is opened or not.
+      open1: false, 
       open2: false,
       open3: false,
       open4: false,
     };
   }
 
+  // Calls the reload method on page loading.
   componentDidMount() {
+    this.update();
+  }
+
+  // Get the specified user, saves it into the state, and then gets the RDVs the teacher proposed to him.
+  update = () => {
     axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
       this.setState({ user: res.data });
       axios.get(`${url}/api/slots/getfree`).then((res2) => {
         this.setState({ rdvs: res2.data });
       });
     });
-  }
+  }; 
 
+  // Handles the modal opening
     onOpenModal1 = () => {
       this.setState({ open1: true });
     };
 
+  // Handles the modal closing
     onCloseModal1 = () => {
       this.setState({ open1: false });
     };
 
+  // Handles the modal opening  
     onOpenModal2 = () => {
       this.setState({ open2: true });
     };
 
+  // Handles the modal closing
     onCloseModal2 = () => {
       this.setState({ open2: false });
     };
 
+  // Handles the modal opening
     onOpenModal3 = () => {
       this.setState({ open3: true });
     };
 
+  // Handles the modal closing
     onCloseModal3 = () => {
       this.setState({ open3: false });
     };
 
+  // Handles the modal opening
     onOpenModal4 = () => {
       this.setState({ open4: true });
     };
 
+  // Handles the modal closing
     onCloseModal4 = () => {
       this.setState({ open4: false });
     };
 
+  // Handles the change of the message.
     onChange = (e) => {
       const message = e.target.value;
       this.setState({ message });
     };
-
+  
+  // Called when a user send his help request.
     demAide = () => {
       const { user, message } = this.state;
       axios.post(`${url}/api/users/aide/${user._id}/2`, { message }).then((res) => {
         this.setState({ user: res.data });
+        // Closes the component of the help request.
         this.onCloseModal1();
         ToastsStore.info("Demande d'aide envoyée");
       });
@@ -93,27 +114,13 @@ class Aide extends Component {
               <button type="submit" className="help" onClick={this.onOpenModal1}>
                 <p>DEMANDER DE L&apos;AIDE</p>
               </button>
-              <Modal style={{ zIndex:10}} open={open1} onClose={this.onCloseModal1} center>
-                <h2>Demander de l&apos;aide</h2>
-                <p>
-                                  Ici, vous pouvez contacter votre enseignant référent si vous avez besoin de
-                                  conseils ou de soutient. Vous pouvez aussi lui joindre un message.
-                                  Si vous ne voulez pas en ajouter, cliquez juste sur
-                                  "Envoyer".
-                </p>
-
-                <textarea
-                  className="form-control"
-                  id="exampleFormControlTextarea1"
-                  rows="2"
-                  value={message}
-                  onChange={this.onChange}
-                />
-
-                <button type="submit" className="modale" onClick={this.demAide}>
-                  <p>ENVOYER</p>
-                </button>
-              </Modal>
+              <ModalHelp 
+                open={open1} 
+                onClose={this.onCloseModal1} 
+                demAide={this.demAide} 
+                onChange={this.onChange}
+                message={message}
+              />
             </div>
             )}
             { (user.aide && !user.currentSlot) && (
@@ -184,27 +191,19 @@ class Aide extends Component {
     }
 }
 
+/*
+Component to allow the user to choose a Rdv slot from the ones available proposed by the teacher.
+*/
 class ModalRDV extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        slots : [],
+        slots : [], // All the slots that are available to the users.
     };
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-    acceptRDV = (e) => {
-      if (e.target.value !== undefined) {
-        axios
-          .post(`${url}/api/users/chosen-slots/${this.props.id}`, {
-            chosenSlot: e.target.value,
-          })
-          .then((res) => {
-            super.setState({ rdvs: [] });
-          });
-      }
-    };
-
+  // Loads the free slots and saves them in the state when the component is rendered.
     componentDidMount() {
       axios.get(`${url}/api/slots/getfree`).then((slots) => {
         let ins = [];
@@ -213,6 +212,7 @@ class ModalRDV extends Component {
       })
     }
 
+  // Handles the acceptation (selection) of a Rdv slot.
     handleInputChange(event, event2) {
       let slots = this.state.slots;
       slots[event].checked = event2;
@@ -222,6 +222,7 @@ class ModalRDV extends Component {
       
     }
 
+  // Saves the chosen slots in the back end.
     send = () => {
       let toSend = []
       this.state.slots.forEach(slot => { if (slot.checked) { toSend.push(slot.id) }});
@@ -243,7 +244,18 @@ class ModalRDV extends Component {
           <form>
                             {this.state.slots.map((slot,i) => (
                                 <div key={i}>
-                                    <Switch style={{margin:'30px'}} onChange={this.handleInputChange.bind(this, i)} checked={slot.checked} uncheckedIcon={false} checkedIcon={false} width={40} height={15} offHandleColor={'#cdcdcd'} onHandleColor={'#cdcdcd'} handleDiameter={20}/>
+                                    <Switch 
+                                      style={{margin:'30px'}} 
+                                      onChange={this.handleInputChange.bind(this, i)} 
+                                      checked={slot.checked} 
+                                      uncheckedIcon={false} 
+                                      checkedIcon={false} 
+                                      width={40} 
+                                      height={15} 
+                                      offHandleColor={'#cdcdcd'} 
+                                      onHandleColor={'#cdcdcd'} 
+                                      handleDiameter={20}
+                                    />
                                     <label style={{padding: '10px'}} >
                                         {' '+slot.date}
                                     </label>
@@ -263,14 +275,18 @@ class ModalRDV extends Component {
     }
 }
 
+/*
+Displays the date of the next Rdv slot attributed to the user, if any.
+*/
 class ModalMesRDV extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: 'Aucun rendez-vous',
+      date: 'Aucun rendez-vous', // Stores the rdv date (string) that the user curently has.
     };
   }
 
+  // Gets the next rdv slot the user has, on component loading
   componentDidUpdate(prevProps) {
     if (prevProps.user !== this.props.user) {
       if (this.props.user.currentSlot !== "") {
@@ -296,13 +312,45 @@ class ModalMesRDV extends Component {
         </button>
         <br />
         <br />
-        <br />
-        <br />
       </Modal>
     );
   }
 }
 
+/*
+Allows the user to make a help request, and to join a message to the teacher.
+*/
+class ModalHelp extends Component {
+  render() {
+    return (
+      <Modal style={{ zIndex:10}} open={this.props.open} onClose={this.props.onClose} center>
+        <h2>Demander de l&apos;aide</h2>
+          <p>
+            Ici, vous pouvez contacter votre enseignant référent si vous avez besoin de
+            conseils ou de soutient. Vous pouvez aussi lui joindre un message.
+            Si vous ne voulez pas en ajouter, cliquez juste sur
+            "Envoyer".
+          </p>
+
+          <textarea
+            className="form-control"
+            id="exampleFormControlTextarea1"
+            rows="2"
+            value={this.props.message}
+            onChange={this.props.onChange}
+          />
+          <br />
+          <button type="submit" className="modale" onClick={this.props.demAide}>
+            <p>ENVOYER</p>
+          </button>
+      </Modal>
+    );
+  }
+}
+
+/*
+Component to allow the user to choose a Rdv slot from the one personally proposed by the teacher.
+*/
 class ModalRDVEnseignant extends Component {
   constructor(props) {
     super(props);
@@ -311,22 +359,27 @@ class ModalRDVEnseignant extends Component {
     };
   }
 
+  // Gets the slots proposed by the teacher on component load.
   componentDidMount() {
     this.update();
   }
 
+  // Fetches the rdv slots assigned to a specific user by a teacher.
   update = () => {
     axios.get(`${url}/api/slots/rdvu/${this.props.id}`).then((resp) => {
       this.setState({ proposed: resp.data });
     });
   }
 
+  // Accepts the rdv and saves the result to the back.
   onAccept = (id) => {
     axios.put(`${url}/api/slots/rdvOK/${this.props.id}`, { idRDV: id }).then((resp) => {
       this.setState({ proposed: [resp.data] });
       this.update();
       ToastsStore.info("L'enseignant a été prévenu par mail !");
       ToastsStore.info("Vous avez été prévenu par mail et vous pouvez \n télécharger le RDV dans votre calendrier!");
+      // Re-renders the page to display the right components.
+      document.location.reload();
     });
   }
 
@@ -357,12 +410,6 @@ class ModalRDVEnseignant extends Component {
         <button type="submit" className="modale" onClick={this.props.closeModal}>
           <p>FERMER</p>
         </button>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
         <br />
         <br />
       </Modal>

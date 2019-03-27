@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-// import { Link } from 'react-router-dom';
-// import FooterStop from './FooterStop'
 import url from '../../../../config';
 import './Repartition.scss';
 import variables from '../../../../globalSCSS/color.scss';
@@ -24,14 +22,11 @@ class Repartition extends Component {
   componentDidMount() {
     for (let i = 0; i < this.state.fields.length; i++) {
       const field = this.state.fields[i];
-      axios
-        .post(`${url}/api/stats/global`, { field: field.field })
-      // eslint-disable-next-line no-loop-func
-        .then((res) => {
-          const fields = this.state.fields;
-          fields[i].repartition = res.data;
-          this.setState({ fields });
-        });
+      axios.post(`${url}/api/stats/global`, { field: field.field }).then((res) => {
+        const fields = this.state.fields;
+        fields[i].repartition = res.data;
+        this.setState({ fields });
+      });
     }
   }
 

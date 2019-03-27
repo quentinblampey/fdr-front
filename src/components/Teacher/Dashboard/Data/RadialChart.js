@@ -6,12 +6,11 @@ class RadialChart extends Component {
     super(props);
     this.state = {
       options: {
+        // Options of the chart imported from Apex chart
         chart: {
           events: {
-            dataPointSelection(event, chartContext, config) {
-            },
-            dataPointMouseEnter(event, chartContext, config) {
-            },
+            dataPointSelection(event, chartContext, config) {},
+            dataPointMouseEnter(event, chartContext, config) {},
           },
         },
         labels: this.props.profils,

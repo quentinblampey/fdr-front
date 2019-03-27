@@ -7,6 +7,7 @@ class Info extends Component {
     super(props);
     this.state = {
       texts: {
+        // Text to show in the info areas
         profils:
                     'Dans cette partie du tableau de bord, <br/>vous pouvez cliquer sur chacun <br/>des elements afin que la liste des <br/>étudiants proposés soit filtrée pour <br/>ce profil.',
         repartition:
@@ -14,10 +15,6 @@ class Info extends Component {
       },
     };
   }
-
-  componentDidMount() {}
-
-  componentDidUpdate(prevProps) {}
 
   render() {
     return (

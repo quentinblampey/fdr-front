@@ -3,26 +3,16 @@ import axios from 'axios';
 import url from '../../config';
 
 class HU extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: '5c76a73f39bf810101c7956b',
-      user: {
-        historicScores: {
-          motivation: [],
-          lifestyle: [],
-          noOrientation: [],
-          integration: [],
-          fidelity: [],
-        },
-      },
-    };
-  }
-
+    /*
+      Save the indicators of every users in their 'history indicators' arrays.
+    */
     update = () => {
       axios.put(`${url}/api/users/save_scores`);
     };
 
+    /*
+      Run the algorithm that assigns every student to a slot he had chosen.
+    */
     affecte = () => {
       axios.post(`${url}/api/assign`);
     };

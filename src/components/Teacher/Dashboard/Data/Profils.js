@@ -4,19 +4,9 @@ import Info from './Info';
 import variables from '../../../../globalSCSS/color.scss';
 
 class RadialChart extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  componentDidMount() {}
-
-  renderRedirect(link) {
-    this.props.history.push(`/enseignant/filter/${link}`);
-  }
-
   render() {
     const options = {
+      // Options of the chart imported from Apex Chart
       colors: this.props.colors,
       chart: {
         events: {

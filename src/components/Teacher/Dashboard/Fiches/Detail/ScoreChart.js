@@ -9,13 +9,15 @@ class HU extends Component {
 
     this.state = {
       historicScore: {
-        motivation: [1, 6, 7, 8],
-        lifestyle: [5, 3, 4, 6],
-        noOrientation: [2, 2, 3, 4],
-        integration: [8, 6, 7, 5],
-        fidelity: [10, 9, 5, 4],
+        // Data used in the chart. The method componentDidMount get the values.
+        motivation: [],
+        lifestyle: [],
+        noOrientation: [],
+        integration: [],
+        fidelity: [],
       },
       options: {
+        // Options of the chart dispkay
         chart: {
           zoom: {
             enabled: false,
@@ -33,7 +35,7 @@ class HU extends Component {
         },
         grid: {
           row: {
-            colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+            colors: ['#f3f3f3', 'transparent'],
             opacity: 0.5,
           },
         },
@@ -66,6 +68,9 @@ class HU extends Component {
     };
   }
 
+  /*
+    Get the historic of the indicators of the user.
+  */
   componentDidMount() {
     axios.get(`${url}/api/users/getid/${this.props.id}`).then((res) => {
       this.setState({

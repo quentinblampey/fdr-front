@@ -21,7 +21,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route exact path="/" component={Portail} />
+          <Route exact path="/" component={Portail} /> 
           <Route exact path="/etudiant" component={Portail} />
           <Route exact path="/contrat/:id" component={Contrat} />
           <Route path="/chat/:id" component={Chat} />

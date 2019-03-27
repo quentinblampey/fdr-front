@@ -5,6 +5,9 @@ import ReactTooltip from 'react-tooltip';
 
 class FicheCourte extends Component {
 
+    /*
+        Given a value between 0 and 10, returns the corresponding color (used for the indicator). The color is green by default.
+    */
     getColor = (val) => {
         if (val <= 6) {
             if (val <= 3) {

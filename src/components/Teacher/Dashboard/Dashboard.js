@@ -11,13 +11,13 @@ class VueEnseignant extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      filter: [],
-      sort: ['pseudo'],
-      sortScore: [],
-      filterHelp: false,
-      profils: ['Employés', 'Sportifs', 'Handicapés', 'Artistes', 'Internationaux'],
+      filter: [], // Filters used to filter users.
+      sort: ['pseudo'], // Sort by name.
+      sortScore: [], // Sort used to sort users by indicator
+      filterHelp: false, // true if the teacher filters by users that asked for help.
+      profils: ['Employés', 'Sportifs', 'Handicapés', 'Artistes', 'Internationaux'], 
       profilsName: ['employe', 'athlete', 'disabled', 'artist', 'foreigner'],
-      translate: {
+      translate: { // Translate into french the words used in the back.
         employe : 'Employés',
         disabled : 'Handicapés',
         foreigner : 'Internationaux',
@@ -31,22 +31,24 @@ class VueEnseignant extends Component {
         integration : 'Intégration'
       },
       proportions: [0, 0, 0, 0, 0],
-      colors: [variables.graph1, variables.graph2, variables.graph3, variables.graph4],
+      colors: [variables.graph1, variables.graph2, variables.graph3, variables.graph4], // Colors used in the polar chart
       updateFilter: this.updateFilter.bind(this),
       updateSort: this.updateSort.bind(this),
       help: this.help.bind(this),
       loadUsers: this.loadUsers.bind(this),
-      users: [],
-      usersHelped: [],
-      number: 0,
-      numberHelp: 0,
+      users: [], // The users to be displayed.
+      usersHelped: [], // The users (that asked help) to be displayed.
+      number: 0, // Number of users
+      numberHelp: 0, // Number of users (that asked help)
     };
   }
 
   componentDidMount() {
     this.loadUsers();
   }
-
+    /*
+      Get the users to display given the sort and filters.
+    */
     loadUsers = () => {
       axios.post(`${url}/api/stats/profils`, { profils: this.state.profilsName }).then((res) => {
         this.setState({ proportions: res.data.proportions });
@@ -69,12 +71,18 @@ class VueEnseignant extends Component {
       });
     };
 
+    /*
+      Choose to help the student. He will now appear il the column on the right.
+    */
     help = (id) => {
       axios.post(`${url}/api/users/help/${id}`).then(() => {
         this.loadUsers();
       });
     };
 
+    /*
+      Update the sort used to display the students.
+    */
     updateSort(sort) {
       if (this.state.sortScore[0] === sort) {
         this.setState({ sortScore: [] });
@@ -84,11 +92,17 @@ class VueEnseignant extends Component {
       this.loadUsers();
     }
 
+    /*
+      Update sort and filters : make it by default again (sort by name).
+    */
     updateSortPseudo() {
       this.setState({ sortScore: [], filter: [], filterHelp: false });
       this.loadUsers();
     }
 
+    /*
+      Update the filters used to display the students.
+    */
     updateFilter(filter) {
       const filters = this.state.filter;
       if (filters.includes(filter)) {
@@ -100,13 +114,13 @@ class VueEnseignant extends Component {
       this.loadUsers();
     }
 
+
+    /*
+      Update the filters used to display the students : add the filter 'Student that asked help'
+    */
     updateFilterHelp() {
       this.setState({ filterHelp: !this.state.filterHelp });
       this.loadUsers();
-    }
-
-    navigate() {
-      this.props.history.push('/enseignant/propose');
     }
 
     render() {

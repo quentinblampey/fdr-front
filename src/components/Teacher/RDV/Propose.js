@@ -52,8 +52,8 @@ class Propose extends Component {
       while (count < number) {
         count += 1;
         let minutes = heureFin.getMinutes();
-        if (minutes === 0) {
-          minutes = String('00');
+        if (String(minutes).length === 1) {
+          minutes = '0' + String(minutes);
         }
         plage.push({
           date: `${date.getDate()}/${mois}/${date.getFullYear()} à ${heureFin.getHours()}h${minutes}`,

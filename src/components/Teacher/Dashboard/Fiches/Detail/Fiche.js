@@ -10,12 +10,13 @@ import SC from './ScoreChart';
 import Engagement from './Engagement';
 import 'react-datepicker/dist/react-datepicker.css';
 
-class Begin extends Component {
+// Principal component, rendered in the router.
+class Fiche extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: { details: { name: 'undefined' }, ue: [] },
-      textContrat: '',
+      user: { details: { name: 'undefined' }, ue: [] }, // Stores the user.
+      textContrat: '', 
       saved: true,
       status: 'choice',
       displayStatus: 'UEs choisies',
@@ -301,50 +302,54 @@ class Begin extends Component {
 
 // Gestion des demandes d'aide
 class Aide extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      date: new Date(),
-      taken: [],
-      collapse: false,
+      date: new Date(), // Stores the date of the datepicker.
+      taken: [], // Stores all the dates previously proposed to this student.
+      collapse: false, // If the component is extended or not.
     };
   }
 
+  // Loads the rdv dates previously proposed to the student.
   componentDidMount() {
     axios.get(`${url}/api/slots/rdvu/${this.props.id}`).then((resp) => {
       this.setState({ taken: resp.data });
     });
   }
 
-    onChange = date => this.setState({ date });
+  // Handles the change of the Rdv date in the datepicker.
+  onChange = date => this.setState({ date });
 
-    onCollapse = () => {
-      const { collapse } = this.state;
-      this.setState({ collapse: !collapse });
-    };
+  // Toggles the expansion of the component.
+  onCollapse = () => {
+    const { collapse } = this.state;
+    this.setState({ collapse: !collapse });
+  };
 
-    proposeRdv = () => {
-      const { date } = this.state;
-      let minutes = date.getMinutes();
-      let mois = String(date.getMonth() + 1);
-      if (minutes === 0) {
-        minutes = String('00');
-      }
-      if (mois.length === 1) {
-        mois = '0' + mois;
-      }
-      const horaire = `${date.getDate()}/${mois}/${date.getFullYear()} à ${date.getHours()}h${minutes}`;
-      axios.post(`${url}/api/slots/newrdv/${this.props.id}`, { horr: horaire }).then(() => {
-        axios.get(`${url}/api/slots/rdvu/${this.props.id}`).then((resp) => {
-          this.setState({ taken: resp.data });
-        });
+  // Register a new rdv slot proposal, sends it to the back, and updates the state.
+  proposeRdv = () => {
+    const { date } = this.state;
+    let minutes = date.getMinutes();
+    let mois = String(date.getMonth() + 1);
+    console.log(minutes);
+    if (String(minutes).length === 1) {
+      minutes = '0' + String(minutes);
+    }
+    if (mois.length === 1) {
+      mois = '0' + mois;
+    }
+    const horaire = `${date.getDate()}/${mois}/${date.getFullYear()} à ${date.getHours()}h${minutes}`;
+    axios.post(`${url}/api/slots/newrdv/${this.props.id}`, { horr: horaire }).then(() => {
+      axios.get(`${url}/api/slots/rdvu/${this.props.id}`).then((resp) => {
+        this.setState({ taken: resp.data });
       });
-    };
+    });
+  };
 
-    render() {
-      let i = 0;
-      const { taken, collapse } = this.state;
+  render() {
+    let i = 0;
+    const { taken, collapse } = this.state;
       return (
             <div className="card">
                 <div className="btn card-header" onClick={this.onCollapse}>
@@ -405,19 +410,22 @@ class Aide extends Component {
     }
 }
 
+// Displays the chart of the scores in an extensible card.
 class Graph extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      collapse: false,
+      collapse: false, // If the component is extended or not.
     };
   }
 
+  // Toggles the expansion of the component.
     onCollapse = () => {
       const { collapse } = this.state;
       this.setState({ collapse: !collapse });
     };
 
+  // Uses the Score Chart component to display the evolution of scores through time.
     render() {
       const i = 0;
       const { collapse } = this.state;
@@ -447,4 +455,4 @@ class Graph extends Component {
     }
 }
 
-export default Begin;
+export default Fiche;

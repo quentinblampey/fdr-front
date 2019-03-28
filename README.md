@@ -22,13 +22,13 @@ Git de développement du prototype de projet "facteur de réussite" en collabora
 -   `npm install react-spinners --save`
 -   `npm install --save @emotion/core`
 
-## Lancer l'application
+# Lancer l'application
 
-# Front
+## Front
 
 Run `$ npm start` in the root of the front project 
 
-# Front
+## Front
 
 Run `$ docker-compose build && docker-compose up` in the nems folder of the back project.
 

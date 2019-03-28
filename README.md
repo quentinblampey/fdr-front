@@ -1,6 +1,6 @@
 # Facteur de réussite
 
-Git de développement du prototype de projet "facteur de réussite" en collaboration avec le MESRI.
+Repository of the Océane project.
 
 # Depedencies
 

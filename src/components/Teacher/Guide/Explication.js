@@ -200,7 +200,7 @@ il est
             {' '}
                         Dans cette section, l'enseignant peut accéder au commentaire général sur le
                         contrat saisi par l'étudiant. Il peut également saisir ou modifier son
-                        propre commentaire
+                        propre commentaire.
           </p>
         </div>
         <div className="part" style={{ marginLeft: '30px', marginTop: '20px' }}>
@@ -217,10 +217,10 @@ il est
           <h4> 3.4 Reflexions </h4>
           <p>
             {' '}
-                        Dans cette section, l'enseignant pourra accéder à la liste des compte-rendus
-                        des entretiens avec d'autres intervenants saisis par l'étudiants. Il peut
-                        également saisir sa réaction aux engagements de l'étudiant(approbation,
-                        information complémentaire etc...)
+                        Dans cette section, l'enseignant référent pourra accéder à la liste des
+                        compte-rendus des entretiens avec d'autres intervenants saisis par
+                        l'étudiant. Il peut également saisir sa réaction aux engagements de
+                        l'étudiant (approbation, information complémentaire etc...)
           </p>
         </div>
         <img src={img5} alt=" " style={{ height: '250px', margin: '20px auto' }} />

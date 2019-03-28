@@ -18,9 +18,7 @@ class Feedbacks extends Component {
           margin: '5px',
         }}
       >
-        <p className="explications">
-        Indiquez ici votre situation dans chaque UE. 
-        </p>
+        <p className="explications">Indiquez ici votre situation dans chaque UE.</p>
         {this.props.user.ue.map(ue => (
           <li
             key={ue.name}
@@ -110,7 +108,7 @@ class Feedbacks extends Component {
       </ul>
     ) : (
       <div style={{ color: '#fefefe', margin: '10px 10px 10px 10px' }}>
-                Vous devez valider des choix d'UE pour pouvoir exprimer vos feedbacks à sur ces UEs
+                Vous devez valider des choix d'UE pour pouvoir exprimer vos feedbacks sur ces UEs.
       </div>
     );
   }

@@ -49,7 +49,7 @@ class Contrat extends Component {
       });
       this.setState({ user: res.data, UEs: aux });
       alert(
-        "Note : notre parti-pris est que le Contrat n'est pas reglementaire, elle ne sert qu'à communiquer entre l'enseignant et l'étudiant sur sa réussite / ses difficultés / ses engagements concernant ses UEs.",
+        "Note : notre parti-pris est que le Contrat n'est pas reglementaire, l'application ne sert qu'à communiquer entre l'enseignant et l'étudiant sur sa réussite / ses difficultés / ses engagements concernant ses UEs.",
       );
     });
   }

@@ -2,27 +2,24 @@
 
 Git de développement du prototype de projet "facteur de réussite" en collaboration avec le MESRI.
 
-## Dépendances
+## Depedencies
 
 -   Node V10.15.1
 -   NPM V6.8.0
--   React V16.8.2
+-   Mongoose 5.4.16
+-   React V16.8.3
 -   Nodemon V1.18.10
+-   Sass 4.11.0
+-   Apex charts 3.5.0
+-   Bootstrap 4.3.1
+-   Express 4.16.4
+-   Multer 1.4.1
 
-## Commandes à lancer
+## Commands to execute before to run the project
 
--   `$ npm install --save express body-parser morgan body-parser serve-favicon`
--   `$ npm install --save mongoose bluebird`
--   `$ npm install --save react-router-dom`
--   `$ npm install --save-dev bootstrap`
--   `$ npm install --save axios`
--   `$ mongoimport --db api --collection questions --file questionsPrenomSport.json --jsonArray`
+-   `$ npm i`
 
--   `Installer SASS`
--   `npm install react-spinners --save`
--   `npm install --save @emotion/core`
-
-# Lancer l'application
+# Run the app
 
 ## Front
 

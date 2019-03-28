@@ -14,7 +14,7 @@ Repository of project Océane.
 
 # Run the app locally
 
-After having clone the back and front repository :
+After cloning the back and front repository :
 
 ## Front
 

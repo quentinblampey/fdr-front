@@ -8,9 +8,9 @@ Repository of project Océane.
 -   Node 10.15.1
 -   NPM 6.8.0
 
-## Commands to execute before to run the project
+## Command to execute before to run the project
 
--   `$ npm i`
+1. Run `$ npm i` in the root of the front project.
 
 ## Run the app locally
 

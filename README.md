@@ -2,7 +2,7 @@
 
 Repository of project Océane.
 
-# Depedencies
+# Dependencies
 
 -   Docker 18.9.2
 -   Node 10.15.1

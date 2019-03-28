@@ -16,6 +16,6 @@ Repository of project Océane.
 
 After cloning the back and front repository :
 
-Run `$ npm start` in the root of the front project 
+Run `$ npm start` in the root of the front project.
 Run `$ docker-compose build && docker-compose up` in the nems folder of the back project.
 

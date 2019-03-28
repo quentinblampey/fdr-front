@@ -18,6 +18,9 @@ class Feedbacks extends Component {
           margin: '5px',
         }}
       >
+        <p className="explications">
+        Indiquez ici votre situation dans chaque UE. 
+        </p>
         {this.props.user.ue.map(ue => (
           <li
             key={ue.name}
@@ -44,7 +47,7 @@ class Feedbacks extends Component {
                   <Dropdown.Item
                     onClick={() => this.props.options('warning', ue.name)}
                   >
-                                        Signaler des difficultés
+                                        Signaler des difficulté
                   </Dropdown.Item>
                   <Dropdown.Item
                     onClick={() => this.props.modal(ue.name, 'comment')}
@@ -80,9 +83,9 @@ class Feedbacks extends Component {
                 center
               >
                 {this.props.modalFeedbacks.field === 'comment' ? (
-                  <h2>Entre ton commentaire</h2>
+                  <h2>Entrez votre commentaire</h2>
                 ) : (
-                  <h2>Entre ton motif d'absence</h2>
+                  <h2>Entrez votre motif d'absence</h2>
                 )}
                 <textarea
                   className="form-control"

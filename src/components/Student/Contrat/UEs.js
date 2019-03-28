@@ -15,6 +15,10 @@ class UEs extends Component {
         }}
       >
         <form>
+          <p className="explications container">
+                        Sélectionnez ici les UEs que vous suivez en licence, puis validez pour que
+                        votre enseignant-référent puisse les voir.
+          </p>
           {this.props.UEs.map((ue, i) => (
             <div
               key={ue.name}

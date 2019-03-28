@@ -24,4 +24,5 @@ Git de développement du prototype de projet "facteur de réussite" en collabora
 
 ## Lancer l'application
 
--   `$ npm start`
+-   Front : `$ npm start`
+-   Back : `$ docker-compose build` `$ docker-compose up` 

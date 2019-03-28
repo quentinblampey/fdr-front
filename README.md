@@ -1,4 +1,4 @@
-# Facteur de réussite
+# Océane
 
 Repository of project Océane.
 

@@ -10,6 +10,7 @@ import Feedbacks from './Feedbacks';
 import Advice from './Advice';
 import Engagements from './Engagements';
 import '../AccueilChat/Accueil.scss';
+import colors from '../../../globalSCSS/color.scss';
 
 class Contrat extends Component {
   constructor(props) {
@@ -193,11 +194,20 @@ class Contrat extends Component {
     this.setState({ selectedEngagement: undefined });
   }
 
+  getStyle = (style) => {
+    if (style===this.state.status){
+      return {backgroundColor : `${colors.color4}`, color : `${colors.colorWhite}`}
+    }
+    else{
+      return {}
+    }
+  }
+
   render() {
     return (
       <div>
         <Test onglet="contrat" id={this.props.match.params.id} />
-        <div className="component row justify-content-center" style={{ margin:'0px' }} >
+        <div className="component row justify-content-center" style={{ margin:'0px'}} >
           <h3 className="titre-cadre">
             CONTRAT
             <div className="sstitre-cadre">DE RÉUSSITE</div>
@@ -211,8 +221,8 @@ class Contrat extends Component {
                 {this.state.displayStatus}
               </Dropdown.Toggle>
               <Dropdown.Menu alignRight>
-                {this.state.dropdownDatas.filter(element => element.status !==this.state.status).map(d => (
-                  <Dropdown.Item key={d.status} onClick={this.etat.bind(this, d.status, d.displayStatus)}>{d.displayStatus}</Dropdown.Item>
+                {this.state.dropdownDatas.map(d => (
+                  <Dropdown.Item key={d.status} style={this.getStyle(d.status)} onClick={() => this.etat(d.status, d.displayStatus)}>{d.displayStatus}</Dropdown.Item>
                 ))}
               </Dropdown.Menu>
             </Dropdown>

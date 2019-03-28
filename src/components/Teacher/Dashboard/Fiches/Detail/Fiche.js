@@ -9,6 +9,7 @@ import url from '../../../../../config';
 import SC from './ScoreChart';
 import Engagement from './Engagement';
 import 'react-datepicker/dist/react-datepicker.css';
+import colors from '../../../../../globalSCSS/color.scss';
 
 // Principal component, rendered in the router.
 class Fiche extends Component {
@@ -82,6 +83,15 @@ class Fiche extends Component {
       });
     };
 
+    getStyle = (style) => {
+      if (style===this.state.status){
+        return {backgroundColor : `${colors.color4}`, color : `${colors.colorWhite}`}
+      }
+      else{
+        return {}
+      }
+    }
+
     render() {
       const { user } = this.state;
       return (
@@ -143,11 +153,9 @@ class Fiche extends Component {
 
                                         <Dropdown.Menu alignRight>
                                             {this.state.dropdownDatas
-                                              .filter(
-                                                element => element.status !== this.state.status,
-                                              )
                                               .map(d => (
                                                     <Dropdown.Item
+                                                      style={this.getStyle(d.status)}
                                                       onClick={this.etat.bind(
                                                         this,
                                                         d.status,

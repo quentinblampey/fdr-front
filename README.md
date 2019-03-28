@@ -1,29 +1,21 @@
-# Facteur de réussite
+# Océane
 
-Git de développement du prototype de projet "facteur de réussite" en collaboration avec le MESRI.
+Repository of project Océane.
 
-## Dépendances 
+## Dependencies
 
-- Node  V10.15.1
-- NPM V6.8.0
-- React V16.8.2
-- Nodemon V1.18.10
+-   Docker 18.9.2
+-   Node 10.15.1
+-   NPM 6.8.0
 
-## Commandes à lancer
+## Command to execute before to run the project
 
+1. Run `$ npm i` in the root of the front project.
 
-- `$ npm install --save express body-parser morgan body-parser serve-favicon`
-- `$ npm install --save mongoose bluebird`
-- `$ npm install --save react-router-dom`
-- `$ npm install --save-dev bootstrap`
-- `$ npm install --save axios`
-- `$ mongoimport --db api --collection questions --file questionsPrenomSport.json --jsonArray`
+## Run the app locally
 
-- `Installer SASS`
-- `npm install react-spinners --save`
-- `npm install --save @emotion/core`
+After cloning the back and front repository :
 
+1. Run `$ npm start` in the root of the front project.
+2. Run `$ docker-compose build && docker-compose up` in the nems folder of the back project.
 
-## Lancer l'application
-
-- `$ nodemon facteur-de-reussite`

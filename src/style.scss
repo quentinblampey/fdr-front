@@ -69,6 +69,11 @@ a:link {
 .fixed-bottom {
     height: $bottom;
 }
+
+.fixed-bottom2 {
+    height: $bottom2;
+}
+
 .fixed-top {
     height: $top;
     background: $white;
@@ -113,4 +118,27 @@ button {
 
 .red {
     background: $red;
+}
+
+// Other
+
+.titre-cadre {
+    padding: 10px;
+    width: 280px;
+    border-radius: 10px;
+    text-align: center;
+    background: $white;
+    position: absolute;
+    top: 70px;
+    color: $color4;
+    font-size: 30px;
+    font-family: 'MsBoldItalic';
+    & .sstitre-cadre {
+        font-size: 10px;
+    }
+}
+
+.color4 {
+    height: $tripleTop;
+    background: $color4;
 }

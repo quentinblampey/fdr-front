@@ -17,7 +17,7 @@ $grayLight: #ececec;
 $color1: rgb(38, 34, 98);
 $color2: rgb(193, 61, 123);
 $color3: rgb(20, 20, 20);
-$color4: rgb(201, 2, 69);
+$color4: rgb(0, 173, 216);
 $color5: rgb(38, 28, 92);
 $color6: rgb(0, 209, 158);
 
@@ -27,4 +27,7 @@ $color6: rgb(0, 209, 158);
     graph3: $red;
     graph4: $orange;
     graph5: $color2;
+    color1: $color1;
+    color4: $color4;
+    colorWhite: $white;
 }

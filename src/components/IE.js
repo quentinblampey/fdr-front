@@ -1,5 +1,11 @@
 import React from 'react';
 
+/*
+
+Redirection for IE users.
+
+*/
+
 const Home = () => (
   <h2>
     {' '}

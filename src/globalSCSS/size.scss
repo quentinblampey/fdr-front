@@ -1,9 +1,15 @@
 $normal: 14px;
 $big: 20px;
 
+$margin0: 2px;
 $margin1: 4px;
 $margin2: 10px;
 $margin3: 20px;
+$margin4: 40px;
+
+$buttonHeight: 15px;
+
+$loaderSize: 12;
 
 $messageWidth: 250px;
 $messageMinHeight: 30px;
@@ -12,4 +18,11 @@ $box: 29px;
 $plusSize: 25px;
 
 $bottom: 100px;
+$bottom2: 60px;
 $top: 35px;
+
+$tripleTop: 30px;
+
+:export {
+    loaderSize: $loaderSize;
+}

@@ -24,11 +24,11 @@ Git de développement du prototype de projet "facteur de réussite" en collabora
 
 ## Lancer l'application
 
--   Front : `$ npm start`
--   Back : `$ docker-compose build` `$ docker-compose up` 
+# Front
 
->  aa
-`aa`
-*  aa
-1.  aa
-* [ aa ]  
+Run `$ npm start` in the root of the front project 
+
+# Front
+
+Run `$ docker-compose build && docker-compose up` in the nems folder of the back project.
+

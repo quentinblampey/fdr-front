@@ -12,7 +12,9 @@ Repository of project Océane.
 
 -   `$ npm i`
 
-# Run the app
+# Run the app locally
+
+After having clone the back and front repository :
 
 ## Front
 

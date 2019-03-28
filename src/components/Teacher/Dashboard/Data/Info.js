@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../Fiches/FicheCourte.scss';
 import ReactTooltip from 'react-tooltip';
 
+// CLass containing the data displayed in the tooltips.
 class Info extends Component {
   constructor(props) {
     super(props);

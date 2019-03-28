@@ -5,20 +5,26 @@ import './Repartition.scss';
 import variables from '../../../../globalSCSS/color.scss';
 import Info from './Info';
 
+// Component displaying the repartition of the students in each of the 5 indicators.
 class Repartition extends Component {
   constructor(props) {
     super(props);
     this.state = {
       fields: [
-        { field: 'motivation', title: 'Motivation', repartition: [] },
-        { field: 'lifestyle', title: 'Style de vie', repartition: [] },
-        { field: 'fidelity', title: 'Fidelite', repartition: [] },
-        { field: 'noOrientation', title: 'Besoin de réorientation', repartition: [] },
-        { field: 'integration', title: 'Intégration', repartition: [] },
+        /*
+        In each indicator, the repartition is stored in indicator.repartition.
+        A length 3 array [20, 30, 50] means 20% of students between 0 and 4, 30% between 4 and 7 and 50% between 7 and 10.
+        */
+        { field: 'motivation', title: 'Motivation', repartition: [] }, // Repartition of the student in the indicator Motivation.
+        { field: 'lifestyle', title: 'Style de vie', repartition: [] }, // Repartition of the student in the indicator Lifestyle.
+        { field: 'fidelity', title: 'Fidelite', repartition: [] }, // Repartition of the student in the indicator Fidelity.
+        { field: 'noOrientation', title: 'Besoin de réorientation', repartition: [] }, // Repartition of the student in the indicator Orientation.
+        { field: 'integration', title: 'Intégration', repartition: [] }, // Repartition of the student in the indicator Integration.
       ],
     };
   }
 
+  // Fetches the repartition for each of the indicators.
   componentDidMount() {
     for (let i = 0; i < this.state.fields.length; i++) {
       const field = this.state.fields[i];

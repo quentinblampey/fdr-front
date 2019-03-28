@@ -4,44 +4,47 @@ import url from '../../config';
 import './Portail.scss';
 import FooterStop from './Footer';
 
+/*
+First view, is on the root route where the user lands when he opens the application.
+*/
 class VueEtudiant extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pseudo: '',
+      pseudo: '', // Stores the email adress of the user in the text field.
     };
   }
 
+
+  // Explication message on component loading.
   componentDidMount() {
-    axios.get(`${url}/api/users/`).then((res) => {
-      this.setState({ pseudo: '', pseudos: res.data });
       alert(
         "Cette application est le début de développement d'une application utilisée pour suivre, coacher et repérer d'éventuels étudiants en difficulté dans les licences. Imaginez vous que vous venez d'entrer en licence, et participez à une (ou plusieurs) conversation avec le chatbot. Remplissez ensuite le questionnaire de satisfaction disponible en cliquant sur le bouton 'Arrêter l'évaluation'. ",
       );
-    });
   }
 
-    onChange = (e) => {
-      const state = this.state;
-      state[e.target.name] = e.target.value;
-      this.setState(state);
-    };
+  // Handles the change of text field.
+  onChange = (e) => {
+    const state = this.state;
+    state[e.target.name] = e.target.value;
+    this.setState(state);
+  };
 
-    onSubmit = (e) => {
-      e.preventDefault();
+  // Get the user on submit. Makes a request to the back to get the user data.
+  onSubmit = (e) => {
+    e.preventDefault();
+    const { pseudo } = this.state;
+    if (pseudo !== '') {
+      axios.post(`${url}/api/users/initget`, { pseudo }).then((result) => {
+        this.props.history.push(`/begin/${result.data._id}`);
+      });
+    }
+  };
 
-      const pseudo = this.state.pseudo;
 
-      if (pseudo !== '') {
-        axios.post(`${url}/api/users/initget`, { pseudo }).then((result) => {
-          this.props.history.push(`/begin/${result.data._id}`);
-        });
-      }
-    };
-
-    render() {
-      const { pseudo } = this.state;
-      return (
+  render() {
+    const { pseudo } = this.state;
+    return (
         <div>
           <div className="color4" />
           <div className="text-center component">
@@ -73,8 +76,8 @@ class VueEtudiant extends Component {
             <FooterStop />
           </div>
         </div>
-      );
-    }
+    );
+  }
 }
 
 export default VueEtudiant;

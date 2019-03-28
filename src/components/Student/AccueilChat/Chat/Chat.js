@@ -55,7 +55,7 @@ class Chat extends Component {
                 chat: this.state.chat.concat([
                   {
                     message:
-                          "Coucou, je suis content de te revoir !🙂",
+                          "Coucou, je suis contente de te revoir !🙂",
                     color: 1,
                   },
                 ]),

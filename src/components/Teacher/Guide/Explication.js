@@ -5,6 +5,7 @@ import img3 from './img/3.png';
 import img4 from './img/4.png';
 import img5 from './img/5.png';
 
+// Hardcoded component used to explain the principle of the teacher interface.
 class Info extends Component {
   render() {
     return (

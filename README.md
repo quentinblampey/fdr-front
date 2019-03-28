@@ -1,6 +1,6 @@
 # Facteur de réussite
 
-Repository of the Océane project.
+Repository of project Océane.
 
 # Depedencies
 

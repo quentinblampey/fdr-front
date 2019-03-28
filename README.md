@@ -2,7 +2,7 @@
 
 Git de développement du prototype de projet "facteur de réussite" en collaboration avec le MESRI.
 
-## Depedencies
+# Depedencies
 
 -   Node V10.15.1
 -   NPM V6.8.0
@@ -15,7 +15,7 @@ Git de développement du prototype de projet "facteur de réussite" en collabora
 -   Express 4.16.4
 -   Multer 1.4.1
 
-## Commands to execute before to run the project
+# Commands to execute before to run the project
 
 -   `$ npm i`
 

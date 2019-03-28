@@ -4,16 +4,9 @@ Git de développement du prototype de projet "facteur de réussite" en collabora
 
 # Depedencies
 
--   Node V10.15.1
--   NPM V6.8.0
--   Mongoose 5.4.16
--   React V16.8.3
--   Nodemon V1.18.10
--   Sass 4.11.0
--   Apex charts 3.5.0
--   Bootstrap 4.3.1
--   Express 4.16.4
--   Multer 1.4.1
+-   Docker 18.9.2
+-   Node 10.15.1
+-   NPM 6.8.0
 
 # Commands to execute before to run the project
 

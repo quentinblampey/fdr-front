@@ -10,33 +10,38 @@ class Chat extends Component {
   constructor() {
     super();
     this.state = {
-      emptyBodyForbidden:[1,3,5],
-      numberMandatory:[151, 152, 153],
-      loading: false,
-      chat: [],
-      isFinish: false,
-      newMessage: '',
-      currentQuestion: { answers: [] },
-      error: false,
+      emptyBodyForbidden:[1,3,5], //This variable hardcodes the questions for which the user can’t post an empty body answer
+      numberMandatory:[151, 152, 153], //This variable hardcodes the questions for which the user can only answer a number
+      chat: [], //This list contains all the messages to be displayed
+      isFinish: false, //Boolean that is True when the chat is finished (ie no more q to ask)
+      newMessage: '', //This variable stores the current content of the input
+      currentQuestion: { answers: [] }, //This variable stores the current question
+      error: false, //This variable is True if there is an error (ie empty body or not a number when required)
     };
   }
+
+  /*
+    Scroll the chat to the bottom so the user sees the last messages.
+  */
 
   updateScroll() {
     const element = document.getElementById('chatbox');
     element.scrollTop = element.scrollHeight;
   }
-
+  /*
+    Initializes the chat.
+  */
   componentDidMount() {
     var promise = new Promise((resolve) => {
       axios.get(`${url}/api/questions/`).then((r) => {
-        if (r.data.length === 0) {
+        if (r.data.length === 0) { // If the questions are not imported yet.
           axios.post(`${url}/api/file/newfile`).then(()=>{})
         }
         resolve();
       })
     });
     promise.then(()=> {
-      axios.post(`${url}/api/questions/${this.props.match.params.id}`).then((r3) => {
+      axios.post(`${url}/api/questions/${this.props.match.params.id}`).then((r3) => { // There is no more questions to ask.
         if (r3.data.question.body === '' || r3.data.question.body === undefined) {
           this.setState({
             chat: this.state.chat.concat([
@@ -50,7 +55,7 @@ class Chat extends Component {
           });
 
         } else {
-          if(r3.data.question.idQ >1){
+          if(r3.data.question.idQ >1){ // The user come back.
               this.setState({
                 chat: this.state.chat.concat([
                   {
@@ -73,6 +78,10 @@ class Chat extends Component {
     });
   }
 
+    /*
+      When a user is writing, update the state and scroll.
+    */
+
     onChange = (e) => {
       const { state } = this;
       state[e.target.name] = e.target.value;
@@ -80,11 +89,19 @@ class Chat extends Component {
       this.updateScroll();
     };
 
+    /*
+      Update stats of a user at the end of a chat.
+    */
+
     updateUser = () => {
       axios.get(`${url}/api/users/getid/${this.props.match.params.id}`).then((res) => {
         axios.put(`${url}/api/users/endchat/${this.props.match.params.id}`, res);
       });
     }
+
+    /*
+      When a user send a personalized answer : it get his message and call 'onSubmit' method.
+    */
 
     onSubmitButton = (e) => {
       let ans;
@@ -94,44 +111,51 @@ class Chat extends Component {
       this.onSubmit(ans, e);
     };
 
+    /*
+      Send the answer of the user to the back so the user is updated and the chatbot know the next question to ask.
+    */
     sendAnswer = (answer) => {
-      axios.post(`${url}/api/answers/${this.props.match.params.id}`, {
+      axios.post(`${url}/api/answers/${this.props.match.params.id}`, { // Post the answer
                 answer,
                 field: this.state.currentQuestion.field,
               })
               .then((res) => {
-                axios.post(`${url}/api/questions/${this.props.match.params.id}`).then((res2) => {
-                  if (res2.data.isFinish) {
+                axios.post(`${url}/api/questions/${this.props.match.params.id}`).then((res2) => { // Get the new question
+                  if (res2.data.isFinish) { // If the chat is finish
                     this.setState({ isFinish: true, loading: false });
                     this.updateUser();
                     this.updateScroll();
                   } else {
                     this.updateScroll();
-                    setTimeout(() => {
-                      this.setState({ loading: false });
+                    setTimeout(() => { // Wait 1 second before the chatbot answers
+                      this.setState({ loading: false }); // Display a loader
                       this.setState({
                         user: res2.data.user,
                         chat: this.state.chat.concat([
                           { message: res2.data.question.body, color: 1 },
                         ]),
                         currentQuestion: res2.data.question,
-                      });
+                      }); // Update tehe chat
                       this.updateScroll();
                     }, 1000);
                   }
                 });
               });
     }
-
+    /*
+      1. Check if the answer is legal.
+      2. Choose the right bot reaction.
+      3. Use sendAnswer method.
+    */
     onSubmit = (answer, e) => {
-      if (answer.body==='' && this.state.emptyBodyForbidden.includes(this.state.currentQuestion.idQ)){
+      if (answer.body==='' && this.state.emptyBodyForbidden.includes(this.state.currentQuestion.idQ)){ // (1) : no empty body.
           if (!this.state.error){
             this.setState({
               chat: this.state.chat.concat({ message: "Merci de rentrer une réponse", color: 1 }),
               error: true
             }, () => { this.updateScroll() });
           }
-      }else if (this.state.numberMandatory.includes(this.state.currentQuestion.idQ) && (isNaN(Number(answer.body)))) {
+      }else if (this.state.numberMandatory.includes(this.state.currentQuestion.idQ) && (isNaN(Number(answer.body)))) { // (1) : number required.
         this.setState({newMessage:'', chat: this.state.chat.concat({ message: "Merci de rentrer un nombre valide entre 0 et 100", color: 1 })}, () => { this.updateScroll() });
       }else {
         var promiseScroll = new Promise((resolve) => {
@@ -144,7 +168,7 @@ class Chat extends Component {
             newMessage: '',
           });
           promiseScroll.then(()=> {
-            let r;
+            let r; // The purpose of r is to store the reaction of the bot (for special cases only).
             if (this.state.currentQuestion.textArea && !([151, 152, 153].includes(this.state.currentQuestion.idQ))){
               if (answer.body===''){
                 r = { message: "Ok, tu veux pas me répondre mais c'est pas grave !", color: 1 };
@@ -169,9 +193,13 @@ class Chat extends Component {
             }
           })
         });
-        promise.then(()=> { this.sendAnswer(answer)});
+        promise.then(()=> { this.sendAnswer(answer)}); // Finally send the answer.
         }
       };
+
+    /*
+      When a user press 'Enter', submit his answer.
+    */
 
     handleKeyPress(target) {
       if (target.charCode === 13) {

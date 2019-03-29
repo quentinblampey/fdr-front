@@ -133,7 +133,7 @@ class Aide extends Component {
             )}
             { (user.helped && !(user.currentSlot)) && (
               <div style={{ color: `${colors.colorWhite}` }} className="container">
-                Votre enseignant référent veut un rendez-vous !
+                Votre enseignant souhaite vous rencontrer et vous a proposé un rendez-vous !
                 <br />
                 <br />
                 <button type="submit" className="help" onClick={this.onOpenModal4}>
@@ -391,7 +391,7 @@ class ModalRDVEnseignant extends Component {
         <br />
         <h2>Horaires proposés par votre enseignant</h2>
         <p>
-          Suite à votre demande d'aide, votre enseignant vous a proposé un (des) rendez-vous(s).
+          Suite à votre demande d'aide, votre enseignant vous a proposé un (des) rendez-vous.
           Vous pouvez choisir celui qui vous arrange le plus et l'accepter.
         </p>
         { proposed.length === 0 && (
